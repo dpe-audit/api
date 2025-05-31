@@ -25,7 +25,11 @@ final class OpendataAuditRepository implements AuditRepository
 
     public function find(Id $id): ?Audit
     {
-        if ($content = $this->observatoire->find($id)) {
+        if ($content = $this->observatoire->audits($id)) {
+            $xml = \simplexml_load_string($content, XMLElement::class);
+            return $this->xml_deserializer->deserialize($xml);
+        }
+        if ($content = $this->observatoire->dpe($id)) {
             $xml = \simplexml_load_string($content, XMLElement::class);
             return $this->xml_deserializer->deserialize($xml);
         }
@@ -160,6 +164,12 @@ final class OpendataAuditRepository implements AuditRepository
     public function with_code_departement(string ...$filters): static
     {
         $filters ? $this->query['ban_code_departement_in'] = array_column($filters, 'value') : null;
+        return $this;
+    }
+
+    public function with_adresse(?string $ban_id = null): static
+    {
+        $ban_id ? $this->query['ban_id'] = $ban_id : null;
         return $this;
     }
 

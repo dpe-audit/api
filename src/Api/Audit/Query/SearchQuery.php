@@ -43,5 +43,7 @@ final class SearchQuery
         public array $code_postal = [],
         public array $code_departement = [],
         public array $zone_climatique = [],
+
+        public ?string $ban_id = null,
     ) {}
 }

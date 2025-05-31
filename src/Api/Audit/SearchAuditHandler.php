@@ -31,6 +31,7 @@ final class SearchAuditHandler
             ->with_code_departement(...$query->code_departement)
             ->with_code_postal(...$query->code_postal)
             ->with_zone_climatique(...$query->zone_climatique)
+            ->with_adresse($query->ban_id)
             ->sort($query->sort ?? 'numero_dpe');
 
         $collection = $repository->search(page: $query->page ?? 1, randomize: $query->randomize ?? false);

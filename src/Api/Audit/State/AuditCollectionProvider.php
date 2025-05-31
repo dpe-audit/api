@@ -45,6 +45,7 @@ final class AuditCollectionProvider implements ProviderInterface
         $query->zone_climatique = array_map(fn($item) => ZoneClimatique::from($item), $filters['zone_climatique'] ?? []);
         $query->code_postal = $filters['code_postal'] ?? [];
         $query->code_departement = $filters['code_departement'] ?? [];
+        $query->ban_id = $filters['ban_id'] ?? null;
 
         $handle = $this->handler;
 

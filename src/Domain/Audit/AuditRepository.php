@@ -39,5 +39,7 @@ interface AuditRepository extends \Countable
 
     public function with_code_departement(string ...$filters): static;
 
+    public function with_adresse(?string $ban_id = null): static;
+
     public function with_zone_climatique(ZoneClimatique ...$filters): static;
 }
