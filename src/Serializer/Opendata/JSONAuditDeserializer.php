@@ -4,9 +4,10 @@ namespace App\Serializer\Opendata;
 
 use App\Domain\Audit\{Audit, AuditData};
 use App\Domain\Audit\Entity\LogementCollection;
-use App\Domain\Audit\Enum\{ClasseAltitude, Etat, PeriodeConstruction, TypeBatiment};
+use App\Domain\Audit\Enum\{ClasseAltitude, Etat, Etiquette, PeriodeConstruction, TypeBatiment};
 use App\Domain\Audit\ValueObject\{Adresse, Batiment};
 use App\Domain\Chauffage\Chauffage;
+use App\Domain\Common\Enum\ZoneClimatique;
 use App\Domain\Common\ValueObject\{Annee, Id};
 use App\Domain\Eclairage\Eclairage;
 use App\Domain\Ecs\Ecs;
@@ -42,7 +43,11 @@ final class JSONAuditDeserializer
             refroidissement: Refroidissement::create(),
             eclairage: Eclairage::create(),
             production: Production::create(),
-            data: AuditData::create(),
+            data: AuditData::create(
+                etiquette_energie: Etiquette::from($data['etiquette_dpe']),
+                etiquette_climat: Etiquette::from($data['etiquette_ges']),
+                zone_climatique: ZoneClimatique::from($data['zone_climatique']),
+            ),
         );
     }
 

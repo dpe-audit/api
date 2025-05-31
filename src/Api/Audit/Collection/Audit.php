@@ -2,7 +2,7 @@
 
 namespace App\Api\Audit\Collection;
 
-use App\Api\Audit\Model\{Adresse, Batiment};
+use App\Api\Audit\Model\{Adresse, AuditData, Batiment};
 use App\Domain\Audit\Audit as Entity;
 
 final class Audit
@@ -15,6 +15,8 @@ final class Audit
         public Adresse $adresse,
 
         public Batiment $batiment,
+
+        public AuditData $data,
     ) {}
 
     public static function from(Entity $entity): self
@@ -24,6 +26,7 @@ final class Audit
             date_etablissement: $entity->date_etablissement()->format('Y-m-d'),
             adresse: Adresse::from($entity),
             batiment: Batiment::from($entity),
+            data: AuditData::from($entity),
         );
     }
 }
