@@ -1,0 +1,85 @@
+App\Engine\Performance\Refroidissement\DimensionnementInstallation:
+  - input:
+      surface_totale: 100
+      surface_couverte: 50
+    output:
+      rdim: 0.5
+  - input:
+      surface_totale: 100
+      surface_couverte: 100
+    output:
+      rdim: 1
+App\Engine\Performance\Refroidissement\DimensionnementSysteme:
+  - input:
+      systemes: 1
+    output:
+      rdim: 1
+  - input:
+      systemes: 5
+    output:
+      rdim: 0.2
+
+App\Engine\Performance\Refroidissement\PerformanceGenerateur:
+  - input:
+      zone_climatique: H1a
+      eer: null
+      annee_installation_generateur: 2000
+      annee_construction: 2000
+    output:
+      eer: 3.6
+  - input:
+      zone_climatique: H2a
+      eer: null
+      annee_installation_generateur: 2000
+      annee_construction: 2000
+    output:
+      eer: 3.6
+  - input:
+      zone_climatique: H3
+      eer: null
+      annee_installation_generateur: 2000
+      annee_construction: 2000
+    output:
+      eer: 3.25
+  - input:
+      zone_climatique: H1a
+      eer: null
+      annee_installation_generateur: 2012
+      annee_construction: 2012
+    output:
+      eer: 6.175
+  - input:
+      zone_climatique: H2a
+      eer: null
+      annee_installation_generateur: 2012
+      annee_construction: 2012
+    output:
+      eer: 6.175
+  - input:
+      zone_climatique: H3
+      eer: null
+      annee_installation_generateur: 2012
+      annee_construction: 2012
+    output:
+      eer: 5.415
+  - input:
+      zone_climatique: H1a
+      eer: null
+      annee_installation_generateur: 2020
+      annee_construction: 2020
+    output:
+      eer: 6.365
+  - input:
+      zone_climatique: H2a
+      eer: null
+      annee_installation_generateur: 2020
+      annee_construction: 2020
+    output:
+      eer: 6.365
+  - input:
+      zone_climatique: H3
+      eer: null
+      annee_installation_generateur: 2020
+      annee_construction: 2020
+    output:
+      eer: 7.125

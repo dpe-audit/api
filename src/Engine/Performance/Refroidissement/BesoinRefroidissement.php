@@ -11,125 +11,97 @@ use App\Engine\Performance\Deperdition\DeperditionEnveloppe;
 use App\Engine\Performance\Inertie\InertieEnveloppe;
 use App\Engine\Performance\Rule;
 use App\Engine\Performance\Scenario\{ScenarioClimatique, ZoneThermique};
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class BesoinRefroidissement extends Rule
 {
-    private Audit $audit;
-
     /**
-     * @see \App\Engine\Performance\Deperdition\DeperditionEnveloppe::gv()
+     * @var array{
+     *      mois: Mois,
+     *      scenario: ScenarioUsage,
+     *      inertie: Inertie,
+     *      gv: float,
+     *      sh: float,
+     *      as_fr_j: float,
+     *      ai_fr_j: float,
+     *      text_fr_j: float,
+     *      nref_fr_j: float,
+     * }
      */
-    public function gv(): float
-    {
-        return $this->audit->enveloppe()->data()->deperditions->get();
-    }
-
-    /**
-     * @see \App\Engine\Performance\Inertie\InertieEnveloppe::inertie()
-     */
-    public function inertie(): Inertie
-    {
-        return $this->audit->enveloppe()->data()->inertie;
-    }
-
-    /**
-     * @see \App\Engine\Performance\Scenario\ZoneThermique::surface_habitable()
-     */
-    public function surface_habitable(): float
-    {
-        return $this->audit->data()->surface_habitable;
-    }
-
-    /**
-     * @see \App\Engine\Performance\Apport\ApportEnveloppe::apports_internes()
-     * @see \App\Engine\Performance\Apport\ApportEnveloppe::apports_solaires()
-     */
-    public function apports(ScenarioUsage $scenario, Mois $mois): float
-    {
-        return $this->audit->enveloppe()->data()->apports->apports_fr(
-            scenario: $scenario,
-            mois: $mois,
-        );
-    }
-
-    /**
-     * @see \App\Engine\Performance\Scenario\ScenarioClimatique::sollicitations_exterieures()
-     */
-    public function text_fr(ScenarioUsage $scenario, Mois $mois): ?float
-    {
-        return $this->audit->data()->sollicitations_exterieures->text_fr(scenario: $scenario, mois: $mois);
-    }
-
-    /**
-     * @see \App\Engine\Performance\Scenario\ScenarioClimatique::sollicitations_exterieures()
-     */
-    public function nref_fr(ScenarioUsage $scenario, Mois $mois): ?float
-    {
-        return $this->audit->data()->sollicitations_exterieures->nref_fr(scenario: $scenario, mois: $mois);
-    }
+    private array $input;
 
     /**
      * Besoin mensuel de refroidissement exprimé en kWh
      */
-    public function bfr(ScenarioUsage $scenario, Mois $mois,): float
+    public function bfr_j(): float
     {
-        $text_clim = $this->text_fr(scenario: $scenario, mois: $mois);
-        $nref = $this->nref_fr(scenario: $scenario, mois: $mois);
+        return $this->get($this->getCacheKey('bfr_j'), function () {
+            $text_fr_j = $this->input['text_fr_j'];
+            $nref_fr_j = $this->input['nref_fr_j'];
 
-        if (null === $text_clim) {
-            return 0;
-        }
-        if (0.5 > ($rbth = $this->rbth(scenario: $scenario, mois: $mois))) {
-            return 0;
-        }
-        $fut = $this->fut(scenario: $scenario, mois: $mois);
-        $tint = $this->tint(scenario: $scenario);
+            if (!$text_fr_j || !$nref_fr_j) {
+                return 0;
+            }
+            if (0.5 > ($rbth = $this->rbth())) {
+                return 0;
+            }
+            $fut = $this->fut();
+            $tint = $this->tint();
 
-        if (0.5 > $rbth) {
-            return 0;
-        }
-        $bfr = $this->apports(scenario: $scenario, mois: $mois) / 1000;
-        $bfr -= $fut * ($this->gv() / 1000) * ($tint - $text_clim) * $nref;
-        return max($bfr, 0);
+            if (0.5 > $rbth) {
+                return 0;
+            }
+            $bfr = ($this->input['ai_fr_j'] + $this->input['as_fr_j']) / 1000;
+            $bfr -= $fut * ($this->input['gv'] / 1000) * ($tint - $text_fr_j) * $nref_fr_j;
+            return max($bfr, 0);
+        });
     }
 
     /**
      * Ratio mensuel de bilan thermique
      */
-    public function rbth(ScenarioUsage $scenario, Mois $mois,): float
+    public function rbth(): float
     {
-        $tint = $this->tint(scenario: $scenario);
-        $text_clim = $this->text_fr(scenario: $scenario, mois: $mois);
-        $nref = $this->nref_fr(scenario: $scenario, mois: $mois);
+        return $this->get($this->getCacheKey('rbth'), function () {
+            $tint = $this->tint();
+            $gv = $this->input['gv'];
+            $ai_fr_j = $this->input['ai_fr_j'];
+            $as_fr_j = $this->input['as_fr_j'];
+            $text_fr_j = $this->input['text_fr_j'];
+            $nref_fr_j = $this->input['nref_fr_j'];
 
-        $rbth = $this->gv() * ($text_clim - $tint) * $nref;
-        return $rbth ? $this->apports(scenario: $scenario, mois: $mois) / $rbth : 0;
+            $rbth = $gv * ($text_fr_j - $tint) * $nref_fr_j;
+            return $rbth ? ($ai_fr_j + $as_fr_j) / $rbth : 0;
+        });
     }
 
     /**
      * Facteur mensuel d'utilisation des apports
      */
-    public function fut(ScenarioUsage $scenario, Mois $mois,): float
+    public function fut(): float
     {
-        $t = $this->t();
-        $rbth = $this->rbth(scenario: $scenario, mois: $mois);
+        return $this->get($this->getCacheKey('fut'), function () {
+            $t = $this->t();
+            $rbth = $this->rbth();
+            $a = 1 + ($t / 15);
 
-        $a = 1 + ($t / 15);
-        return match (true) {
-            $rbth > 0 && $rbth !== 1 => (1 - \pow($rbth, -$a)) / (1 - \pow($rbth, -$a - 1)),
-            $rbth === 1 => $a / ($a + 1),
-        };
+            return $rbth > 0 && $rbth !== 1
+                ?  (1 - \pow($rbth, -$a)) / (1 - \pow($rbth, -$a - 1))
+                : $a / ($a + 1);
+        });
     }
 
     /**
      * Température de consigne en froid exprimée en °C
      */
-    public function tint(ScenarioUsage $scenario): float
+    public function tint(): float
     {
-        return match ($scenario) {
-            ScenarioUsage::CONVENTIONNEL => 26,
-            ScenarioUsage::DEPENSIER => 28,
-        };
+        return $this->get($this->getCacheKey('tint'), function () {
+            return match ($this->input['scenario']) {
+                ScenarioUsage::CONVENTIONNEL => 26,
+                ScenarioUsage::DEPENSIER => 28,
+            };
+        });
     }
 
     /**
@@ -137,7 +109,9 @@ final class BesoinRefroidissement extends Rule
      */
     public function t(): float
     {
-        return $this->cin() / (3600 * $this->gv());
+        return $this->get('t', function () {
+            return $this->cin() / (3600 * $this->input['gv']);
+        });
     }
 
     /**
@@ -145,22 +119,83 @@ final class BesoinRefroidissement extends Rule
      */
     public function cin(): float
     {
-        return $this->inertie()->cin() * $this->surface_habitable();
+        return $this->get('cin', function () {
+            return $this->input['inertie']->cin() * $this->input['sh'];
+        });
     }
 
     public function apply(Audit $entity): void
     {
-        $this->audit = $entity;
-
         $entity->refroidissement()->calcule($entity->refroidissement()->data()->with(
             besoins: Besoins::create(
                 usage: Usage::REFROIDISSEMENT,
-                callback: fn(ScenarioUsage $scenario, Mois $mois) => $this->bfr(
-                    scenario: $scenario,
-                    mois: $mois,
-                ),
+                callback: function (ScenarioUsage $scenario, Mois $mois) use ($entity) {
+                    $output = $this->__invoke(static::prepare(
+                        entity: $entity,
+                        scenario: $scenario,
+                        mois: $mois
+                    ))['bfr_j'];
+                    return $output['bfr_j'];
+                }
             ),
         ));
+    }
+
+    /**
+     * @see \App\Engine\Performance\Scenario\ZoneThermique::surface_habitable()
+     * @see \App\Engine\Performance\Scenario\ScenarioClimatique::sollicitations_exterieures()
+     * @see \App\Engine\Performance\Deperdition\DeperditionEnveloppe::gv()
+     * @see \App\Engine\Performance\Apport\ApportEnveloppe::apports_internes()
+     * @see \App\Engine\Performance\Apport\ApportEnveloppe::apports_solaires()
+     * @see \App\Engine\Performance\Inertie\InertieEnveloppe::inertie()
+     */
+    private static function prepare(Audit $entity, ScenarioUsage $scenario, Mois $mois): array
+    {
+        $input = [];
+        $input['mois'] = $mois;
+        $input['scenario'] = $scenario;
+        $input['sh'] = $entity->data()->surface_habitable;
+        $input['gv'] = $entity->enveloppe()->data()->deperditions->get();
+        $input['inertie'] = $entity->enveloppe()->data()->inertie;
+        $input['ai_fr_j'] = $entity->enveloppe()->data()->apports->apports_internes_fr(scenario: $scenario, mois: $mois,);
+        $input['as_fr_j'] = $entity->enveloppe()->data()->apports->apports_solaires_fr(scenario: $scenario, mois: $mois);
+        $input['text_fr_j'] = $entity->data()->sollicitations_exterieures->text_fr(scenario: $scenario, mois: $mois);
+        $input['nref_fr_j'] = $entity->data()->sollicitations_exterieures->nref_fr(scenario: $scenario, mois: $mois);
+        return $input;
+    }
+
+    private function getCacheKey(string $name): string
+    {
+        return "{$this->input['scenario']}_{$this->input['mois']}_{$name}";
+    }
+
+    /**
+     * @return array{bfr_j: float, rbth: float, fut: float, tint: float, t: float, cin: float}
+     */
+    public function __invoke(array $input): array
+    {
+        $resolver = new OptionsResolver();
+        $resolver->setRequired('mois', 'scenario', 'sh', 'gv', 'inertie', 'ai_fr_j', 'as_fr_j', 'text_fr_j', 'nref_fr_j');
+        $resolver->setAllowedTypes('mois', Mois::class);
+        $resolver->setAllowedTypes('scenario', ScenarioUsage::class);
+        $resolver->setAllowedTypes('sh', 'float');
+        $resolver->setAllowedTypes('gv', 'float');
+        $resolver->setAllowedTypes('inertie', Inertie::class);
+        $resolver->setAllowedTypes('ai_fr_j', 'float');
+        $resolver->setAllowedTypes('as_fr_j', 'float');
+        $resolver->setAllowedTypes('text_fr_j', 'float');
+        $resolver->setAllowedTypes('nref_fr_j', 'float');
+
+        $this->input = $resolver->resolve($input);
+
+        return [
+            'bfr_j' => $this->bfr_j(),
+            'rbth' => $this->rbth(),
+            'fut' => $this->fut(),
+            'tint' => $this->tint(),
+            't' => $this->t(),
+            'cin' => $this->cin(),
+        ];
     }
 
     public static function dependencies(): array

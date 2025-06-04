@@ -7,42 +7,27 @@ use App\Domain\Common\Enum\{ScenarioUsage, Usage};
 use App\Domain\Common\ValueObject\Consommations;
 use App\Domain\Refroidissement\Entity\Systeme;
 use App\Engine\Performance\Rule;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class ConsommationRefroidissement extends Rule
 {
-    private Systeme $systeme;
+    /**
+     * @var array{
+     *      bfr_j: float,
+     *      eer: float,
+     *      rdim_installation: float,
+     *      rdim_systeme: float,
+     * }
+     */
+    private array $input;
 
     /**
-     * @see \App\Engine\Performance\Refroidissement\BesoinRefroidissement::bfr()
+     * Consommation annuelle de refroidissement pour le mois j en kWh
      */
-    public function bfr(ScenarioUsage $scenario): float
+    public function cfr_j(): float
     {
-        return $this->systeme->refroidissement()->data()->besoins->get($scenario);
-    }
-
-    /**
-     * @see \App\Engine\Performance\Refroidissement\PerformanceGenerateur::eer()
-     */
-    public function eer(): float
-    {
-        return $this->systeme->generateur()->data()->eer;
-    }
-
-    /**
-     * @see \App\Engine\Performance\Refroidissement\DimensionnementInstallation::rdim()
-     * @see \App\Engine\Performance\Refroidissement\DimensionnementSysteme::rdim()
-     */
-    public function rdim(): float
-    {
-        return $this->systeme->data()->rdim * $this->systeme->installation()->data()->rdim;
-    }
-
-    /**
-     * Consommation annuelle de refroidissement exprimée en kWh
-     */
-    public function cfr(ScenarioUsage $scenario): float
-    {
-        return 0.9 * ($this->bfr($scenario) / $this->eer()) * $this->rdim();
+        $rdim = $this->input['rdim_installation'] * $this->input['rdim_systeme'];
+        return 0.9 * ($this->input['bfr_j'] / $this->input['eer']) * $rdim;
     }
 
     public function apply(Audit $entity): void
@@ -53,12 +38,13 @@ final class ConsommationRefroidissement extends Rule
             ));
         }
         foreach ($entity->refroidissement()->systemes() as $systeme) {
-            $this->systeme = $systeme;
-
             $consommations = Consommations::create(
                 usage: Usage::REFROIDISSEMENT,
                 energie: $systeme->generateur()->energie()->to(),
-                callback: fn(ScenarioUsage $scenario) => $this->cfr($scenario),
+                callback: fn(ScenarioUsage $scenario) => $this->__invoke(static::prepare(
+                    systeme: $systeme,
+                    scenario: $scenario,
+                ))['cfr_j']
             );
 
             $systeme->calcule($systeme->data()->with(
@@ -77,6 +63,39 @@ final class ConsommationRefroidissement extends Rule
                 consommations: $consommations,
             ));
         }
+    }
+
+    /**
+     * @see \App\Engine\Performance\Refroidissement\BesoinRefroidissement::bfr_j()
+     * @see \App\Engine\Performance\Refroidissement\DimensionnementInstallation::rdim()
+     * @see \App\Engine\Performance\Refroidissement\DimensionnementSysteme::rdim()
+     * @see \App\Engine\Performance\Refroidissement\PerformanceGenerateur::eer()
+     */
+    private static function prepare(Systeme $systeme, ScenarioUsage $scenario): array
+    {
+        $input = [];
+        $input['rdim_installation'] = $systeme->installation()->data()->rdim;
+        $input['rdim_systeme'] = $systeme->data()->rdim;
+        $input['eer'] = $systeme->generateur()->data()->eer;
+        $input['bfr_j'] = $systeme->refroidissement()->data()->besoins->get($scenario);
+        return $input;
+    }
+
+    /**
+     * @return array{cfr_j: float}
+     */
+    public function __invoke(array $input): array
+    {
+        $resolver = new OptionsResolver();
+        $resolver->setRequired('rdim_installation', 'rdim_systeme', 'eer', 'bfr_j');
+        $resolver->setAllowedTypes('rdim_installation', 'float');
+        $resolver->setAllowedTypes('rdim_systeme', 'float');
+        $resolver->setAllowedTypes('eer', 'float');
+        $resolver->setAllowedTypes('bfr_j', 'float');
+
+        $this->input = $resolver->resolve($input);
+
+        return ['cfr_j' => $this->cfr_j()];
     }
 
     public static function dependencies(): array

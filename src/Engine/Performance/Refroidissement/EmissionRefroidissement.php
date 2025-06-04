@@ -5,33 +5,33 @@ namespace App\Engine\Performance\Refroidissement;
 use App\Domain\Audit\Audit;
 use App\Domain\Common\Enum\{ScenarioUsage, Usage};
 use App\Domain\Common\ValueObject\Emissions;
-use App\Domain\Refroidissement\Entity\Systeme;
+use App\Domain\Refroidissement\Entity\{Systeme, ReseauFroid};
 use App\Domain\Refroidissement\Enum\EnergieGenerateur;
 use App\Engine\Performance\Rule;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 final class EmissionRefroidissement extends Rule
 {
-    private Systeme $systeme;
-
     /**
-     * @see \App\Engine\Performance\Refroidissement\ConsommationRefroidissement::cfr()
+     * @var array{
+     *      contenu_co2_reseau_froid: float|null,
+     *      energie_generateur: EnergieGenerateur,
+     *      cfr_j: float,
+     * }
      */
-    public function cfr(ScenarioUsage $scenario): float
-    {
-        return $this->systeme->data()->consommations->get($scenario);;
-    }
+    private array $input;
 
     /**
      * Emissions de CO2 exprimées en kg
      * 
      * @see https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000046662777
      */
-    public function eges(ScenarioUsage $scenario): float
+    public function eges_j(): float
     {
-        if ($this->systeme->generateur()->reseau_froid()) {
-            return $this->cfr($scenario) * $this->systeme->generateur()->reseau_froid()->contenu_co2()->decimal();
+        if (null !== $this->input['contenu_co2_reseau_froid']) {
+            return $this->input['cfr_j'] * $this->input['contenu_co2_reseau_froid'];
         }
-        return $this->cfr($scenario) * match ($this->systeme->generateur()->energie()) {
+        return $this->input['cfr_j'] * match ($this->input['energie_generateur']) {
             EnergieGenerateur::ELECTRICITE => 0.064,
             EnergieGenerateur::GAZ_NATUREL => 0.227,
             EnergieGenerateur::GPL => 0.272,
@@ -47,11 +47,12 @@ final class EmissionRefroidissement extends Rule
             ));
         }
         foreach ($entity->refroidissement()->systemes() as $systeme) {
-            $this->systeme = $systeme;
-
             $emissions = Emissions::create(
                 usage: Usage::REFROIDISSEMENT,
-                callback: fn(ScenarioUsage $scenario) => $this->eges($scenario),
+                callback: fn(ScenarioUsage $scenario) => $this->__invoke(static::prepare(
+                    systeme: $systeme,
+                    scenario: $scenario,
+                ))['eges_j'],
             );
 
             $systeme->calcule($systeme->data()->with(
@@ -70,6 +71,33 @@ final class EmissionRefroidissement extends Rule
                 emissions: $emissions,
             ));
         }
+    }
+
+    /**
+     * @see \App\Engine\Performance\Refroidissement\ConsommationRefroidissement::cfr_j()
+     */
+    private function prepare(Systeme $systeme, ScenarioUsage $scenario): array
+    {
+        $input = [];
+        $input['cfr_j'] = $systeme->data()->consommations->get($scenario);
+        $input['contenu_co2_reseau_froid'] = $systeme->generateur()->reseau_froid()?->contenu_co2()->decimal();
+        return $input;
+    }
+
+    /**
+     * @return array{eges_j: float}
+     */
+    public function __invoke(array $input): array
+    {
+        $resolver = new OptionsResolver();
+        $resolver->setRequired('contenu_co2_reseau_froid', 'energie_generateur', 'cfr_j');
+        $resolver->setAllowedTypes('contenu_co2_reseau_froid', 'float|null');
+        $resolver->setAllowedTypes('energie_generateur', EnergieGenerateur::class);
+        $resolver->setAllowedTypes('cfr_j', 'float');
+
+        $this->input = $resolver->resolve($input);
+
+        return ['eges_j' => $this->eges_j()];
     }
 
     public static function dependencies(): array
