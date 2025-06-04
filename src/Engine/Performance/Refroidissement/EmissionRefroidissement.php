@@ -90,8 +90,8 @@ final class EmissionRefroidissement extends Rule
     public function __invoke(array $input): array
     {
         $resolver = new OptionsResolver();
-        $resolver->setRequired('contenu_co2_reseau_froid', 'energie_generateur', 'cfr_j');
-        $resolver->setAllowedTypes('contenu_co2_reseau_froid', 'float|null');
+        $resolver->setRequired(['contenu_co2_reseau_froid', 'energie_generateur', 'cfr_j']);
+        $resolver->setAllowedTypes('contenu_co2_reseau_froid', ['float', 'null']);
         $resolver->setAllowedTypes('energie_generateur', EnergieGenerateur::class);
         $resolver->setAllowedTypes('cfr_j', 'float');
 

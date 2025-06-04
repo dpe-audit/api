@@ -80,9 +80,9 @@ final class PerformanceGenerateur extends Rule
     public function __invoke(array $input): array
     {
         $resolver = new OptionsResolver();
-        $resolver->setRequired('zone_climatique', 'eer', 'annee_installation_generateur', 'annee_construction');
+        $resolver->setRequired(['zone_climatique', 'eer', 'annee_installation_generateur', 'annee_construction']);
         $resolver->setAllowedTypes('zone_climatique', ZoneClimatique::class);
-        $resolver->setAllowedTypes('eer', 'float|null');
+        $resolver->setAllowedTypes('eer', ['float', 'null']);
         $resolver->setAllowedTypes('annee_installation_generateur', [Annee::class, 'null']);
         $resolver->setAllowedTypes('annee_construction', Annee::class);
 

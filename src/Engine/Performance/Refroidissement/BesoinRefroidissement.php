@@ -24,8 +24,8 @@ final class BesoinRefroidissement extends Rule
      *      sh: float,
      *      as_fr_j: float,
      *      ai_fr_j: float,
-     *      text_fr_j: float,
-     *      nref_fr_j: float,
+     *      text_fr_j: float|null,
+     *      nref_fr_j: float|null,
      * }
      */
     private array $input;
@@ -175,7 +175,7 @@ final class BesoinRefroidissement extends Rule
     public function __invoke(array $input): array
     {
         $resolver = new OptionsResolver();
-        $resolver->setRequired('mois', 'scenario', 'sh', 'gv', 'inertie', 'ai_fr_j', 'as_fr_j', 'text_fr_j', 'nref_fr_j');
+        $resolver->setRequired(['mois', 'scenario', 'sh', 'gv', 'inertie', 'ai_fr_j', 'as_fr_j', 'text_fr_j', 'nref_fr_j']);
         $resolver->setAllowedTypes('mois', Mois::class);
         $resolver->setAllowedTypes('scenario', ScenarioUsage::class);
         $resolver->setAllowedTypes('sh', 'float');
@@ -183,8 +183,8 @@ final class BesoinRefroidissement extends Rule
         $resolver->setAllowedTypes('inertie', Inertie::class);
         $resolver->setAllowedTypes('ai_fr_j', 'float');
         $resolver->setAllowedTypes('as_fr_j', 'float');
-        $resolver->setAllowedTypes('text_fr_j', 'float');
-        $resolver->setAllowedTypes('nref_fr_j', 'float');
+        $resolver->setAllowedTypes('text_fr_j', ['float', 'null']);
+        $resolver->setAllowedTypes('nref_fr_j', ['float', 'null']);
 
         $this->input = $resolver->resolve($input);
 

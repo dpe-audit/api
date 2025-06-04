@@ -15,6 +15,7 @@ final class XMLRefroidissementTableValeurRepository implements RefroidissementTa
     {
         return $this->db->repository('refroidissement.eer')
             ->createQuery()
+            ->and('zone_climatique', $zone_climatique->code())
             ->andCompareTo('annee_installation_generateur', $annee_installation_generateur->value())
             ->getOne()
             ?->floatval('eer');

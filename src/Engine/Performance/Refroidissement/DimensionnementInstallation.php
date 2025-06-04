@@ -47,9 +47,9 @@ final class DimensionnementInstallation extends Rule
     public function __invoke(array $input): array
     {
         $resolver = new OptionsResolver();
-        $resolver->setRequired('surface_totale', 'surface_couverte');
-        $resolver->setAllowedTypes('surface_totale', 'float|int');
-        $resolver->setAllowedTypes('surface_couverte', 'float|int');
+        $resolver->setRequired(['surface_totale', 'surface_couverte']);
+        $resolver->setAllowedTypes('surface_totale', ['float', 'int']);
+        $resolver->setAllowedTypes('surface_couverte', ['float', 'int']);
 
         $this->input = $resolver->resolve($input);
         return ['rdim' => $this->rdim()];

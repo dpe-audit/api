@@ -87,7 +87,7 @@ final class ConsommationRefroidissement extends Rule
     public function __invoke(array $input): array
     {
         $resolver = new OptionsResolver();
-        $resolver->setRequired('rdim_installation', 'rdim_systeme', 'eer', 'bfr_j');
+        $resolver->setRequired(['rdim_installation', 'rdim_systeme', 'eer', 'bfr_j']);
         $resolver->setAllowedTypes('rdim_installation', 'float');
         $resolver->setAllowedTypes('rdim_systeme', 'float');
         $resolver->setAllowedTypes('eer', 'float');
