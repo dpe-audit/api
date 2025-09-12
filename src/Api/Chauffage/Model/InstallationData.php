@@ -2,8 +2,8 @@
 
 namespace App\Api\Chauffage\Model;
 
-use App\Domain\Common\ValueObject\{Consommation, Emission};
-use App\Domain\Chauffage\Entity\Installation as Entity;
+use App\Model\Common\ValueObject\{Consommation, Emission};
+use App\Model\Chauffage\Entity\Installation as Entity;
 
 /**
  * @property array<Consommation> $consommations

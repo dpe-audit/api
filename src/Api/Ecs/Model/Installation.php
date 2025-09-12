@@ -2,7 +2,7 @@
 
 namespace App\Api\Ecs\Model;
 
-use App\Domain\Ecs\Entity\{Installation as Entity, InstallationCollection as EntityCollection};
+use App\Model\Ecs\Entity\{Installation as Entity, InstallationCollection as EntityCollection};
 use Symfony\Component\Validator\Constraints as Assert;
 
 final class Installation

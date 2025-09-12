@@ -2,9 +2,7 @@
 
 namespace App\Domain\Common\Enum;
 
-use App\Domain\Common\Enum\Enum;
-
-enum Mois: string implements Enum
+enum Mois: string
 {
     case JANVIER = '01';
     case FEVRIER = '02';
@@ -37,29 +35,6 @@ enum Mois: string implements Enum
     public static function each(\Closure $func): array
     {
         return \array_map($func, self::cases());
-    }
-
-    public function id(): string
-    {
-        return $this->value;
-    }
-
-    public function lib(): string
-    {
-        return match ($this) {
-            self::JANVIER => 'Janvier',
-            self::FEVRIER => 'Février',
-            self::MARS => 'Mars',
-            self::AVRIL => 'Avril',
-            self::MAI => 'Mai',
-            self::JUIN => 'Juin',
-            self::JUILLET => 'Juillet',
-            self::AOUT => 'Août',
-            self::SEPTEMBRE => 'Septembre',
-            self::OCTOBRE => 'Octobre',
-            self::NOVEMBRE => 'Novembre',
-            self::DECEMBRE => 'Décembre',
-        };
     }
 
     /**

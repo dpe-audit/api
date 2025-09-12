@@ -3,11 +3,11 @@
 namespace App\Api\Enveloppe\Handler;
 
 use App\Api\Enveloppe\Model\PlancherBas as Payload;
-use App\Domain\Common\ValueObject\{Annee, Id};
-use App\Domain\Enveloppe\Entity\PlancherBas;
-use App\Domain\Enveloppe\Enveloppe;
-use App\Domain\Enveloppe\ValueObject\Isolation;
-use App\Domain\Enveloppe\ValueObject\PlancherBas\Position;
+use App\Model\Common\ValueObject\{Annee, Id};
+use App\Model\Enveloppe\Entity\PlancherBas;
+use App\Model\Enveloppe\Enveloppe;
+use App\Model\Enveloppe\ValueObject\Isolation;
+use App\Model\Enveloppe\ValueObject\PlancherBas\Position;
 
 final class CreatePlancherBasHandler
 {

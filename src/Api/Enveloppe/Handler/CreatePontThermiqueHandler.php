@@ -3,11 +3,11 @@
 namespace App\Api\Enveloppe\Handler;
 
 use App\Api\Enveloppe\Model\PontThermique as Payload;
-use App\Domain\Common\ValueObject\Id;
-use App\Domain\Enveloppe\Entity\PontThermique;
-use App\Domain\Enveloppe\Enum\PontThermique\TypeLiaison;
-use App\Domain\Enveloppe\Enveloppe;
-use App\Domain\Enveloppe\ValueObject\PontThermique\Liaison;
+use App\Model\Common\ValueObject\Id;
+use App\Model\Enveloppe\Entity\PontThermique;
+use App\Model\Enveloppe\Enum\PontThermique\TypeLiaison;
+use App\Model\Enveloppe\Enveloppe;
+use App\Model\Enveloppe\ValueObject\PontThermique\Liaison;
 
 final class CreatePontThermiqueHandler
 {

@@ -2,7 +2,7 @@
 
 namespace App\Api\Chauffage\Model;
 
-use App\Domain\Chauffage\Chauffage as Entity;
+use App\Model\Chauffage\Chauffage as Entity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**

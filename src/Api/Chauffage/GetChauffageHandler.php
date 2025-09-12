@@ -2,8 +2,8 @@
 
 namespace App\Api\Chauffage;
 
-use App\Domain\Chauffage\{Chauffage, ChauffageRepository};
-use App\Domain\Common\ValueObject\Id;
+use App\Model\Chauffage\{Chauffage, ChauffageRepository};
+use App\Model\Common\ValueObject\Id;
 
 final class GetChauffageHandler
 {

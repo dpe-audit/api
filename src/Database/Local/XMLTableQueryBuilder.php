@@ -2,8 +2,6 @@
 
 namespace App\Database\Local;
 
-use App\Domain\Common\Enum\Enum;
-
 final class XMLTableQueryBuilder
 {
     private string $query = '//';
@@ -28,8 +26,8 @@ final class XMLTableQueryBuilder
         if ($search instanceof \Stringable) {
             $search = (string) $search;
         }
-        if ($search instanceof Enum) {
-            $search = (string) $search->id();
+        if ($search instanceof \BackedEnum) {
+            $search = (string) $search->value;
         }
         $expression = '$attribute = "$search" or $attribute = ""';
         if (null === $value) {

@@ -2,7 +2,7 @@
 
 namespace App\Domain\Common\Enum;
 
-enum Energie: string implements Enum
+enum Energie: string
 {
     case ELECTRICITE = 'electricite';
     case GAZ_NATUREL = 'gaz_naturel';
@@ -24,25 +24,6 @@ enum Energie: string implements Enum
             9, 10, 13 => self::GPL,
             11 => self::CHARBON,
             15 => self::RESEAU_FROID,
-        };
-    }
-
-    public function id(): string
-    {
-        return $this->value;
-    }
-
-    public function lib(): string
-    {
-        return match ($this) {
-            self::ELECTRICITE => 'Électricité',
-            self::GAZ_NATUREL => 'Gaz naturel',
-            self::GPL => 'GPL',
-            self::FIOUL => 'Fioul domestique',
-            self::BOIS => 'Bois',
-            self::CHARBON => 'Charbon',
-            self::RESEAU_CHALEUR => 'Réseau de chaleur',
-            self::RESEAU_FROID => 'Réseau de froid',
         };
     }
 

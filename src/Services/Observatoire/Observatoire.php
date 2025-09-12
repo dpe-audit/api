@@ -2,7 +2,7 @@
 
 namespace App\Services\Observatoire;
 
-use App\Domain\Common\ValueObject\Id;
+use App\Model\Common\ValueObject\Id;
 use Symfony\Contracts\HttpClient\{HttpClientInterface, ResponseInterface};
 
 final class Observatoire

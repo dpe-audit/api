@@ -3,11 +3,11 @@
 namespace App\Api\Enveloppe\Handler;
 
 use App\Api\Enveloppe\Model\Lnc as Payload;
-use App\Domain\Common\ValueObject\{Id, Inclinaison, Orientation};
-use App\Domain\Enveloppe\Entity\Lnc;
-use App\Domain\Enveloppe\Entity\Lnc\{Baie, ParoiOpaque};
-use App\Domain\Enveloppe\Enveloppe;
-use App\Domain\Enveloppe\ValueObject\Lnc\{PositionBaie, PositionParoi};
+use App\Model\Common\ValueObject\{Id, Inclinaison, Orientation};
+use App\Model\Enveloppe\Entity\Lnc;
+use App\Model\Enveloppe\Entity\Lnc\{Baie, ParoiOpaque};
+use App\Model\Enveloppe\Enveloppe;
+use App\Model\Enveloppe\ValueObject\Lnc\{PositionBaie, PositionParoi};
 
 final class CreateLncHandler
 {

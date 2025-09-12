@@ -6,7 +6,7 @@ use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
 use App\Api\Enveloppe\GetEnveloppeHandler;
 use App\Api\Enveloppe\Model\Enveloppe;
-use App\Domain\Common\ValueObject\Id;
+use App\Model\Common\ValueObject\Id;
 
 /**
  * @implements ProviderInterface<Enveloppe|null>

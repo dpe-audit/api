@@ -2,8 +2,8 @@
 
 namespace App\Api\Common\Model;
 
-use App\Domain\Common\Enum\{ScenarioUsage, TypePerte, Usage};
-use App\Domain\Common\ValueObject\Pertes as Value;
+use App\Model\Common\Enum\{ScenarioUsage, TypePerte, Usage};
+use App\Model\Common\ValueObject\Pertes as Value;
 
 final class Perte
 {

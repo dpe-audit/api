@@ -2,7 +2,7 @@
 
 namespace App\Api\Chauffage\Model;
 
-use App\Domain\Chauffage\ValueObject\Regulation as Value;
+use App\Model\Chauffage\ValueObject\Regulation as Value;
 
 final class Regulation
 {

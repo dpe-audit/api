@@ -2,7 +2,7 @@
 
 namespace App\Api\Ecs\Model;
 
-use App\Domain\Ecs\Entity\{Systeme as Entity, SystemeCollection as EntityCollection};
+use App\Model\Ecs\Entity\{Systeme as Entity, SystemeCollection as EntityCollection};
 use Symfony\Component\Validator\Constraints as Assert;
 
 final class Systeme

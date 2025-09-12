@@ -3,11 +3,11 @@
 namespace App\Api\Enveloppe\Handler;
 
 use App\Api\Enveloppe\Model\Baie as Payload;
-use App\Domain\Common\ValueObject\{Annee, Id, Inclinaison, Orientation};
-use App\Domain\Enveloppe\Entity\Baie;
-use App\Domain\Enveloppe\Entity\Baie\DoubleFenetre;
-use App\Domain\Enveloppe\Enveloppe;
-use App\Domain\Enveloppe\ValueObject\Baie\{Composition, Menuiserie, Performance, Position, Survitrage, Vitrage};
+use App\Model\Common\ValueObject\{Annee, Id, Inclinaison, Orientation};
+use App\Model\Enveloppe\Entity\Baie;
+use App\Model\Enveloppe\Entity\Baie\DoubleFenetre;
+use App\Model\Enveloppe\Enveloppe;
+use App\Model\Enveloppe\ValueObject\Baie\{Composition, Menuiserie, Performance, Position, Survitrage, Vitrage};
 
 final class CreateBaieHandler
 {

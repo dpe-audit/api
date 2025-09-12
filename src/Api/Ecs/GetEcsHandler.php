@@ -2,8 +2,8 @@
 
 namespace App\Api\Ecs;
 
-use App\Domain\Ecs\{Ecs, EcsRepository};
-use App\Domain\Common\ValueObject\Id;
+use App\Model\Ecs\{Ecs, EcsRepository};
+use App\Model\Common\ValueObject\Id;
 
 final class GetEcsHandler
 {

@@ -2,7 +2,6 @@
 
 namespace App\Domain\Ecs;
 
-use App\Domain\Common\ValueObject\{Besoins, Consommations, Emissions, Pertes};
 use Webmozart\Assert\Assert;
 
 final class EcsData
@@ -10,53 +9,52 @@ final class EcsData
     public function __construct(
         public readonly ?float $nmax,
         public readonly ?float $nadeq,
-        public readonly ?Besoins $besoins,
-        public readonly ?Pertes $pertes,
-        public readonly ?Pertes $pertes_recuperables,
-        public readonly ?Consommations $consommations,
-        public readonly ?Emissions $emissions,
+        public readonly ?float $becs,
+        public readonly ?float $cef,
+        public readonly ?float $cep,
+        public readonly ?float $eges,
     ) {}
 
     public static function create(
         ?float $nmax = null,
         ?float $nadeq = null,
-        ?Besoins $besoins = null,
-        ?Pertes $pertes = null,
-        ?Pertes $pertes_recuperables = null,
-        ?Consommations $consommations = null,
-        ?Emissions $emissions = null,
+        ?float $becs = null,
+        ?float $cef = null,
+        ?float $cep = null,
+        ?float $eges = null,
     ): self {
         Assert::nullOrGreaterThan($nmax, 0);
         Assert::nullOrGreaterThan($nadeq, 0);
+        Assert::nullOrGreaterThan($becs, 0);
+        Assert::nullOrGreaterThan($cef, 0);
+        Assert::nullOrGreaterThan($cep, 0);
+        Assert::nullOrGreaterThan($eges, 0);
 
         return new self(
             nmax: $nmax,
             nadeq: $nadeq,
-            besoins: $besoins,
-            pertes: $pertes,
-            pertes_recuperables: $pertes_recuperables,
-            consommations: $consommations,
-            emissions: $emissions,
+            becs: $becs,
+            cef: $cef,
+            cep: $cep,
+            eges: $eges,
         );
     }
 
     public function with(
         ?float $nmax = null,
         ?float $nadeq = null,
-        ?Besoins $besoins = null,
-        ?Pertes $pertes = null,
-        ?Pertes $pertes_recuperables = null,
-        ?Consommations $consommations = null,
-        ?Emissions $emissions = null,
+        ?float $becs = null,
+        ?float $cef = null,
+        ?float $cep = null,
+        ?float $eges = null,
     ): self {
         return self::create(
             nmax: $nmax ?? $this->nmax,
             nadeq: $nadeq ?? $this->nadeq,
-            besoins: $besoins ?? $this->besoins,
-            pertes: $pertes ? ($this->pertes?->merge($pertes) ?? $pertes) : $this->pertes,
-            pertes_recuperables: $pertes_recuperables ? ($this->pertes_recuperables?->merge($pertes_recuperables) ?? $pertes_recuperables) : $this->pertes_recuperables,
-            consommations: $consommations ? ($this->consommations?->merge($consommations) ?? $consommations) : $this->consommations,
-            emissions: $emissions ? ($this->emissions?->merge($emissions) ?? $emissions) : $this->emissions,
+            becs: $becs ?? $this->becs,
+            cef: $cef ?? $this->cef,
+            cep: $cep ?? $this->cep,
+            eges: $eges ?? $this->eges,
         );
     }
 }

@@ -2,21 +2,18 @@
 
 namespace App\Domain\Eclairage;
 
-use App\Domain\Common\ValueObject\Id;
-
 final class Eclairage
 {
-    public function __construct(
-        private readonly Id $id,
-        private EclairageData $data,
-    ) {}
+    private EclairageData $data;
+
+    public function __construct()
+    {
+        $this->data = EclairageData::create();
+    }
 
     public static function create(): self
     {
-        return new self(
-            id: Id::create(),
-            data: EclairageData::create(),
-        );
+        return new self();
     }
 
     public function reinitialise(): void
@@ -28,11 +25,6 @@ final class Eclairage
     {
         $this->data = $data;
         return $this;
-    }
-
-    public function id(): Id
-    {
-        return $this->id;
     }
 
     public function data(): EclairageData

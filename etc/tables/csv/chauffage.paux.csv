@@ -18,10 +18,6 @@ pac_air_eau;;;;0;0;;0
 pac_eau_eau;;;;0;0;;0
 pac_eau_glycolee_eau;;;;0;0;;0
 pac_geothermique;;;;0;0;;0
-pac_hybride_air_eau;;;;0;0;;0
-pac_hybride_eau_eau;;;;0;0;;0
-pac_hybride_eau_glycolee_eau;;;;0;0;;0
-pac_hybride_geothermique;;;;0;0;;0
 poele_bouilleur;;;1;73.3;10.5;70;73.3 + 10.5 * Pn
 poele_bouilleur;;;;0;0;70;0
 reseau_chaleur;;;;0;0;;0

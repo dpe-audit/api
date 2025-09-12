@@ -2,8 +2,8 @@
 
 namespace App\Api\Eclairage\Model;
 
-use App\Domain\Common\ValueObject\{Consommation, Emission};
-use App\Domain\Eclairage\Eclairage as Entity;
+use App\Model\Common\ValueObject\{Consommation, Emission};
+use App\Model\Eclairage\Eclairage as Entity;
 
 /**
  * @property array<Consommation> $consommations

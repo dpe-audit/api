@@ -2,8 +2,8 @@
 
 namespace App\Api\Common\Model;
 
-use App\Domain\Common\Enum\{ScenarioUsage, Usage};
-use App\Domain\Common\ValueObject\Besoins as Value;
+use App\Model\Common\Enum\{ScenarioUsage, Usage};
+use App\Model\Common\ValueObject\Besoins as Value;
 
 final class Besoin
 {

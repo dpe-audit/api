@@ -3,8 +3,8 @@
 namespace App\Api\Ecs\Model;
 
 use App\Api\Common\Model\Perte;
-use App\Domain\Common\ValueObject\{Consommation, Emission};
-use App\Domain\Ecs\Entity\Generateur as Entity;
+use App\Model\Common\ValueObject\{Consommation, Emission};
+use App\Model\Ecs\Entity\Generateur as Entity;
 
 /**
  * @property array<Perte> $pertes

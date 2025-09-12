@@ -2,7 +2,7 @@
 
 namespace App\Api\Chauffage\Model;
 
-use App\Domain\Chauffage\Entity\{Installation as Entity, InstallationCollection as EntityCollection};
+use App\Model\Chauffage\Entity\{Installation as Entity, InstallationCollection as EntityCollection};
 use Symfony\Component\Validator\Constraints as Assert;
 
 final class Installation

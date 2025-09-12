@@ -3,9 +3,9 @@
 namespace App\Database\Opendata\Chauffage;
 
 use App\Database\Opendata\{XMLElement, XMLReader};
-use App\Domain\Chauffage\Enum\UsageChauffage;
-use App\Domain\Chauffage\ValueObject\{Regulation, Solaire};
-use App\Domain\Common\ValueObject\{Id, Pourcentage};
+use App\Model\Chauffage\Enum\UsageChauffage;
+use App\Model\Chauffage\ValueObject\{Regulation, Solaire};
+use App\Model\Common\ValueObject\{Id, Pourcentage};
 
 final class XMLInstallationReader extends XMLReader
 {

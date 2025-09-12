@@ -2,29 +2,36 @@
 
 namespace App\Domain\Eclairage;
 
-use App\Domain\Common\ValueObject\{Consommations, Emissions};
+use Webmozart\Assert\Assert;
 
 final class EclairageData
 {
     public function __construct(
-        public readonly ?Consommations $consommations,
-        public readonly ?Emissions $emissions,
+        public readonly ?float $cef,
+        public readonly ?float $cep,
+        public readonly ?float $eges,
     ) {}
 
     public static function create(
-        ?Consommations $consommations = null,
-        ?Emissions $emissions = null,
+        ?float $cef = null,
+        ?float $cep = null,
+        ?float $eges = null,
     ): self {
-        return new self(consommations: $consommations, emissions: $emissions);
+        Assert::nullOrGreaterThanEq($cef, 0);
+        Assert::nullOrGreaterThanEq($cep, 0);
+        Assert::nullOrGreaterThanEq($eges, 0);
+        return new self(cef: $cef, cep: $cep, eges: $eges);
     }
 
     public function with(
-        ?Consommations $consommations = null,
-        ?Emissions $emissions = null,
+        ?float $cef = null,
+        ?float $cep = null,
+        ?float $eges = null,
     ): self {
         return self::create(
-            consommations: $consommations ?? $this->consommations,
-            emissions: $emissions ?? $this->emissions,
+            cef: $cef ?? $this->cef,
+            cep: $cep ?? $this->cep,
+            eges: $eges ?? $this->eges
         );
     }
 }

@@ -4,7 +4,7 @@ namespace App\Api\Chauffage;
 
 use App\Api\Chauffage\Handler\{CreateEmetteurHandler, CreateGenerateurHandler, CreateInstallationHandler, CreateSystemeHandler};
 use App\Api\Chauffage\Model\Chauffage as Payload;
-use App\Domain\Chauffage\Chauffage;
+use App\Model\Chauffage\Chauffage;
 
 final class CreateChauffageHandler
 {

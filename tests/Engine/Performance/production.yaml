@@ -1,0 +1,38 @@
+surface_capteurs:
+  - expect: 10
+    with:
+      surface_capteurs: 10
+  - expect: 9
+    with:
+      surface_capteurs: null
+      modules: 5
+
+kpv:
+  - expect: 0
+    with:
+      orientation: 0
+      inclinaison: 10
+  - expect: 1
+    with:
+      orientation: 90
+      inclinaison: 10
+  - expect: 1
+    with:
+      orientation: 135
+      inclinaison: 10
+  - expect: 1
+    with:
+      orientation: 180
+      inclinaison: 10
+  - expect: 1
+    with:
+      orientation: 225
+      inclinaison: 10
+  - expect: 1
+    with:
+      orientation: 270
+      inclinaison: 10
+  - expect: 0
+    with:
+      orientation: 340
+      inclinaison: 10

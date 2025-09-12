@@ -3,8 +3,8 @@
 namespace App\Database\Opendata\Chauffage;
 
 use App\Database\Opendata\XMLReader;
-use App\Domain\Chauffage\Enum\{TemperatureDistribution, TypeDistribution, TypeEmetteur, TypeEmission};
-use App\Domain\Common\ValueObject\{Annee, Id};
+use App\Model\Chauffage\Enum\{TemperatureDistribution, TypeDistribution, TypeEmetteur, TypeEmission};
+use App\Model\Common\ValueObject\{Annee, Id};
 
 final class XMLEmetteurReader extends XMLReader
 {

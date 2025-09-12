@@ -4,23 +4,18 @@ namespace App\Domain\Common\ValueObject;
 
 use Symfony\Component\Uid\{AbstractUid, Uuid};
 
-final class Id implements \Stringable
+final class Id extends AbstractUid
 {
-    public function __construct(public readonly string $value) {}
-
-    public static function from(string $value): static
-    {
-        return new self(value: $value);
-    }
+    public function __construct(protected string $uid) {}
 
     public static function create(): static
     {
-        return new self(value: Uuid::v7()->toRfc4122());
+        return new static(uid: Uuid::v7()->toRfc4122());
     }
 
-    public function compare(Id $id): bool
+    public function toBinary(): string
     {
-        return $this->value === $id->value;
+        return $this->uid;
     }
 
     public static function isValid(string $uid): bool
@@ -28,13 +23,11 @@ final class Id implements \Stringable
         return Uuid::isValid($uid);
     }
 
-    public function toBinary(): string
+    public static function fromString(string $uid): static
     {
-        return $this->value;
-    }
-
-    public function __toString(): string
-    {
-        return $this->value;
+        if (!static::isValid($uid)) {
+            throw new \InvalidArgumentException('Invalid uid provided.');
+        }
+        return new static(uid: $uid);
     }
 }

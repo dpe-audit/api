@@ -2,25 +2,10 @@
 
 namespace App\Domain\Common\Enum;
 
-use App\Domain\Common\Enum\Enum;
-
-enum ScenarioUsage: string implements Enum
+enum ScenarioUsage: string
 {
     case CONVENTIONNEL = 'conventionnel';
     case DEPENSIER = 'depensier';
-
-    public function id(): string
-    {
-        return $this->value;
-    }
-
-    public function lib(): string
-    {
-        return match ($this) {
-            self::CONVENTIONNEL => 'Scénario conventionnel',
-            self::DEPENSIER => 'Scénario dépensier',
-        };
-    }
 
     public static function each(\Closure $func): array
     {

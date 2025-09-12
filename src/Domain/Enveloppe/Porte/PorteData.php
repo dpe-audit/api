@@ -1,0 +1,53 @@
+<?php
+
+namespace App\Domain\Enveloppe\Porte;
+
+use Webmozart\Assert\Assert;
+
+final class PorteData
+{
+    public function __construct(
+        public readonly ?float $sdep,
+        public readonly ?float $u,
+        public readonly ?float $b,
+        public readonly ?float $dp,
+        public readonly ?Performance $performance,
+    ) {}
+
+    public static function create(
+        ?float $sdep = null,
+        ?float $u = null,
+        ?float $b = null,
+        ?float $dp = null,
+        ?Performance $performance = null,
+    ): self {
+        Assert::nullOrGreaterThanEq($sdep, 0);
+        Assert::nullOrGreaterThanEq($u, 0);
+        Assert::nullOrGreaterThanEq($b, 0);
+        Assert::nullOrGreaterThanEq($dp, 0);
+
+        return new self(
+            sdep: $sdep,
+            u: $u,
+            b: $b,
+            dp: $dp,
+            performance: $performance,
+        );
+    }
+
+    public function with(
+        ?float $sdep = null,
+        ?float $u = null,
+        ?float $b = null,
+        ?float $dp = null,
+        ?Performance $performance = null,
+    ): self {
+        return self::create(
+            sdep: $sdep ?? $this->sdep,
+            u: $u ?? $this->u,
+            b: $b ?? $this->b,
+            dp: $dp ?? $this->dp,
+            performance: $performance ?? $this->performance,
+        );
+    }
+}

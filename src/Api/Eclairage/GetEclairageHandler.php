@@ -2,8 +2,8 @@
 
 namespace App\Api\Eclairage;
 
-use App\Domain\Eclairage\{Eclairage, EclairageRepository};
-use App\Domain\Common\ValueObject\Id;
+use App\Model\Eclairage\{Eclairage, EclairageRepository};
+use App\Model\Common\ValueObject\Id;
 
 final class GetEclairageHandler
 {

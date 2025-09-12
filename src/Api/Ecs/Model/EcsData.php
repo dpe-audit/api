@@ -3,8 +3,8 @@
 namespace App\Api\Ecs\Model;
 
 use App\Api\Common\Model\{Besoin, Perte};
-use App\Domain\Common\ValueObject\{Consommation, Emission};
-use App\Domain\Ecs\Ecs as Entity;
+use App\Model\Common\ValueObject\{Consommation, Emission};
+use App\Model\Ecs\Ecs as Entity;
 
 /**
  * @property array<Besoin> $besoins

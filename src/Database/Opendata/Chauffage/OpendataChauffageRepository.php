@@ -3,8 +3,8 @@
 namespace App\Database\Opendata\Chauffage;
 
 use App\Database\Opendata\XMLElement;
-use App\Domain\Common\ValueObject\Id;
-use App\Domain\Chauffage\{Chauffage, ChauffageRepository};
+use App\Model\Common\ValueObject\Id;
+use App\Model\Chauffage\{Chauffage, ChauffageRepository};
 use App\Serializer\Opendata\XMLChauffageDeserializer;
 use App\Services\Observatoire\Observatoire;
 

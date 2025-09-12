@@ -2,9 +2,8 @@
 
 namespace App\Api\Production;
 
-use App\Api\Production\Handler\CreatePanneauPhotovoltaiqueHandler;
-use App\Api\Production\Model\Production as Payload;
 use App\Domain\Production\Production;
+use App\Dto\Production\ProductionDto;
 
 final class CreateProductionHandler
 {
@@ -12,7 +11,7 @@ final class CreateProductionHandler
         private readonly CreatePanneauPhotovoltaiqueHandler $panneau_photovoltaique_handler,
     ) {}
 
-    public function __invoke(Payload $payload): Production
+    public function __invoke(ProductionDto $payload): Production
     {
         $entity = Production::create();
 

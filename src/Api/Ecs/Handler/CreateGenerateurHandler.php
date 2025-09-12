@@ -3,11 +3,11 @@
 namespace App\Api\Ecs\Handler;
 
 use App\Api\Ecs\Model\Generateur as Payload;
-use App\Domain\Common\ValueObject\{Annee, Id, Pourcentage};
-use App\Domain\Ecs\Ecs;
-use App\Domain\Ecs\Entity\Generateur;
-use App\Domain\Ecs\Factory\GenerateurFactory;
-use App\Domain\Ecs\ValueObject\Generateur\{Combustion, Signaletique};
+use App\Model\Common\ValueObject\{Annee, Id, Pourcentage};
+use App\Model\Ecs\Ecs;
+use App\Model\Ecs\Entity\Generateur;
+use App\Model\Ecs\Factory\GenerateurFactory;
+use App\Model\Ecs\ValueObject\Generateur\{Combustion, Signaletique};
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
 /**

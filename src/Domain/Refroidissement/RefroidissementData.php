@@ -2,37 +2,47 @@
 
 namespace App\Domain\Refroidissement;
 
-use App\Domain\Common\ValueObject\{Besoins, Consommations, Emissions};
+use Webmozart\Assert\Assert;
 
 final class RefroidissementData
 {
     public function __construct(
-        public readonly ?Besoins $besoins = null,
-        public readonly ?Consommations $consommations = null,
-        public readonly ?Emissions $emissions = null,
+        public readonly ?float $bfr,
+        public readonly ?float $cef,
+        public readonly ?float $cep,
+        public readonly ?float $eges,
     ) {}
 
     public static function create(
-        ?Besoins $besoins = null,
-        ?Consommations $consommations = null,
-        ?Emissions $emissions = null,
+        ?float $bfr = null,
+        ?float $cef = null,
+        ?float $cep = null,
+        ?float $eges = null,
     ): self {
+        Assert::nullOrGreaterThanEq($bfr, 0);
+        Assert::nullOrGreaterThanEq($cef, 0);
+        Assert::nullOrGreaterThanEq($cep, 0);
+        Assert::nullOrGreaterThanEq($eges, 0);
+
         return new self(
-            besoins: $besoins,
-            consommations: $consommations,
-            emissions: $emissions,
+            bfr: $bfr,
+            cef: $cef,
+            cep: $cep,
+            eges: $eges,
         );
     }
 
     public function with(
-        ?Besoins $besoins = null,
-        ?Consommations $consommations = null,
-        ?Emissions $emissions = null,
+        ?float $bfr = null,
+        ?float $cef = null,
+        ?float $cep = null,
+        ?float $eges = null
     ): self {
         return self::create(
-            besoins: $besoins ?? $this->besoins,
-            consommations: $consommations ? ($this->consommations?->merge($consommations) ?? $consommations) : $this->consommations,
-            emissions: $emissions ? ($this->emissions?->merge($emissions) ?? $emissions) : $this->emissions,
+            bfr: $bfr ?? $this->bfr,
+            cef: $cef ?? $this->cef,
+            cep: $cep ?? $this->cep,
+            eges: $eges ?? $this->eges,
         );
     }
 }

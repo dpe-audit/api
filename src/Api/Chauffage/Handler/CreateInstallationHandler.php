@@ -3,10 +3,10 @@
 namespace App\Api\Chauffage\Handler;
 
 use App\Api\Chauffage\Model\Installation as Payload;
-use App\Domain\Common\ValueObject\{Annee, Id, Pourcentage};
-use App\Domain\Chauffage\Chauffage;
-use App\Domain\Chauffage\Entity\Installation;
-use App\Domain\Chauffage\ValueObject\{Regulation, Solaire};
+use App\Model\Common\ValueObject\{Annee, Id, Pourcentage};
+use App\Model\Chauffage\Chauffage;
+use App\Model\Chauffage\Entity\Installation;
+use App\Model\Chauffage\ValueObject\{Regulation, Solaire};
 
 final class CreateInstallationHandler
 {

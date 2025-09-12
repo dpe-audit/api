@@ -2,8 +2,8 @@
 
 namespace App\Api\Chauffage\Model;
 
-use App\Domain\Chauffage\Entity\{Generateur as Entity, GenerateurCollection as EntityCollection};
-use App\Domain\Chauffage\Enum\{EnergieGenerateur, LabelGenerateur, ModeCombustion, TypeGenerateur, TypeChaudiere};
+use App\Model\Chauffage\Entity\{Generateur as Entity, GenerateurCollection as EntityCollection};
+use App\Model\Chauffage\Enum\{EnergieGenerateur, LabelGenerateur, ModeCombustion, TypeGenerateur, TypeChaudiere};
 use App\Services\Validator\Constraints as DpeAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 

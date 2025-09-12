@@ -2,56 +2,60 @@
 
 namespace App\Domain\Enveloppe;
 
-use App\Domain\Common\ValueObject\Id;
-use App\Domain\Enveloppe\Enum\Exposition;
-use App\Domain\Enveloppe\Entity\{Lnc, LncCollection};
-use App\Domain\Enveloppe\Entity\{Baie, BaieCollection};
-use App\Domain\Enveloppe\Entity\{Mur, MurCollection};
-use App\Domain\Enveloppe\Entity\{Niveau, NiveauCollection};
-use App\Domain\Enveloppe\Entity\{Paroi, ParoiCollection};
-use App\Domain\Enveloppe\Entity\{PlancherBas, PlancherBasCollection};
-use App\Domain\Enveloppe\Entity\{PlancherHaut, PlancherHautCollection};
-use App\Domain\Enveloppe\Entity\{Porte, PorteCollection};
-use App\Domain\Enveloppe\Entity\{PontThermique, PontThermiqueCollection};
-use App\Domain\Enveloppe\Enum\TypeParoi;
+use App\Domain\Enveloppe\Lnc\{Lnc, LncCollection};
+use App\Domain\Enveloppe\Baie\{Baie, BaieCollection};
+use App\Domain\Enveloppe\DoubleFenetre\{DoubleFenetre, DoubleFenetreCollection};
+use App\Domain\Enveloppe\Mur\{Mur, MurCollection};
+use App\Domain\Enveloppe\Masque\{Masque, MasqueCollection};
+use App\Domain\Enveloppe\Niveau\{Niveau, NiveauCollection};
+use App\Domain\Enveloppe\Paroi\{Paroi, ParoiCollection};
+use App\Domain\Enveloppe\PlancherBas\{PlancherBas, PlancherBasCollection};
+use App\Domain\Enveloppe\PlancherHaut\{PlancherHaut, PlancherHautCollection};
+use App\Domain\Enveloppe\Porte\{Porte, PorteCollection};
+use App\Domain\Enveloppe\PontThermique\{PontThermique, PontThermiqueCollection};
 use Webmozart\Assert\Assert;
 
 final class Enveloppe
 {
+    private NiveauCollection $niveaux;
+    private LncCollection $locaux_non_chauffes;
+    private DoubleFenetreCollection $doubles_fenetres;
+    private MasqueCollection $masques;
+    private BaieCollection $baies;
+    private MurCollection $murs;
+    private PlancherBasCollection $planchers_bas;
+    private PlancherHautCollection $planchers_hauts;
+    private PorteCollection $portes;
+    private PontThermiqueCollection $ponts_thermiques;
+    private EnveloppeData $data;
+
     public function __construct(
-        private readonly Id $id,
         private Exposition $exposition,
         private ?float $q4pa_conv,
         private bool $presence_brasseurs_air,
-        private LncCollection $locaux_non_chauffes,
-        private BaieCollection $baies,
-        private MurCollection $murs,
-        private PlancherBasCollection $planchers_bas,
-        private PlancherHautCollection $planchers_hauts,
-        private PorteCollection $portes,
-        private PontThermiqueCollection $ponts_thermiques,
-        private NiveauCollection $niveaux,
-        private EnveloppeData $data,
-    ) {}
+    ) {
+        $this->niveaux = new NiveauCollection();
+        $this->locaux_non_chauffes = new LncCollection();
+        $this->doubles_fenetres = new DoubleFenetreCollection();
+        $this->masques = new MasqueCollection();
+        $this->baies = new BaieCollection();
+        $this->murs = new MurCollection();
+        $this->planchers_bas = new PlancherBasCollection();
+        $this->planchers_hauts = new PlancherHautCollection();
+        $this->portes = new PorteCollection();
+        $this->ponts_thermiques = new PontThermiqueCollection();
+        $this->data = EnveloppeData::create();
+    }
 
-    public static function create(Exposition $exposition, ?float $q4pa_conv, bool $presence_brasseurs_air): self
-    {
-        Assert::nullOrGreaterThan($q4pa_conv, 0);
-
+    public static function create(
+        Exposition $exposition,
+        ?float $q4pa_conv,
+        bool $presence_brasseurs_air,
+    ): self {
         return new self(
-            id: Id::create(),
             exposition: $exposition,
             q4pa_conv: $q4pa_conv,
             presence_brasseurs_air: $presence_brasseurs_air,
-            niveaux: new NiveauCollection,
-            locaux_non_chauffes: new LncCollection,
-            baies: new BaieCollection,
-            murs: new MurCollection,
-            planchers_bas: new PlancherBasCollection,
-            planchers_hauts: new PlancherHautCollection,
-            portes: new PorteCollection,
-            ponts_thermiques: new PontThermiqueCollection,
-            data: EnveloppeData::create(),
         );
     }
 
@@ -60,22 +64,20 @@ final class Enveloppe
         $this->data = EnveloppeData::create();
         $this->niveaux->reinitialise();
         $this->locaux_non_chauffes->reinitialise();
+        $this->doubles_fenetres->reinitialise();
+        $this->masques->reinitialise();
         $this->baies->reinitialise();
         $this->murs->reinitialise();
         $this->planchers_bas->reinitialise();
         $this->planchers_hauts->reinitialise();
         $this->portes->reinitialise();
+        $this->ponts_thermiques->reinitialise();
     }
 
     public function calcule(EnveloppeData $data): self
     {
         $this->data = $data;
         return $this;
-    }
-
-    public function id(): Id
-    {
-        return $this->id;
     }
 
     public function exposition(): Exposition
@@ -94,6 +96,20 @@ final class Enveloppe
     }
 
     /**
+     * @return ParoiCollection|Paroi[]
+     */
+    public function parois(): ParoiCollection
+    {
+        return new ParoiCollection(array_merge(
+            $this->murs->values(),
+            $this->planchers_bas->values(),
+            $this->planchers_hauts->values(),
+            $this->portes->values(),
+            $this->baies->values(),
+        ));
+    }
+
+    /**
      * @return NiveauCollection|Niveau[]
      */
     public function niveaux(): NiveauCollection
@@ -103,8 +119,12 @@ final class Enveloppe
 
     public function add_niveau(Niveau $entity): self
     {
+        Assert::null($this->niveaux->find($entity->id()));
+        Assert::same($entity->enveloppe(), $this);
+
         $this->niveaux->add($entity);
         $this->reinitialise();
+
         return $this;
     }
 
@@ -118,33 +138,51 @@ final class Enveloppe
 
     public function add_local_non_chauffe(Lnc $entity): self
     {
+        Assert::null($this->locaux_non_chauffes->find($entity->id()));
+        Assert::same($entity->enveloppe(), $this);
+
         $this->locaux_non_chauffes->add($entity);
         $this->reinitialise();
+
         return $this;
     }
 
     /**
-     * @return ParoiCollection|Paroi[]
+     * @return DoubleFenetreCollection|DoubleFenetre[]
      */
-    public function parois(TypeParoi $type_paroi): ParoiCollection
+    public function doubles_fenetres(): DoubleFenetreCollection
     {
-        return match ($type_paroi) {
-            TypeParoi::MUR => $this->murs,
-            TypeParoi::PLANCHER_BAS => $this->planchers_bas,
-            TypeParoi::PLANCHER_HAUT => $this->planchers_hauts,
-            TypeParoi::PORTE => $this->portes,
-            TypeParoi::BAIE => $this->baies,
-        };
+        return $this->doubles_fenetres;
     }
 
-    public function paroi(Id $id): ?Paroi
+    public function add_double_fenetre(DoubleFenetre $entity): self
     {
-        foreach (TypeParoi::cases() as $type_paroi) {
-            if ($paroi = $this->parois($type_paroi)->find($id)) {
-                return $paroi;
-            }
-        }
-        return null;
+        Assert::null($this->doubles_fenetres->find($entity->id()));
+        Assert::same($entity->enveloppe(), $this);
+
+        $this->doubles_fenetres->add($entity);
+        $this->reinitialise();
+
+        return $this;
+    }
+
+    /**
+     * @return MasqueCollection|Masque[]
+     */
+    public function masques(): MasqueCollection
+    {
+        return $this->masques;
+    }
+
+    public function add_masque(Masque $entity): self
+    {
+        Assert::null($this->masques->find($entity->id()));
+        Assert::same($entity->enveloppe(), $this);
+
+        $this->masques->add($entity);
+        $this->reinitialise();
+
+        return $this;
     }
 
     /**
@@ -157,8 +195,12 @@ final class Enveloppe
 
     public function add_baie(Baie $entity): self
     {
+        Assert::null($this->baies->find($entity->id()));
+        Assert::same($entity->enveloppe(), $this);
+
         $this->baies->add($entity);
         $this->reinitialise();
+
         return $this;
     }
 
@@ -172,8 +214,12 @@ final class Enveloppe
 
     public function add_mur(Mur $entity): self
     {
+        Assert::null($this->murs->find($entity->id()));
+        Assert::same($entity->enveloppe(), $this);
+
         $this->murs->add($entity);
         $this->reinitialise();
+
         return $this;
     }
 
@@ -187,8 +233,12 @@ final class Enveloppe
 
     public function add_plancher_bas(PlancherBas $entity): self
     {
+        Assert::null($this->planchers_bas->find($entity->id()));
+        Assert::same($entity->enveloppe(), $this);
+
         $this->planchers_bas->add($entity);
         $this->reinitialise();
+
         return $this;
     }
 
@@ -202,8 +252,12 @@ final class Enveloppe
 
     public function add_plancher_haut(PlancherHaut $entity): self
     {
+        Assert::null($this->planchers_hauts->find($entity->id()));
+        Assert::same($entity->enveloppe(), $this);
+
         $this->planchers_hauts->add($entity);
         $this->reinitialise();
+
         return $this;
     }
 
@@ -217,8 +271,12 @@ final class Enveloppe
 
     public function add_porte(Porte $entity): self
     {
+        Assert::null($this->portes->find($entity->id()));
+        Assert::same($entity->enveloppe(), $this);
+
         $this->portes->add($entity);
         $this->reinitialise();
+
         return $this;
     }
 
@@ -232,8 +290,12 @@ final class Enveloppe
 
     public function add_pont_thermique(PontThermique $entity): self
     {
+        Assert::null($this->ponts_thermiques->find($entity->id()));
+        Assert::same($entity->enveloppe(), $this);
+
         $this->ponts_thermiques->add($entity);
         $this->reinitialise();
+
         return $this;
     }
 

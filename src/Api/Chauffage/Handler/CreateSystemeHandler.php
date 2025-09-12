@@ -3,10 +3,10 @@
 namespace App\Api\Chauffage\Handler;
 
 use App\Api\Chauffage\Model\Systeme as Payload;
-use App\Domain\Common\ValueObject\Id;
-use App\Domain\Chauffage\Chauffage;
-use App\Domain\Chauffage\Entity\Systeme;
-use App\Domain\Chauffage\ValueObject\Reseau;
+use App\Model\Common\ValueObject\Id;
+use App\Model\Chauffage\Chauffage;
+use App\Model\Chauffage\Entity\Systeme;
+use App\Model\Chauffage\ValueObject\Reseau;
 
 final class CreateSystemeHandler
 {

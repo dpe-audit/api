@@ -2,7 +2,7 @@
 
 namespace App\Api\Ecs\Model;
 
-use App\Domain\Ecs\Ecs as Entity;
+use App\Model\Ecs\Ecs as Entity;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**

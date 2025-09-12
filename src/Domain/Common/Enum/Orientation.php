@@ -2,38 +2,12 @@
 
 namespace App\Domain\Common\Enum;
 
-enum Orientation: string implements Enum
+enum Orientation: string
 {
-    case NORD = 'N';
-    case EST = 'E';
-    case SUD = 'S';
-    case OUEST = 'O';
-
-    public function id(): string
-    {
-        return $this->value;
-    }
-
-    public function lib(): string
-    {
-        return match ($this) {
-            self::NORD => 'Nord',
-            self::EST => 'Est',
-            self::SUD => 'Sud',
-            self::OUEST => 'Ouest',
-        };
-    }
-
-    public static function from_enum_orientation_id(int $id): ?self
-    {
-        return match ($id) {
-            1 => self::SUD,
-            2 => self::NORD,
-            3 => self::EST,
-            4 => self::OUEST,
-            5 => null,
-        };
-    }
+    case NORD = 'nord';
+    case EST = 'est';
+    case SUD = 'sud';
+    case OUEST = 'ouest';
 
     public static function from_azimut(float $azimut): self
     {

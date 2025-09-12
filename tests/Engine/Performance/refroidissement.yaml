@@ -1,86 +1,73 @@
-App\Engine\Performance\Refroidissement\DimensionnementInstallation:
-  - with:
+rdim_installation:
+  - expect: 0.5
+    with:
       surface_totale: 100
       surface_couverte: 50
-    expect:
-      rdim: 0.5
-  - with:
+  - expect: 1
+    with:
       surface_totale: 100
       surface_couverte: 100
-    expect:
-      rdim: 1
 
-App\Engine\Performance\Refroidissement\DimensionnementSysteme:
-  - with:
+rdim_systeme:
+  - expect: 1
+    with:
       systemes: 1
-    expect:
-      rdim: 1
-  - with:
+  - expect: 0.2
+    with:
       systemes: 5
-    expect:
-      rdim: 0.2
 
-App\Engine\Performance\Refroidissement\PerformanceGenerateur:
+eer:
   - with:
       zone_climatique: H1a
-      eer: null
-      annee_installation_generateur: 2000
+      seer: null
+      annee_installation: 2000
       annee_construction: 2000
-    expect:
-      eer: 3.6
+    expect: 3.6
   - with:
       zone_climatique: H2a
-      eer: null
-      annee_installation_generateur: 2000
+      seer: null
+      annee_installation: 2000
       annee_construction: 2000
-    expect:
-      eer: 3.6
+    expect: 3.6
   - with:
       zone_climatique: H3
-      eer: null
-      annee_installation_generateur: 2000
+      seer: null
+      annee_installation: 2000
       annee_construction: 2000
-    expect:
-      eer: 3.25
+    expect: 3.25
   - with:
       zone_climatique: H1a
-      eer: null
-      annee_installation_generateur: 2012
+      seer: null
+      annee_installation: 2012
       annee_construction: 2012
-    expect:
-      eer: 6.175
+    expect: 6.175
   - with:
       zone_climatique: H2a
-      eer: null
-      annee_installation_generateur: 2012
+      seer: null
+      annee_installation: 2012
       annee_construction: 2012
-    expect:
-      eer: 6.175
+    expect: 6.175
   - with:
       zone_climatique: H3
-      eer: null
-      annee_installation_generateur: 2012
+      seer: null
+      annee_installation: 2012
       annee_construction: 2012
-    expect:
-      eer: 5.415
+    expect: 5.415
   - with:
       zone_climatique: H1a
-      eer: null
-      annee_installation_generateur: 2020
+      seer: null
+      annee_installation: 2020
       annee_construction: 2020
-    expect:
-      eer: 6.365
+    expect: 6.365
   - with:
       zone_climatique: H2a
-      eer: null
-      annee_installation_generateur: 2020
+      seer: null
+      annee_installation: 2020
       annee_construction: 2020
-    expect:
-      eer: 6.365
+    expect: 6.365
   - with:
       zone_climatique: H3
-      eer: null
-      annee_installation_generateur: 2020
+      seer: null
+      annee_installation: 2020
       annee_construction: 2020
-    expect:
-      eer: 7.125
+    expect: 7.125

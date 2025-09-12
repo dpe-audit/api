@@ -2,48 +2,30 @@
 
 namespace App\Domain\Ventilation;
 
-use App\Domain\Common\ValueObject\Id;
-use App\Domain\Ventilation\Entity\{Generateur, GenerateurCollection};
-use App\Domain\Ventilation\Entity\{Installation, InstallationCollection};
-use App\Domain\Ventilation\Entity\{Systeme, SystemeCollection};
+use App\Domain\Ventilation\Generateur\{Generateur, GenerateurCollection};
+use App\Domain\Ventilation\Installation\{Installation, InstallationCollection};
+use Webmozart\Assert\Assert;
 
 final class Ventilation
 {
-    public function __construct(
-        private readonly Id $id,
-        private GenerateurCollection $generateurs,
-        private InstallationCollection $installations,
-        private SystemeCollection $systemes,
-        private VentilationData $data,
-    ) {}
+    private GenerateurCollection $generateurs;
+    private InstallationCollection $installations;
+
+    public function __construct()
+    {
+        $this->generateurs = new GenerateurCollection;
+        $this->installations = new InstallationCollection;
+    }
 
     public static function create(): self
     {
-        return new self(
-            id: Id::create(),
-            generateurs: new GenerateurCollection(),
-            installations: new InstallationCollection(),
-            systemes: new SystemeCollection(),
-            data: VentilationData::create(),
-        );
-    }
-
-    public function calcule(VentilationData $data): self
-    {
-        $this->data = $data;
-        return $this;
+        return new self();
     }
 
     public function reinitialise(): void
     {
         $this->installations->reinitialise();
         $this->generateurs->reinitialise();
-        $this->systemes->reinitialise();
-    }
-
-    public function id(): Id
-    {
-        return $this->id;
     }
 
     /**
@@ -56,8 +38,12 @@ final class Ventilation
 
     public function add_generateur(Generateur $entity): self
     {
+        Assert::null($this->generateurs->find($entity->id()));
+        Assert::same($entity->ventilation(), $this);
+
         $this->generateurs->add($entity);
         $this->reinitialise();
+
         return $this;
     }
 
@@ -71,28 +57,12 @@ final class Ventilation
 
     public function add_installation(Installation $entity): self
     {
+        Assert::null($this->installations->find($entity->id()));
+        Assert::same($entity->ventilation(), $this);
+
         $this->installations->add($entity);
         $this->reinitialise();
+
         return $this;
-    }
-
-    /**
-     * @return SystemeCollection|Systeme[]
-     */
-    public function systemes(): SystemeCollection
-    {
-        return $this->systemes;
-    }
-
-    public function add_systeme(Systeme $entity): self
-    {
-        $this->systemes->add($entity);
-        $this->reinitialise();
-        return $this;
-    }
-
-    public function data(): VentilationData
-    {
-        return $this->data;
     }
 }

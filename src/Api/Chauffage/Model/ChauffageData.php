@@ -3,8 +3,8 @@
 namespace App\Api\Chauffage\Model;
 
 use App\Api\Common\Model\{Besoin, Perte};
-use App\Domain\Common\ValueObject\{Consommation, Emission};
-use App\Domain\Chauffage\Chauffage as Entity;
+use App\Model\Common\ValueObject\{Consommation, Emission};
+use App\Model\Chauffage\Chauffage as Entity;
 
 /**
  * @property array<Besoin> $besoins

@@ -9,10 +9,10 @@ use App\Api\Enveloppe\CreateEnveloppeHandler;
 use App\Api\Production\CreateProductionHandler;
 use App\Api\Refroidissement\CreateRefroidissementHandler;
 use App\Api\Ventilation\CreateVentilationHandler;
-use App\Domain\Audit\Audit;
-use App\Domain\Audit\ValueObject\{Adresse, Batiment};
-use App\Domain\Common\ValueObject\Annee;
-use App\Domain\Common\ValueObject\Id;
+use App\Model\Audit\Audit;
+use App\Model\Audit\ValueObject\{Adresse, Batiment};
+use App\Model\Common\ValueObject\Annee;
+use App\Model\Common\ValueObject\Id;
 
 final class CreateAuditHandler
 {

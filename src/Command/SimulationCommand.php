@@ -5,7 +5,7 @@ namespace App\Command;
 use App\Api\Audit\ComputeAuditHandler;
 use App\Api\Audit\Model\Audit as Resource;
 use App\Database\Opendata\XMLElement;
-use App\Domain\Audit\Audit;
+use App\Model\Audit\Audit;
 use App\Serializer\Opendata\XMLAuditDeserializer;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;

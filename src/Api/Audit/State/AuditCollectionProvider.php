@@ -8,8 +8,8 @@ use ApiPlatform\State\Pagination\{PaginatorInterface, Pagination};
 use App\Api\Audit\Collection\{Audit, AuditPaginator};
 use App\Api\Audit\SearchAuditHandler;
 use App\Api\Audit\Query\SearchQuery;
-use App\Domain\Audit\Enum\{Etiquette, ClasseAltitude, PeriodeConstruction, TypeBatiment};
-use App\Domain\Common\Enum\ZoneClimatique;
+use App\Model\Audit\Enum\{Etiquette, ClasseAltitude, PeriodeConstruction, TypeBatiment};
+use App\Model\Common\Enum\ZoneClimatique;
 
 /**
  * @implements ProviderInterface<Audit|null>

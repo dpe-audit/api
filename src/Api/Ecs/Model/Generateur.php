@@ -2,8 +2,8 @@
 
 namespace App\Api\Ecs\Model;
 
-use App\Domain\Ecs\Entity\{Generateur as Entity, GenerateurCollection as EntityCollection};
-use App\Domain\Ecs\Enum\{EnergieGenerateur, LabelGenerateur, ModeCombustion, TypeGenerateur, TypeChaudiere};
+use App\Model\Ecs\Entity\{Generateur as Entity, GenerateurCollection as EntityCollection};
+use App\Model\Ecs\Enum\{EnergieGenerateur, LabelGenerateur, ModeCombustion, TypeGenerateur, TypeChaudiere};
 use App\Services\Validator\Constraints as DpeAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 

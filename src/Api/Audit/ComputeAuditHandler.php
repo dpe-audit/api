@@ -2,7 +2,7 @@
 
 namespace App\Api\Audit;
 
-use App\Domain\Audit\Audit;
+use App\Model\Audit\Audit;
 use App\Engine\Performance\Engine;
 
 final class ComputeAuditHandler

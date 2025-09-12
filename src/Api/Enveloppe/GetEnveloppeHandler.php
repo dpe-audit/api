@@ -2,8 +2,8 @@
 
 namespace App\Api\Enveloppe;
 
-use App\Domain\Enveloppe\{Enveloppe, EnveloppeRepository};
-use App\Domain\Common\ValueObject\Id;
+use App\Model\Enveloppe\{Enveloppe, EnveloppeRepository};
+use App\Model\Common\ValueObject\Id;
 
 final class GetEnveloppeHandler
 {

@@ -1,0 +1,85 @@
+rdim_installation:
+  - expect: 0
+    with:
+      surface_totale: 100
+      surface_couverte: 0
+  - expect: 0.5
+    with:
+      surface_totale: 100
+      surface_couverte: 50
+
+rdim_systeme:
+  - expect: 1
+    with:
+      systemes: 1
+  - expect: 0.2
+    with:
+      systemes: 5
+
+pvent_moy:
+  - expect: 0
+    with:
+      type_batiment: maison
+      type_ventilation: ventilation_naturelle_ouverture_fenetres
+  - expect: 0
+    with:
+      type_batiment: maison
+      type_ventilation: ventilation_naturelle_entrees_air_hautes_basses
+  - expect: 0
+    with:
+      type_batiment: maison
+      type_ventilation: ventilation_naturelle_conduit
+  - expect: 0
+    with:
+      type_batiment: maison
+      type_ventilation: ventilation_naturelle_conduit_entrees_air_hygroreglables
+  - with:
+      type_batiment: maison
+      type_ventilation: ventilation_mecanique
+      type_generateur: vmc_simple_flux
+      type_vmc: autoreglable
+      annee_installation: 2010
+    expect: 65
+  - with:
+      type_batiment: maison
+      type_ventilation: ventilation_mecanique
+      type_generateur: vmc_simple_flux
+      type_vmc: autoreglable
+      annee_installation: 2020
+    expect: 35
+  - with:
+      type_batiment: maison
+      type_ventilation: ventilation_mecanique
+      type_generateur: vmc_simple_flux
+      type_vmc: hygroreglable_type_a
+      annee_installation: 2010
+    expect: 50
+  - with:
+      type_batiment: maison
+      type_ventilation: ventilation_mecanique
+      type_generateur: vmc_simple_flux
+      type_vmc: hygroreglable_type_a
+      annee_installation: 2020
+    expect: 15
+  - with:
+      type_batiment: maison
+      type_ventilation: ventilation_mecanique
+      type_generateur: vmc_simple_flux
+      type_vmc: hygroreglable_type_b
+      annee_installation: 2010
+    expect: 50
+  - with:
+      type_batiment: maison
+      type_ventilation: ventilation_mecanique
+      type_generateur: vmc_simple_flux
+      type_vmc: hygroreglable_type_b
+      annee_installation: 2020
+    expect: 15
+
+caux:
+  - expect: 4.38
+    with:
+      rdim_installation: 0.5
+      rdim_systeme: 0.5
+      pvent_moy: 10
+      ratio_utilisation: 0.2

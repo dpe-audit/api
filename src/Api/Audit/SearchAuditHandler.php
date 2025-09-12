@@ -3,7 +3,7 @@
 namespace App\Api\Audit;
 
 use App\Api\Audit\Query\SearchQuery;
-use App\Domain\Audit\{AuditCollection, AuditRepository};
+use App\Model\Audit\{AuditCollection, AuditRepository};
 
 final class SearchAuditHandler
 {

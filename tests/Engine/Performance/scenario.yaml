@@ -1,0 +1,123 @@
+App\Engine\Performance\Scenario\TemperatureBaseRule:
+  - { with: { zone_climatique: H1a, altitude: 0 }, expect: { tbase: -9.5 } }
+  - { with: { zone_climatique: H1a, altitude: 600 }, expect: { tbase: -11.5 } }
+  - { with: { zone_climatique: H1a, altitude: 1200 }, expect: { tbase: -13.5 } }
+  - { with: { zone_climatique: H1b, altitude: 0 }, expect: { tbase: -9.5 } }
+  - { with: { zone_climatique: H1b, altitude: 600 }, expect: { tbase: -11.5 } }
+  - { with: { zone_climatique: H1b, altitude: 1200 }, expect: { tbase: -13.5 } }
+  - { with: { zone_climatique: H1c, altitude: 0 }, expect: { tbase: -9.5 } }
+  - { with: { zone_climatique: H1c, altitude: 600 }, expect: { tbase: -11.5 } }
+  - { with: { zone_climatique: H1c, altitude: 1200 }, expect: { tbase: -13.5 } }
+  - { with: { zone_climatique: H2a, altitude: 0 }, expect: { tbase: -6.5 } }
+  - { with: { zone_climatique: H2a, altitude: 600 }, expect: { tbase: -8.5 } }
+  - { with: { zone_climatique: H2a, altitude: 1200 }, expect: { tbase: -10.5 } }
+  - { with: { zone_climatique: H2b, altitude: 0 }, expect: { tbase: -6.5 } }
+  - { with: { zone_climatique: H2b, altitude: 600 }, expect: { tbase: -8.5 } }
+  - { with: { zone_climatique: H2b, altitude: 1200 }, expect: { tbase: -10.5 } }
+  - { with: { zone_climatique: H2c, altitude: 0 }, expect: { tbase: -6.5 } }
+  - { with: { zone_climatique: H2c, altitude: 600 }, expect: { tbase: -8.5 } }
+  - { with: { zone_climatique: H2c, altitude: 1200 }, expect: { tbase: -10.5 } }
+  - { with: { zone_climatique: H2d, altitude: 0 }, expect: { tbase: -6.5 } }
+  - { with: { zone_climatique: H2d, altitude: 600 }, expect: { tbase: -8.5 } }
+  - { with: { zone_climatique: H2d, altitude: 1200 }, expect: { tbase: -10.5 } }
+  - { with: { zone_climatique: H3, altitude: 0 }, expect: { tbase: -3.5 } }
+  - { with: { zone_climatique: H3, altitude: 600 }, expect: { tbase: -5.5 } }
+  - { with: { zone_climatique: H3, altitude: 1200 }, expect: { tbase: -17.5 } }
+
+App\Engine\Performance\Scenario\ZoneClimatiqueRule:
+  - { with: { code_departement: "01" }, expect: { zone_climatique: H1c } }
+  - { with: { code_departement: "02" }, expect: { zone_climatique: H1a } }
+  - { with: { code_departement: "03" }, expect: { zone_climatique: H1c } }
+  - { with: { code_departement: "04" }, expect: { zone_climatique: H2d } }
+  - { with: { code_departement: "05" }, expect: { zone_climatique: H1c } }
+  - { with: { code_departement: "06" }, expect: { zone_climatique: H3 } }
+  - { with: { code_departement: "07" }, expect: { zone_climatique: H2d } }
+  - { with: { code_departement: "08" }, expect: { zone_climatique: H1b } }
+  - { with: { code_departement: "09" }, expect: { zone_climatique: H2c } }
+  - { with: { code_departement: "10" }, expect: { zone_climatique: H1b } }
+  - { with: { code_departement: "11" }, expect: { zone_climatique: H3 } }
+  - { with: { code_departement: "12" }, expect: { zone_climatique: H2c } }
+  - { with: { code_departement: "13" }, expect: { zone_climatique: H3 } }
+  - { with: { code_departement: "14" }, expect: { zone_climatique: H1a } }
+  - { with: { code_departement: "15" }, expect: { zone_climatique: H1c } }
+  - { with: { code_departement: "16" }, expect: { zone_climatique: H2b } }
+  - { with: { code_departement: "17" }, expect: { zone_climatique: H2b } }
+  - { with: { code_departement: "18" }, expect: { zone_climatique: H2b } }
+  - { with: { code_departement: "19" }, expect: { zone_climatique: H1c } }
+  - { with: { code_departement: "2A" }, expect: { zone_climatique: H3 } }
+  - { with: { code_departement: "2B" }, expect: { zone_climatique: H3 } }
+  - { with: { code_departement: "21" }, expect: { zone_climatique: H1c } }
+  - { with: { code_departement: "22" }, expect: { zone_climatique: H2a } }
+  - { with: { code_departement: "23" }, expect: { zone_climatique: H1c } }
+  - { with: { code_departement: "24" }, expect: { zone_climatique: H2c } }
+  - { with: { code_departement: "25" }, expect: { zone_climatique: H1c } }
+  - { with: { code_departement: "26" }, expect: { zone_climatique: H2d } }
+  - { with: { code_departement: "27" }, expect: { zone_climatique: H1a } }
+  - { with: { code_departement: "28" }, expect: { zone_climatique: H1a } }
+  - { with: { code_departement: "29" }, expect: { zone_climatique: H2a } }
+  - { with: { code_departement: "30" }, expect: { zone_climatique: H3 } }
+  - { with: { code_departement: "31" }, expect: { zone_climatique: H2c } }
+  - { with: { code_departement: "32" }, expect: { zone_climatique: H2c } }
+  - { with: { code_departement: "33" }, expect: { zone_climatique: H2c } }
+  - { with: { code_departement: "34" }, expect: { zone_climatique: H3 } }
+  - { with: { code_departement: "35" }, expect: { zone_climatique: H2a } }
+  - { with: { code_departement: "36" }, expect: { zone_climatique: H2b } }
+  - { with: { code_departement: "37" }, expect: { zone_climatique: H2b } }
+  - { with: { code_departement: "38" }, expect: { zone_climatique: H1c } }
+  - { with: { code_departement: "39" }, expect: { zone_climatique: H1c } }
+  - { with: { code_departement: "40" }, expect: { zone_climatique: H2c } }
+  - { with: { code_departement: "41" }, expect: { zone_climatique: H2b } }
+  - { with: { code_departement: "42" }, expect: { zone_climatique: H1c } }
+  - { with: { code_departement: "43" }, expect: { zone_climatique: H1c } }
+  - { with: { code_departement: "44" }, expect: { zone_climatique: H2b } }
+  - { with: { code_departement: "45" }, expect: { zone_climatique: H1b } }
+  - { with: { code_departement: "46" }, expect: { zone_climatique: H2c } }
+  - { with: { code_departement: "47" }, expect: { zone_climatique: H2c } }
+  - { with: { code_departement: "48" }, expect: { zone_climatique: H2d } }
+  - { with: { code_departement: "49" }, expect: { zone_climatique: H2b } }
+  - { with: { code_departement: "50" }, expect: { zone_climatique: H2a } }
+  - { with: { code_departement: "51" }, expect: { zone_climatique: H1b } }
+  - { with: { code_departement: "52" }, expect: { zone_climatique: H1b } }
+  - { with: { code_departement: "53" }, expect: { zone_climatique: H2b } }
+  - { with: { code_departement: "54" }, expect: { zone_climatique: H1b } }
+  - { with: { code_departement: "55" }, expect: { zone_climatique: H1b } }
+  - { with: { code_departement: "56" }, expect: { zone_climatique: H2a } }
+  - { with: { code_departement: "57" }, expect: { zone_climatique: H1b } }
+  - { with: { code_departement: "58" }, expect: { zone_climatique: H1b } }
+  - { with: { code_departement: "59" }, expect: { zone_climatique: H1a } }
+  - { with: { code_departement: "60" }, expect: { zone_climatique: H1a } }
+  - { with: { code_departement: "61" }, expect: { zone_climatique: H1a } }
+  - { with: { code_departement: "62" }, expect: { zone_climatique: H1a } }
+  - { with: { code_departement: "63" }, expect: { zone_climatique: H1c } }
+  - { with: { code_departement: "64" }, expect: { zone_climatique: H2c } }
+  - { with: { code_departement: "65" }, expect: { zone_climatique: H2c } }
+  - { with: { code_departement: "66" }, expect: { zone_climatique: H3 } }
+  - { with: { code_departement: "67" }, expect: { zone_climatique: H1b } }
+  - { with: { code_departement: "68" }, expect: { zone_climatique: H1b } }
+  - { with: { code_departement: "69" }, expect: { zone_climatique: H1c } }
+  - { with: { code_departement: "70" }, expect: { zone_climatique: H1b } }
+  - { with: { code_departement: "71" }, expect: { zone_climatique: H1c } }
+  - { with: { code_departement: "72" }, expect: { zone_climatique: H2b } }
+  - { with: { code_departement: "73" }, expect: { zone_climatique: H1c } }
+  - { with: { code_departement: "74" }, expect: { zone_climatique: H1c } }
+  - { with: { code_departement: "75" }, expect: { zone_climatique: H1a } }
+  - { with: { code_departement: "76" }, expect: { zone_climatique: H1a } }
+  - { with: { code_departement: "77" }, expect: { zone_climatique: H1a } }
+  - { with: { code_departement: "78" }, expect: { zone_climatique: H1a } }
+  - { with: { code_departement: "79" }, expect: { zone_climatique: H2b } }
+  - { with: { code_departement: "80" }, expect: { zone_climatique: H1a } }
+  - { with: { code_departement: "81" }, expect: { zone_climatique: H2c } }
+  - { with: { code_departement: "82" }, expect: { zone_climatique: H2c } }
+  - { with: { code_departement: "83" }, expect: { zone_climatique: H3 } }
+  - { with: { code_departement: "84" }, expect: { zone_climatique: H2d } }
+  - { with: { code_departement: "85" }, expect: { zone_climatique: H2b } }
+  - { with: { code_departement: "86" }, expect: { zone_climatique: H2b } }
+  - { with: { code_departement: "87" }, expect: { zone_climatique: H1c } }
+  - { with: { code_departement: "88" }, expect: { zone_climatique: H1b } }
+  - { with: { code_departement: "89" }, expect: { zone_climatique: H1b } }
+  - { with: { code_departement: "90" }, expect: { zone_climatique: H1b } }
+  - { with: { code_departement: "91" }, expect: { zone_climatique: H1a } }
+  - { with: { code_departement: "92" }, expect: { zone_climatique: H1a } }
+  - { with: { code_departement: "93" }, expect: { zone_climatique: H1a } }
+  - { with: { code_departement: "94" }, expect: { zone_climatique: H1a } }
+  - { with: { code_departement: "95" }, expect: { zone_climatique: H1a } }

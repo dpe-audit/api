@@ -4,8 +4,8 @@ namespace App\Api\Ecs;
 
 use App\Api\Ecs\Handler\{CreateGenerateurHandler, CreateInstallationHandler, CreateSystemeHandler};
 use App\Api\Ecs\Model\Ecs as Payload;
-use App\Domain\Ecs\Ecs;
-use App\Domain\Ecs\Factory\GenerateurFactory;
+use App\Model\Ecs\Ecs;
+use App\Model\Ecs\Factory\GenerateurFactory;
 
 /**
  * @property GenerateurFactory[] $factories

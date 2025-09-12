@@ -2,8 +2,8 @@
 
 namespace App\Api\Chauffage\Model;
 
-use App\Domain\Chauffage\Entity\Systeme as Entity;
-use App\Domain\Chauffage\Enum\{IsolationReseau, TypeDistribution};
+use App\Model\Chauffage\Entity\Systeme as Entity;
+use App\Model\Chauffage\Enum\{IsolationReseau, TypeDistribution};
 use Symfony\Component\Validator\Constraints as Assert;
 
 final class Reseau

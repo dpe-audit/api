@@ -136,10 +136,10 @@ generateur_air_chaud;basse_temperature;;2006;;;300;;84;77;Pn * (1.75 -0.55 * log
 generateur_air_chaud;basse_temperature;;2006;;300;;300;84;77;Pn * (1.75 -0.55 * logPn) / 100;0
 generateur_air_chaud;condensation;;2006;;;300;;90;83;Pn * (1.75 -0.55 * logPn) / 100;0
 generateur_air_chaud;condensation;;2006;;300;;300;90;83;Pn * (1.75 -0.55 * logPn) / 100;0
-radiateur_gaz;;;;2005;;5;;70;;;0
-radiateur_gaz;;;;2005;5;;;73;;;0
-radiateur_gaz;;;2006;;;5;;80;;;0
-radiateur_gaz;;;2006;;5;;;82;;;0
+radiateur_gaz;;;;2005;;5;;70;0;0;0
+radiateur_gaz;;;;2005;5;;;73;0;0;0
+radiateur_gaz;;;2006;;;5;;80;0;0;0
+radiateur_gaz;;;2006;;5;;;82;0;0;0
 poele_bouilleur;;bois_buche;;2011;;70;;47 + 6 * logPn;48 + 6 * logPn;0.07 * Pn * (Pn ^ -0.3);0
 poele_bouilleur;;bois_buche;;2011;70;400;70;58;59;1.4;0
 poele_bouilleur;;bois_buche;;2011;400;;70;58;59;0.8;0

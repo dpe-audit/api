@@ -3,11 +3,11 @@
 namespace App\Api\Chauffage\Handler;
 
 use App\Api\Chauffage\Model\Generateur as Payload;
-use App\Domain\Common\ValueObject\{Annee, Id, Pourcentage};
-use App\Domain\Chauffage\Chauffage;
-use App\Domain\Chauffage\Entity\Generateur;
-use App\Domain\Chauffage\Factory\GenerateurFactory;
-use App\Domain\Chauffage\ValueObject\Generateur\{Combustion, Signaletique};
+use App\Model\Common\ValueObject\{Annee, Id, Pourcentage};
+use App\Model\Chauffage\Chauffage;
+use App\Model\Chauffage\Entity\Generateur;
+use App\Model\Chauffage\Factory\GenerateurFactory;
+use App\Model\Chauffage\ValueObject\Generateur\{Combustion, Signaletique};
 use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
 
 /**

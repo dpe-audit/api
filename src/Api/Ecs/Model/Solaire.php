@@ -2,8 +2,8 @@
 
 namespace App\Api\Ecs\Model;
 
-use App\Domain\Ecs\Entity\Installation as Entity;
-use App\Domain\Ecs\Enum\UsageEcs;
+use App\Model\Ecs\Entity\Installation as Entity;
+use App\Model\Ecs\Enum\UsageEcs;
 use App\Services\Validator\Constraints as DpeAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 

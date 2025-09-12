@@ -2,42 +2,38 @@
 
 namespace App\Domain\Chauffage;
 
-use App\Domain\Chauffage\Entity\{Emetteur, EmetteurCollection};
-use App\Domain\Chauffage\Entity\{Generateur, GenerateurCollection};
-use App\Domain\Chauffage\Entity\{Installation, InstallationCollection};
-use App\Domain\Chauffage\Entity\{Systeme, SystemeCollection};
-use App\Domain\Chauffage\Enum\TypeChauffage;
-use App\Domain\Common\ValueObject\Id;
+use App\Domain\Chauffage\Emetteur\{Emetteur, EmetteurCollection};
+use App\Domain\Chauffage\Generateur\{Generateur, GenerateurCollection};
+use App\Domain\Chauffage\Installation\{Installation, InstallationCollection};
+use App\Domain\Chauffage\Systeme\{Systeme, SystemeCollection};
 use Webmozart\Assert\Assert;
 
 final class Chauffage
 {
-    public function __construct(
-        private readonly Id $id,
-        private GenerateurCollection $generateurs,
-        private EmetteurCollection $emetteurs,
-        private InstallationCollection $installations,
-        private SystemeCollection $systemes,
-        private ChauffageData $data,
-    ) {}
+    private GenerateurCollection $generateurs;
+    private EmetteurCollection $emetteurs;
+    private InstallationCollection $installations;
+    private SystemeCollection $systemes;
+    private ChauffageData $data;
+
+    public function __construct()
+    {
+        $this->generateurs = new GenerateurCollection;
+        $this->emetteurs = new EmetteurCollection;
+        $this->installations = new InstallationCollection;
+        $this->systemes = new SystemeCollection;
+        $this->data = ChauffageData::create();
+    }
 
     public static function create(): self
     {
-        return new self(
-            id: Id::create(),
-            generateurs: new GenerateurCollection(),
-            emetteurs: new EmetteurCollection(),
-            installations: new InstallationCollection(),
-            systemes: new SystemeCollection(),
-            data: ChauffageData::create(),
-        );
+        return new self();
     }
 
     public function reinitialise(): self
     {
         $this->data = ChauffageData::create();
         $this->generateurs->reinitialise();
-        $this->emetteurs->reinitialise();
         $this->installations->reinitialise();
         $this->systemes->reinitialise();
         return $this;
@@ -47,11 +43,6 @@ final class Chauffage
     {
         $this->data = $data;
         return $this;
-    }
-
-    public function id(): Id
-    {
-        return $this->id;
     }
 
     public function effet_joule(): bool
@@ -69,8 +60,12 @@ final class Chauffage
 
     public function add_generateur(Generateur $entity): self
     {
+        Assert::null($this->generateurs->find($entity->id()));
+        Assert::same($entity->chauffage(), $this);
+
         $this->generateurs->add($entity);
         $this->reinitialise();
+
         return $this;
     }
 
@@ -84,8 +79,12 @@ final class Chauffage
 
     public function add_installation(Installation $entity): self
     {
+        Assert::null($this->installations->find($entity->id()));
+        Assert::same($entity->chauffage(), $this);
+
         $this->installations->add($entity);
         $this->reinitialise();
+
         return $this;
     }
 
@@ -99,6 +98,9 @@ final class Chauffage
 
     public function add_emetteur(Emetteur $entity): self
     {
+        Assert::null($this->emetteurs->find($entity->id()));
+        Assert::same($entity->chauffage(), $this);
+
         $this->emetteurs->add($entity);
         $this->reinitialise();
         return $this;
@@ -117,13 +119,12 @@ final class Chauffage
      */
     public function add_systeme(Systeme $entity): self
     {
-        $installation = $this->installations->find($entity->installation()->id());
-        $systemes = $installation->systemes()->with_type(TypeChauffage::CHAUFFAGE_CENTRAL);
-
-        Assert::lessThan($systemes->count(), 2);
+        Assert::null($this->systemes->find($entity->id()));
+        Assert::same($entity->chauffage(), $this);
 
         $this->systemes->add($entity);
         $this->reinitialise();
+
         return $this;
     }
 

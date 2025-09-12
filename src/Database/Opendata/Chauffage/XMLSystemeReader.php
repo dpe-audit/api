@@ -3,9 +3,9 @@
 namespace App\Database\Opendata\Chauffage;
 
 use App\Database\Opendata\XMLReader;
-use App\Domain\Chauffage\Enum\{IsolationReseau, TypeChauffage, TypeDistribution};
-use App\Domain\Chauffage\ValueObject\Reseau;
-use App\Domain\Common\ValueObject\Id;
+use App\Model\Chauffage\Enum\{IsolationReseau, TypeChauffage, TypeDistribution};
+use App\Model\Chauffage\ValueObject\Reseau;
+use App\Model\Common\ValueObject\Id;
 
 final class XMLSystemeReader extends XMLReader
 {

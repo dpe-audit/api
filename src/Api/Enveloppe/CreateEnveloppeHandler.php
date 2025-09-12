@@ -4,7 +4,7 @@ namespace App\Api\Enveloppe;
 
 use App\Api\Enveloppe\Handler\{CreateBaieHandler, CreateLncHandler, CreateMurHandler, CreateNiveauHandler, CreatePlancherBasHandler, CreatePlancherHautHandler, CreatePontThermiqueHandler, CreatePorteHandler};
 use App\Api\Enveloppe\Model\Enveloppe as Payload;
-use App\Domain\Enveloppe\Enveloppe;
+use App\Model\Enveloppe\Enveloppe;
 
 final class CreateEnveloppeHandler
 {

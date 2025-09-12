@@ -2,8 +2,8 @@
 
 namespace App\Api\Chauffage\Model;
 
-use App\Domain\Chauffage\Entity\{Emetteur as Entity, EmetteurCollection as EntityCollection};
-use App\Domain\Chauffage\Enum\{TemperatureDistribution, TypeEmetteur};
+use App\Model\Chauffage\Entity\{Emetteur as Entity, EmetteurCollection as EntityCollection};
+use App\Model\Chauffage\Enum\{TemperatureDistribution, TypeEmetteur};
 use App\Services\Validator\Constraints as DpeAssert;
 
 final class Emetteur

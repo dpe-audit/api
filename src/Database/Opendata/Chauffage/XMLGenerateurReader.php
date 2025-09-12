@@ -3,9 +3,9 @@
 namespace App\Database\Opendata\Chauffage;
 
 use App\Database\Opendata\XMLReader;
-use App\Domain\Chauffage\Enum\{EnergieGenerateur, LabelGenerateur, ModeCombustion, TypeChaudiere, TypeGenerateur, UsageChauffage};
-use App\Domain\Chauffage\ValueObject\Generateur\{Combustion, Signaletique};
-use App\Domain\Common\ValueObject\{Annee, Id, Pourcentage};
+use App\Model\Chauffage\Enum\{EnergieGenerateur, LabelGenerateur, ModeCombustion, TypeChaudiere, TypeGenerateur, UsageChauffage};
+use App\Model\Chauffage\ValueObject\Generateur\{Combustion, Signaletique};
+use App\Model\Common\ValueObject\Id;
 
 final class XMLGenerateurReader extends XMLReader
 {

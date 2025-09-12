@@ -6,7 +6,7 @@ use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
 use App\Api\Ecs\GetEcsHandler;
 use App\Api\Ecs\Model\Ecs;
-use App\Domain\Common\ValueObject\Id;
+use App\Model\Common\ValueObject\Id;
 
 /**
  * @implements ProviderInterface<Ecs|null>

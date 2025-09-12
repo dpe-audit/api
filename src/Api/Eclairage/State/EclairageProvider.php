@@ -6,7 +6,7 @@ use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
 use App\Api\Eclairage\GetEclairageHandler;
 use App\Api\Eclairage\Model\Eclairage;
-use App\Domain\Common\ValueObject\Id;
+use App\Model\Common\ValueObject\Id;
 
 /**
  * @implements ProviderInterface<Eclairage|null>

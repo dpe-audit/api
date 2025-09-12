@@ -29,6 +29,11 @@ class ArrayCollection implements Collection
         return new static($collection);
     }
 
+    public function clear(): void
+    {
+        $this->elements = [];
+    }
+
     public function count(): int
     {
         return \count($this->elements);
@@ -124,6 +129,11 @@ class ArrayCollection implements Collection
     public function map(\Closure $func): static
     {
         return $this->createFrom(array_map($func, $this->elements));
+    }
+
+    public function unique(): static
+    {
+        return $this->createFrom(array_unique($this->elements, SORT_REGULAR));
     }
 
     public function walk(\Closure $func): static

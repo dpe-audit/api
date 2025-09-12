@@ -1,4 +1,4 @@
-﻿type_chaudiere;pdim/gt;pdim/lte;annee_installation_generateur/gt;annee_installation_generateur/lte;pn;type_chaudiere_defaut
+﻿position_chaudiere;pdim/gt;pdim/lte;annee_installation_generateur/gt;annee_installation_generateur/lte;pn;type_chaudiere_defaut
 chaudiere_murale;;5;;2005;18;chaudiere_sol
 chaudiere_murale;5;10;;2005;18;chaudiere_sol
 chaudiere_murale;10;13;;2005;18;chaudiere_sol

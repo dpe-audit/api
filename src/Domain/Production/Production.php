@@ -2,24 +2,23 @@
 
 namespace App\Domain\Production;
 
-use App\Domain\Common\ValueObject\Id;
-use App\Domain\Production\Entity\{PanneauPhotovoltaique, PanneauPhotovoltaiqueCollection};
+use App\Domain\Production\PanneauPhotovoltaique\{PanneauPhotovoltaique, PanneauPhotovoltaiqueCollection};
+use Webmozart\Assert\Assert;
 
 final class Production
 {
-    public function __construct(
-        private readonly Id $id,
-        private PanneauPhotovoltaiqueCollection $panneaux_photovoltaiques,
-        private ProductionData $data,
-    ) {}
+    private PanneauPhotovoltaiqueCollection $panneaux_photovoltaiques;
+    private ProductionData $data;
+
+    public function __construct()
+    {
+        $this->panneaux_photovoltaiques = new PanneauPhotovoltaiqueCollection;
+        $this->data = ProductionData::create();
+    }
 
     public static function create(): self
     {
-        return new self(
-            id: Id::create(),
-            panneaux_photovoltaiques: new PanneauPhotovoltaiqueCollection(),
-            data: ProductionData::create(),
-        );
+        return new self();
     }
 
     public function calcule(ProductionData $data): self
@@ -34,11 +33,6 @@ final class Production
         $this->panneaux_photovoltaiques->reinitialise();
     }
 
-    public function id(): Id
-    {
-        return $this->id;
-    }
-
     /**
      * @return PanneauPhotovoltaiqueCollection|PanneauPhotovoltaique[]
      */
@@ -49,8 +43,12 @@ final class Production
 
     public function add_panneau_photovoltaique(PanneauPhotovoltaique $entity): self
     {
+        Assert::null($this->panneaux_photovoltaiques->find($entity->id()));
+        Assert::same($entity->production(), $this);
+
         $this->panneaux_photovoltaiques->add($entity);
         $this->reinitialise();
+
         return $this;
     }
 

@@ -3,10 +3,10 @@
 namespace App\Api\Ecs\Handler;
 
 use App\Api\Ecs\Model\Installation as Payload;
-use App\Domain\Common\ValueObject\{Annee, Id, Pourcentage};
-use App\Domain\Ecs\Ecs;
-use App\Domain\Ecs\Entity\Installation;
-use App\Domain\Ecs\ValueObject\Solaire;
+use App\Model\Common\ValueObject\{Annee, Id, Pourcentage};
+use App\Model\Ecs\Ecs;
+use App\Model\Ecs\Entity\Installation;
+use App\Model\Ecs\ValueObject\Solaire;
 
 final class CreateInstallationHandler
 {

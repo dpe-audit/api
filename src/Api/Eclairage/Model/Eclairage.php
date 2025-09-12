@@ -2,7 +2,7 @@
 
 namespace App\Api\Eclairage\Model;
 
-use App\Domain\Eclairage\Eclairage as Entity;
+use App\Model\Eclairage\Eclairage as Entity;
 
 final class Eclairage
 {

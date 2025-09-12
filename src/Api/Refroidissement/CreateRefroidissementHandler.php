@@ -2,11 +2,8 @@
 
 namespace App\Api\Refroidissement;
 
-use App\Api\Refroidissement\Handler\CreateGenerateurHandler;
-use App\Api\Refroidissement\Handler\CreateInstallationHandler;
-use App\Api\Refroidissement\Handler\CreateSystemeHandler;
-use App\Api\Refroidissement\Model\Refroidissement as Payload;
 use App\Domain\Refroidissement\Refroidissement;
+use App\Dto\Refroidissement\RefroidissementDto;
 
 final class CreateRefroidissementHandler
 {
@@ -15,7 +12,8 @@ final class CreateRefroidissementHandler
         private readonly CreateInstallationHandler $installation_handler,
         private readonly CreateSystemeHandler $systeme_handler,
     ) {}
-    public function __invoke(Payload $payload): Refroidissement
+
+    public function __invoke(RefroidissementDto $payload): Refroidissement
     {
         $entity = Refroidissement::create();
 

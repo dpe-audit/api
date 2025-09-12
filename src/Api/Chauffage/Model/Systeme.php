@@ -2,8 +2,8 @@
 
 namespace App\Api\Chauffage\Model;
 
-use App\Domain\Chauffage\Enum\TypeChauffage;
-use App\Domain\Chauffage\Entity\{Emetteur as EmetteurEntity, Systeme as Entity, SystemeCollection as EntityCollection};
+use App\Model\Chauffage\Enum\TypeChauffage;
+use App\Model\Chauffage\Entity\{Emetteur as EmetteurEntity, Systeme as Entity, SystemeCollection as EntityCollection};
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**

@@ -6,7 +6,7 @@ use ApiPlatform\Metadata\Operation;
 use ApiPlatform\State\ProviderInterface;
 use App\Api\Chauffage\GetChauffageHandler;
 use App\Api\Chauffage\Model\Chauffage;
-use App\Domain\Common\ValueObject\Id;
+use App\Model\Common\ValueObject\Id;
 
 /**
  * @implements ProviderInterface<Chauffage|null>

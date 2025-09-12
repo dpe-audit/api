@@ -2,8 +2,8 @@
 
 namespace App\Api\Ecs\Model;
 
-use App\Domain\Ecs\Entity\Systeme as Entity;
-use App\Domain\Ecs\Enum\{BouclageReseau, IsolationReseau};
+use App\Model\Ecs\Entity\Systeme as Entity;
+use App\Model\Ecs\Enum\{BouclageReseau, IsolationReseau};
 use Symfony\Component\Validator\Constraints as Assert;
 
 final class Reseau

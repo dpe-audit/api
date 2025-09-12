@@ -2,8 +2,8 @@
 
 namespace App\Api\Chauffage\Model;
 
-use App\Domain\Chauffage\Entity\Installation as Entity;
-use App\Domain\Chauffage\Enum\UsageChauffage;
+use App\Model\Chauffage\Entity\Installation as Entity;
+use App\Model\Chauffage\Enum\UsageChauffage;
 use App\Services\Validator\Constraints as DpeAssert;
 use Symfony\Component\Validator\Constraints as Assert;
 

@@ -3,11 +3,11 @@
 namespace App\Api\Enveloppe\Handler;
 
 use App\Api\Enveloppe\Model\Mur as Payload;
-use App\Domain\Common\ValueObject\{Annee, Id, Orientation};
-use App\Domain\Enveloppe\Entity\Mur;
-use App\Domain\Enveloppe\Enveloppe;
-use App\Domain\Enveloppe\ValueObject\Isolation;
-use App\Domain\Enveloppe\ValueObject\Mur\Position;
+use App\Model\Common\ValueObject\{Annee, Id, Orientation};
+use App\Model\Enveloppe\Entity\Mur;
+use App\Model\Enveloppe\Enveloppe;
+use App\Model\Enveloppe\ValueObject\Isolation;
+use App\Model\Enveloppe\ValueObject\Mur\Position;
 
 final class CreateMurHandler
 {

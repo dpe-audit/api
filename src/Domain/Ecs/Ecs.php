@@ -2,30 +2,29 @@
 
 namespace App\Domain\Ecs;
 
-use App\Domain\Common\ValueObject\Id;
-use App\Domain\Ecs\Entity\{Generateur, GenerateurCollection};
-use App\Domain\Ecs\Entity\{Installation, InstallationCollection};
-use App\Domain\Ecs\Entity\{Systeme, SystemeCollection};
+use App\Domain\Ecs\Generateur\{Generateur, GenerateurCollection};
+use App\Domain\Ecs\Installation\{Installation, InstallationCollection};
+use App\Domain\Ecs\Systeme\{Systeme, SystemeCollection};
+use Webmozart\Assert\Assert;
 
 final class Ecs
 {
-    public function __construct(
-        private readonly Id $id,
-        private InstallationCollection $installations,
-        private GenerateurCollection $generateurs,
-        private SystemeCollection $systemes,
-        private EcsData $data,
-    ) {}
+    private GenerateurCollection $generateurs;
+    private InstallationCollection $installations;
+    private SystemeCollection $systemes;
+    private EcsData $data;
+
+    public function __construct()
+    {
+        $this->generateurs = new GenerateurCollection;
+        $this->installations = new InstallationCollection;
+        $this->systemes = new SystemeCollection;
+        $this->data = EcsData::create();
+    }
 
     public static function create(): self
     {
-        return new self(
-            id: Id::create(),
-            generateurs: new GenerateurCollection(),
-            installations: new InstallationCollection(),
-            systemes: new SystemeCollection(),
-            data: EcsData::create(),
-        );
+        return new self();
     }
 
     public function reinitialise(): self
@@ -43,9 +42,23 @@ final class Ecs
         return $this;
     }
 
-    public function id(): Id
+    /**
+     * @return GenerateurCollection|Generateur[]
+     */
+    public function generateurs(): GenerateurCollection
     {
-        return $this->id;
+        return $this->generateurs;
+    }
+
+    public function add_generateur(Generateur $entity): self
+    {
+        Assert::null($this->generateurs->find($entity->id()));
+        Assert::same($entity->ecs(), $this);
+
+        $this->generateurs->add($entity);
+        $this->reinitialise();
+
+        return $this;
     }
 
     /**
@@ -58,23 +71,12 @@ final class Ecs
 
     public function add_installation(Installation $entity): self
     {
+        Assert::null($this->installations->find($entity->id()));
+        Assert::same($entity->ecs(), $this);
+
         $this->installations->add($entity);
         $this->reinitialise();
-        return $this;
-    }
 
-    /**
-     * @return GenerateurCollection|Generateur[]
-     */
-    public function generateurs(): GenerateurCollection
-    {
-        return $this->generateurs;
-    }
-
-    public function add_generateur(Generateur $entity): self
-    {
-        $this->generateurs->add($entity);
-        $this->reinitialise();
         return $this;
     }
 
@@ -88,8 +90,12 @@ final class Ecs
 
     public function add_systeme(Systeme $entity): self
     {
+        Assert::null($this->systemes->find($entity->id()));
+        Assert::same($entity->ecs(), $this);
+
         $this->systemes->add($entity);
         $this->reinitialise();
+
         return $this;
     }
 

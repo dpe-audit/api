@@ -3,9 +3,9 @@
 namespace App\Api\Ecs\Model;
 
 use App\Api\Common\Model\Perte;
-use App\Domain\Common\ValueObject\{Consommation, Emission};
-use App\Domain\Ecs\Entity\Systeme as Entity;
-use App\Domain\Ecs\ValueObject\Rendement;
+use App\Model\Common\ValueObject\{Consommation, Emission};
+use App\Model\Ecs\Entity\Systeme as Entity;
+use App\Model\Ecs\ValueObject\Rendement;
 
 /**
  * @property array<Rendement> $rendements

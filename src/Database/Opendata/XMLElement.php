@@ -2,7 +2,7 @@
 
 namespace App\Database\Opendata;
 
-use App\Domain\Common\ValueObject\Id;
+use App\Model\Common\ValueObject\Id;
 
 class XMLElement extends \SimpleXMLElement
 {

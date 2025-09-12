@@ -3,9 +3,9 @@
 namespace App\Api\Chauffage\Handler;
 
 use App\Api\Chauffage\Model\Emetteur as Payload;
-use App\Domain\Common\ValueObject\{Annee, Id};
-use App\Domain\Chauffage\Chauffage;
-use App\Domain\Chauffage\Entity\Emetteur;
+use App\Model\Common\ValueObject\{Annee, Id};
+use App\Model\Chauffage\Chauffage;
+use App\Model\Chauffage\Entity\Emetteur;
 
 final class CreateEmetteurHandler
 {

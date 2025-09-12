@@ -1,8 +1,5 @@
 ﻿type_generateur;energie_generateur;presence_ventouse;G;H;paux;pn_max
-accumulateur;;;0;0;0;
-chauffe_eau_instantane;;;0;0;0;
-chauffe_eau_vertical;;;0;0;0;
-chauffe_eau_horizontal;;;0;0;0;
+chauffe_eau;;;0;0;0;
 chaudiere;electricite;;0;0;0;
 chaudiere;fioul;;20;1.6;20 + 1.6 * Pn;400
 chaudiere;gaz_naturel;;20;1.6;20 + 1.6 * Pn;400
@@ -15,7 +12,6 @@ chaudiere;charbon;;0;0;0;
 chaudiere;bois_buche;;0;0;0;
 chaudiere;bois_granule;;0;0;0;
 chaudiere;bois_plaquette;;0;0;0;
-chaudiere_multi_batiment;;;0;0;0;
 cet_air_ambiant;;;0;0;0;
 cet_air_exterieur;;;0;0;0;
 cet_air_extrait;;;0;0;0;

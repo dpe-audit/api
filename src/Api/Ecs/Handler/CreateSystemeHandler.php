@@ -3,10 +3,10 @@
 namespace App\Api\Ecs\Handler;
 
 use App\Api\Ecs\Model\Systeme as Payload;
-use App\Domain\Common\ValueObject\Id;
-use App\Domain\Ecs\Ecs;
-use App\Domain\Ecs\Entity\Systeme;
-use App\Domain\Ecs\ValueObject\{Reseau, Stockage};
+use App\Model\Common\ValueObject\Id;
+use App\Model\Ecs\Ecs;
+use App\Model\Ecs\Entity\Systeme;
+use App\Model\Ecs\ValueObject\{Reseau, Stockage};
 
 final class CreateSystemeHandler
 {

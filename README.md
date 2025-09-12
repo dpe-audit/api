@@ -1,4 +1,4 @@
-# DPE-Audit API
+# DPE-Audit - API
 
 > [!IMPORTANT]
 > Ce projet est en cours de développement.
@@ -21,8 +21,6 @@ symfony server:start
 **POST /audit** : Publie un audit énergétique conforme au [standard d'échange de données](https://github.com/action-21/dpe-audit-schema). Une simulation des performances est automatiquement effecuée pour chaque requête.
 
 **GET /audit/{id}** : Retourne un audit énergétique existant depuis l'[observatoire DPE-Audit](https://observatoire-dpe-audit.ademe.fr/). Une simulation des performances est automatiquement effecuée pour chaque requête.
-
-**PUT /audit/{id}** : 🚧 Remplace un audit énergétique existant.
 
 **PATCH /audit/{id}/scenario** : Applique un scenario de travaux à un audit énergétique existant.
 

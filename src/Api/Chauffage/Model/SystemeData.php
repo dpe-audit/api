@@ -2,10 +2,10 @@
 
 namespace App\Api\Chauffage\Model;
 
-use App\Domain\Common\ValueObject\{Consommation, Emission};
-use App\Domain\Chauffage\Entity\Systeme as Entity;
-use App\Domain\Chauffage\Enum\ConfigurationSysteme;
-use App\Domain\Chauffage\ValueObject\{Intermittence, Rendement};
+use App\Model\Common\ValueObject\{Consommation, Emission};
+use App\Model\Chauffage\Entity\Systeme as Entity;
+use App\Model\Chauffage\Enum\ConfigurationSysteme;
+use App\Model\Chauffage\ValueObject\{Intermittence, Rendement};
 
 /**
  * @property array<Rendement> $rg
