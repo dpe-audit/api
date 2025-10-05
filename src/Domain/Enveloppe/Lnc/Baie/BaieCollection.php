@@ -18,7 +18,7 @@ final class BaieCollection extends ArrayCollection
 
     public function find(Id $id): ?Baie
     {
-        return array_find($this->elements, fn(Baie $item): bool => $item->id()->compare($id));
+        return array_find($this->elements, fn(Baie $item): bool => $item->id()->equals($id));
     }
 
     public function with_mitoyennetes(Mitoyennete ...$mitoyennete): self
@@ -31,7 +31,7 @@ final class BaieCollection extends ArrayCollection
     public function with_orientation(Orientation $orientation): self
     {
         return $this->filter(
-            fn(Baie $item): bool => $item->position()->orientation?->compare($orientation) ?? false
+            fn(Baie $item): bool => $item->position()->orientation?->equals($orientation) ?? false
         );
     }
 

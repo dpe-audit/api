@@ -12,7 +12,7 @@ final class EmetteurCollection extends ArrayCollection
 {
     public function find(Id $id): ?Emetteur
     {
-        return array_find($this->elements, fn(Emetteur $item): bool => $item->id()->compare($id));
+        return array_find($this->elements, fn(Emetteur $item): bool => $item->id()->equals($id));
     }
 
     public function with_installation(Id $id): self

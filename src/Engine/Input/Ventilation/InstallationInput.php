@@ -2,10 +2,11 @@
 
 namespace App\Engine\Input\Ventilation;
 
+use App\Domain\Common\Consommation\ConsommationCollection;
 use App\Domain\Ventilation\Installation\{Installation, TypeVentilation};
 use App\Engine\{Engine, Input};
 use App\Engine\Rules\Deperdition\DeperditionSystemeVentilationRule;
-use App\Engine\Rules\Ventilation\{DebitVentilationRule, DimensionnementInstallationRule};
+use App\Engine\Rules\Ventilation\{ConsommationInstallationRule, DebitVentilationRule, DimensionnementInstallationRule};
 
 final class InstallationInput extends Input
 {
@@ -20,7 +21,7 @@ final class InstallationInput extends Input
     {
         return $this->generateur ??= array_find(
             $this->context->data()->ventilation->generateurs,
-            fn(GenerateurInput $item) => $item->entity->id()->compare($this->entity->generateur()->id())
+            fn(GenerateurInput $item) => $item->entity->id()->equals($this->entity->generateur()->id())
         );
     }
 
@@ -56,6 +57,11 @@ final class InstallationInput extends Input
         return $this->requireIterator(DeperditionSystemeVentilationRule::class, $this);
     }
 
+    public function consommation_rule(): ConsommationInstallationRule
+    {
+        return $this->require(ConsommationInstallationRule::class);
+    }
+
     public function rdim(): float
     {
         return $this->dimensionnement_rule()->rdim();
@@ -79,5 +85,10 @@ final class InstallationInput extends Input
     public function hvent(): float
     {
         return $this->deperdition_rule()->hvent();
+    }
+
+    public function consommations(): ConsommationCollection
+    {
+        return $this->consommation_rule()->consommations();
     }
 }

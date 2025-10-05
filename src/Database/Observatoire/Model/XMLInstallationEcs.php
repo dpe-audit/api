@@ -9,8 +9,10 @@ use App\Domain\Ecs\Systeme\Reseau\IsolationReseau;
 /**
  * @property array<XMLGenerateurEcs> $generateur_ecs_collection
  */
-final class XMLInstallationEcs extends XMLUniqueElement
+final class XMLInstallationEcs
 {
+    use WithDescription, WithReferences;
+
     public function __construct(
         public readonly string $reference,
         public readonly ?string $description,

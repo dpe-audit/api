@@ -2,8 +2,7 @@
 
 namespace App\Engine\Rules\Deperdition;
 
-use App\Domain\Enveloppe\Porte\Performance;
-use App\Domain\Enveloppe\Porte\Position\Mitoyennete;
+use App\Domain\Enveloppe\Paroi\{Mitoyennete, Performance};
 use App\Engine\Input\Enveloppe\PorteInputRuleIterator;
 use App\Engine\Table\PorteTableValeurRepository;
 
@@ -73,7 +72,7 @@ final class DeperditionPorteRule extends PorteInputRuleIterator
     public function performance(): Performance
     {
         return $this->get('performance', function (): Performance {
-            return Performance::from_data($this->u());
+            return Performance::from_uporte($this->u());
         });
     }
 

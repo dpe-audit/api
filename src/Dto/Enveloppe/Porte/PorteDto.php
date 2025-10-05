@@ -13,7 +13,6 @@ final class PorteDto
     public function __construct(
         public string $id,
         public string $description,
-        public TypePose $type_pose,
         public ?Isolation $isolation,
         public ?Materiau $materiau,
         public ?int $annee_installation,
@@ -28,7 +27,6 @@ final class PorteDto
         return new self(
             id: (string) $data->id(),
             description: $data->description(),
-            type_pose: $data->type_pose(),
             isolation: $data->isolation(),
             materiau: $data->materiau(),
             annee_installation: $data->annee_installation(),
@@ -52,7 +50,6 @@ final class PorteDto
         return [
             'id' => $this->id,
             'description' => $this->description,
-            'type_pose' => $this->type_pose->value,
             'isolation' => $this->isolation?->value,
             'materiau' => $this->materiau?->value,
             'annee_installation' => $this->annee_installation,

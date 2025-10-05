@@ -14,9 +14,7 @@ final class BesoinEcsRule extends Rule
     public function becs(): float
     {
         return $this->get("becs", function (): float {
-            return Mois::reduce(function (float $carry, Mois $mois): float {
-                return $carry += $this->becs_j($mois);
-            });
+            return Mois::reduce(fn(Mois $mois): float => $this->becs_j($mois));
         });
     }
 

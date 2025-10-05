@@ -61,4 +61,16 @@ final class DebitVentilationRule extends InstallationInputRuleIterator
             ) ?? throw new \DomainException('Valeur forfaitaire "smea_conv" non trouvée');
         });
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function calcule(): void
+    {
+        $this->item()->entity->calcule($this->item()->entity->data()->with(
+            qvarep_conv: $this->qvarep_conv(),
+            qvasouf_conv: $this->qvasouf_conv(),
+            smea_conv: $this->smea_conv(),
+        ));
+    }
 }

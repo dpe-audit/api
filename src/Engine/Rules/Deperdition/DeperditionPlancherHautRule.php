@@ -2,9 +2,8 @@
 
 namespace App\Engine\Rules\Deperdition;
 
-use App\Domain\Enveloppe\PlancherHaut\Isolation\EtatIsolation;
-use App\Domain\Enveloppe\PlancherHaut\Performance;
-use App\Domain\Enveloppe\PlancherHaut\Position\Mitoyennete;
+use App\Domain\Enveloppe\Paroi\Isolation\EtatIsolation;
+use App\Domain\Enveloppe\Paroi\{Mitoyennete, Performance};
 use App\Engine\Input\Enveloppe\PlancherHautInputRuleIterator;
 use App\Engine\Table\PlancherHautTableValeurRepository;
 
@@ -107,7 +106,7 @@ final class DeperditionPlancherHautRule extends PlancherHautInputRuleIterator
     public function performance(): Performance
     {
         return $this->get('performance', function (): Performance {
-            return Performance::from_data(
+            return Performance::from_uph(
                 uph: $this->u(),
                 configuration: $this->item()->configuration(),
             );

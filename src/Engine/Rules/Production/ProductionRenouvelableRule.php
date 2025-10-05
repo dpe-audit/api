@@ -20,4 +20,14 @@ final class ProductionRenouvelableRule extends Rule
             );
         });
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function calcule(): void
+    {
+        $this->ressource()->production()->calcule($this->ressource()->production()->data()->with(
+            ppv: $this->ppv(),
+        ));
+    }
 }

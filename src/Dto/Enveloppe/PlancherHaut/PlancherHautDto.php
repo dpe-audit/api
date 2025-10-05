@@ -2,11 +2,12 @@
 
 namespace App\Dto\Enveloppe\PlancherHaut;
 
+use App\Domain\Enveloppe\Paroi\Inertie;
 use App\Domain\Enveloppe\PlancherHaut\Configuration;
-use App\Domain\Enveloppe\PlancherHaut\Inertie;
 use App\Domain\Enveloppe\PlancherHaut\PlancherHaut;
 use App\Domain\Enveloppe\PlancherHaut\PlancherHautCollection;
 use App\Domain\Enveloppe\PlancherHaut\TypePlancherHaut;
+use App\Dto\Enveloppe\Paroi\IsolationDto;
 
 final class PlancherHautDto
 {

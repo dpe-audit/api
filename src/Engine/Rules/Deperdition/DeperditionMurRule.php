@@ -2,9 +2,8 @@
 
 namespace App\Engine\Rules\Deperdition;
 
-use App\Domain\Enveloppe\Mur\Isolation\EtatIsolation;
-use App\Domain\Enveloppe\Mur\Performance;
-use App\Domain\Enveloppe\Mur\Position\Mitoyennete;
+use App\Domain\Enveloppe\Paroi\Isolation\EtatIsolation;
+use App\Domain\Enveloppe\Paroi\{Mitoyennete, Performance};
 use App\Engine\Input\Enveloppe\MurInputRuleIterator;
 use App\Engine\Table\MurTableValeurRepository;
 
@@ -114,7 +113,7 @@ final class DeperditionMurRule extends MurInputRuleIterator
     public function performance(): Performance
     {
         return $this->get('performance', function (): Performance {
-            return Performance::from_data(umur: $this->u());
+            return Performance::from_umur(umur: $this->u());
         });
     }
 

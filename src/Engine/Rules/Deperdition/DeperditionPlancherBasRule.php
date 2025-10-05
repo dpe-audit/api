@@ -2,9 +2,8 @@
 
 namespace App\Engine\Rules\Deperdition;
 
-use App\Domain\Enveloppe\PlancherBas\Isolation\EtatIsolation;
-use App\Domain\Enveloppe\PlancherBas\Performance;
-use App\Domain\Enveloppe\PlancherBas\Position\Mitoyennete;
+use App\Domain\Enveloppe\Paroi\Isolation\EtatIsolation;
+use App\Domain\Enveloppe\Paroi\{Mitoyennete, Performance};
 use App\Engine\Input\Enveloppe\PlancherBasInputRuleIterator;
 use App\Engine\Table\PlancherBasTableValeurRepository;
 
@@ -128,7 +127,7 @@ final class DeperditionPlancherBasRule extends PlancherBasInputRuleIterator
     public function performance(): Performance
     {
         return $this->get('performance', function (): Performance {
-            return Performance::from_data(upb: $this->u_final());
+            return Performance::from_upb(upb: $this->u_final());
         });
     }
 

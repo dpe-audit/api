@@ -2,49 +2,125 @@
 
 namespace App\Engine\Rules\Refroidissement;
 
-use App\Domain\Refroidissement\Generateur\EnergieGenerateur;
-use App\Engine\Input\Refroidissement\SystemeInputRuleIterator;
+use App\Domain\Common\Consommation\{Consommation, ConsommationCollection};
+use App\Domain\Common\Enum\{Energie, Usage};
+use App\Engine\Rule;
 
-final class ConsommationRefroidissementRule extends SystemeInputRuleIterator
+final class ConsommationRefroidissementRule extends Rule
 {
     /**
-     * Consommation finale du système de refroidissement en kWh/an
+     * Liste des consommations de refroidissement
      */
-    public function cef(): float
+    public function consommations(): ConsommationCollection
     {
-        return $this->get('cef', function (): float {
-            $bfr = $this->data()->refroidissement->bfr();
-            $eer = $this->item()->generateur()->eer();
-            $rdim = $this->item()->rdim();
-            return 0.9 * ($bfr / $eer) * $rdim;
+        return $this->get('consommations', function (): ConsommationCollection {
+            $collection = ConsommationCollection::create();
+
+            foreach ($this->data()->refroidissement->systemes as $item) {
+                $collection->with(Consommation::create(
+                    usage: Usage::REFROIDISSEMENT,
+                    energie: $item->generateur()->energie()->to(),
+                    cef: $item->cef_fr(),
+                    cep: $item->cep_fr(),
+                    eges: $item->eges_fr(),
+                ));
+                $collection->with(Consommation::create(
+                    usage: Usage::AUXILIAIRE,
+                    energie: Energie::ELECTRICITE,
+                    cef: $item->cef_aux(),
+                    cep: $item->cep_aux(),
+                    eges: $item->eges_aux(),
+                ));
+            }
+            return $collection;
         });
     }
 
     /**
-     * Consommation primaire du système de refroidissement en kWh/an
+     * Consommation d'énergie final de refroidissement en kWh/an
      */
-    public function cep(): float
+    public function cef_fr(): float
     {
-        return $this->get('cep', function (): float {
-            return $this->cef() * $this->item()->generateur()->energie()->to()->facteur_energie_primaire();
+        return $this->get('cef_fr', function (): float {
+            return array_sum(array_map(
+                fn($item) => $item->cef_fr(),
+                $this->data()->refroidissement->systemes,
+            ));
         });
     }
 
     /**
-     * Emissions de CO2 du système de refroidissement en kg/an
-     * 
-     * @see https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000046662777
+     * Consommation d'énergie primaire de refroidissement en kWh/an
      */
-    public function eges(): float
+    public function cep_fr(): float
     {
-        if (null !== $contenu_co2 = $this->item()->generateur()->contenu_co2_reseau_froid()) {
-            return $this->cef() * $contenu_co2;
-        }
-        return $this->cef() * match ($this->item()->generateur()->energie()) {
-            EnergieGenerateur::ELECTRICITE => 0.064,
-            EnergieGenerateur::GAZ_NATUREL => 0.227,
-            EnergieGenerateur::GPL => 0.272,
-            EnergieGenerateur::RESEAU_FROID => 0.385,
-        };
+        return $this->get('cep_fr', function (): float {
+            return array_sum(array_map(
+                fn($item) => $item->cep_fr(),
+                $this->data()->refroidissement->systemes,
+            ));
+        });
+    }
+
+    /**
+     * Consommation d'énergie primaire de refroidissement en kWh/an
+     */
+    public function eges_fr(): float
+    {
+        return $this->get('eges_fr', function (): float {
+            return array_sum(array_map(
+                fn($item) => $item->eges_fr(),
+                $this->data()->refroidissement->systemes,
+            ));
+        });
+    }
+
+    /**
+     * Consommation d'énergie final des auxiliaires de refroidissement en kWh/an
+     */
+    public function cef_aux(): float
+    {
+        return $this->get('cef_aux', function (): float {
+            return array_sum(array_map(
+                fn($item) => $item->cef_aux(),
+                $this->data()->refroidissement->systemes,
+            ));
+        });
+    }
+
+    /**
+     * Consommation d'énergie primaire des auxiliaires de refroidissement en kWh/an
+     */
+    public function cep_aux(): float
+    {
+        return $this->get('cep_aux', function (): float {
+            return array_sum(array_map(
+                fn($item) => $item->cep_aux(),
+                $this->data()->refroidissement->systemes,
+            ));
+        });
+    }
+
+    /**
+     * Consommation d'énergie primaire des auxiliaires de refroidissement en kWh/an
+     */
+    public function eges_aux(): float
+    {
+        return $this->get('eges_aux', function (): float {
+            return array_sum(array_map(
+                fn($item) => $item->eges_aux(),
+                $this->data()->refroidissement->systemes,
+            ));
+        });
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function calcule(): void
+    {
+        $this->ressource()->refroidissement()->calcule($this->ressource()->refroidissement()->data()->with(
+            consommations: $this->consommations(),
+        ));
     }
 }

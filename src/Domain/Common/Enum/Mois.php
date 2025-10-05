@@ -29,7 +29,7 @@ enum Mois: string
 
     public static function reduce(\Closure $func, mixed $initial = 0): mixed
     {
-        return array_reduce(self::cases(), $func, $initial);
+        return array_reduce(self::cases(), fn(float $carry, Mois $mois) => $carry += $func($mois), $initial);
     }
 
     public static function each(\Closure $func): array

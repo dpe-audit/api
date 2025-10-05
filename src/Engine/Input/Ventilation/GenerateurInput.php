@@ -21,7 +21,7 @@ final class GenerateurInput extends Input
     {
         return array_filter(
             $this->context->data()->ventilation->installations,
-            fn(InstallationInput $item) => $item->entity->generateur()->id()->compare($this->entity->id()),
+            fn(InstallationInput $item) => $item->entity->generateur()->id()->equals($this->entity->id()),
         );
     }
 
@@ -68,18 +68,18 @@ final class GenerateurInput extends Input
         return $this->dimensionnement_rule()->rdim();
     }
 
-    public function cef_auxiliaire(): float
+    public function cef_aux(): float
     {
-        return $this->consommation_auxiliaire_rule()->cef();
+        return $this->consommation_auxiliaire_rule()->cef_aux();
     }
 
-    public function cep_auxiliaire(): float
+    public function cep_aux(): float
     {
-        return $this->consommation_auxiliaire_rule()->cep();
+        return $this->consommation_auxiliaire_rule()->cep_aux();
     }
 
-    public function eges_auxiliaire(): float
+    public function eges_aux(): float
     {
-        return $this->consommation_auxiliaire_rule()->eges();
+        return $this->consommation_auxiliaire_rule()->eges_aux();
     }
 }

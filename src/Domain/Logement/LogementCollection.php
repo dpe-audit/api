@@ -9,6 +9,6 @@ final class LogementCollection extends ArrayCollection
 {
     public function find(Id $id): ?Logement
     {
-        return array_find($this->elements, fn(Logement $item): bool => $item->id()->compare($id));
+        return array_find($this->elements, fn(Logement $item): bool => $item->id()->equals($id));
     }
 }

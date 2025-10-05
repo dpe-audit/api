@@ -2,11 +2,12 @@
 
 namespace App\Dto\Enveloppe\Mur;
 
-use App\Domain\Enveloppe\Mur\Inertie;
 use App\Domain\Enveloppe\Mur\Mur;
 use App\Domain\Enveloppe\Mur\MurCollection;
 use App\Domain\Enveloppe\Mur\TypeDoublage;
 use App\Domain\Enveloppe\Mur\TypeMur;
+use App\Domain\Enveloppe\Paroi\Inertie;
+use App\Dto\Enveloppe\Paroi\IsolationDto;
 
 final class MurDto
 {

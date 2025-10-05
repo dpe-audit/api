@@ -28,21 +28,21 @@ final class RessourceTransformer
         private LogementTransformer $logement_transformer,
     ) {}
 
-    public function __invoke(XMLRessource $xml): RessourceDto
+    public function __invoke(XMLRessource $ressource): RessourceDto
     {
         return new RessourceDto(
             id: null,
-            date_visite: $xml->administratif->date_visite(),
-            date_etablissement: $xml->administratif->date_etablissement(),
-            adresse: $this->adresse_transformer->__invoke($xml),
-            batiment: $this->batiment_transformer->__invoke($xml),
-            enveloppe: $this->enveloppe_transformer->__invoke($xml),
-            chauffage: $this->chauffage_transformer->__invoke($xml),
-            ecs: $this->ecs_transformer->__invoke($xml),
-            refroidissement: $this->refroidissement_transformer->__invoke($xml),
-            ventilation: $this->ventilation_transformer->__invoke($xml),
-            production: $this->production_transformer->__invoke($xml),
-            logements: $this->logement_transformer->__invoke($xml),
+            date_visite: $ressource->administratif->date_visite(),
+            date_etablissement: $ressource->administratif->date_etablissement(),
+            adresse: $this->adresse_transformer->__invoke($ressource),
+            batiment: $this->batiment_transformer->__invoke($ressource),
+            enveloppe: $this->enveloppe_transformer->__invoke($ressource),
+            chauffage: $this->chauffage_transformer->__invoke($ressource),
+            ecs: $this->ecs_transformer->__invoke($ressource),
+            refroidissement: $this->refroidissement_transformer->__invoke($ressource),
+            ventilation: $this->ventilation_transformer->__invoke($ressource),
+            production: $this->production_transformer->__invoke($ressource),
+            logements: $this->logement_transformer->__invoke($ressource),
         );
     }
 }

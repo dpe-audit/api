@@ -4,10 +4,10 @@ namespace App\Engine\Table;
 
 use App\Domain\Enveloppe\Baie\{TypeBaie, TypeFermeture};
 use App\Domain\Enveloppe\Baie\Menuiserie\Materiau;
-use App\Domain\Enveloppe\Baie\Position\Mitoyennete;
 use App\Domain\Enveloppe\Baie\Position\TypePose;
 use App\Domain\Enveloppe\Baie\Survitrage\TypeSurvitrage;
 use App\Domain\Enveloppe\Baie\Vitrage\{NatureGazLame, TypeVitrage};
+use App\Domain\Enveloppe\Paroi\Mitoyennete;
 
 interface BaieTableValeurRepository
 {

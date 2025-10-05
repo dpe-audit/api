@@ -17,6 +17,6 @@ final class PontThermiqueCollection extends ArrayCollection
 
     public function find(Id $id): ?PontThermique
     {
-        return array_find($this->elements, fn(PontThermique $item): bool => $item->id()->compare($id));
+        return array_find($this->elements, fn(PontThermique $item): bool => $item->id()->equals($id));
     }
 }

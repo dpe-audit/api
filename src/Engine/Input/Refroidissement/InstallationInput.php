@@ -2,9 +2,10 @@
 
 namespace App\Engine\Input\Refroidissement;
 
+use App\Domain\Common\Consommation\ConsommationCollection;
 use App\Domain\Refroidissement\Installation\Installation;
 use App\Engine\{Engine, Input};
-use App\Engine\Rules\Refroidissement\DimensionnementInstallationRule;
+use App\Engine\Rules\Refroidissement\{ConsommationInstallationRule, DimensionnementInstallationRule};
 
 final class InstallationInput extends Input
 {
@@ -55,5 +56,12 @@ final class InstallationInput extends Input
         /** @var DimensionnementInstallationRule $rule */
         $rule = $this->requireIterator(DimensionnementInstallationRule::class, $this);
         return $rule->rdim();
+    }
+
+    public function consommations(): ConsommationCollection
+    {
+        /** @var ConsommationInstallationRule $rule */
+        $rule = $this->requireIterator(ConsommationInstallationRule::class, $this);
+        return $rule->consommations();
     }
 }

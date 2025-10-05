@@ -63,18 +63,17 @@ abstract class RendementSystemeRule extends SystemeInputRuleIterator
         return 1;
     }
 
-    protected function becs(): float
+    /**
+     * @inheritDoc
+     */
+    public function calcule(): void
     {
-        return $this->data()->ecs->becs();
-    }
-
-    protected function pertes_stockage(): float
-    {
-        return $this->get('pertes_stockage', function (): float {
-            $pertes = 0;
-            $pertes += $this->item()->pertes_stockage();
-            $pertes += $this->item()->generateur()->pertes_stockage();
-            return $pertes;
-        });
+        $this->item()->entity->calcule($this->item()->entity->data()->with(
+            iecs: $this->iecs(),
+            rd: $this->rd(),
+            rg: $this->rg(),
+            rgs: $this->rgs(),
+            rs: $this->rs(),
+        ));
     }
 }

@@ -3,8 +3,8 @@
 namespace App\Engine\Table;
 
 use App\Domain\Adresse\ZoneClimatique;
+use App\Domain\Enveloppe\Paroi\Mitoyennete;
 use App\Domain\Enveloppe\PlancherHaut\{Configuration, TypePlancherHaut};
-use App\Domain\Enveloppe\PlancherHaut\Position\Mitoyennete;
 
 interface PlancherHautTableValeurRepository
 {

@@ -2,7 +2,9 @@
 
 namespace App\Engine\Rules\Performance;
 
-use App\Domain\Ressource\{EtiquetteClimat, EtiquetteEnergie};
+use App\Domain\Common\Consommation\ConsommationCollection;
+use App\Domain\Common\Perte\PerteCollection;
+use App\Domain\Ressource\{Bilan, EtiquetteClimat, EtiquetteEnergie};
 use App\Engine\Rule;
 use App\Engine\Table\PerformanceTableValeurRepository;
 
@@ -13,49 +15,30 @@ final class PerformanceRule extends Rule
     ) {}
 
     /**
-     * Consommation finale d'énergie en kWh/an
+     * Liste des consommations
      */
-    public function cef(): float
+    public function consommations(): ConsommationCollection
     {
-        return $this->get('cef', function (): float {
-            return array_sum([
-                $this->data()->cef_chauffage(),
-                $this->data()->cef_ecs(),
-                $this->data()->cef_refroidissement(),
-                $this->data()->cef_eclairage(),
-                $this->data()->cef_auxiliaires(),
+        return $this->get('consommations', function (): ConsommationCollection {
+            return ConsommationCollection::create(...[
+                ...$this->data()->chauffage->consommations()->values(),
+                ...$this->data()->ecs->consommations()->values(),
+                ...$this->data()->refroidissement->consommations()->values(),
+                ...$this->data()->ventilation->consommations()->values(),
+                ...$this->data()->eclairage->consommations()->values(),
             ]);
         });
     }
 
     /**
-     * Consommation primaire d'énergie en kWh/an
+     * Liste des pertes
      */
-    public function cep(): float
+    public function pertes(): PerteCollection
     {
-        return $this->get('cep', function (): float {
-            return array_sum([
-                $this->data()->cep_chauffage(),
-                $this->data()->cep_ecs(),
-                $this->data()->cep_refroidissement(),
-                $this->data()->cep_eclairage(),
-                $this->data()->cep_auxiliaires(),
-            ]);
-        });
-    }
-
-    /**
-     * Emisssions de CO2 exprimées en kg/an
-     */
-    public function eges(): float
-    {
-        return $this->get('eges', function (): float {
-            return array_sum([
-                $this->data()->eges_chauffage(),
-                $this->data()->eges_ecs(),
-                $this->data()->eges_refroidissement(),
-                $this->data()->eges_eclairage(),
-                $this->data()->eges_auxiliaires(),
+        return $this->get('pertes', function (): PerteCollection {
+            return PerteCollection::create(...[
+                ...$this->data()->chauffage->pertes()->values(),
+                ...$this->data()->ecs->pertes()->values(),
             ]);
         });
     }
@@ -63,30 +46,30 @@ final class PerformanceRule extends Rule
     /**
      * Consommation finale d'énergie en kWh/m²/an
      */
-    public function cef_m2(): float
+    public function cef(): float
     {
-        return $this->get('cef_m2', function (): float {
-            return $this->cef() / $this->data()->batiment->surface_habitable();
+        return $this->get('cef', function (): float {
+            return $this->consommations()->cef() / $this->data()->batiment->surface_habitable();
         });
     }
 
     /**
      * Consommation primaire d'énergie en kWh/m²/an
      */
-    public function cep_m2(): float
+    public function cep(): float
     {
-        return $this->get('cep_m2', function (): float {
-            return $this->cep() / $this->data()->batiment->surface_habitable();
+        return $this->get('cep', function (): float {
+            return $this->consommations()->cep() / $this->data()->batiment->surface_habitable();
         });
     }
 
     /**
      * Emisssions de CO2 exprimées en kg/m²/an
      */
-    public function eges_m2(): float
+    public function eges(): float
     {
-        return $this->get('eges_m2', function (): float {
-            return $this->eges() / $this->data()->batiment->surface_habitable();
+        return $this->get('eges', function (): float {
+            return $this->consommations()->eges() / $this->data()->batiment->surface_habitable();
         });
     }
 
@@ -99,8 +82,8 @@ final class PerformanceRule extends Rule
             return $this->repository->etiquette_energie(
                 zone_climatique: $this->data()->batiment->zone_climatique(),
                 altitude: $this->data()->batiment->altitude(),
-                cep: $this->cep_m2(),
-                eges: $this->eges_m2(),
+                cep: $this->cep(),
+                eges: $this->eges(),
             ) ?? throw new \DomainException("Etiquette énergie non trouvée");
         });
     }
@@ -114,8 +97,26 @@ final class PerformanceRule extends Rule
             return $this->repository->etiquette_climat(
                 zone_climatique: $this->data()->batiment->zone_climatique(),
                 altitude: $this->data()->batiment->altitude(),
-                eges: $this->eges_m2(),
+                eges: $this->eges(),
             ) ?? throw new \DomainException("Etiquette climat non trouvée");
         });
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function calcule(): void
+    {
+        $this->ressource()->calcule($this->ressource()->data()->with(
+            pertes: $this->pertes(),
+            consommations: $this->consommations(),
+            bilan: Bilan::create(
+                cef: $this->cef(),
+                cep: $this->cep(),
+                eges: $this->eges(),
+                etiquette_energie: $this->etiquette_energie(),
+                etiquette_climat: $this->etiquette_climat(),
+            )
+        ));
     }
 }

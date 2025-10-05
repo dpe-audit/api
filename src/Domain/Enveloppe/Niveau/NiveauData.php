@@ -6,7 +6,9 @@ use App\Domain\Enveloppe\Inertie;
 
 final class NiveauData
 {
-    public function __construct(public readonly ?Inertie $inertie) {}
+    public function __construct(
+        public readonly ?Inertie $inertie,
+    ) {}
 
     public static function create(?Inertie $inertie = null,): self
     {

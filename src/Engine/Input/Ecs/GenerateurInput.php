@@ -73,7 +73,10 @@ final class GenerateurInput extends Input
 
     public function generateur_mixte(): ?GenerateurMixte
     {
-        return $this->entity->position()->generateur_mixte;
+        return $this->entity->position()->generateur_mixte_id ? array_find(
+            $this->context->data()->chauffage->generateurs,
+            fn(GenerateurMixte $item) => $item->entity->id()->equals($this->entity->position()->generateur_mixte_id)
+        ) : null;
     }
 
     public function position_volume_chauffe(): bool
@@ -175,21 +178,27 @@ final class GenerateurInput extends Input
 
     public function pertes_generation(?Mois $mois = null): float
     {
-        return $mois ? $this->perte_rule()->pertes_generation_j($mois) : $this->perte_rule()->pertes_generation();
+        return $mois
+            ? $this->perte_rule()->pertes_generation_j($mois)
+            : $this->perte_rule()->pertes_generation();
     }
 
     public function pertes_generation_recuperables(?Mois $mois = null): float
     {
-        return $mois ? $this->perte_rule()->pertes_generation_recuperables_j($mois) : $this->perte_rule()->pertes_generation_recuperables();
+        return $mois
+            ? $this->perte_rule()->pertes_generation_recuperables_j($mois)
+            : $this->perte_rule()->pertes_generation_recuperables();
     }
 
-    public function pertes_stockage(): float
+    public function pertes_stockage_integre(): float
     {
-        return $this->perte_rule()->pertes_stockage();
+        return $this->perte_rule()->pertes_stockage_integre();
     }
 
-    public function pertes_stockage_recuperables(?Mois $mois = null): float
+    public function pertes_stockage_integre_recuperables(?Mois $mois = null): float
     {
-        return $mois ? $this->perte_rule()->pertes_stockage_recuperables_j($mois) : $this->perte_rule()->pertes_stockage_recuperables();
+        return $mois
+            ? $this->perte_rule()->pertes_stockage_integre_recuperables_j($mois)
+            : $this->perte_rule()->pertes_stockage_integre_recuperables();
     }
 }

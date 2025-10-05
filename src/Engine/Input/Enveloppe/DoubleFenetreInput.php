@@ -10,7 +10,7 @@ use App\Domain\Enveloppe\DoubleFenetre\TypeBaie;
 use App\Domain\Enveloppe\DoubleFenetre\Vitrage\{NatureGazLame, TypeVitrage};
 use App\Engine\{Engine, Input};
 use App\Engine\Rules\Apport\FacteurSolaire\FacteurSolaireDoubleFenetreRule;
-use App\Engine\Rules\Deperdition\PerformanceDoubleFenetreRule;
+use App\Engine\Rules\Deperdition\DeperditionDoubleFenetreRule;
 
 final class DoubleFenetreInput extends Input
 {
@@ -98,15 +98,15 @@ final class DoubleFenetreInput extends Input
 
     public function ug(): float
     {
-        /** @var PerformanceDoubleFenetreRule $rule */
-        $rule = $this->requireIterator(PerformanceDoubleFenetreRule::class, $this);
+        /** @var DeperditionDoubleFenetreRule $rule */
+        $rule = $this->requireIterator(DeperditionDoubleFenetreRule::class, $this);
         return $rule->ug();
     }
 
     public function uw(): float
     {
-        /** @var PerformanceDoubleFenetreRule $rule */
-        $rule = $this->requireIterator(PerformanceDoubleFenetreRule::class, $this);
+        /** @var DeperditionDoubleFenetreRule $rule */
+        $rule = $this->requireIterator(DeperditionDoubleFenetreRule::class, $this);
         return $rule->uw();
     }
 

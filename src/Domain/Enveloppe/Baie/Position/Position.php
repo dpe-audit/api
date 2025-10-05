@@ -4,6 +4,7 @@ namespace App\Domain\Enveloppe\Baie\Position;
 
 use App\Domain\Enveloppe\DoubleFenetre\DoubleFenetre;
 use App\Domain\Enveloppe\Lnc\Lnc;
+use App\Domain\Enveloppe\Paroi\Mitoyennete;
 use App\Domain\Enveloppe\Paroi\Paroi;
 
 final class Position

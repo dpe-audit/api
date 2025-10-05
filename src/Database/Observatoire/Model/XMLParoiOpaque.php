@@ -2,6 +2,9 @@
 
 namespace App\Database\Observatoire\Model;
 
+use App\Domain\Enveloppe\Paroi\Isolation\EtatIsolation;
+use App\Domain\Enveloppe\Paroi\Isolation\TypeIsolation;
+
 abstract class XMLParoiOpaque extends XMLParoi
 {
     public readonly float $surface_paroi_opaque;
@@ -40,6 +43,28 @@ abstract class XMLParoiOpaque extends XMLParoi
     public function epaisseur_isolation(): ?float
     {
         return $this->epaisseur_isolation ? $this->epaisseur_isolation * 10 : null;
+    }
+
+    public function etat_isolation(): ?EtatIsolation
+    {
+        return match ($this->enum_type_isolation_id) {
+            2 => EtatIsolation::NON_ISOLE,
+            3, 4, 5, 6, 7, 8 => EtatIsolation::ISOLE,
+            default => null,
+        };
+    }
+
+    public function type_isolation(): ?TypeIsolation
+    {
+        return match ($this->enum_type_isolation_id) {
+            3 => TypeIsolation::ITI,
+            4 => TypeIsolation::ITE,
+            5 => TypeIsolation::ITR,
+            6 => TypeIsolation::ITI_ITE,
+            7 => TypeIsolation::ITI_ITR,
+            8 => TypeIsolation::ITE_ITR,
+            default => null
+        };
     }
 
     public function annee_isolation(XMLRessource $ressource): ?int

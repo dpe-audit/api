@@ -3,46 +3,40 @@
 namespace App\Domain\Refroidissement;
 
 use Webmozart\Assert\Assert;
+use App\Domain\Common\Consommation\ConsommationCollection;
+use App\Domain\Common\Emission\EmissionCollection;
 
 final class RefroidissementData
 {
     public function __construct(
         public readonly ?float $bfr,
-        public readonly ?float $cef,
-        public readonly ?float $cep,
-        public readonly ?float $eges,
+        public readonly ?ConsommationCollection $consommations,
+        public readonly ?EmissionCollection $emissions,
     ) {}
 
     public static function create(
         ?float $bfr = null,
-        ?float $cef = null,
-        ?float $cep = null,
-        ?float $eges = null,
+        ?ConsommationCollection $consommations = null,
+        ?EmissionCollection $emissions = null,
     ): self {
         Assert::nullOrGreaterThanEq($bfr, 0);
-        Assert::nullOrGreaterThanEq($cef, 0);
-        Assert::nullOrGreaterThanEq($cep, 0);
-        Assert::nullOrGreaterThanEq($eges, 0);
 
         return new self(
             bfr: $bfr,
-            cef: $cef,
-            cep: $cep,
-            eges: $eges,
+            consommations: $consommations,
+            emissions: $emissions,
         );
     }
 
     public function with(
         ?float $bfr = null,
-        ?float $cef = null,
-        ?float $cep = null,
-        ?float $eges = null
+        ?ConsommationCollection $consommations = null,
+        ?EmissionCollection $emissions = null,
     ): self {
         return self::create(
             bfr: $bfr ?? $this->bfr,
-            cef: $cef ?? $this->cef,
-            cep: $cep ?? $this->cep,
-            eges: $eges ?? $this->eges,
+            consommations: $consommations ?? $this->consommations,
+            emissions: $emissions ?? $this->emissions,
         );
     }
 }

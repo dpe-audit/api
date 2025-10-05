@@ -18,8 +18,8 @@ final class RendementChauffeEauElectriqueRule extends RendementSystemeRule
             if (0 === $this->item()->generateur()->volume_stockage()) {
                 return 1;
             }
-            $becs = $this->becs();
-            $pertes = $this->pertes_stockage();
+            $becs = $this->data()->ecs->becs();
+            $pertes = $this->item()->pertes_stockage();
             $rd = $this->rd();
 
             if ($this->item()->generateur()->position_chauff_eau() === PositionChauffeEau::CHAUFFE_EAU_VERTICAL) {
@@ -41,7 +41,7 @@ final class RendementChauffeEauElectriqueRule extends RendementSystemeRule
                 return 0.97;
             }
             if (0 === $this->item()->generateur()->volume_stockage()) {
-                $becs = $this->becs();
+                $becs = $this->data()->ecs->becs();
                 $rpn = $this->item()->generateur()->rpn();
                 $qp0 = $this->item()->generateur()->qp0();
                 $pveilleuse = $this->item()->generateur()->pveilleuse();

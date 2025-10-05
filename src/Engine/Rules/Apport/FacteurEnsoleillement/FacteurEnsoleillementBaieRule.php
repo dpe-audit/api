@@ -55,8 +55,6 @@ final class FacteurEnsoleillementBaieRule extends BaieInputRuleIterator
     public function calcule(): void
     {
         $this->item()->entity->calcule($this->item()->entity->data()->with(
-            fe1: $this->fe1(),
-            fe2: $this->fe2(),
             fe: $this->fe(),
         ));
     }

@@ -84,4 +84,17 @@ final class DimensionnementGenerateurRule extends GenerateurInputRuleIterator
                 : $this->item()->pch();
         });
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function calcule(): void
+    {
+        $this->item()->entity->calcule($this->item()->entity->data()->with(
+            rdim: $this->rdim(),
+            pn: $this->pn(),
+            pdim: $this->pdim(),
+            pch: $this->pch(),
+        ));
+    }
 }

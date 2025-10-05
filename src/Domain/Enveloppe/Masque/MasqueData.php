@@ -12,10 +12,15 @@ final class MasqueData
         public readonly ?float $omb,
     ) {}
 
-    public static function create(?float $fe1 = null, ?float $fe2 = null, ?float $omb = null,): self
-    {
+    public static function create(
+        ?float $fe1 = null,
+        ?float $fe2 = null,
+        ?float $omb = null,
+    ): self {
         Assert::nullOrGreaterThanEq($fe1, 0);
+        Assert::nullOrLessThanEq($fe1, 1);
         Assert::nullOrGreaterThanEq($fe2, 0);
+        Assert::nullOrLessThanEq($fe2, 1);
         Assert::nullOrGreaterThanEq($omb, 0);
         Assert::nullOrLessThanEq($omb, 100);
         return new self(fe1: $fe1, fe2: $fe2, omb: $omb);

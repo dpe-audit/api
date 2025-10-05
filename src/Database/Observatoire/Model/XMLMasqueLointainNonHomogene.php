@@ -8,6 +8,8 @@ use App\Domain\Enveloppe\Masque\SecteurMasque;
 
 final class XMLMasqueLointainNonHomogene
 {
+    use WithId;
+
     public function __construct(
         public readonly int $tv_coef_masque_lointain_non_homogene_id,
     ) {}

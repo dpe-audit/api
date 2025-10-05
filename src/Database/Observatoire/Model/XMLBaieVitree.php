@@ -5,7 +5,6 @@ namespace App\Database\Observatoire\Model;
 use App\Domain\Common\Enum\Orientation;
 use App\Domain\Common\ValueObject\Id;
 use App\Domain\Enveloppe\Baie\Menuiserie\Materiau;
-use App\Domain\Enveloppe\Baie\Position\Mitoyennete;
 use App\Domain\Enveloppe\Baie\Position\TypePose;
 use App\Domain\Enveloppe\Baie\Survitrage\TypeSurvitrage;
 use App\Domain\Enveloppe\Baie\TypeBaie;
@@ -143,30 +142,12 @@ final class XMLBaieVitree extends XMLParoi
 
     public function surface(): float
     {
-        return $this->nb_baie && $this->surface_totale_baie
-            ? $this->surface_totale_baie / $this->nb_baie
-            : 0;
+        return $this->surface_totale_baie;
     }
 
     public function description(): string
     {
         return 'Description non renseignée';
-    }
-
-    public function mitoyennete(): Mitoyennete
-    {
-        return match ($this->enum_type_adjacence_id) {
-            1 => Mitoyennete::EXTERIEUR,
-            2 => Mitoyennete::ENTERRE,
-            3 => Mitoyennete::VIDE_SANITAIRE,
-            4 => Mitoyennete::LOCAL_NON_RESIDENTIEL,
-            5 => Mitoyennete::TERRE_PLEIN,
-            6 => Mitoyennete::SOUS_SOL_NON_CHAUFFE,
-            7 => Mitoyennete::LOCAL_NON_ACCESSIBLE,
-            8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21 => Mitoyennete::LOCAL_NON_CHAUFFE,
-            20 => Mitoyennete::LOCAL_NON_RESIDENTIEL,
-            22 => Mitoyennete::LOCAL_RESIDENTIEL,
-        };
     }
 
     public function type_baie(): TypeBaie
@@ -305,7 +286,7 @@ final class XMLBaieVitree extends XMLParoi
 
     public function double_fenetre_id(): ?Id
     {
-        return $this->baie_vitree_double_fenetre ? $this->id() : null;
+        return $this->baie_vitree_double_fenetre?->id();
     }
 
     public function configuration_masque_proche(): ?ConfigurationMasque

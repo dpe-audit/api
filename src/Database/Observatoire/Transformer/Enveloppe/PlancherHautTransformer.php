@@ -2,13 +2,17 @@
 
 namespace App\Database\Observatoire\Transformer\Enveloppe;
 
-use App\Database\Observatoire\Model\XMLRessource;
-use App\Dto\Enveloppe\PlancherHaut\IsolationDto;
-use App\Dto\Enveloppe\PlancherHaut\PlancherHautDto;
-use App\Dto\Enveloppe\PlancherHaut\PositionDto;
+use App\Database\Observatoire\Model\{XMLPlancherHaut, XMLRessource};
+use App\Dto\Enveloppe\Paroi\IsolationDto;
+use App\Dto\Enveloppe\PlancherHaut\{PlancherHautDto, PositionDto};
 
 final class PlancherHautTransformer
 {
+    public function supports(XMLPlancherHaut $element): bool
+    {
+        return $element->surface() > 0;
+    }
+
     /**
      * @return array<PlancherHautDto>
      */
@@ -17,7 +21,7 @@ final class PlancherHautTransformer
         $collection = [];
 
         foreach ($ressource->logement()->enveloppe->plancher_haut_collection as $plancher_haut) {
-            if (0 == $plancher_haut->surface()) {
+            if (false === $this->supports($plancher_haut)) {
                 continue;
             }
             $collection[] = new PlancherHautDto(
@@ -41,7 +45,7 @@ final class PlancherHautTransformer
                     surface: $plancher_haut->surface(),
                     mitoyennete: $plancher_haut->mitoyennete(),
                     orientation: null,
-                    local_non_chauffe_id: $plancher_haut->lnc_id($ressource)?->toBinary()
+                    local_non_chauffe_id: $plancher_haut->lnc_id($ressource)?->__toString()
                 )
             );
         }

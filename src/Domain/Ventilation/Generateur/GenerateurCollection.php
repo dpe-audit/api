@@ -17,6 +17,6 @@ final class GenerateurCollection extends ArrayCollection
 
     public function find(Id $id): ?Generateur
     {
-        return array_find($this->elements, fn(Generateur $item) => $item->id()->compare($id));
+        return array_find($this->elements, fn(Generateur $item) => $item->id()->equals($id));
     }
 }

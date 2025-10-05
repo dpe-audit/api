@@ -2,55 +2,125 @@
 
 namespace App\Engine\Rules\Ecs;
 
-use App\Domain\Ecs\Generateur\EnergieGenerateur;
-use App\Engine\Input\Ecs\SystemeInputRuleIterator;
+use App\Domain\Common\Consommation\{Consommation, ConsommationCollection};
+use App\Domain\Common\Enum\{Energie, Usage};
+use App\Engine\Rule;
 
-final class ConsommationEcsRule extends SystemeInputRuleIterator
+final class ConsommationEcsRule extends Rule
 {
     /**
-     * Consommation finale d'eau chaude sanitaire exprimée en kWh/an
+     * Liste des consommations d'eau chaude sanitaire
      */
-    public function cef(): float
+    public function consommations(): ConsommationCollection
     {
-        return $this->get('cef', function (): float {
-            $becs = $this->data()->ecs->becs();
-            $iecs = $this->item()->iecs();
-            $fecs = $this->item()->installation()->fecs();
-            $rdim = $this->item()->rdim();
-            return $becs * (1 - $fecs) * $iecs * $rdim;
-        });
-    }
+        return $this->get('consommations', function (): ConsommationCollection {
+            $collection = ConsommationCollection::create();
 
-    /**
-     * Consommation primaire d'eau chaude sanitaire exprimée en kWh/an
-     */
-    public function cep(): float
-    {
-        return $this->get('cep', function (): float {
-            return $this->cef() * $this->item()->generateur()->energie()->to()->facteur_energie_primaire();
-        });
-    }
-
-    /**
-     * Emissions de CO2 d'eau chaude sanitaire exprimées en kg/an
-     */
-    public function eges(): float
-    {
-        return $this->get('eges', function (): float {
-            if ($contenu_co2_reseau_chaleur = $this->item()->generateur()->contenu_co2_reseau_chaleur()) {
-                return $this->cef() * $contenu_co2_reseau_chaleur;
+            foreach ($this->data()->ecs->systemes as $item) {
+                $collection->with(Consommation::create(
+                    usage: Usage::ECS,
+                    energie: $item->generateur()->energie()->to(),
+                    cef: $item->cef_ecs(),
+                    cep: $item->cep_ecs(),
+                    eges: $item->eges_ecs(),
+                ));
+                $collection->with(Consommation::create(
+                    usage: Usage::AUXILIAIRE,
+                    energie: Energie::ELECTRICITE,
+                    cef: $item->cef_aux(),
+                    cep: $item->cep_aux(),
+                    eges: $item->eges_aux(),
+                ));
             }
-            return $this->cef() * match ($this->item()->generateur()->energie()) {
-                EnergieGenerateur::ELECTRICITE => 0.065,
-                EnergieGenerateur::GAZ_NATUREL => 0.227,
-                EnergieGenerateur::GPL => 0.272,
-                EnergieGenerateur::FIOUL => 0.324,
-                EnergieGenerateur::BOIS_BUCHE => 0.03,
-                EnergieGenerateur::BOIS_PLAQUETTE => 0.024,
-                EnergieGenerateur::BOIS_GRANULE => 0.03,
-                EnergieGenerateur::CHARBON => 0.385,
-                EnergieGenerateur::RESEAU_CHALEUR => 0.385,
-            };
+            return $collection;
         });
+    }
+
+    /**
+     * Consommation d'énergie final d'eau chaude sanitaire en kWh/an
+     */
+    public function cef_ecs(): float
+    {
+        return $this->get('cef_ecs', function (): float {
+            return array_sum(array_map(
+                fn($item) => $item->cef_ecs(),
+                $this->data()->ecs->systemes,
+            ));
+        });
+    }
+
+    /**
+     * Consommation d'énergie primaire d'eau chaude sanitaire en kWh/an
+     */
+    public function cep_ecs(): float
+    {
+        return $this->get('cep_ecs', function (): float {
+            return array_sum(array_map(
+                fn($item) => $item->cep_ecs(),
+                $this->data()->ecs->systemes,
+            ));
+        });
+    }
+
+    /**
+     * Consommation d'énergie primaire d'eau chaude sanitaire en kWh/an
+     */
+    public function eges_ecs(): float
+    {
+        return $this->get('eges_ecs', function (): float {
+            return array_sum(array_map(
+                fn($item) => $item->eges_ecs(),
+                $this->data()->ecs->systemes,
+            ));
+        });
+    }
+
+    /**
+     * Consommation d'énergie final des auxiliaires d'eau chaude sanitaire en kWh/an
+     */
+    public function cef_aux(): float
+    {
+        return $this->get('cef_aux', function (): float {
+            return array_sum(array_map(
+                fn($item) => $item->cef_aux(),
+                $this->data()->ecs->systemes,
+            ));
+        });
+    }
+
+    /**
+     * Consommation d'énergie primaire des auxiliaires d'eau chaude sanitaire en kWh/an
+     */
+    public function cep_aux(): float
+    {
+        return $this->get('cep_aux', function (): float {
+            return array_sum(array_map(
+                fn($item) => $item->cep_aux(),
+                $this->data()->ecs->systemes,
+            ));
+        });
+    }
+
+    /**
+     * Consommation d'énergie primaire des auxiliaires d'eau chaude sanitaire en kWh/an
+     */
+    public function eges_aux(): float
+    {
+        return $this->get('eges_aux', function (): float {
+            return array_sum(array_map(
+                fn($item) => $item->eges_aux(),
+                $this->data()->ecs->systemes,
+            ));
+        });
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function calcule(): void
+    {
+        $this->ressource()->ecs()->calcule($this->ressource()->ecs()->data()->with(
+            consommations: $this->consommations(),
+        ));
     }
 }

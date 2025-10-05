@@ -195,7 +195,7 @@ final class SollicitationsExterieuresRule extends Rule
      */
     public function calcule(): void
     {
-        $this->ressource()->adresse()->calcule($this->ressource()->adresse()->data()->with(
+        $this->ressource()->calcule($this->ressource()->data()->with(
             zone_climatique: $this->zone_climatique(),
         ));
     }

@@ -4,9 +4,9 @@ namespace App\Domain\Enveloppe\Mur;
 
 use App\Domain\Common\ValueObject\Id;
 use App\Domain\Enveloppe\Enveloppe;
-use App\Domain\Enveloppe\Mur\Isolation\Isolation;
 use App\Domain\Enveloppe\Mur\Position\Position;
-use App\Domain\Enveloppe\Paroi\{Paroi, TypeParoi};
+use App\Domain\Enveloppe\Paroi\{Inertie, Mitoyennete, Paroi, TypeParoi};
+use App\Domain\Enveloppe\Paroi\Isolation\Isolation;
 use Webmozart\Assert\Assert;
 
 final class Mur extends Paroi
@@ -93,9 +93,20 @@ final class Mur extends Paroi
         return $this->enveloppe;
     }
 
+    /**
+     * @inheritDoc
+     */
     public static function type_paroi(): TypeParoi
     {
         return TypeParoi::MUR;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function mitoyennete(): Mitoyennete
+    {
+        return $this->position->mitoyennete;
     }
 
     public function description(): string

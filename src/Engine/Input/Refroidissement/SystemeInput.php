@@ -4,7 +4,7 @@ namespace App\Engine\Input\Refroidissement;
 
 use App\Domain\Refroidissement\Systeme\Systeme;
 use App\Engine\{Engine, Input};
-use App\Engine\Rules\Refroidissement\{ConsommationRefroidissementRule, DimensionnementSystemeRule};
+use App\Engine\Rules\Refroidissement\{ConsommationAuxiliaireRule, ConsommationSystemeRule, DimensionnementSystemeRule};
 
 final class SystemeInput extends Input
 {
@@ -44,9 +44,14 @@ final class SystemeInput extends Input
         return $this->require(DimensionnementSystemeRule::class);
     }
 
-    public function consommation_rule(): ConsommationRefroidissementRule
+    public function consommation_refroidissement_rule(): ConsommationSystemeRule
     {
-        return $this->require(ConsommationRefroidissementRule::class);
+        return $this->require(ConsommationSystemeRule::class);
+    }
+
+    public function consommation_auxiliaire_rule(): ConsommationAuxiliaireRule
+    {
+        return $this->require(ConsommationSystemeRule::class);
     }
 
     public function rdim(): float
@@ -54,18 +59,33 @@ final class SystemeInput extends Input
         return $this->dimensionnement_rule()->rdim();
     }
 
-    public function cef(): float
+    public function cef_fr(): float
     {
-        return $this->consommation_rule()->cef();
+        return $this->consommation_refroidissement_rule()->cef_fr();
     }
 
-    public function cep(): float
+    public function cep_fr(): float
     {
-        return $this->consommation_rule()->cep();
+        return $this->consommation_refroidissement_rule()->cep_fr();
     }
 
-    public function eges(): float
+    public function eges_fr(): float
     {
-        return $this->consommation_rule()->eges();
+        return $this->consommation_refroidissement_rule()->eges_fr();
+    }
+
+    public function cef_aux(): float
+    {
+        return $this->consommation_auxiliaire_rule()->cef_aux();
+    }
+
+    public function cep_aux(): float
+    {
+        return $this->consommation_auxiliaire_rule()->cep_aux();
+    }
+
+    public function eges_aux(): float
+    {
+        return $this->consommation_auxiliaire_rule()->eges_aux();
     }
 }

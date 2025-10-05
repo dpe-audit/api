@@ -2,10 +2,11 @@
 
 namespace App\Dto\Enveloppe\PlancherBas;
 
-use App\Domain\Enveloppe\PlancherBas\Inertie;
+use App\Domain\Enveloppe\Paroi\Inertie;
 use App\Domain\Enveloppe\PlancherBas\PlancherBas;
 use App\Domain\Enveloppe\PlancherBas\PlancherBasCollection;
 use App\Domain\Enveloppe\PlancherBas\TypePlancherBas;
+use App\Dto\Enveloppe\Paroi\IsolationDto;
 
 final class PlancherBasDto
 {

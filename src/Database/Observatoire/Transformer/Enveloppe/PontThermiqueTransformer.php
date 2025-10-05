@@ -2,12 +2,16 @@
 
 namespace App\Database\Observatoire\Transformer\Enveloppe;
 
-use App\Database\Observatoire\Model\XMLRessource;
-use App\Dto\Enveloppe\PontThermique\LiaisonDto;
-use App\Dto\Enveloppe\PontThermique\PontThermiqueDto;
+use App\Database\Observatoire\Model\{XMLPontThermique, XMLRessource};
+use App\Dto\Enveloppe\PontThermique\{LiaisonDto, PontThermiqueDto};
 
 final class PontThermiqueTransformer
 {
+    public function supports(XMLPontThermique $element): bool
+    {
+        return $element->longueur() > 0;
+    }
+
     /**
      * @return array<PontThermiqueDto>
      */
@@ -16,7 +20,7 @@ final class PontThermiqueTransformer
         $collection = [];
 
         foreach ($ressource->logement()->enveloppe->pont_thermique_collection as $pont_thermique) {
-            if (0 == $pont_thermique->longueur()) {
+            if (false === $this->supports($pont_thermique)) {
                 continue;
             }
             $collection[] = new PontThermiqueDto(

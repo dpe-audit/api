@@ -2,10 +2,9 @@
 
 namespace App\Engine\Input\Enveloppe;
 
-use App\Domain\Enveloppe\Paroi\TypeParoi;
+use App\Domain\Enveloppe\Paroi\Isolation\{EtatIsolation, TypeIsolation};
+use App\Domain\Enveloppe\Paroi\{Mitoyennete, TypeParoi};
 use App\Domain\Enveloppe\PlancherBas\{PlancherBas, TypePlancherBas};
-use App\Domain\Enveloppe\PlancherBas\Isolation\{EtatIsolation, TypeIsolation};
-use App\Domain\Enveloppe\PlancherBas\Position\Mitoyennete;
 use App\Engine\Engine;
 use App\Engine\Rules\Deperdition\DeperditionPlancherBasRule;
 

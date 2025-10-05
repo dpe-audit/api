@@ -7,19 +7,19 @@ use Webmozart\Assert\Assert;
 final class ProductionData
 {
     public function __construct(
-        public readonly ?float $production,
+        public readonly ?float $ppv,
     ) {}
 
-    public static function create(?float $production = null): self
+    public static function create(?float $ppv = null): self
     {
-        Assert::nullOrGreaterThanEq($production, 0);
-        return new self(production: $production);
+        Assert::nullOrGreaterThanEq($ppv, 0);
+        return new self(ppv: $ppv);
     }
 
-    public function with(?float $production = null): self
+    public function with(?float $ppv = null): self
     {
         return self::create(
-            production: $production ?? $this->production,
+            ppv: $ppv ?? $this->ppv,
         );
     }
 }

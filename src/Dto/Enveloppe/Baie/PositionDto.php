@@ -2,9 +2,9 @@
 
 namespace App\Dto\Enveloppe\Baie;
 
-use App\Domain\Enveloppe\Baie\Position\Mitoyennete;
 use App\Domain\Enveloppe\Baie\Position\Position;
 use App\Domain\Enveloppe\Baie\Position\TypePose;
+use App\Domain\Enveloppe\Paroi\Mitoyennete;
 
 final class PositionDto
 {

@@ -26,7 +26,7 @@ final class PositionDto
             cascade: $data->cascade,
             priorite_cascade: $data->priorite_cascade,
             position_chaudiere: $data->position_chaudiere,
-            generateur_mixte_id: $data->generateur_mixte?->id()->toBinary(),
+            generateur_mixte_id: $data->generateur_mixte_id,
             reseau_chaleur_id: $data->reseau_chaleur?->id(),
         );
     }

@@ -26,4 +26,84 @@ final class RendementInstallationRule extends InstallationInputRuleIterator
             ) ?? throw new \DomainException("Valeurs forfaitaires Fch non trouvées");
         });
     }
+
+    /**
+     * Inverse du rendement de l'installation
+     */
+    public function ich(): float
+    {
+        return $this->get('ich', function (): float {
+            return array_sum(array_map(
+                fn($item) => $item->ich() * $item->rdim(),
+                $this->item()->systemes()
+            ));
+        });
+    }
+
+    /**
+     * Rendement d'emission de l'installation
+     */
+    public function re(): float
+    {
+        return $this->get('re', function (): float {
+            return array_sum(array_map(
+                fn($item) => $item->re() * $item->rdim(),
+                $this->item()->systemes()
+            ));
+        });
+    }
+
+    /**
+     * Rendement de distribution de l'installation
+     */
+    public function rd(): float
+    {
+        return $this->get('rd', function (): float {
+            return array_sum(array_map(
+                fn($item) => $item->rd() * $item->rdim(),
+                $this->item()->systemes()
+            ));
+        });
+    }
+
+    /**
+     * Rendement de génération de l'installation
+     */
+    public function rg(): float
+    {
+        return $this->get('rg', function (): float {
+            return array_sum(array_map(
+                fn($item) => $item->rg() * $item->rdim(),
+                $this->item()->systemes()
+            ));
+        });
+    }
+
+    /**
+     * Rendement de régulation de l'installation
+     */
+    public function rr(): float
+    {
+        return $this->get('rr', function (): float {
+            return array_sum(array_map(
+                fn($item) => $item->rr() * $item->rdim(),
+                $this->item()->systemes()
+            ));
+        });
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function calcule(): void
+    {
+        $this->item()->entity->calcule($this->item()->entity->data()->with(
+            fch: $this->fch(),
+            ich: $this->ich(),
+            re: $this->re(),
+            rd: $this->rd(),
+            rg: $this->rg(),
+            rr: $this->rr(),
+        ));
+    }
 }

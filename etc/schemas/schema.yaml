@@ -1,0 +1,5599 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+$id: https://schemas.dpe-audit.fr/ressource
+title: Ressource
+type: object
+properties:
+  id:
+    title: Identifiant
+    type: string
+    format: uuid
+    readOnly: true
+  date_visite:
+    title: Date de visite du logement
+    type: string
+    format: date
+  date_etablissement:
+    title: Date d'établissement
+    type: string
+    format: date
+  adresse:
+    $ref: /adresse
+  batiment:
+    $ref: /batiment
+  logements:
+    title: Liste des logements visités
+    type: array
+    default: []
+    items:
+      $ref: /logement
+  enveloppe:
+    $ref: /enveloppe
+  chauffage:
+    $ref: /chauffage
+  ecs:
+    $ref: /ecs
+  ventilation:
+    $ref: /ventilation
+  refroidissement:
+    $ref: /refroidissement
+  production:
+    $ref: /production
+  data:
+    $ref: '#/$defs/data'
+required:
+  - date_visite
+  - date_etablissement
+  - adresse
+  - batiment
+  - logements
+  - chauffage
+  - ecs
+  - ventilation
+  - refroidissement
+  - production
+$defs:
+  data:
+    title: Données calculées
+    type: object
+    readOnly: true
+    properties:
+      zone_climatique:
+        title: Zone climatique
+        type: string
+        enum:
+          - H1a
+          - H1b
+          - H1c
+          - H2a
+          - H2b
+          - H2c
+          - H2d
+          - H3
+      effet_joule:
+        title: Bâtiment chauffé par effet joule
+        type: boolean
+      parois_anciennes_lourdes:
+        title: Bâtiment constitué de parois anciennes lourdes
+        type: boolean
+      surface_reference:
+        title: Surface thermique de référence en m²
+        type: number
+        minimumExclusive: 0
+      volume_reference:
+        title: Volume thermique de référence en m³
+        type: number
+        minimumExclusive: 0
+      bilan:
+        $ref: '#/$defs/bilan'
+      pertes:
+        $ref: /common/pertes
+      consommations:
+        $ref: /common/consommations
+  bilan:
+    title: Bilan
+    type: object
+    properties:
+      cef:
+        title: Consommation d'énergie finale en kWh/m²/an
+        type: number
+        minimum: 0
+      cep:
+        title: Consommation d'énergie primaire en kWh/m²/an
+        type: number
+        minimum: 0
+      eges:
+        title: Émissions de gaz à effet de serre en kgCO2/m²/an
+        type: number
+        minimum: 0
+      etiquette_energie:
+        title: Etiquette énergie
+        type: string
+        enum:
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+      etiquette_climat:
+        title: Etiquette climat
+        type: string
+        enum:
+          - A
+          - B
+          - C
+          - D
+          - E
+          - F
+          - G
+  https://schemas.dpe-audit.fr/adresse:
+    $id: https://schemas.dpe-audit.fr/adresse
+    title: Adresse
+    type: object
+    properties:
+      ban_id:
+        title: Identifiant depuis la Base Adresse Nationale (BAN)
+        description: >-
+          Clé d'interopérabilité telle que définie dans la spécification du
+          format d'échange BAL
+        type:
+          - string
+          - 'null'
+        default: null
+      nom:
+        title: Numéro éventuel et nom de voie ou lieu dit
+        type: string
+      code_postal:
+        title: Code postal de la commune
+        type: string
+      code_insee:
+        title: Code INSEE de la commune
+        type: string
+      commune:
+        title: Nom officiel de la commune
+        type: string
+    required:
+      - ban_id
+      - nom
+      - code_postal
+      - code_insee
+      - commune
+  https://schemas.dpe-audit.fr/batiment:
+    $id: https://schemas.dpe-audit.fr/batiment
+    title: Bâtiment
+    type: object
+    properties:
+      rnb_id:
+        title: Identifiant du bâtiment depuis le RNB
+        type:
+          - string
+          - 'null'
+        default: null
+      type:
+        title: Type de bâtiment
+        description: Donnée calculée à partir du nombre de logements
+        type: string
+        enum:
+          - maison
+          - immeuble
+      annee_construction:
+        title: Année de construction
+        type: integer
+      altitude:
+        title: Altitude du bâtiment en mètres
+        type: number
+      logements:
+        title: Nombre de logements
+        type: integer
+        exclusiveMinimum: 0
+      surface_habitable:
+        title: Surface habitable en m²
+        type: number
+        exclusiveMinimum: 0
+      hauteur_sous_plafond:
+        title: Hauteur moyenne sous plafond en m
+        type: number
+        exclusiveMinimum: 0
+      materiaux_anciens:
+        title: Bâtiment majoritairement composé de matériaux anciens
+        type: boolean
+    required:
+      - rnb_id
+      - type
+      - annee_construction
+      - altitude
+      - logements
+      - surface_habitable
+      - hauteur_sous_plafond
+      - materiaux_anciens
+  https://schemas.dpe-audit.fr/logement:
+    $id: https://schemas.dpe-audit.fr/logement
+    title: Logement visité
+    type: object
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      surface_habitable:
+        title: Surface habitable en m²
+        type: number
+      hauteur_sous_plafond:
+        title: Hauteur sous plafond moyenne en m
+        type: number
+      position:
+        title: Position du logement
+        type: string
+        enum:
+          - rdc
+          - etage_intermediaire
+          - dernier_etage
+      typologie:
+        title: Typologie du logement
+        type: string
+        enum:
+          - T1
+          - T2
+          - T3
+          - T4
+          - T5
+          - T6
+          - T7
+    required:
+      - id
+      - description
+      - surface_habitable
+      - hauteur_sous_plafond
+      - position
+      - typologie
+  https://schemas.dpe-audit.fr/enveloppe:
+    $id: https://schemas.dpe-audit.fr/enveloppe
+    title: Enveloppe
+    type: object
+    properties:
+      exposition:
+        title: Exposition
+        type: string
+        enum:
+          - exposition_simple
+          - exposition_multiple
+      q4pa_conv:
+        title: >-
+          Perméabilité à l'air de l'enveloppe sous 4Pa connue et justifiée en
+          m3/(h.m²)
+        type:
+          - number
+          - 'null'
+        exclusiveMinimum: 0
+        default: null
+      presence_brasseurs_air:
+        title: Présence de brasseurs d'air
+        type: boolean
+        default: false
+      niveaux:
+        title: Liste des niveaux
+        type: array
+        minItems: 1
+        items:
+          $ref: /enveloppe/niveau
+      locaux_non_chauffes:
+        title: Liste des locaux non chauffés
+        type: array
+        default: []
+        items:
+          $ref: /enveloppe/local_non_chauffe
+      murs:
+        title: Liste des murs
+        type: array
+        minItems: 1
+        items:
+          $ref: /enveloppe/mur
+      planchers_bas:
+        title: Liste des planchers bas
+        type: array
+        default: []
+        items:
+          $ref: /enveloppe/plancher_bas
+      planchers_hauts:
+        title: Liste des planchers hauts
+        type: array
+        default: []
+        items:
+          $ref: /enveloppe/plancher_haut
+      baies:
+        title: Liste des baies
+        type: array
+        default: []
+        items:
+          $ref: /enveloppe/baie
+      portes:
+        title: Liste des portes
+        type: array
+        default: []
+        items:
+          $ref: /enveloppe/porte
+      ponts_thermiques:
+        title: Liste des ponts thermiques
+        type: array
+        default: []
+        items:
+          $ref: /enveloppe/pont_thermique
+      doubles_fenetres:
+        title: Liste des doubles fenêtres
+        type: array
+        default: []
+        items:
+          $ref: /enveloppe/double_fenetre
+      masques:
+        title: Liste des masques
+        type: array
+        default: []
+        items:
+          $ref: /enveloppe/masque
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - exposition
+      - q4pa_conv
+      - presence_brasseurs_air
+      - niveaux
+      - locaux_non_chauffes
+      - murs
+      - planchers_bas
+      - planchers_hauts
+      - baies
+      - portes
+      - ponts_thermiques
+      - doubles_fenetres
+      - masques
+    $defs:
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          inertie:
+            title: Inertie
+            type: string
+            enum:
+              - tres_lourde
+              - lourde
+              - moyenne
+              - legere
+          permeabilite:
+            $ref: '#/$defs/permeabilite'
+          deperditions:
+            $ref: '#/$defs/deperditions'
+          confort_ete:
+            $ref: '#/$defs/confort_ete'
+          apports:
+            $ref: '#/$defs/apports'
+      deperditions:
+        title: Déperditions thermiques
+        type: object
+        properties:
+          gv:
+            title: Déperditions thermiques en W/K
+            type: number
+          dp:
+            title: Déperditions thermiques par les parois en W/K
+            type: number
+          dp_murs:
+            title: Déperditions thermiques par les murs en W/K
+            type: number
+          dp_planchers_bas:
+            title: Déperditions thermiques par les planchers bas en W/K
+            type: number
+          dp_planchers_hauts:
+            title: Déperditions thermiques par les planchers hauts en W/K
+            type: number
+          dp_baies:
+            title: Déperditions thermiques par les baies en W/K
+            type: number
+          dp_portes:
+            title: Déperditions thermiques par les portes en W/K
+            type: number
+          pt:
+            title: Déperditions thermiques par les ponts thermiques en W/K
+            type: number
+          dr:
+            title: Déperditions thermiques par renouvellement d'air en W/K
+            type: number
+          ubat:
+            title: Coefficient de transmission thermique de l'enveloppe en W/(m².K)
+            type: number
+          performance:
+            title: Performance
+            type: string
+            enum:
+              - tres_bonne
+              - bonne
+              - moyenne
+              - insuffisante
+      apports:
+        title: Apports gratuits
+        type: object
+        properties:
+          f:
+            title: >-
+              Fraction des besoins de chauffage couverts par les apports
+              gratuits
+            type: number
+          apport_ch:
+            title: Apport pour le chauffage
+            type: number
+          apport_interne_ch:
+            title: Apport interne pour le chauffage
+            type: number
+          apport_solaire_ch:
+            title: Apport solaire pour le chauffage
+            type: number
+          apport_fr:
+            title: Apport pour le refroidissement
+            type: number
+          apport_interne_fr:
+            title: Apport interne pour le refroidissement
+            type: number
+          apport_solaire_fr:
+            title: Apport solaire pour le refroidissement
+            type: number
+      permeabilite:
+        title: Permeabilité
+        type: object
+        properties:
+          hvent:
+            title: >-
+              Déperdition thermique par renouvellement d'air due au système de
+              ventilation en W/K
+            type: number
+            minimum: 0
+          hperm:
+            title: Déperdition thermique par renouvellement d'air due au vent en W/K
+            type: number
+            minimum: 0
+          q4pa_conv:
+            title: Perméabilité à l'air de l'enveloppe sous 4Pa en m3/(h.m²)
+            type: number
+            minimum: 0
+          presence_joints_menuiserie:
+            title: Présence majoritaire de joints au niveau des menuiseries
+            type: boolean
+      confort_ete:
+        title: Confort d'été
+        type: object
+        properties:
+          performance:
+            title: Performance
+            type: string
+            enum:
+              - bon
+              - moyen
+              - insuffisant
+          inertie_lourde:
+            title: Inertie lourde
+            type: boolean
+          isolatoin_plancher_haut:
+            title: Isolation des planchers hauts
+            type:
+              - boolean
+              - 'null'
+          presence_protection_solaire:
+            title: Présence de protections solaires
+            type:
+              - boolean
+              - 'null'
+          logement_traversant:
+            title: Logement traversant
+            type:
+              - boolean
+              - 'null'
+          presence_brasseur_air:
+            title: Présence de brasseurs d'air
+            type:
+              - boolean
+              - 'null'
+  https://schemas.dpe-audit.fr/enveloppe/niveau:
+    $id: https://schemas.dpe-audit.fr/enveloppe/niveau
+    title: Niveau
+    type: object
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      surface:
+        title: Surface en m²
+        type: number
+        minimumExclusive: 0
+      inertie_paroi_verticale:
+        title: Inertie des parois verticales
+        type: string
+        enum:
+          - lourde
+          - legere
+      inertie_plancher_bas:
+        title: Inertie des planchers bas
+        type: string
+        enum:
+          - lourde
+          - legere
+      inertie_plancher_haut:
+        title: Inertie des planchers hauts
+        type: string
+        enum:
+          - lourde
+          - legere
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - id
+      - description
+      - surface
+      - inertie_paroi_verticale
+      - inertie_plancher_bas
+      - inertie_plancher_haut
+    $defs:
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          inertie:
+            title: Inertie
+            type: string
+            enum:
+              - tres_lourde
+              - lourde
+              - moyenne
+              - legere
+  https://schemas.dpe-audit.fr/enveloppe/local_non_chauffe:
+    $id: https://schemas.dpe-audit.fr/enveloppe/local_non_chauffe
+    title: Local non chauffé
+    type: object
+    unevaluatedProperties: false
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      type:
+        title: Type
+        type: string
+        enum:
+          - garage
+          - cellier
+          - espace_tampon_solarise
+          - comble_fortement_ventile
+          - comble_faiblement_ventile
+          - comble_tres_faiblement_ventile
+          - circulation_sans_ouverture_exterieure
+          - circulation_avec_ouverture_exterieure
+          - circulation_avec_bouche_ou_gaine_desenfumage_ouverte
+          - hall_entree_avec_fermeture_automatique
+          - hall_entree_sans_fermeture_automatique
+          - garage_collectif
+          - autres
+      parois:
+        title: Liste des parois
+        type: array
+        items:
+          $ref: /enveloppe/local_non_chauffe/paroi
+      baies:
+        title: Liste des baies
+        type: array
+        items:
+          $ref: /enveloppe/local_non_chauffe/baie
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - id
+      - description
+      - type
+      - parois
+      - baies
+    $defs:
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          b:
+            title: Coefficient de réduction des déperditions thermiques
+            type:
+              - number
+              - 'null'
+          uvue:
+            title: Coefficient surfacique équivalent exprimé en W/(m2.K)
+            type:
+              - number
+              - 'null'
+          aue:
+            title: Somme des surfaces des parois donannt sur l'extérieur
+            type:
+              - number
+              - 'null'
+          aiu:
+            title: Somme des surfaces des parois donnant sur des espaces chauffés
+            type:
+              - number
+              - 'null'
+          isolation_aue:
+            title: >-
+              Etat d'isolation majoritaire des parois du local non chauffé
+              donnant sur l'extérieur
+            type:
+              - boolean
+              - 'null'
+          isolation_aiu:
+            title: >-
+              Etat d'isolation majoritaire des parois du local non chauffé
+              donnant sur l'espace chauffé
+            type:
+              - boolean
+              - 'null'
+          sse:
+            title: Surface sud équivalente
+            type:
+              - number
+              - 'null'
+  https://schemas.dpe-audit.fr/enveloppe/local_non_chauffe/paroi:
+    $id: https://schemas.dpe-audit.fr/enveloppe/local_non_chauffe/paroi
+    title: Paroi
+    type: object
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      isolation:
+        title: État d'isolation de la paroi
+        type:
+          - string
+          - 'null'
+        enum:
+          - isole
+          - non_isole
+          - null
+      position:
+        $ref: '#/$defs/position'
+    required:
+      - id
+      - description
+      - isolation
+      - position
+    $defs:
+      position:
+        title: Position
+        type: object
+        properties:
+          mitoyennete:
+            title: Mitoyenneté
+            type: string
+            enum:
+              - exterieur
+              - enterre
+              - terre_plein
+              - vide_sanitaire
+              - local_non_chauffe
+              - local_chauffe
+              - local_non_accessible
+          surface:
+            title: Surface opaque en m²
+            type: number
+            exclusiveMinimum: 0
+        required:
+          - mitoyennete
+          - surface
+  https://schemas.dpe-audit.fr/enveloppe/local_non_chauffe/baie:
+    $id: https://schemas.dpe-audit.fr/enveloppe/local_non_chauffe/baie
+    title: Baie
+    type: object
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      materiau:
+        title: Matériau
+        type: string
+        enum:
+          - polycarbonate
+          - pvc
+          - bois
+          - bois_metal
+          - metal
+      type_vitrage:
+        title: Type de vitrage
+        type: string
+        enum:
+          - polycarbonate
+          - simple_vitrage
+          - double_vitrage
+          - double_vitrage_fe
+          - triple_vitrage
+          - triple_vitrage_fe
+          - null
+        default: null
+      presence_rupteur_pont_thermique:
+        title: Présence d'un rupteur de pont thermique
+        type:
+          - boolean
+          - 'null'
+        default: null
+      position:
+        $ref: '#/$defs/position'
+    required:
+      - id
+      - description
+      - materiau
+      - type_vitrage
+      - position
+    oneOf:
+      - title: Baie en polycarbonate
+        type: object
+        properties:
+          materiau:
+            const: polycarbonate
+          type_vitrage:
+            const: polycarbonate
+        required:
+          - materiau
+          - type_vitrage
+      - title: Autres cas
+        type: object
+        properties:
+          materiau:
+            not:
+              const: polycarbonate
+          type_vitrage:
+            not:
+              const: polycarbonate
+        required:
+          - materiau
+          - type_vitrage
+    $defs:
+      position:
+        title: Position de la baie
+        type: object
+        properties:
+          surface:
+            title: Surface totale en m²
+            type: number
+            exclusiveMinimum: 0
+          mitoyennete:
+            title: Mitoyenneté
+            type: string
+            enum:
+              - exterieur
+              - enterre
+              - terre_plein
+              - vide_sanitaire
+              - local_non_chauffe
+              - local_chauffe
+              - local_non_accessible
+          orientation:
+            title: Orientation par rapport au nord en °
+            type:
+              - number
+              - 'null'
+            default: null
+            minimum: 0
+            exclusiveMaximum: 360
+          inclinaison:
+            title: Inclinaison par rapport à l'horizontal en °
+            type: number
+            minimum: 0
+            maximum: 90
+        required:
+          - surface
+          - mitoyennete
+          - inclinaison
+          - orientation
+        oneOf:
+          - title: Baie horizontale
+            type: object
+            properties:
+              inclinaison:
+                const: 0
+              orientation:
+                const: null
+            required:
+              - inclinaison
+          - title: Autres cas
+            type: object
+            properties:
+              inclinaison:
+                minimumExclusive: 0
+              orientation:
+                type: number
+            required:
+              - inclinaison
+              - orientation
+  https://schemas.dpe-audit.fr/enveloppe/mur:
+    $id: https://schemas.dpe-audit.fr/enveloppe/mur
+    title: Mur
+    type: object
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      type_structure:
+        title: Type de mur
+        type:
+          - string
+          - 'null'
+        enum:
+          - pierre_moellons
+          - pierre_moellons_avec_remplissage
+          - pise_ou_beton_terre
+          - pan_bois_sans_remplissage
+          - pan_bois_avec_remplissage
+          - bois_rondin
+          - brique_pleine_simple
+          - brique_pleine_double_avec_lame_air
+          - brique_creuse
+          - bloc_beton_plein
+          - bloc_beton_creux
+          - beton_banche
+          - beton_machefer
+          - brique_terre_cuite_alveolaire
+          - sandwich_beton_isolant_beton_sans_isolation_rapportee
+          - cloison_platre
+          - ossature_bois_sans_remplissage
+          - ossature_bois_avec_remplissage_tout_venant
+          - ossature_bois_avec_remplissage_isolant
+          - null
+        default: null
+      epaisseur_structure:
+        title: Epaisseur du mur non isolé en mm
+        type:
+          - number
+          - 'null'
+        exclusiveMinimum: 0
+        default: null
+      type_doublage:
+        title: Type de doublage
+        type:
+          - string
+          - 'null'
+        enum:
+          - sans_doublage
+          - indetermine
+          - lame_air_inferieur_15mm
+          - lame_air_superieur_15mm
+          - materiaux_connu
+          - null
+        default: null
+      presence_enduit_isolant:
+        title: Présence d'un enduit isolant
+        type:
+          - boolean
+          - 'null'
+        default: null
+      paroi_ancienne:
+        title: Mur constitué de matériaux anciens
+        type:
+          - boolean
+          - 'null'
+        default: null
+      inertie:
+        $ref: /enveloppe/paroi/inertie
+      annee_construction:
+        title: Année de construction
+        type:
+          - integer
+          - 'null'
+        default: null
+      annee_renovation:
+        title: Année de dernière rénovation connue et justifiée
+        type:
+          - integer
+          - 'null'
+        default: null
+      u0:
+        title: >-
+          Coefficient de transmission thermique connu et justifié du mur non
+          isolé en W/m²K
+        type:
+          - number
+          - 'null'
+        exclusiveMinimum: 0
+        default: null
+      u:
+        title: Coefficient de transmission thermique connu et justifié en W/m²K
+        type:
+          - number
+          - 'null'
+        exclusiveMinimum: 0
+        default: null
+      position:
+        $ref: '#/$defs/position'
+      isolation:
+        $ref: '#/$defs/isolation'
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - id
+      - description
+      - type_structure
+      - epaisseur_structure
+      - type_doublage
+      - presence_enduit_isolant
+      - paroi_ancienne
+      - inertie
+      - annee_construction
+      - annee_renovation
+      - u0
+      - u
+      - position
+      - isolation
+    $defs:
+      position:
+        title: Position
+        type: object
+        properties:
+          surface:
+            title: Surface déperditive exprimée en m²
+            type: number
+            exclusiveMinimum: 0
+          mitoyennete:
+            $ref: /enveloppe/paroi/mitoyennete
+          orientation:
+            title: Orientation en degré par rapport au nord
+            type:
+              - number
+              - 'null'
+            minimum: 0
+            exclusiveMaximum: 360
+            default: null
+          local_non_chauffe_id:
+            title: Identifiant du local non chauffé associé
+            type:
+              - string
+              - 'null'
+            format: uuid
+            default: null
+        required:
+          - surface
+          - mitoyennete
+          - orientation
+        oneOf:
+          - title: Mur donnant sur un local non chauffé
+            type: object
+            properties:
+              mitoyennete:
+                const: local_non_chauffe
+              local_non_chauffe_id:
+                type: string
+            required:
+              - local_non_chauffe_id
+              - mitoyennete
+          - title: Autres cas
+            type: object
+            properties:
+              mitoyennete:
+                not:
+                  const: local_non_chauffe
+              local_non_chauffe_id:
+                const: null
+            required:
+              - mitoyennete
+      isolation:
+        $ref: /enveloppe/paroi/isolation
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          u0:
+            title: Coefficient de transmission thermique du mur non isolé en W/(m².K)
+            type: number
+        allOf:
+          - $ref: /enveloppe/paroi/data
+  https://schemas.dpe-audit.fr/enveloppe/paroi/inertie:
+    $id: https://schemas.dpe-audit.fr/enveloppe/paroi/inertie
+    title: État d'inertie
+    type:
+      - string
+      - 'null'
+    enum:
+      - lourde
+      - legere
+      - null
+    default: null
+  https://schemas.dpe-audit.fr/enveloppe/paroi/mitoyennete:
+    $id: https://schemas.dpe-audit.fr/enveloppe/paroi/mitoyennete
+    title: Mitoyenneté
+    type: string
+    enum:
+      - exterieur
+      - enterre
+      - vide_sanitaire
+      - terre_plein
+      - sous_sol_non_chauffe
+      - local_non_chauffe
+      - local_non_residentiel
+      - local_residentiel
+      - local_non_accessible
+  https://schemas.dpe-audit.fr/enveloppe/paroi/isolation:
+    $id: https://schemas.dpe-audit.fr/enveloppe/paroi/isolation
+    title: Isolation
+    type: object
+    properties:
+      etat:
+        title: Etat d'isolation
+        type:
+          - string
+          - 'null'
+        enum:
+          - isole
+          - non_isole
+          - null
+        default: null
+      type:
+        title: Type d'isolation
+        type:
+          - string
+          - 'null'
+        default: null
+        enum:
+          - iti
+          - ite
+          - itr
+          - iti_ite
+          - itr_iti
+          - itr_ite
+          - itr_iti_ite
+          - null
+      annee_installation:
+        title: Année d'isolation
+        type:
+          - integer
+          - 'null'
+        default: null
+      epaisseur:
+        title: Epaisseur de l'isolation en mm
+        type:
+          - number
+          - 'null'
+        exclusiveMinimum: 0
+        default: null
+      resistance_thermique:
+        title: Résistance thermique de l'isolation en m².K/W
+        type:
+          - number
+          - 'null'
+        exclusiveMinimum: 0
+        default: null
+    required:
+      - etat
+    oneOf:
+      - title: Paroi non isolée ou dont l'isolation n'est pas connue
+        type: object
+        properties:
+          etat:
+            enum:
+              - non_isole
+              - null
+          type:
+            const: null
+          annee_installation:
+            const: null
+          epaisseur:
+            const: null
+          resistance_thermique:
+            const: null
+        required:
+          - etat
+      - title: Paroi isolée
+        type: object
+        properties:
+          etat:
+            const: isole
+        required:
+          - etat
+  https://schemas.dpe-audit.fr/enveloppe/paroi/data:
+    $id: https://schemas.dpe-audit.fr/enveloppe/paroi/data
+    title: Deperdition
+    type: object
+    readOnly: true
+    properties:
+      u:
+        title: Coefficient de transmission thermique en W/(m².K)
+        type: number
+        minimum: 0
+      b:
+        title: Coefficient de réduction des déperditions thermiques
+        type: number
+        minimum: 0
+      sdep:
+        title: Surface déperditive en m²
+        type: number
+        minimum: 0
+      dp:
+        title: Déperditions thermiques en W/K
+        type: number
+        minimum: 0
+      performance:
+        title: Performance
+        type: string
+        enum:
+          - tres_bonne
+          - bonne
+          - moyenne
+          - insuffisante
+  https://schemas.dpe-audit.fr/enveloppe/plancher_bas:
+    $id: https://schemas.dpe-audit.fr/enveloppe/plancher_bas
+    title: Plancher bas
+    type: object
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      type_structure:
+        title: Type de plancher bas
+        type:
+          - string
+          - 'null'
+        enum:
+          - plancher_avec_ou_sans_remplissage
+          - plancher_entre_solives_metalliques
+          - plancher_entre_solives_bois
+          - plancher_bois_sur_solives_metalliques
+          - bardeaux_et_remplissage
+          - voutains_sur_solives_metalliques
+          - voutains_briques_ou_moellons
+          - dalle_beton
+          - plancher_bois_sur_solives_bois
+          - plancher_lourd_type_entrevous_terre_cuite_ou_poutrelles_beton
+          - plancher_entrevous_isolant
+          - null
+        default: null
+      inertie:
+        $ref: /enveloppe/paroi/inertie
+      annee_construction:
+        title: Année de construction
+        type:
+          - integer
+          - 'null'
+        default: null
+      annee_renovation:
+        title: Année de dernière rénovation connue et justifiée
+        type:
+          - integer
+          - 'null'
+        default: null
+      u0:
+        title: >-
+          Coefficient de transmission thermique connu et justifié du plancher
+          bas non isolé en W/m²K
+        type:
+          - number
+          - 'null'
+        exclusiveMinimum: 0
+        default: null
+      u:
+        title: Coefficient de transmission thermique connu et justifié en W/m²K
+        type:
+          - number
+          - 'null'
+        exclusiveMinimum: 0
+        default: null
+      position:
+        $ref: '#/$defs/position'
+      isolation:
+        $ref: '#/$defs/isolation'
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - id
+      - description
+      - type_structure
+      - inertie
+      - annee_construction
+      - annee_renovation
+      - u0
+      - u
+      - position
+      - isolation
+    $defs:
+      position:
+        title: Position
+        type: object
+        properties:
+          surface:
+            title: Surface déperditive exprimée en m²
+            type: number
+            exclusiveMinimum: 0
+          mitoyennete:
+            $ref: /enveloppe/paroi/mitoyennete
+          local_non_chauffe_id:
+            title: Identifiant du local non chauffé associé
+            type:
+              - string
+              - 'null'
+            format: uuid
+            default: null
+        required:
+          - surface
+          - mitoyennete
+        oneOf:
+          - title: Plancher bas donnant sur un local non chauffé
+            type: object
+            properties:
+              mitoyennete:
+                const: local_non_chauffe
+              local_non_chauffe_id:
+                type: string
+            required:
+              - local_non_chauffe_id
+              - mitoyennete
+          - title: >-
+              Plancher bas donnant sur un vides sanitaire, un sous-sol non
+              chauffé ou un terre-plein
+            type: object
+            properties:
+              mitoyennete:
+                enum:
+                  - enterre
+                  - vide_sanitaire
+                  - terre_plein
+                  - sous_sol_non_chauffe
+              surface_ue:
+                title: Surface retenue pour le calcul de ue en m²
+                type: number
+                exclusiveMinimum: 0
+              perimetre_ue:
+                title: Périmètre retenue pour le calcul de ue en m
+                type: number
+                exclusiveMinimum: 0
+              local_non_chauffe_id:
+                const: null
+            required:
+              - mitoyennete
+              - surface_ue
+              - perimetre_ue
+          - title: Autres cas
+            type: object
+            properties:
+              mitoyennete:
+                enum:
+                  - exterieur
+                  - local_non_residentiel
+                  - local_residentiel
+                  - local_non_accessible
+              local_non_chauffe_id:
+                const: null
+            required:
+              - mitoyennete
+      isolation:
+        $ref: /enveloppe/paroi/isolation
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          u0:
+            title: >-
+              Coefficient de transmission thermique du plancher bas non isolé en
+              W/(m².K)
+            type: number
+        allOf:
+          - $ref: /enveloppe/paroi/data
+  https://schemas.dpe-audit.fr/enveloppe/plancher_haut:
+    $id: https://schemas.dpe-audit.fr/enveloppe/plancher_haut
+    title: Plancher haut
+    type: object
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      configuration:
+        title: Configuration
+        type: string
+        enum:
+          - plancher
+          - rampants
+          - terrasse
+      type_structure:
+        title: Type de plancher haut
+        type:
+          - string
+          - 'null'
+        default: null
+        enum:
+          - plafond_avec_ou_sans_remplissage
+          - plafond_entre_solives_metalliques
+          - plafond_entre_solives_bois
+          - plafond_bois_sur_solives_metalliques
+          - plafond_bois_sous_solives_metalliques
+          - bardeaux_et_remplissage
+          - plafond_bois_sur_solives_bois
+          - plafond_bois_sous_solives_bois
+          - dalle_beton
+          - plafond_lourd
+          - combles_amenages_sous_rampant
+          - toiture_chaume
+          - plafond_patre
+          - bac_acier
+          - null
+      inertie:
+        $ref: /enveloppe/paroi/inertie
+      annee_construction:
+        title: Année de construction
+        type:
+          - integer
+          - 'null'
+        default: null
+      annee_renovation:
+        title: Année de dernière rénovation connue et justifiée
+        type:
+          - integer
+          - 'null'
+        default: null
+      u0:
+        title: >-
+          Coefficient de transmission thermique connu et justifié du plancher
+          haut non isolé en W/m²K
+        type:
+          - number
+          - 'null'
+        exclusiveMinimum: 0
+        default: null
+      u:
+        title: Coefficient de transmission thermique connu et justifié en W/m²K
+        type:
+          - number
+          - 'null'
+        exclusiveMinimum: 0
+        default: null
+      position:
+        $ref: '#/$defs/position'
+      isolation:
+        $ref: '#/$defs/isolation'
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - id
+      - description
+      - configuration
+      - type_structure
+      - inertie
+      - annee_construction
+      - annee_renovation
+      - u0
+      - u
+      - position
+      - isolation
+    $defs:
+      position:
+        title: Position
+        type: object
+        properties:
+          surface:
+            title: Surface déperditive exprimée en m²
+            type: number
+            exclusiveMinimum: 0
+          mitoyennete:
+            $ref: /enveloppe/paroi/mitoyennete
+          orientation:
+            title: Orientation en degré par rapport au nord
+            type:
+              - number
+              - 'null'
+            minimum: 0
+            exclusiveMaximum: 360
+            default: null
+          local_non_chauffe_id:
+            title: Identifiant du local non chauffé associé
+            type:
+              - string
+              - 'null'
+            format: uuid
+            default: null
+        required:
+          - surface
+          - mitoyennete
+          - orientation
+        oneOf:
+          - title: Plancher donnant sur un local non chauffé
+            type: object
+            properties:
+              mitoyennete:
+                const: local_non_chauffe
+              local_non_chauffe_id:
+                type: string
+            required:
+              - local_non_chauffe_id
+              - mitoyennete
+          - title: Autres cas
+            type: object
+            properties:
+              mitoyennete:
+                not:
+                  const: local_non_chauffe
+              local_non_chauffe_id:
+                const: null
+            required:
+              - mitoyennete
+      isolation:
+        $ref: /enveloppe/paroi/isolation
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          u0:
+            title: >-
+              Coefficient de transmission thermique du plancher haut non isolé
+              en W/(m².K)
+            type: number
+        allOf:
+          - $ref: /enveloppe/paroi/data
+  https://schemas.dpe-audit.fr/enveloppe/baie:
+    $id: https://schemas.dpe-audit.fr/enveloppe/baie
+    title: Baie
+    type: object
+    unevaluatedProperties: false
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      type:
+        title: Type
+        type: string
+        enum:
+          - brique_verre_pleine
+          - brique_verre_creuse
+          - polycarbonate
+          - fenetre_battante
+          - fenetre_coulissante
+          - porte_fenetre_coulissante
+          - porte_fenetre_battante
+      presence_protection_solaire:
+        title: Présence de protection solaire
+        type: boolean
+      type_fermeture:
+        title: Type de fermeture
+        type: string
+        enum:
+          - sans_fermeture
+          - jalousie_accordeon
+          - fermeture_lames_orientables
+          - venitiens_exterieurs_metal
+          - volet_battant_avec_ajours_fixes
+          - persiennes_avec_ajours_fixes
+          - fermeture_sans_ajours
+          - volets_roulants_aluminium
+          - volets_roulants_pvc_bois_epaisseur_lte_12_mm
+          - volets_roulants_pvc_bois_epaisseur_gt_12_mm
+          - persienne_coulissante_epaisseur_lte_22_mm
+          - persienne_coulissante_epaisseur_gt_22_mm
+          - volet_battant_pvc_bois_epaisseur_lte_22_mm
+          - volet_battant_pvc_bois_epaisseur_gt_22_mm
+          - fermeture_isolee_sans_ajours
+      annee_installation:
+        title: Année d'installation
+        type:
+          - integer
+          - 'null'
+        default: null
+      ug:
+        title: >-
+          Coefficient de transmission thermique du vitrage connu et justifié en
+          W/m²K
+        type:
+          - number
+          - 'null'
+        exclusiveMinimum: 0
+        default: null
+      uw:
+        title: >-
+          Coefficient de transmission thermique de la baie connu et justifié en
+          W/m²K
+        type:
+          - number
+          - 'null'
+        exclusiveMinimum: 0
+        default: null
+      ujn:
+        title: >-
+          Coefficient de transmission thermique de la baie avec fermeture connu
+          et justifié en W/m²K
+        type:
+          - number
+          - 'null'
+        exclusiveMinimum: 0
+        default: null
+      sw:
+        title: Proportion d'énergie solaire transmise par la baie en %
+        type:
+          - number
+          - 'null'
+        minimum: 0
+        maximum: 100
+        default: null
+      position:
+        $ref: '#/$defs/position'
+      menuiserie:
+        $ref: '#/$defs/menuiserie'
+      vitrage:
+        $ref: '#/$defs/vitrage'
+      survitrage:
+        $ref: '#/$defs/survitrage'
+      masques:
+        title: Liste des masques
+        type: array
+        default: []
+        items:
+          type: string
+          format: uuid
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - id
+      - description
+      - type
+      - presence_protection_solaire
+      - type_fermeture
+      - position
+      - vitrage
+      - masques
+    oneOf:
+      - title: Paroi vitrée
+        type: object
+        properties:
+          type:
+            enum:
+              - brique_verre_pleine
+              - brique_verre_creuse
+              - polycarbonate
+          vitrage:
+            type: object
+            properties:
+              type:
+                enum:
+                  - brique_verre
+                  - polycarbonate
+          menuiserie:
+            const: null
+        required:
+          - type
+          - vitrage
+      - title: Fenêtre
+        type: object
+        properties:
+          type:
+            enum:
+              - fenetre_battante
+              - fenetre_coulissante
+          position:
+            type: object
+            properties:
+              type_pose:
+                type: string
+            required:
+              - type_pose
+          vitrage:
+            type: object
+            properties:
+              type:
+                not:
+                  enum:
+                    - brique_verre
+                    - polycarbonate
+          menuiserie:
+            type: object
+        required:
+          - type
+          - position
+          - vitrage
+          - menuiserie
+      - title: Porte fenêtre
+        type: object
+        properties:
+          type:
+            enum:
+              - porte_fenetre_coulissante
+              - porte_fenetre_battante
+          position:
+            type: object
+            properties:
+              type_pose:
+                type: string
+              presence_soubassement:
+                type: boolean
+            required:
+              - type_pose
+              - presence_soubassement
+          vitrage:
+            type: object
+            properties:
+              type:
+                not:
+                  enum:
+                    - brique_verre
+                    - polycarbonate
+          menuiserie:
+            type: object
+        required:
+          - type
+          - position
+          - vitrage
+          - menuiserie
+    $defs:
+      position:
+        title: Position
+        type: object
+        properties:
+          paroi_id:
+            title: Identifiant de la paroi associée à la baie
+            type:
+              - string
+              - 'null'
+            format: uuid
+            default: null
+          local_non_chauffe_id:
+            title: Identifiant du local non chauffé associé à la baie
+            type:
+              - string
+              - 'null'
+            format: uuid
+            default: null
+          double_fenetre_id:
+            title: Identifiant de la double fenêtre associée
+            type:
+              - string
+              - 'null'
+            format: uuid
+            default: null
+          surface:
+            title: Surface déperditive exprimée en m²
+            type: number
+            minimum: 0
+          mitoyennete:
+            $ref: /enveloppe/paroi/mitoyennete
+          type_pose:
+            title: Type de pose
+            type:
+              - string
+              - 'null'
+            enum:
+              - nu_exterieur
+              - nu_interieur
+              - tunnel
+              - null
+            default: null
+          presence_soubassement:
+            title: Présence d'un soubassement
+            type:
+              - boolean
+              - 'null'
+            default: null
+          inclinaison:
+            title: Inclinaison de la baie par rapport à l'horizontale en degré
+            type: number
+            minimum: 0
+            maximum: 90
+          orientation:
+            title: Orientation de la baie en degré par rapport au nord
+            type:
+              - number
+              - 'null'
+            minimum: 0
+            exclusiveMaximum: 360
+        required:
+          - paroi_id
+          - surface
+          - mitoyennete
+          - inclinaison
+          - orientation
+        allOf:
+          - oneOf:
+              - title: Baie donnant sur un local non chauffé
+                type: object
+                properties:
+                  mitoyennete:
+                    const: local_non_chauffe
+                  local_non_chauffe_id:
+                    type: string
+                required:
+                  - local_non_chauffe_id
+                  - mitoyennete
+              - title: Autres cas
+                type: object
+                properties:
+                  mitoyennete:
+                    not:
+                      const: local_non_chauffe
+                  local_non_chauffe_id:
+                    const: null
+                required:
+                  - mitoyennete
+          - oneOf:
+              - title: Baie horizontale
+                type: object
+                properties:
+                  inclinaison:
+                    const: 0
+                  orientation:
+                    const: null
+                required:
+                  - inclinaison
+                  - orientation
+              - title: Autres cas
+                type: object
+                properties:
+                  inclinaison:
+                    minimumExlusive: 0
+                  orientation:
+                    type: number
+                required:
+                  - inclinaison
+                  - orientation
+      menuiserie:
+        title: Menuiserie
+        type: object
+        properties:
+          materiau:
+            title: Matériau
+            type:
+              - string
+              - 'null'
+            enum:
+              - pvc
+              - bois
+              - bois_metal
+              - metal
+              - null
+            default: null
+          largeur_dormant:
+            title: Largeur dormant en mm
+            type:
+              - number
+              - 'null'
+            exclusiveMinimum: 0
+            default: null
+          presence_joint:
+            title: Présence de joint d'étanchéité
+            type:
+              - boolean
+              - 'null'
+            default: null
+          presence_retour_isolation:
+            title: Présence d'un retour d'isolation
+            type:
+              - boolean
+              - 'null'
+            default: null
+          presence_rupteur_pont_thermique:
+            title: Présence d'un rupteur de pont thermique
+            type:
+              - boolean
+              - 'null'
+            default: null
+        required:
+          - materiau
+          - largeur_dormant
+          - presence_joint
+          - presence_retour_isolation
+          - presence_rupteur_pont_thermique
+      vitrage:
+        title: Vitrage
+        type: object
+        properties:
+          type:
+            title: Type
+            type: string
+            enum:
+              - brique_verre
+              - polycarbonate
+              - simple_vitrage
+              - double_vitrage
+              - double_vitrage_fe
+              - triple_vitrage
+              - triple_vitrage_fe
+          nature_lame:
+            title: Nature de la lame d'air
+            type:
+              - string
+              - 'null'
+            enum:
+              - air
+              - argon
+              - krypton
+              - null
+            default: null
+          epaisseur_lame:
+            title: Epaisseur de la lame d'air en mm
+            type:
+              - number
+              - 'null'
+            exclusiveMinimum: 0
+            default: null
+        required:
+          - type
+        oneOf:
+          - title: Paroi vitrée
+            properties:
+              type:
+                enum:
+                  - brique_verre
+                  - polycarbonate
+              nature_lame:
+                const: null
+              epaisseur_lame:
+                const: null
+            required:
+              - type
+          - title: Vitrage simple
+            properties:
+              type:
+                const: simple_vitrage
+              nature_lame:
+                const: null
+              epaisseur_lame:
+                const: null
+            required:
+              - type
+          - title: Vitrage complexe
+            properties:
+              type:
+                not:
+                  enum:
+                    - brique_verre
+                    - polycarbonate
+                    - simple_vitrage
+            required:
+              - type
+      survitrage:
+        title: Survitrage
+        type: object
+        properties:
+          type:
+            title: Type de survitrage
+            type:
+              - string
+              - 'null'
+            enum:
+              - survitrage_simple
+              - survitrage_fe
+              - null
+            default: null
+          epaisseur_lame:
+            title: Epaisseur de la lame d'air en mm
+            type:
+              - number
+              - 'null'
+            minimum: 0
+            default: null
+        required:
+          - type
+          - epaisseur_lame
+      data:
+        title: Données calculées
+        type: object
+        properties:
+          ug:
+            title: Coefficient de transmission thermique du vitrage en W/m²K
+            type:
+              - number
+              - 'null'
+          uw:
+            title: Coefficient de transmission thermique de la baie en W/m²K
+            type:
+              - number
+              - 'null'
+          deltar:
+            title: >-
+              Résistance thermique additionnelle due aux fermetures exprimée en
+              m².K/W
+            type:
+              - number
+              - 'null'
+          fe:
+            title: Facteur d'ensoleillement de la baie
+            type:
+              - number
+              - 'null'
+          sw:
+            title: Proportion d'énergie solaire transmise par la baie
+            type:
+              - number
+              - 'null'
+          sse:
+            title: Surface sud équivalente de la baie en m²
+            type:
+              - number
+              - 'null'
+        allOf:
+          - $ref: /enveloppe/paroi/data
+  https://schemas.dpe-audit.fr/enveloppe/porte:
+    $id: https://schemas.dpe-audit.fr/enveloppe/porte
+    title: Porte
+    type: object
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      isolation:
+        title: État d'isolation de la porte
+        type:
+          - string
+          - 'null'
+        enum:
+          - isole
+          - non_isole
+          - null
+        default: null
+      materiau:
+        title: Matériau de la porte
+        type:
+          - string
+          - 'null'
+        enum:
+          - pvc
+          - bois
+          - bois_metal
+          - metal
+          - null
+        default: null
+      annee_installation:
+        title: Année d'installation
+        type:
+          - integer
+          - 'null'
+        default: null
+      u:
+        title: Coefficient de transmission thermique connu et justifié en W/m²K
+        type:
+          - number
+          - 'null'
+        exclusiveMinimum: 0
+        default: null
+      position:
+        $ref: '#/$defs/position'
+      menuiserie:
+        $ref: '#/$defs/menuiserie'
+      vitrage:
+        $ref: '#/$defs/vitrage'
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - id
+      - description
+      - isolation
+      - materiau
+      - annee_installation
+      - u
+      - position
+      - vitrage
+      - menuiserie
+    $defs:
+      position:
+        title: Position de la porte
+        type: object
+        properties:
+          paroi_id:
+            title: Identifiant de la paroi associée à la porte
+            type:
+              - string
+              - 'null'
+            format: uuid
+            default: null
+          local_non_chauffe_id:
+            title: Identifiant du local non chauffé associé à la porte
+            type:
+              - string
+              - 'null'
+            format: uuid
+            default: null
+          surface:
+            title: Surface déperditive exprimée en m²
+            type: number
+            exclusiveMinimum: 0
+          mitoyennete:
+            $ref: /enveloppe/paroi/mitoyennete
+          orientation:
+            title: Orientation de la porte en degré par rapport au nord
+            type:
+              - number
+              - 'null'
+            minimum: 0
+            exclusiveMaximum: 360
+            default: null
+          presence_sas:
+            title: Présence d'un sas devant la porte
+            type: boolean
+          type_pose:
+            title: Type de pose
+            type:
+              - string
+              - 'null'
+            enum:
+              - nu_exterieur
+              - nu_interieur
+              - tunnel
+              - null
+            default: null
+        required:
+          - surface
+          - mitoyennete
+          - orientation
+          - presence_sas
+          - type_pose
+        oneOf:
+          - title: Porte donnant sur un local non chauffé
+            type: object
+            properties:
+              mitoyennete:
+                const: local_non_chauffe
+              local_non_chauffe_id:
+                type: string
+            required:
+              - local_non_chauffe_id
+              - mitoyennete
+          - title: Autres cas
+            type: object
+            properties:
+              mitoyennete:
+                not:
+                  const: local_non_chauffe
+              local_non_chauffe_id:
+                const: null
+            required:
+              - mitoyennete
+      menuiserie:
+        title: Menuiserie
+        type: object
+        properties:
+          largeur_dormant:
+            title: Largeur dormant en mm
+            type:
+              - number
+              - 'null'
+            minimum: 0
+            default: null
+          presence_joint:
+            title: Présence de joint d'étanchéité
+            type:
+              - boolean
+              - 'null'
+            default: null
+          presence_retour_isolation:
+            title: Présence d'un retour d'isolation
+            type:
+              - boolean
+              - 'null'
+            default: null
+        required:
+          - largeur_dormant
+          - presence_joint
+          - presence_retour_isolation
+      vitrage:
+        title: Vitrage
+        type: object
+        properties:
+          surface:
+            title: Surface de vitrage en m²
+            description: >-
+              Une porte avec un taux de vitrage supérieur à 60% est à considérer
+              comme une porte-fenêtre avec soubassement
+            type: number
+            minimum: 0
+          type:
+            title: Type de vitrage
+            type:
+              - string
+              - 'null'
+            enum:
+              - simple_vitrage
+              - double_vitrage
+              - triple_vitrage
+              - null
+            default: null
+        required:
+          - surface
+        oneOf:
+          - title: Porte sans vitrage
+            type: object
+            properties:
+              surface:
+                const: 0
+              type:
+                const: null
+            required:
+              - surface
+          - title: Porte avec vitrage
+            type: object
+            properties:
+              surface:
+                type: number
+                minimumExclusive: 0
+              type:
+                type: string
+            required:
+              - surface
+              - type
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        allOf:
+          - $ref: /enveloppe/paroi/data
+  https://schemas.dpe-audit.fr/enveloppe/pont_thermique:
+    $id: https://schemas.dpe-audit.fr/enveloppe/pont_thermique
+    title: Pont thermique
+    type: object
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      longueur:
+        title: Longueur du pont thermique en m
+        type: number
+        exclusiveMinimum: 0
+      kpt:
+        title: Valeur du pont thermique connue et justifiée
+        type:
+          - number
+          - 'null'
+        exclusiveMinimum: 0
+        default: null
+      liaison:
+        $ref: '#/$defs/liaison'
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - id
+      - description
+      - longueur
+      - kpt
+      - liaison
+    $defs:
+      liaison:
+        title: Liaison
+        type: object
+        unevaluatedProperties: false
+        properties:
+          type:
+            title: Type de liaison
+            type: string
+            enum:
+              - plancher_bas_mur
+              - plancher_haut_mur
+              - refend_mur
+              - plancher_intermediaire_mur
+              - menuiserie_mur
+          pont_thermique_partiel:
+            title: Pont thermique partiel
+            type: boolean
+            default: false
+          mur_id:
+            title: Identifiant du mur associé au pont thermique au format UUID
+            type: string
+            format: uuid
+          plancher_id:
+            title: >-
+              Identifiant du Plancher haut ou du Plancher bas associé au pont
+              thermique
+            type:
+              - string
+              - 'null'
+            format: uuid
+            default: null
+          ouverture_id:
+            title: Identifiant de la Baie ou de la Porte associée au pont thermique
+            type:
+              - string
+              - 'null'
+            format: uuid
+            default: null
+        required:
+          - type
+          - mur_id
+        oneOf:
+          - title: Pont thermique mur / plancher
+            type: object
+            properties:
+              type:
+                enum:
+                  - plancher_bas_mur
+                  - plancher_haut_mur
+              pont_thermique_partiel:
+                const: false
+              plancher_id:
+                type: string
+              ouverture_id:
+                const: null
+            required:
+              - type
+              - plancher_id
+          - title: Pont thermique mur / menuiserie
+            type: object
+            properties:
+              type:
+                const: menuiserie_mur
+              pont_thermique_partiel:
+                const: false
+              ouverture_id:
+                type: string
+              plancher_id:
+                const: null
+            required:
+              - type
+              - ouverture_id
+          - title: Pont thermique mur / refend ou plancher intermédiaire
+            type: object
+            properties:
+              type:
+                enum:
+                  - plancher_intermediaire_mur
+                  - refend_mur
+              ouverture_id:
+                const: null
+              plancher_id:
+                const: null
+            required:
+              - type
+              - pont_thermique_partiel
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          k:
+            title: Valeur du pont thermique
+            type: number
+            minimum: 0
+          pt:
+            title: Déperditions thermiques en W/K
+            type: number
+            minimum: 0
+  https://schemas.dpe-audit.fr/enveloppe/double_fenetre:
+    $id: https://schemas.dpe-audit.fr/enveloppe/double_fenetre
+    title: Double fenêtre
+    type: object
+    unevaluatedProperties: false
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      type:
+        title: Type
+        type: string
+        enum:
+          - brique_verre_pleine
+          - brique_verre_creuse
+          - polycarbonate
+          - fenetre_battante
+          - fenetre_coulissante
+          - porte_fenetre_coulissante
+          - porte_fenetre_battante
+      ug:
+        title: >-
+          Coefficient de transmission thermique du vitrage connu et justifié en
+          W/m²K
+        type:
+          - number
+          - 'null'
+        exclusiveMinimum: 0
+        default: null
+      uw:
+        title: >-
+          Coefficient de transmission thermique de la baie connu et justifié en
+          W/m²K
+        type:
+          - number
+          - 'null'
+        exclusiveMinimum: 0
+        default: null
+      sw:
+        title: Proportion d'énergie solaire transmise par la baie en %
+        type:
+          - number
+          - 'null'
+        minimum: 0
+        maximum: 100
+        default: null
+      position:
+        $ref: '#/$defs/position'
+      menuiserie:
+        $ref: '#/$defs/menuiserie'
+      vitrage:
+        $ref: '#/$defs/vitrage'
+      survitrage:
+        $ref: '#/$defs/survitrage'
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - id
+      - description
+      - type
+      - position
+      - vitrage
+    oneOf:
+      - title: Paroi vitrée
+        type: object
+        properties:
+          type:
+            enum:
+              - brique_verre_pleine
+              - brique_verre_creuse
+              - polycarbonate
+          vitrage:
+            type: object
+            properties:
+              type:
+                enum:
+                  - brique_verre
+                  - polycarbonate
+          menuiserie:
+            const: null
+        required:
+          - type
+          - vitrage
+      - title: Fenêtre
+        type: object
+        properties:
+          type:
+            enum:
+              - fenetre_battante
+              - fenetre_coulissante
+          position:
+            type: object
+            properties:
+              type_pose:
+                type: string
+            required:
+              - type_pose
+          vitrage:
+            type: object
+            properties:
+              type:
+                not:
+                  enum:
+                    - brique_verre
+                    - polycarbonate
+          menuiserie:
+            type: object
+        required:
+          - type
+          - position
+          - vitrage
+          - menuiserie
+      - title: Porte fenêtre
+        type: object
+        properties:
+          type:
+            enum:
+              - porte_fenetre_coulissante
+              - porte_fenetre_battante
+          position:
+            type: object
+            properties:
+              type_pose:
+                type: string
+              presence_soubassement:
+                type: boolean
+            required:
+              - type_pose
+              - presence_soubassement
+          vitrage:
+            type: object
+            properties:
+              type:
+                not:
+                  enum:
+                    - brique_verre
+                    - polycarbonate
+          menuiserie:
+            type: object
+        required:
+          - type
+          - position
+          - vitrage
+          - menuiserie
+    $defs:
+      position:
+        title: Position
+        type: object
+        properties:
+          type_pose:
+            title: Type de pose
+            type:
+              - string
+              - 'null'
+            enum:
+              - nu_exterieur
+              - nu_interieur
+              - tunnel
+              - null
+            default: null
+          inclinaison:
+            title: Inclinaison
+            type: number
+            minimum: 0
+            maximum: 90
+          presence_soubassement:
+            title: Présence d'un soubassement
+            type:
+              - boolean
+              - 'null'
+            default: null
+        required:
+          - inclinaison
+      menuiserie:
+        title: Menuiserie
+        type:
+          - object
+          - 'null'
+        default: null
+        properties:
+          materiau:
+            title: Matériau
+            type:
+              - string
+              - 'null'
+            enum:
+              - pvc
+              - bois
+              - bois_metal
+              - metal
+              - null
+          largeur_dormant:
+            title: Largeur dormant en mm
+            type:
+              - number
+              - 'null'
+            exclusiveMinimum: 0
+            default: null
+          presence_joint:
+            title: Présence de joint d'étanchéité
+            type:
+              - boolean
+              - 'null'
+            default: null
+          presence_retour_isolation:
+            title: Présence d'un retour d'isolation
+            type:
+              - boolean
+              - 'null'
+            default: null
+          presence_rupteur_pont_thermique:
+            title: Présence d'un rupteur de pont thermique
+            type:
+              - boolean
+              - 'null'
+            default: null
+        required:
+          - materiau
+          - largeur_dormant
+          - presence_joint
+          - presence_retour_isolation
+          - presence_rupteur_pont_thermique
+      vitrage:
+        title: Vitrage
+        type: object
+        properties:
+          type:
+            title: Type
+            type: string
+            enum:
+              - brique_verre
+              - polycarbonate
+              - simple_vitrage
+              - double_vitrage
+              - double_vitrage_fe
+              - triple_vitrage
+              - triple_vitrage_fe
+          nature_lame:
+            title: Nature de la lame d'air
+            type:
+              - string
+              - 'null'
+            enum:
+              - air
+              - argon
+              - krypton
+              - null
+            default: null
+          epaisseur_lame:
+            title: Epaisseur de la lame d'air en mm
+            type:
+              - number
+              - 'null'
+            exclusiveMinimum: 0
+            default: null
+        required:
+          - type
+        oneOf:
+          - title: Paroi vitrée
+            properties:
+              type:
+                enum:
+                  - brique_verre
+                  - polycarbonate
+              nature_lame:
+                const: null
+              epaisseur_lame:
+                const: null
+            required:
+              - type
+          - title: Vitrage simple
+            properties:
+              type:
+                const: simple_vitrage
+              nature_lame:
+                const: null
+              epaisseur_lame:
+                const: null
+            required:
+              - type
+          - title: Vitrage complexe
+            properties:
+              type:
+                not:
+                  enum:
+                    - brique_verre
+                    - polycarbonate
+                    - simple_vitrage
+            required:
+              - type
+      survitrage:
+        title: Survitrage
+        type:
+          - object
+          - 'null'
+        default: null
+        properties:
+          type:
+            title: Type de survitrage
+            type:
+              - string
+              - 'null'
+            enum:
+              - survitrage_simple
+              - survitrage_fe
+              - null
+            default: null
+          epaisseur_lame:
+            title: Epaisseur de la lame d'air en mm
+            type:
+              - number
+              - 'null'
+            minimum: 0
+            default: null
+        required:
+          - type
+          - epaisseur_lame
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          ug:
+            title: Coefficient de transmission thermique du vitrage en W/m²K
+            type:
+              - number
+              - 'null'
+          uw:
+            title: Coefficient de transmission thermique de la baie en W/m²K
+            type:
+              - number
+              - 'null'
+          sw:
+            title: Proportion d'énergie solaire transmise par la baie
+            type:
+              - number
+              - 'null'
+  https://schemas.dpe-audit.fr/enveloppe/masque:
+    $id: https://schemas.dpe-audit.fr/enveloppe/masque
+    title: Masque
+    type: object
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      type:
+        title: Type de masque
+        type: string
+        enum:
+          - proche
+          - lointain
+      configuration:
+        title: Configuration du masque
+        type: string
+        enum:
+          - homogene
+          - non_homogene
+          - fond_balcon
+          - fond_et_flanc_loggias
+          - balcon_ou_auvent
+          - paroi_laterale_sans_obstacle_au_sud
+          - paroi_laterale_avec_obstacle_au_sud
+      orientation:
+        title: Orientation de la façade
+        type:
+          - string
+          - 'null'
+        enum:
+          - nord
+          - sud
+          - est
+          - ouest
+          - null
+        default: null
+      hauteur:
+        title: Hauteur du masque en angle
+        type:
+          - number
+          - 'null'
+        exclusiveMinimum: 0
+        exclusiveMaximum: 80
+        default: null
+      profondeur:
+        title: Profondeur du masque en m
+        type:
+          - number
+          - 'null'
+        exclusiveMinimum: 0
+        default: null
+      secteur:
+        title: Secteur
+        type:
+          - string
+          - 'null'
+        enum:
+          - lateral
+          - lateral_sud
+          - central
+          - central_sud
+          - null
+        default: null
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - id
+      - description
+      - type
+      - configuration
+    oneOf:
+      - title: Masque lointain homogène
+        type: object
+        properties:
+          type:
+            const: lointain
+          configuration:
+            const: homogene
+          orientation:
+            type: string
+          hauteur:
+            type: number
+        required:
+          - type
+          - configuration
+          - orientation
+          - hauteur
+      - title: Masque lointain non homogène
+        type: object
+        properties:
+          type:
+            const: lointain
+          configuration:
+            const: non_homogene
+          orientation:
+            type: string
+          hauteur:
+            type: number
+          secteur:
+            type: string
+        required:
+          - type
+          - configuration
+          - orientation
+          - hauteur
+          - secteur
+        anyOf:
+          - title: Façade au Sud ou Nord
+            type: object
+            properties:
+              orientation:
+                type: string
+                enum:
+                  - nord
+                  - sud
+              secteur:
+                enum:
+                  - lateral
+                  - central
+            required:
+              - orientation
+              - secteur
+          - title: Façade Est ou Ouest
+            type: object
+            properties:
+              orientation:
+                type: string
+                enum:
+                  - est
+                  - ouest
+              secteur:
+                enum:
+                  - lateral
+                  - lateral_sud
+                  - central
+                  - central_sud
+            required:
+              - orientation
+              - secteur
+      - title: Masque proche - Paroi latérale
+        type: object
+        properties:
+          type:
+            const: proche
+          configuration:
+            enum:
+              - paroi_laterale_sans_obstacle_au_sud
+              - paroi_laterale_avec_obstacle_au_sud
+        required:
+          - type
+          - configuration
+      - title: Masque proche - Baie en fond de balcon ou fond et flanc de loggias
+        type: object
+        properties:
+          type:
+            const: proche
+          configuration:
+            enum:
+              - fond_balcon
+              - fond_et_flanc_loggias
+          orientation:
+            type: string
+          profondeur:
+            type: number
+        required:
+          - type
+          - configuration
+          - orientation
+          - profondeur
+      - title: Masque proche - Baie sous un balcon ou auvent
+        type: object
+        properties:
+          type:
+            const: proche
+          configuration:
+            const: balcon_ou_auvent
+          profondeur:
+            type: number
+        required:
+          - type
+          - configuration
+          - profondeur
+    $defs:
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          fe1:
+            title: Facteur d'ensoleillement du masque proche
+            type:
+              - number
+              - 'null'
+          fe2:
+            title: Facteur d'ensoleillement du masque lointain homogène
+            type:
+              - number
+              - 'null'
+          omb:
+            title: Facteur d'ensoleillement du masque lointain non homogène
+            type:
+              - number
+              - 'null'
+  https://schemas.dpe-audit.fr/chauffage:
+    $id: https://schemas.dpe-audit.fr/chauffage
+    title: Chauffage
+    type: object
+    properties:
+      generateurs:
+        title: Liste des générateurs
+        type: array
+        minContains: 1
+        items:
+          $ref: /chauffage/generateur
+      emetteurs:
+        title: Liste des émetteurs
+        type: array
+        default: []
+        items:
+          $ref: /chauffage/emetteur
+      installations:
+        title: Liste des installations
+        type: array
+        minContains: 1
+        items:
+          $ref: /chauffage/installation
+      systemes:
+        title: Liste des systèmes
+        type: array
+        minContains: 1
+        items:
+          $ref: /chauffage/systeme
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - generateurs
+      - emetteurs
+      - installations
+      - systemes
+    $defs:
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          bch:
+            title: Besoin de chauffage en kWh/an
+            type: number
+          pertes:
+            $ref: /common/pertes
+          consommations:
+            $ref: /common/consommations
+  https://schemas.dpe-audit.fr/chauffage/generateur:
+    $id: https://schemas.dpe-audit.fr/chauffage/generateur
+    title: Générateur de chauffage
+    type: object
+    unevaluatedProperties: false
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      type:
+        title: Type de générateur
+        type:
+          - string
+          - 'null'
+        enum:
+          - chaudiere
+          - convecteur_bi_jonction
+          - convecteur_electrique
+          - panneau_rayonnant_electrique
+          - plafond_rayonnant_electrique
+          - plancher_rayonnant_electrique
+          - radiateur_electrique
+          - radiateur_electrique_accumulation
+          - generateur_air_chaud
+          - pac_air_air
+          - pac_air_eau
+          - pac_eau_eau
+          - pac_eau_glycolee_eau
+          - pac_geothermique
+          - cuisiniere
+          - foyer_ferme
+          - insert
+          - poele
+          - poele_bouilleur
+          - radiateur_gaz
+          - reseau_chaleur
+          - null
+      energie:
+        title: Energie
+        type:
+          - string
+          - 'null'
+        enum:
+          - electricite
+          - gaz_naturel
+          - gpl
+          - fioul
+          - charbon
+          - bois_buche
+          - bois_plaquette
+          - bois_granule
+          - reseau_chaleur
+          - null
+      bienergie:
+        title: Energie secondaire
+        type:
+          - string
+          - 'null'
+        default: null
+        enum:
+          - electricite
+          - gaz_naturel
+          - gpl
+          - fioul
+          - charbon
+          - bois_buche
+          - bois_plaquette
+          - bois_granule
+          - null
+      annee_installation:
+        title: Année d'installation
+        type:
+          - integer
+          - 'null'
+        default: null
+      position:
+        $ref: '#/$defs/position'
+      signaletique:
+        $ref: '#/$defs/signaletique'
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - id
+      - description
+      - type
+      - energie
+      - annee_installation
+      - position
+      - signaletique
+    $defs:
+      position:
+        title: Position
+        type: object
+        properties:
+          position_chaudiere:
+            title: Position de la chaudière
+            type:
+              - string
+              - 'null'
+            enum:
+              - chaudiere_murale
+              - chaudiere_sol
+              - null
+            default: null
+          generateur_collectif:
+            title: Générateur collectif d'eau chaude sanitaire
+            type: boolean
+          generateur_multi_batiment:
+            title: Générateur multi bâtiment
+            type: boolean
+          position_volume_chauffe:
+            title: Position du générateur à l'intérieur du volume chauffé
+            type: boolean
+          cascade:
+            title: Identifiant de la cascade
+            type:
+              - integer
+              - 'null'
+            minimum: 0
+            default: null
+          priorite_cascade:
+            title: Ordre de priorité du générateur en cascade
+            type:
+              - integer
+              - 'null'
+            minimum: 0
+            default: null
+          generateur_mixte_id:
+            title: Identifiant du générateur mixte
+            type:
+              - string
+              - 'null'
+            format: uuid
+            default: null
+          reseau_chaleur_id:
+            title: Identifiant du réseau de chaleur
+            type:
+              - string
+              - 'null'
+            default: null
+        required:
+          - generateur_collectif
+          - generateur_multi_batiment
+          - position_volume_chauffe
+        allOf:
+          - oneOf:
+              - title: Générateur individuel
+                type: object
+                properties:
+                  generateur_collectif:
+                    const: false
+                  generateur_multi_batiment:
+                    const: false
+                  generateur_mixte_id:
+                    const: null
+                  reseau_chaleur_id:
+                    const: null
+                required:
+                  - generateur_collectif
+              - title: Générateur collectif
+                type: object
+                properties:
+                  generateur_collectif:
+                    const: true
+                  position_volume_chauffe:
+                    const: false
+                required:
+                  - generateur_collectif
+                  - position_volume_chauffe
+          - oneOf:
+              - title: Générateur en cascade
+                type: object
+                properties:
+                  cascade:
+                    type: integer
+                  priorite_cascade:
+                    type: integer
+                required:
+                  - cascade
+                  - priorite_cascade
+              - title: Autres
+                type: object
+                properties:
+                  cascade:
+                    const: null
+                  priorite_cascade:
+                    const: null
+      signaletique:
+        title: Fiche signalétique
+        type: object
+        properties:
+          pn:
+            title: Puissance nominale en kW
+            type:
+              - number
+              - 'null'
+            exclusiveMinimum: 0
+            default: null
+          label:
+            title: Label du générateur
+            type:
+              - string
+              - 'null'
+            enum:
+              - flamme_verte
+              - nf_performance
+              - null
+            default: null
+          scop:
+            title: Coefficient de performance énergétique saisonnier
+            type:
+              - number
+              - 'null'
+            exclusiveMinimum: 0
+            maximum: 10
+            default: null
+          mode_combustion:
+            title: Mode de combustion
+            type:
+              - string
+              - 'null'
+            enum:
+              - standard
+              - basse_temperature
+              - condensation
+              - null
+            default: null
+          presence_ventouse:
+            title: Présence d'une ventouse
+            type:
+              - boolean
+              - 'null'
+            default: null
+          presence_regulation_combustion:
+            title: Présence d'une régulation de combustion
+            type:
+              - boolean
+              - 'null'
+            default: null
+          pveilleuse:
+            title: Puissance de la veilleuse en W
+            type:
+              - number
+              - 'null'
+            minimum: 0
+            default: null
+          qp0:
+            title: Pertes à l'arrêt en W
+            type:
+              - number
+              - 'null'
+            exclusiveMinimum: 0
+            default: null
+          rpn:
+            title: Rendement à puissance nominale sur PCI en %
+            type:
+              - number
+              - 'null'
+            exclusiveMinimum: 0
+            maximum: 150
+            default: null
+          rpint:
+            title: Rendement à puissance intermédiaire sur PCI en %
+            type:
+              - number
+              - 'null'
+            exclusiveMinimum: 0
+            maximum: 150
+            default: null
+          tfonc30:
+            title: Température de fonctionnement à 30% de la puissance nominale en °C
+            type:
+              - number
+              - 'null'
+            minimumExclusive: 0
+            maximum: 150
+            default: null
+          tfonc100:
+            title: >-
+              Température de fonctionnement à 100% de la puissance nominale en
+              °C
+            type:
+              - number
+              - 'null'
+            minimumExclusive: 0
+            maximum: 150
+            default: null
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          rdim:
+            title: Ratio de dimenstionnement
+            type: number
+          cef_ch:
+            title: Consommation finale de chauffage en kWh/an
+            type: number
+          cep_ch:
+            title: Consommation primaire de chauffage  en kWh/an
+            type: number
+          eges_ch:
+            title: Emissions de gaz à effet de serre de chauffage  en kgCO2/an
+            type: number
+          pn:
+            title: Puissance nominale en kW
+            type: number
+          pdim:
+            title: Puissance de dimensionnement en kW
+            type: number
+          pch:
+            title: Puissance de dimensionnement de chauffage en kW
+            type: number
+          scop:
+            title: Coefficient de performance énergétique saisonnier
+            type:
+              - number
+              - 'null'
+          rpn:
+            title: Rendement à pleine charge exprimée en %PCI
+            type:
+              - number
+              - 'null'
+          rpint:
+            title: Rendement à charge intermédiaire exprimée en %PCI
+            type:
+              - number
+              - 'null'
+          qp0:
+            title: Pertes à l'arrêt en W
+            type:
+              - number
+              - 'null'
+          pveilleuse:
+            title: Puissance de la veilleuse en W
+            type:
+              - number
+              - 'null'
+          tfonc30:
+            title: Température de fonctionnement à 30% de la puissance nominale en °C
+            type:
+              - number
+              - 'null'
+          tfonc100:
+            title: >-
+              Température de fonctionnement à 100% de la puissance nominale en
+              °C
+            type:
+              - number
+              - 'null'
+          pertes:
+            $ref: '#/$defs/pertes'
+      pertes:
+        title: Pertes
+        type: object
+        properties:
+          pertes_generation:
+            title: Pertes de génération en kWh/an
+            type: number
+          pertes_generation_recuperables:
+            title: Pertes de génération récupérables en kWh/an
+            type: number
+    oneOf:
+      - title: Chaudière à combustion
+        properties:
+          type:
+            enum:
+              - chaudiere
+              - poele_bouilleur
+              - generateur_air_chaud
+          energie:
+            not:
+              enum:
+                - electricite
+                - reseau_chaleur
+          bienergie:
+            not:
+              const: reseau_chaleur
+          position:
+            type: object
+            properties:
+              reseau_chaleur_id:
+                const: null
+          signaletique:
+            type: object
+            properties:
+              label:
+                const: null
+              scop:
+                const: null
+        required:
+          - type
+          - energie
+          - position
+          - signaletique
+      - title: Chaudière électrique
+        properties:
+          type:
+            enum:
+              - chaudiere
+              - generateur_air_chaud
+          energie:
+            const: electricite
+          bienergie:
+            const: null
+          position:
+            type: object
+            properties:
+              reseau_chaleur_id:
+                const: null
+          signaletique:
+            type: object
+            properties:
+              label:
+                const: null
+              scop:
+                const: null
+              mode_combustion:
+                const: null
+              presence_ventouse:
+                const: null
+              presence_regulation_combustion:
+                const: null
+              pveilleuse:
+                const: null
+              qp0:
+                const: null
+              rpn:
+                const: null
+              rpint:
+                const: null
+              tfonc30:
+                const: null
+              tfonc100:
+                const: null
+        required:
+          - type
+          - energie
+          - position
+          - signaletique
+      - title: Emetteur électrique
+        type: object
+        properties:
+          type:
+            enum:
+              - generateur_air_chaud
+              - convecteur_bi_jonction
+              - convecteur_electrique
+              - panneau_rayonnant_electrique
+              - plafond_rayonnant_electrique
+              - plancher_rayonnant_electrique
+              - radiateur_electrique
+              - radiateur_electrique_accumulation
+          energie:
+            const: electricite
+          bienergie:
+            const: null
+          position:
+            type: object
+            properties:
+              position_chaudiere:
+                const: null
+              generateur_collectif:
+                const: false
+              generateur_multi_batiment:
+                const: false
+              position_volume_chauffe:
+                const: true
+              cascade:
+                const: null
+              priorite_cascade:
+                const: null
+              generateur_mixte_id:
+                const: null
+              reseau_chaleur_id:
+                const: null
+          signaletique:
+            type: object
+            properties:
+              label:
+                title: Label
+                type:
+                  - string
+                  - 'null'
+                enum:
+                  - nf_performance
+                  - null
+                default: null
+              scop:
+                const: null
+              mode_combustion:
+                const: null
+              presence_ventouse:
+                const: null
+              presence_regulation_combustion:
+                const: null
+              pveilleuse:
+                const: null
+              qp0:
+                const: null
+              rpn:
+                const: null
+              rpint:
+                const: null
+              tfonc30:
+                const: null
+              tfonc100:
+                const: null
+        required:
+          - type
+          - energie
+          - position
+          - signaletique
+      - title: Pompe à chaleur
+        type: object
+        properties:
+          type:
+            enum:
+              - pac_air_air
+              - pac_air_eau
+              - pac_eau_eau
+              - pac_eau_glycolee_eau
+              - pac_geothermique
+          energie:
+            const: electricite
+          bienergie:
+            const: null
+          position:
+            type: object
+            properties:
+              position_chaudiere:
+                const: null
+              cascade:
+                const: null
+              priorite_cascade:
+                const: null
+              reseau_chaleur_id:
+                const: null
+          signaletique:
+            type: object
+            properties:
+              label:
+                const: null
+              mode_combustion:
+                const: null
+              presence_ventouse:
+                const: null
+              presence_regulation_combustion:
+                const: null
+              pveilleuse:
+                const: null
+              qp0:
+                const: null
+              rpn:
+                const: null
+              rpint:
+                const: null
+              tfonc30:
+                const: null
+              tfonc100:
+                const: null
+        required:
+          - type
+          - energie
+          - position
+          - signaletique
+      - title: Pompe à chaleur hybride
+        properties:
+          type:
+            enum:
+              - pac_air_eau
+              - pac_eau_eau
+              - pac_eau_glycolee_eau
+              - pac_geothermique
+          energie:
+            const: electricite
+          bienergie:
+            not:
+              enum:
+                - electricite
+                - fioul
+                - charbon
+                - reseau_chaleur
+                - null
+          position:
+            type: object
+            properties:
+              reseau_chaleur_id:
+                const: null
+          signaletique:
+            type: object
+            properties:
+              label:
+                const: null
+        required:
+          - type
+          - energie
+          - bienergie
+          - position
+          - signaletique
+      - title: Poêle / Insert
+        properties:
+          type:
+            enum:
+              - cuisiniere
+              - foyer_ferme
+              - insert
+              - poele
+          energie:
+            not:
+              enum:
+                - electricite
+                - reseau_chaleur
+          bienergie:
+            const: null
+          position:
+            type: object
+            properties:
+              position_chaudiere:
+                const: null
+              generateur_collectif:
+                const: false
+              generateur_multi_batiment:
+                const: false
+              position_volume_chauffe:
+                const: true
+              cascade:
+                const: null
+              priorite_cascade:
+                const: null
+              generateur_mixte_id:
+                const: null
+              reseau_chaleur_id:
+                const: null
+          signaletique:
+            type: object
+            properties:
+              label:
+                title: Label
+                type:
+                  - string
+                  - 'null'
+                enum:
+                  - flamme_verte
+                  - null
+                default: null
+              scop:
+                const: null
+              mode_combustion:
+                const: null
+              presence_regulation_combustion:
+                const: null
+              pveilleuse:
+                const: null
+              qp0:
+                const: null
+              rpn:
+                const: null
+              rpint:
+                const: null
+              tfonc30:
+                const: null
+              tfonc100:
+                const: null
+        required:
+          - type
+          - energie
+          - position
+          - signaletique
+      - title: Radiateur à gaz
+        type: object
+        properties:
+          type:
+            const: radiateur_gaz
+          energie:
+            enum:
+              - gaz_naturel
+              - gpl
+          bienergie:
+            const: null
+          position:
+            type: object
+            properties:
+              position_chaudiere:
+                const: null
+              generateur_collectif:
+                const: false
+              generateur_multi_batiment:
+                const: false
+              position_volume_chauffe:
+                const: true
+              cascade:
+                const: null
+              priorite_cascade:
+                const: null
+              generateur_mixte_id:
+                const: null
+              reseau_chaleur_id:
+                const: null
+          signaletique:
+            type: object
+            properties:
+              label:
+                title: Label
+                type:
+                  - string
+                  - 'null'
+                enum:
+                  - flamme_verte
+                  - null
+                default: null
+              scop:
+                const: null
+              mode_combustion:
+                const: null
+              presence_regulation_combustion:
+                const: null
+              pveilleuse:
+                const: null
+              qp0:
+                const: null
+              rpn:
+                const: null
+              rpint:
+                const: null
+              tfonc30:
+                const: null
+              tfonc100:
+                const: null
+        required:
+          - type
+          - energie
+          - position
+          - signaletique
+      - title: Réseau de chaleur
+        type: object
+        properties:
+          type:
+            const: reseau_chaleur
+          energie:
+            const: reseau_chaleur
+          bienergie:
+            const: null
+          position:
+            type: object
+            properties:
+              position_chaudiere:
+                const: null
+              generateur_collectif:
+                const: true
+              generateur_multi_batiment:
+                const: true
+              position_volume_chauffe:
+                const: false
+              cascade:
+                const: null
+              priorite_cascade:
+                const: null
+              generateur_mixte_id:
+                const: null
+          signaletique:
+            type: object
+            properties:
+              pn:
+                const: null
+              label:
+                const: null
+              scop:
+                const: null
+              mode_combustion:
+                const: null
+              presence_regulation_combustion:
+                const: null
+              pveilleuse:
+                const: null
+              qp0:
+                const: null
+              rpn:
+                const: null
+              rpint:
+                const: null
+              tfonc30:
+                const: null
+              tfonc100:
+                const: null
+        required:
+          - type
+          - energie
+          - position
+          - signaletique
+      - title: Générateur collectif inconnu
+        type: object
+        properties:
+          type:
+            const: null
+          energie:
+            const: null
+          bienergie:
+            const: null
+          position:
+            type: object
+            properties:
+              position_chaudiere:
+                const: null
+              generateur_collectif:
+                const: true
+              position_volume_chauffe:
+                const: false
+              cascade:
+                const: null
+              priorite_cascade:
+                const: null
+              generateur_mixte_id:
+                const: null
+              reseau_chaleur_id:
+                const: null
+          signaletique:
+            type: object
+            properties:
+              pn:
+                const: null
+              label:
+                const: null
+              scop:
+                const: null
+              mode_combustion:
+                const: null
+              presence_regulation_combustion:
+                const: null
+              pveilleuse:
+                const: null
+              qp0:
+                const: null
+              rpn:
+                const: null
+              rpint:
+                const: null
+              tfonc30:
+                const: null
+              tfonc100:
+                const: null
+        required:
+          - type
+          - energie
+          - position
+          - signaletique
+  https://schemas.dpe-audit.fr/chauffage/emetteur:
+    $id: https://schemas.dpe-audit.fr/chauffage/emetteur
+    title: Émetteur de chaleur
+    type: object
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      type:
+        title: Type d'émetteur de chauffage
+        type: string
+        enum:
+          - plancher_chauffant
+          - plafond_chauffant
+          - radiateur_monotube
+          - radiateur_bitube
+          - radiateur
+      temperature_distribution:
+        title: Température de distribution de l'émetteur de chaleur
+        type: string
+        enum:
+          - basse
+          - moyenne
+          - haute
+      presence_robinet_thermostatique:
+        title: Présence d'un robinet thermostatique
+        type: boolean
+      annee_installation:
+        title: Année d'installation de l'émetteur de chaleur
+        type:
+          - integer
+          - 'null'
+        default: null
+    required:
+      - id
+      - description
+      - type
+      - temperature_distribution
+      - presence_robinet_thermostatique
+      - annee_installation
+  https://schemas.dpe-audit.fr/chauffage/installation:
+    $id: https://schemas.dpe-audit.fr/chauffage/installation
+    title: Installation de chauffage
+    type: object
+    unevaluatedProperties: false
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      surface:
+        title: Surface couverte par l'installation de chauffage en m²
+        type: number
+        exclusiveMinimum: 0
+      comptage_individuel:
+        title: Comptage individuel
+        type: boolean
+      solaire_thermique:
+        $ref: '#/$defs/solaire_thermique'
+      regulation_centrale:
+        $ref: '#/$defs/regulation'
+      regulation_terminale:
+        $ref: '#/$defs/regulation'
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - id
+      - description
+      - surface
+      - comptage_individuel
+      - solaire_thermique
+      - regulation_centrale
+      - regulation_terminale
+    $defs:
+      solaire_thermique:
+        title: Solaire thermique
+        type:
+          - object
+          - 'null'
+        default: null
+        properties:
+          usage:
+            title: Usages couverts par le solaire thermique
+            type: string
+            enum:
+              - chauffage
+              - chauffage_ecs
+            default: chauffage
+          annee_installation:
+            title: Année d'installation
+            type:
+              - integer
+              - 'null'
+            default: null
+          fch:
+            title: Facteur de couverture solaire connu et justifié en %
+            type: number
+            minimum: 0
+            maximum: 100
+        required:
+          - usage
+          - annee_installation
+          - fch
+      regulation:
+        title: Régulation
+        type: object
+        properties:
+          presence_regulation:
+            title: Présence d'une régulation
+            type: boolean
+          minimum_temperature:
+            title: Régulation avec minimum de température
+            type:
+              - boolean
+              - 'null'
+            default: null
+          detection_presence:
+            title: Détection de présence
+            type:
+              - boolean
+              - 'null'
+            default: null
+        required:
+          - presence_regulation
+        oneOf:
+          - title: Régulation
+            type: object
+            properties:
+              presence_regulation:
+                const: true
+              minimum_temperature:
+                type: boolean
+              detection_presence:
+                type: boolean
+            required:
+              - presence_regulation
+              - minimum_temperature
+              - detection_presence
+          - title: Pas de régulation
+            type: object
+            properties:
+              presence_regulation:
+                const: false
+              minimum_temperature:
+                const: null
+              detection_presence:
+                const: null
+            required:
+              - presence_regulation
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          rdim:
+            title: Ratio de dimensionnement
+            type: number
+          fch:
+            title: Facteur de couverture solaire
+            type: number
+          int:
+            title: Facteur d'intermittence
+            type: number
+          i0:
+            title: Coefficient d'intermittence
+            type: number
+          ich:
+            title: Inverse du rendement du système
+            type: number
+          rd:
+            title: Rendement de distribution
+            type: number
+          re:
+            title: Rendement d'émission
+            type: number
+          rg:
+            title: Rendement de génération
+            type: number
+          rr:
+            title: Rendement de régulation
+            type: number
+          pertes:
+            $ref: /common/pertes
+          consommations:
+            $ref: /common/consommations
+  https://schemas.dpe-audit.fr/common/pertes:
+    $id: https://schemas.dpe-audit.fr/common/pertes
+    title: Pertes des sytèmes
+    type: array
+    items:
+      type: object
+      properties:
+        type:
+          title: Type de perte
+          type: string
+          enum:
+            - distribution
+            - generation
+            - stockage
+        pertes:
+          title: Pertes en kWh/an
+          type: number
+        pertes_recuperables:
+          title: Pertes récupérables en kWh/an
+          type: number
+      required:
+        - type
+        - pertes
+        - pertes_recuperables
+  https://schemas.dpe-audit.fr/common/consommations:
+    $id: https://schemas.dpe-audit.fr/common/consommations
+    title: Consommations d'énergie
+    type: array
+    items:
+      type: object
+      properties:
+        energie:
+          $ref: /common/energie
+        usage:
+          $ref: /common/usage
+        cef:
+          title: Consommation d'énergie finale en kWh/an
+          type: number
+        cep:
+          title: Consommation d'énergie primaire en kWh/an
+          type: number
+        eges:
+          title: Emissions de gaz à effet de serre en kgCO2/an
+          type: number
+      required:
+        - energie
+        - usage
+        - cef
+        - cep
+        - eges
+  https://schemas.dpe-audit.fr/common/energie:
+    $id: https://schemas.dpe-audit.fr/common/energie
+    title: Energie
+    type: string
+    enum:
+      - electricite
+      - electricite_renouvelable
+      - gaz_naturel
+      - gpl
+      - fioul
+      - bois
+      - charbon
+      - reseau_urbain
+  https://schemas.dpe-audit.fr/common/usage:
+    $id: https://schemas.dpe-audit.fr/common/usage
+    title: Usage
+    type: string
+    enum:
+      - chauffage
+      - ecs
+      - refroidissement
+      - eclairage
+      - auxiliaire
+  https://schemas.dpe-audit.fr/chauffage/systeme:
+    $id: https://schemas.dpe-audit.fr/chauffage/systeme
+    title: Système de chauffage
+    type: object
+    unevaluatedProperties: false
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      installation_id:
+        title: Identifiant de l'installation de chauffage associée
+        type: string
+        format: uuid
+      generateur_id:
+        title: Identifiant du générateur de chauffage associé
+        type: string
+        format: uuid
+      type:
+        title: Type de système
+        type: string
+        enum:
+          - chauffage_central
+          - chauffage_divise
+      reseau:
+        $ref: '#/$defs/reseau'
+      emetteurs:
+        title: Liste des émetteurs associés au système de chauffage
+        type: array
+        default: []
+        items:
+          title: Identifiant unique de l'émetteur de chauffage au format UUID
+          type: string
+          format: uuid
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - id
+      - description
+      - installation_id
+      - generateur_id
+      - type
+    oneOf:
+      - title: Chauffage central
+        type: object
+        properties:
+          type:
+            const: chauffage_central
+          reseau:
+            type: object
+          emetteurs:
+            type: array
+            minContains: 1
+        required:
+          - type
+          - reseau
+          - emetteurs
+      - title: Chauffage divisé
+        type: object
+        properties:
+          type:
+            const: chauffage_divise
+          reseau:
+            const: null
+          emetteurs:
+            type: array
+            minContains: 0
+            maxContains: 0
+        required:
+          - type
+    $defs:
+      reseau:
+        title: Réseau de distribution
+        type:
+          - object
+          - 'null'
+        default: null
+        properties:
+          type_distribution:
+            title: Type de distribution
+            type: string
+            enum:
+              - hydraulique
+              - aeraulique
+              - fluide_frigorigene
+          presence_circulateur_externe:
+            title: Présence d'un circulateur externe
+            type: boolean
+            default: false
+          niveaux_desservis:
+            title: Nombre de niveaux desservis par le réseau
+            type: integer
+            minimum: 1
+          isolation:
+            title: Isolation du réseau
+            type:
+              - string
+              - 'null'
+            enum:
+              - isole
+              - non_isole
+              - null
+            default: null
+        required:
+          - type_distribution
+          - presence_circulateur_externe
+          - niveaux_desservis
+          - isolation
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          rdim:
+            title: Ratio de dimensionnement
+            type: number
+          int:
+            title: Facteur d'intermittence
+            type: number
+          i0:
+            title: Coefficient d'intermittence
+            type: number
+          ich:
+            title: Inverse du rendement du système
+            type: number
+          rd:
+            title: Rendement de distribution
+            type: number
+          re:
+            title: Rendement d'émission
+            type: number
+          rg:
+            title: Rendement de génération
+            type: number
+          rr:
+            title: Rendement de régulation
+            type: number
+          cef_ch:
+            title: Consommation finale de chauffage en kWh/an
+            type: number
+          cep_ch:
+            title: Consommation primaire de chauffage en kWh/an
+            type: number
+          eges_ch:
+            title: Emissions de gaz à effet de serre de chauffage en kgCO2/an
+            type: number
+          cef_aux:
+            title: Consommation finale des auxiliaires en kWh/an
+            type: number
+          cep_aux:
+            title: Consommation primaire des auxiliaires en kWh/an
+            type: number
+          eges_aux:
+            title: Emissions de gaz à effet de serre des auxiliaires en kgCO2/an
+            type: number
+          pertes:
+            $ref: '#/$defs/pertes'
+      pertes:
+        title: Pertes
+        type: object
+        properties:
+          pertes_generation:
+            title: Pertes de génération en kWh/an
+            type: number
+          pertes_generation_recuperables:
+            title: Pertes de génération récupérables en kWh/an
+            type: number
+  https://schemas.dpe-audit.fr/ecs:
+    $id: https://schemas.dpe-audit.fr/ecs
+    title: Eau chaude sanitaire
+    type: object
+    properties:
+      generateurs:
+        title: Liste des générateurs
+        type: array
+        minContains: 1
+        items:
+          $ref: /ecs/generateur
+      installations:
+        title: Liste des installations
+        type: array
+        minContains: 1
+        items:
+          $ref: /ecs/installation
+      systemes:
+        title: Liste des systèmes
+        type: array
+        minContains: 1
+        items:
+          $ref: /ecs/systeme
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - generateurs
+      - installations
+      - systemes
+    $defs:
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          nadeq:
+            title: Nombre d'adultes équivalents
+            type: number
+          nmax:
+            title: Coefficient d'occupation maximal
+            type: number
+          becs:
+            title: Besoin d'eau chaude sanitaire en kWh/an
+            type: number
+          pertes:
+            $ref: /common/pertes
+          consommations:
+            $ref: /common/consommations
+  https://schemas.dpe-audit.fr/ecs/generateur:
+    $id: https://schemas.dpe-audit.fr/ecs/generateur
+    title: Générateur d'eau chaude sanitaire
+    type: object
+    unevaluatedProperties: false
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      type:
+        title: Type de générateur d'eau chaude sanitaire
+        type:
+          - string
+          - 'null'
+        enum:
+          - chauffe_eau
+          - chaudiere
+          - cet_air_ambiant
+          - cet_air_exterieur
+          - cet_air_extrait
+          - pac_double_service
+          - poele_bouilleur
+          - reseau_chaleur
+          - null
+      energie:
+        title: Energie
+        type:
+          - string
+          - 'null'
+        enum:
+          - electricite
+          - gaz_naturel
+          - gpl
+          - fioul
+          - charbon
+          - bois_buche
+          - bois_plaquette
+          - bois_granule
+          - reseau_chaleur
+          - null
+      annee_installation:
+        title: Année d'installation connue et justifiée
+        type:
+          - integer
+          - 'null'
+        default: null
+      position:
+        $ref: '#/$defs/position'
+      signaletique:
+        $ref: '#/$defs/signaletique'
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - id
+      - description
+      - type
+      - energie
+      - annee_installation
+      - position
+      - signaletique
+    oneOf:
+      - title: Chaudière à combustion
+        type: object
+        properties:
+          type:
+            enum:
+              - chaudiere
+              - poele_bouilleur
+          energie:
+            not:
+              enum:
+                - electricite
+                - reseau_chaleur
+          position:
+            type: object
+            properties:
+              position_chauffe_eau:
+                const: null
+              reseau_chaleur_id:
+                const: null
+          signaletique:
+            type: object
+            properties:
+              cop:
+                const: null
+              label:
+                const: null
+        required:
+          - type
+          - energie
+          - position
+          - signaletique
+      - title: Chaudière électrique
+        type: object
+        properties:
+          type:
+            const: chaudiere
+          energie:
+            const: electricite
+          position:
+            type: object
+            properties:
+              position_chauffe_eau:
+                const: null
+              reseau_chaleur_id:
+                const: null
+          signaletique:
+            type: object
+            properties:
+              cop:
+                const: null
+              mode_combustion:
+                const: null
+              presence_ventouse:
+                const: null
+              pveilleuse:
+                const: null
+              qp0:
+                const: null
+              rpn:
+                const: null
+        required:
+          - type
+          - energie
+          - position
+          - signaletique
+      - title: Chauffe-eau à combustion
+        type: object
+        properties:
+          type:
+            const: chauffe_eau
+          energie:
+            not:
+              enum:
+                - electricite
+                - reseau_chaleur
+          position:
+            type: object
+            properties:
+              generateur_collectif:
+                const: false
+              generateur_multi_batiment:
+                const: false
+              generateur_mixte_id:
+                const: null
+              reseau_chaleur_id:
+                const: null
+          signaletique:
+            type: object
+            properties:
+              cop:
+                const: null
+              label:
+                const: null
+        required:
+          - type
+          - energie
+          - position
+          - signaletique
+      - title: Chauffe-eau électrique
+        type: object
+        properties:
+          type:
+            const: chauffe_eau
+          energie:
+            const: electricite
+          position:
+            type: object
+            properties:
+              generateur_collectif:
+                const: false
+              generateur_multi_batiment:
+                const: false
+              generateur_mixte_id:
+                const: null
+              reseau_chaleur_id:
+                const: null
+          signaletique:
+            type: object
+            properties:
+              cop:
+                const: null
+              mode_combustion:
+                const: null
+              presence_ventouse:
+                const: null
+              pveilleuse:
+                const: null
+              qp0:
+                const: null
+              rpn:
+                const: null
+        required:
+          - type
+          - energie
+          - position
+          - signaletique
+      - title: Chauffe-eau thermodynamique
+        type: object
+        properties:
+          type:
+            enum:
+              - cet_air_ambiant
+              - cet_air_exterieur
+              - cet_air_extrait
+          energie:
+            const: electricite
+          position:
+            type: object
+            properties:
+              position_chauffe_eau:
+                const: null
+              generateur_mixte_id:
+                const: null
+              reseau_chaleur_id:
+                const: null
+          signaletique:
+            type: object
+            properties:
+              label:
+                const: null
+              mode_combustion:
+                const: null
+              presence_ventouse:
+                const: null
+              pveilleuse:
+                const: null
+              qp0:
+                const: null
+              rpn:
+                const: null
+        required:
+          - type
+          - energie
+          - position
+          - signaletique
+      - title: PAC double service
+        properties:
+          type:
+            const: pac_double_service
+          energie:
+            const: electricite
+          position:
+            type: object
+            properties:
+              position_chauffe_eau:
+                const: null
+              reseau_chaleur_id:
+                const: null
+          signaletique:
+            type: object
+            properties:
+              label:
+                const: null
+        required:
+          - type
+          - energie
+          - position
+          - signaletique
+      - title: Réseau de chaleur
+        type: object
+        properties:
+          type:
+            const: reseau_chaleur
+          energie:
+            const: reseau_chaleur
+          position:
+            type: object
+            properties:
+              generateur_collectif:
+                const: true
+              generateur_multi_batiment:
+                const: true
+              position_volume_chauffe:
+                const: false
+              generateur_mixte_id:
+                const: null
+          signaletique:
+            type: object
+            properties:
+              pn:
+                const: null
+              cop:
+                const: null
+              label:
+                const: null
+              mode_combustion:
+                const: null
+              presence_ventouse:
+                const: null
+              pveilleuse:
+                const: null
+              qp0:
+                const: null
+              rpn:
+                const: null
+        required:
+          - type
+          - energie
+          - position
+          - signaletique
+      - title: Générateur collectif inconnu
+        type: object
+        properties:
+          type:
+            const: null
+          energie:
+            const: null
+          position:
+            type: object
+            properties:
+              generateur_collectif:
+                const: true
+              position_volume_chauffe:
+                const: false
+              position_chauffe_eau:
+                const: null
+              generateur_mixte_id:
+                const: null
+              reseau_chaleur_id:
+                const: null
+          signaletique:
+            type: object
+            properties:
+              volume_stockage:
+                const: null
+              pn:
+                const: null
+              cop:
+                const: null
+              label:
+                const: null
+              mode_combustion:
+                const: null
+              presence_ventouse:
+                const: null
+              pveilleuse:
+                const: null
+              qp0:
+                const: null
+              rpn:
+                const: null
+        required:
+          - type
+          - energie
+          - position
+          - signaletique
+    $defs:
+      position:
+        title: Position
+        type: object
+        properties:
+          position_chauffe_eau:
+            title: Position du chauffe-eau
+            type:
+              - string
+              - 'null'
+            enum:
+              - chauffe_eau_vertical
+              - chauffe_eau_horizontal
+              - null
+            default: null
+          generateur_collectif:
+            title: Générateur collectif d'eau chaude sanitaire
+            type: boolean
+          generateur_multi_batiment:
+            title: Générateur multi bâtiment
+            type: boolean
+          position_volume_chauffe:
+            title: Position du générateur à l'intérieur du volume chauffé
+            type: boolean
+          generateur_mixte_id:
+            title: Identifiant du générateur mixte
+            type:
+              - string
+              - 'null'
+            format: uuid
+            default: null
+          reseau_chaleur_id:
+            title: Identifiant du réseau de chaleur
+            type:
+              - string
+              - 'null'
+            format: uuid
+            default: null
+        required:
+          - generateur_collectif
+          - generateur_multi_batiment
+          - position_volume_chauffe
+      signaletique:
+        title: Fiche signalétique
+        type: object
+        properties:
+          volume_stockage:
+            title: Volume de stockage en litres
+            type:
+              - number
+              - 'null'
+            minimum: 0
+            default: null
+          pn:
+            title: Puissance nominale en kW
+            type:
+              - number
+              - 'null'
+            exclusiveMinimum: 0
+            default: null
+          label:
+            title: Label
+            type:
+              - string
+              - 'null'
+            enum:
+              - ne_performance_a
+              - ne_performance_b
+              - ne_performance_c
+              - null
+            default: null
+          cop:
+            title: Coefficient de performance énergétique
+            type:
+              - number
+              - 'null'
+            exclusiveMinimum: 0
+            maximum: 10
+            default: null
+          mode_combustion:
+            title: Mode de combustion
+            type:
+              - string
+              - 'null'
+            enum:
+              - standard
+              - basse_temperature
+              - condensation
+              - null
+            default: null
+          presence_ventouse:
+            title: Présence d'une ventouse
+            type:
+              - boolean
+              - 'null'
+            default: null
+          pveilleuse:
+            title: Puissance de la veilleuse en W
+            type:
+              - number
+              - 'null'
+            minimum: 0
+            default: null
+          qp0:
+            title: Pertes à l'arrêt en W
+            type:
+              - number
+              - 'null'
+            exclusiveMinimum: 0
+            default: null
+          rpn:
+            title: Rendement à puissance nominale sur PCI en %
+            type:
+              - number
+              - 'null'
+            exclusiveMinimum: 0
+            maximum: 150
+            default: null
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          rdim:
+            title: Ratio de dimensionnement
+            type: number
+          cef_ecs:
+            title: Consommation finale d'eau chaude sanitaire en kWh/an
+            type: number
+          cep_ecs:
+            title: Consommation primaire d'eau chaude sanitaire en kWh/an
+            type: number
+          eges_ecs:
+            title: >-
+              Emissions de gaz à effet de serre d'eau chaude sanitaire en
+              kgCO2/an
+            type: number
+          pn:
+            title: Puissance nominale en kW
+            type: number
+          pdim:
+            title: Puissance de dimensionnement en kW
+            type: number
+          paux:
+            title: Puissance des auxiliaires en kW
+            type:
+              - number
+              - 'null'
+          pecs:
+            title: >-
+              Puissance de dimensionnement du besoin d'eau chaude sanitaire en
+              kW
+            type: number
+          cop:
+            title: Coefficient de performance énergétique
+            type:
+              - number
+              - 'null'
+          rpn:
+            title: Rendement à pleine charge exprimée en %PCI
+            type:
+              - number
+              - 'null'
+          qp0:
+            title: Pertes à l'arrêt en W
+            type:
+              - number
+              - 'null'
+          pveilleuse:
+            title: Puissance de la veilleuse en W
+            type:
+              - number
+              - 'null'
+      pertes:
+        title: Pertes
+        type: object
+        properties:
+          pertes_generation:
+            title: Pertes de génération en kWh/an
+            type: number
+          pertes_generation_recuperables:
+            title: Pertes de génération récupérables en kWh/an
+            type: number
+          pertes_stockage_integre:
+            title: Pertes de stockage intégré en kWh/an
+            type: number
+          pertes_stockage_integre_recuperables:
+            title: Pertes de stockage intégré récupérables en kWh/an
+            type: number
+  https://schemas.dpe-audit.fr/ecs/installation:
+    $id: https://schemas.dpe-audit.fr/ecs/installation
+    title: Installation d'eau chaude sanitaire
+    type: object
+    unevaluatedProperties: false
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      surface:
+        title: Surface couverte par l'installation en m²
+        type: number
+        exclusiveMinimum: 0
+      solaire_thermique:
+        $ref: '#/$defs/solaire_thermique'
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - id
+      - description
+      - surface
+      - solaire_thermique
+    $defs:
+      solaire_thermique:
+        title: Solaire thermique
+        type:
+          - object
+          - 'null'
+        default: null
+        properties:
+          usage:
+            title: Usages couverts par le solaire thermique
+            type: string
+            enum:
+              - ecs
+              - chauffage_ecs
+          annee_installation:
+            title: Année d'installation
+            type:
+              - integer
+              - 'null'
+            default: null
+          fecs:
+            title: Facteur de couverture solaire connue et justifié
+            type:
+              - number
+              - 'null'
+            minimum: 0
+            maximum: 1
+            default: null
+        required:
+          - usage
+          - annee_installation
+          - fecs
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          rdim:
+            title: Ratio de dimensionnement
+            type: number
+          fecs:
+            title: Facteur de couverture solaire
+            type: number
+          iecs:
+            title: Inverse du rendement de l'installation
+            type: number
+          rd:
+            title: Rendement de distribution
+            type: number
+          rs:
+            title: Rendement de stockage
+            type: number
+          rg:
+            title: Rendement de génération
+            type: number
+          rgs:
+            title: Rendement de génération et de stockage
+            type: number
+          pertes:
+            $ref: /common/pertes
+          consommations:
+            $ref: /common/consommations
+  https://schemas.dpe-audit.fr/ecs/systeme:
+    $id: https://schemas.dpe-audit.fr/ecs/systeme
+    title: Système d'eau chaude sanitaire
+    type: object
+    unevaluatedProperties: false
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      generateur_id:
+        title: Identifiant du générateur d'eau chaude sanitaire associé au système
+        type: string
+        format: uuid
+      installation_id:
+        title: >-
+          Identifiant de l'installation d'eau chaude sanitaire associée au
+          système
+        type: string
+        format: uuid
+      reseau:
+        $ref: '#/$defs/reseau'
+      stockage:
+        $ref: '#/$defs/stockage'
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - id
+      - description
+      - generateur_id
+      - installation_id
+      - reseau
+      - stockage
+    $defs:
+      reseau:
+        title: Réseau de distribution d'eau chaude sanitaire
+        type: object
+        properties:
+          alimentation_contigue:
+            title: Alimentation contigüe
+            type: boolean
+          niveaux_desservis:
+            title: Nombre de niveaux desservis
+            type: integer
+            minimum: 1
+          isolation:
+            title: Isolation du réseau
+            type:
+              - string
+              - 'null'
+            enum:
+              - isole
+              - non_isole
+              - null
+            default: null
+          bouclage:
+            title: Type de bouclage
+            type:
+              - string
+              - 'null'
+            enum:
+              - non_boucle
+              - boucle
+              - trace
+              - null
+        required:
+          - alimentation_contigue
+          - niveaux_desservis
+          - isolation
+          - bouclage
+      stockage:
+        title: Stockage indépendant
+        type: object
+        properties:
+          volume:
+            title: Volume de stockage en l
+            type:
+              - number
+              - 'null'
+            minimum: 0
+            default: null
+          position_volume_chauffe:
+            title: Position à l'intérieur volume chauffé
+            type:
+              - boolean
+              - 'null'
+            default: null
+        oneOf:
+          - title: Absance de stockage
+            properties:
+              volume:
+                minimumExclusive: 0
+              position_volume_chauffe:
+                type: boolean
+            required:
+              - volume
+              - position_volume_chauffe
+          - title: Sans stockage
+            properties:
+              volume:
+                const: 0
+              position_volume_chauffe:
+                const: null
+            required:
+              - volume
+          - title: Stockage inconnu
+            properties:
+              volume:
+                const: null
+              position_volume_chauffe:
+                const: null
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          rdim:
+            title: Ratio de dimensionnement
+            type: number
+          iecs:
+            title: Inverse du rendement du système
+            type: number
+          rd:
+            title: Rendement de distribution
+            type: number
+          rs:
+            title: Rendement de stockage
+            type: number
+          rg:
+            title: Rendement de génération
+            type: number
+          rgs:
+            title: Rendement de génération et de stockage
+            type: number
+          cef_ecs:
+            title: Consommation finale d'eau chaude sanitaire en kWh/an
+            type: number
+          cep_ecs:
+            title: Consommation primaire d'eau chaude sanitaire en kWh/an
+            type: number
+          eges_ecs:
+            title: >-
+              Emissions de gaz à effet de serre d'eau chaude sanitaire en
+              kgCO2/an
+            type: number
+          cef_aux:
+            title: Consommation finale des auxiliaires en kWh/an
+            type: number
+          cep_aux:
+            title: Consommation primaire des auxiliaires en kWh/an
+            type: number
+          eges_aux:
+            title: Emissions de gaz à effet de serre des auxiliaires en kgCO2/an
+            type: number
+          pertes:
+            $ref: '#/$defs/pertes'
+      pertes:
+        title: Pertes
+        type: object
+        properties:
+          pertes_generation:
+            title: Pertes de génération en kWh/an
+            type: number
+          pertes_generation_recuperables:
+            title: Pertes de génération récupérables en kWh/an
+            type: number
+          pertes_stockage_integre:
+            title: Pertes de stockage intégré en kWh/an
+            type: number
+          pertes_stockage_integre_recuperables:
+            title: Pertes de stockage intégré récupérables en kWh/an
+            type: number
+          pertes_stockage_independant:
+            title: Pertes de stockage indépendant en kWh/an
+            type: number
+          pertes_stockage_independant_recuperables:
+            title: Pertes de stockage indépendant récupérables en kWh/an
+            type: number
+          pertes_distribution:
+            title: Pertes de distribution en kWh/an
+            type: number
+          pertes_distribution_recuperables:
+            title: Pertes de distribution récupérables en kWh/an
+            type: number
+  https://schemas.dpe-audit.fr/ventilation:
+    $id: https://schemas.dpe-audit.fr/ventilation
+    title: Ventilation
+    type: object
+    properties:
+      generateurs:
+        title: Liste des générateurs
+        type: array
+        default: []
+        items:
+          $ref: /ventilation/generateur
+      installations:
+        title: Liste des installations
+        type: array
+        minContains: 1
+        items:
+          $ref: /ventilation/installation
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - generateurs
+      - installations
+    $defs:
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          consommations:
+            $ref: /common/consommations
+  https://schemas.dpe-audit.fr/ventilation/generateur:
+    $id: https://schemas.dpe-audit.fr/ventilation/generateur
+    title: Générateur de ventilation
+    type: object
+    unevaluatedProperties: false
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      type:
+        title: Type de générateur
+        type: string
+        enum:
+          - vmc_simple_flux
+          - vmc_simple_flux_gaz
+          - vmc_basse_pression
+          - vmc_double_flux
+          - ventilation_hybride
+          - ventilation_mecanique
+          - puit_climatique
+          - vmi
+          - vmr
+      type_vmc:
+        title: Type de Ventilation Mécanique Contrôlée
+        type:
+          - string
+          - 'null'
+        enum:
+          - autoreglable
+          - hygroreglable_type_a
+          - hygroreglable_type_b
+          - null
+        default: null
+      generateur_collectif:
+        title: Générateur collectif de ventilation
+        type: boolean
+      presence_echangeur_thermique:
+        title: Présence d'un échangeur thermique
+        type:
+          - boolean
+          - 'null'
+        default: null
+      annee_installation:
+        title: Année d'installation du générateur de ventilation
+        type:
+          - integer
+          - 'null'
+        default: null
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - id
+      - description
+      - type
+      - generateur_collectif
+      - presence_echangeur_thermique
+      - annee_installation
+    oneOf:
+      - title: Ventilation Mécanique Contrôlée
+        type: object
+        properties:
+          type:
+            enum:
+              - vmc_simple_flux
+              - vmc_simple_flux_gaz
+              - vmc_basse_pression
+              - vmc_double_flux
+              - ventilation_hybride
+        required:
+          - type
+      - title: Autres
+        type: object
+        properties:
+          type:
+            enum:
+              - ventilation_mecanique
+              - puit_climatique
+              - vmi
+              - vmr
+          type_vmc:
+            const: null
+        required:
+          - type
+    $defs:
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          rdim:
+            title: Ratio de dimensionnement du générateur
+            type: number
+          ratio_utilisation:
+            title: Ratio d'utilisation du mode mécanique du générateur
+            type: number
+          pvent_moy:
+            title: Puissance moyenne des auxiliaires en W
+            type: number
+          cef_aux:
+            title: Consommation d'énergie finale en kWh/an
+            type: number
+          cep_aux:
+            title: Consommation d'énergie primaire en kWh/an
+            type: number
+          eges_aux:
+            title: Emissions de gaz à effet de serre en kgCO2/an
+            type: number
+  https://schemas.dpe-audit.fr/ventilation/installation:
+    $id: https://schemas.dpe-audit.fr/ventilation/installation
+    title: Installation de ventilation
+    type: object
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      surface:
+        title: Surface couverte par l'installation en m²
+        type: number
+        exclusiveMinimum: 0
+      type:
+        title: Type de ventilation
+        type: string
+        enum:
+          - ventilation_mecanique
+          - ventilation_naturelle_ouverture_fenetres
+          - ventilation_naturelle_entrees_air_hautes_basses
+          - ventilation_naturelle_conduit
+          - ventilation_naturelle_conduit_entrees_air_hygroreglables
+      generateur_id:
+        title: Identifiant du générateur de ventilation associé au système
+        type:
+          - string
+          - 'null'
+        default: null
+        format: uuid
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - id
+      - description
+      - surface
+      - type
+    oneOf:
+      - title: Ventilation mécanique
+        type: object
+        properties:
+          type:
+            const: ventilation_mecanique
+          generateur_id:
+            type: string
+            format: uuid
+        required:
+          - type
+          - generateur_id
+      - title: Ventilation naturelle
+        type: object
+        properties:
+          type:
+            enum:
+              - ventilation_naturelle_ouverture_fenetres
+              - ventilation_naturelle_entrees_air_hautes_basses
+              - ventilation_naturelle_conduit
+              - ventilation_naturelle_conduit_entrees_air_hygroreglables
+          generateur_id:
+            const: null
+        required:
+          - type
+    $defs:
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          rdim:
+            title: Ratio de dimensionnement de l'installation
+            type: number
+          qvarep_conv:
+            title: Débit volumique conventionnel à reprendre en m3/(h.m²)
+            type: number
+          qvasouf_conv:
+            title: Débit volumique conventionnel à souffler en m3/(h.m²)
+            type: number
+          smea_conv:
+            title: >-
+              Somme des modules d'entrée d'air sous 20 Pa par unité de surface
+              habitable en m3/(h.m²)
+            type: number
+          consommations:
+            $ref: /common/consommations
+  https://schemas.dpe-audit.fr/refroidissement:
+    $id: https://schemas.dpe-audit.fr/refroidissement
+    title: Refroidissement
+    type: object
+    properties:
+      generateurs:
+        title: Liste des générateurs
+        type: array
+        default: []
+        items:
+          $ref: /refroidissement/generateur
+      installations:
+        title: Liste des installations
+        type: array
+        default: []
+        items:
+          $ref: /refroidissement/installation
+      systemes:
+        title: Liste des systèmes
+        type: array
+        default: []
+        items:
+          $ref: /refroidissement/systeme
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - generateurs
+      - installations
+      - systemes
+    $defs:
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          bfr:
+            title: Besoin annuel de refroidissement en kWh
+            type: number
+          consommations:
+            $ref: /common/consommations
+  https://schemas.dpe-audit.fr/refroidissement/generateur:
+    $id: https://schemas.dpe-audit.fr/refroidissement/generateur
+    title: Générateur de refroidissement
+    type: object
+    unevaluatedProperties: false
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      type:
+        title: Type de générateur
+        type: string
+        enum:
+          - pac_air_air
+          - pac_air_eau
+          - pac_eau_eau
+          - pac_eau_glycolee_eau
+          - pac_geothermique
+          - autre_systeme_thermodynamique
+          - autre
+          - reseau_froid
+      energie:
+        title: Énergie utilisée par le générateur
+        type: string
+        enum:
+          - electricite
+          - gaz_naturel
+          - gpl
+          - reseau_froid
+      annee_installation:
+        title: Année d'installation connue et justifiée
+        type:
+          - integer
+          - 'null'
+        default: null
+      seer:
+        title: Coefficient d'efficience énergétique saisonnier connu et justifié
+        type:
+          - number
+          - 'null'
+        exclusiveMinimum: 0
+        default: null
+      reseau_froid_id:
+        title: Identifiant unique du réseau de froid
+        type:
+          - string
+          - 'null'
+        default: null
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - id
+      - description
+      - type
+      - energie
+    oneOf:
+      - title: Pompe à chaleur
+        type: object
+        properties:
+          type:
+            enum:
+              - pac_air_air
+              - pac_air_eau
+              - pac_eau_eau
+              - pac_eau_glycolee_eau
+              - pac_geothermique
+              - autre_systeme_thermodynamique
+          energie:
+            const: electricite
+          reseau_froid_id:
+            const: null
+        required:
+          - type
+          - energie
+      - title: Climatiseur
+        type: object
+        properties:
+          type:
+            const: autre
+          energie:
+            enum:
+              - electricite
+              - gaz_naturel
+              - gpl
+          reseau_froid_id:
+            const: null
+        required:
+          - type
+          - energie
+      - title: Réseau de froid
+        type: object
+        properties:
+          type:
+            const: reseau_froid
+          energie:
+            const: reseau_froid
+        required:
+          - type
+          - energie
+    $defs:
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          eer:
+            title: Coefficient d'efficacité énergétique
+            type: number
+          rdim:
+            title: Ratio de dimensionnement
+            type: number
+          cef_fr:
+            title: Consommation finale en kWh/an
+            type: number
+          cep_fr:
+            title: Consommation primaire en kWh/an
+            type: number
+          eges_fr:
+            title: Emissions de gaz à effet de serre en kgCO2/an
+            type: number
+  https://schemas.dpe-audit.fr/refroidissement/installation:
+    $id: https://schemas.dpe-audit.fr/refroidissement/installation
+    title: Installation de refroidissement
+    type: object
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      surface:
+        title: Surface couverte par l'installation en m²
+        type: number
+        exclusiveMinimum: 0
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - id
+      - description
+      - surface
+    $defs:
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          rdim:
+            title: Ratio de dimensionnement
+            type: number
+          consommations:
+            $ref: /common/consommations
+  https://schemas.dpe-audit.fr/refroidissement/systeme:
+    $id: https://schemas.dpe-audit.fr/refroidissement/systeme
+    title: Système de refroidissement
+    type: object
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      installation_id:
+        title: Identifiant de l'installation associée
+        type: string
+        format: uuid
+      generateur_id:
+        title: Identifiant du générateur associé
+        type: string
+        format: uuid
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - id
+      - description
+      - installation_id
+      - generateur_id
+    $defs:
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          rdim:
+            title: Ratio de dimensionnement
+            type: number
+          cef_fr:
+            title: Consommation finale en kWh/an
+            type: number
+          cep_fr:
+            title: Consommation primaire en kWh/an
+            type: number
+          eges_fr:
+            title: Emissions de gaz à effet de serre en kgCO2/an
+            type: number
+          cef_aux:
+            title: Consommation d'énergie finale des auxiliaires en kWh/an
+            type: number
+          cep_aux:
+            title: Consommation d'énergie primaire des auxiliaires en kWh/an
+            type: number
+          eges_aux:
+            title: Emissions de gaz à effet de serre des auxiliaires en kgCO2/an
+            type: number
+  https://schemas.dpe-audit.fr/production:
+    $id: https://schemas.dpe-audit.fr/production
+    title: Production
+    type: object
+    properties:
+      panneaux_photovoltaiques:
+        title: Liste des panneaux photovoltaïques
+        type: array
+        default: []
+        items:
+          $ref: /production/panneau_photovoltaique
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - panneaux_photovoltaiques
+    $defs:
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          ppv:
+            title: Production photovoltaïque en kWh/an
+            type: number
+  https://schemas.dpe-audit.fr/production/panneau_photovoltaique:
+    $id: https://schemas.dpe-audit.fr/production/panneau_photovoltaique
+    title: Panneau photovoltaïque
+    type: object
+    properties:
+      id:
+        title: Identifiant
+        type: string
+        format: uuid
+      description:
+        title: Description
+        type: string
+      orientation:
+        title: Orientation
+        minimum: 0
+        exclusiveMaximum: 360
+      inclinaison:
+        title: Inclinaison
+        type: number
+        minimum: 0
+        maximum: 90
+      modules:
+        title: Nombre de modules
+        type: integer
+        minimum: 1
+      surface:
+        title: Surface totale des capteurs en m²
+        type:
+          - number
+          - 'null'
+        exclusiveMinimum: 0
+        default: null
+      installation_collective:
+        title: Installation photovoltaïque collective
+        type: boolean
+      data:
+        $ref: '#/$defs/data'
+    required:
+      - id
+      - description
+      - orientation
+      - inclinaison
+      - modules
+      - surface
+      - installation_collective
+    $defs:
+      data:
+        title: Données calculées
+        type: object
+        readOnly: true
+        properties:
+          kpv:
+            title: >-
+              Coefficient de pondération prenant en compte l'altération par
+              rapport à l'orientation optimale
+            type: number
+          ppv:
+            title: Production photovoltaïque en kWh/an
+            type: number

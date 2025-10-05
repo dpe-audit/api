@@ -5,8 +5,10 @@ namespace App\Database\Observatoire\Model;
 use App\Domain\Refroidissement\Generateur\EnergieGenerateur;
 use App\Domain\Refroidissement\Generateur\TypeGenerateur;
 
-final class XMLClimatisation extends XMLUniqueElement
+final class XMLClimatisation
 {
+    use WithId, WithDescription;
+
     public function __construct(
         public readonly ?string $reference,
         public readonly ?string $description,

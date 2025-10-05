@@ -6,7 +6,7 @@ use App\Domain\Common\Enum\Orientation;
 use App\Domain\Enveloppe\Baie\TypeFermeture;
 use App\Domain\Enveloppe\ConfortEte\{ConfortEte, Performance};
 use App\Domain\Enveloppe\Inertie;
-use App\Domain\Enveloppe\PlancherHaut\Position\Mitoyennete;
+use App\Domain\Enveloppe\Paroi\Mitoyennete;
 use App\Engine\Input\Enveloppe\BaieInput;
 use App\Engine\Rule;
 

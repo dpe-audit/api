@@ -2,9 +2,8 @@
 
 namespace App\Engine\Input\Enveloppe;
 
-use App\Domain\Enveloppe\Paroi\TypeParoi;
+use App\Domain\Enveloppe\Paroi\{Mitoyennete, TypeParoi};
 use App\Domain\Enveloppe\Porte\{Isolation, Materiau, Porte};
-use App\Domain\Enveloppe\Porte\Position\Mitoyennete;
 use App\Domain\Enveloppe\Porte\Vitrage\TypeVitrage;
 use App\Engine\Engine;
 use App\Engine\Rules\Deperdition\DeperditionPorteRule;

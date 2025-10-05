@@ -4,6 +4,8 @@ namespace App\Database\Observatoire\Model;
 
 final class XMLPanneauPv
 {
+    use WithId;
+
     public function __construct(
         public readonly ?float $surface_totale_capteurs,
         public readonly ?float $ratio_virtualisation,

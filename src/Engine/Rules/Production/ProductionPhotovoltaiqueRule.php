@@ -21,7 +21,7 @@ final class ProductionPhotovoltaiqueRule extends PanneauPhotovoltaiqueInputRuleI
     public function ppv(): float
     {
         return $this->get('ppv', function (): float {
-            return Mois::reduce(fn(float $carry, Mois $mois) => $carry += $this->ppv_j($mois), 0);
+            return Mois::reduce(fn(Mois $mois) => $this->ppv_j($mois));
         });
     }
 

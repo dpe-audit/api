@@ -2,10 +2,11 @@
 
 namespace App\Engine\Input\Ventilation;
 
+use App\Domain\Common\Consommation\ConsommationCollection;
 use App\Domain\Ventilation\Generateur\Generateur;
 use App\Domain\Ventilation\Installation\Installation;
 use App\Engine\{Engine, Input};
-use App\Engine\Rules\Performance\PerformanceAuxiliairesVentilationRule;
+use App\Engine\Rules\Ventilation\ConsommationVentilationRule;
 
 final class VentilationInput extends Input
 {
@@ -24,23 +25,28 @@ final class VentilationInput extends Input
             ->values();
     }
 
-    public function consommation_auxiliaire_rule(): PerformanceAuxiliairesVentilationRule
+    public function consommation_rule(): ConsommationVentilationRule
     {
-        return $this->require(PerformanceAuxiliairesVentilationRule::class);
+        return $this->require(ConsommationVentilationRule::class);
     }
 
-    public function cef_auxiliaires(): float
+    public function consommations(): ConsommationCollection
     {
-        return $this->consommation_auxiliaire_rule()->cef();
+        return $this->consommation_rule()->consommations();
     }
 
-    public function cep_auxiliaires(): float
+    public function cef_aux(): float
     {
-        return $this->consommation_auxiliaire_rule()->cep();
+        return $this->consommation_rule()->cef_aux();
     }
 
-    public function eges_auxiliaires(): float
+    public function cep_aux(): float
     {
-        return $this->consommation_auxiliaire_rule()->eges();
+        return $this->consommation_rule()->cep_aux();
+    }
+
+    public function eges_aux(): float
+    {
+        return $this->consommation_rule()->eges_aux();
     }
 }

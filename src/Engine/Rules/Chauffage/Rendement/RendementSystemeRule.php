@@ -128,4 +128,18 @@ abstract class RendementSystemeRule extends SystemeInputRuleIterator
     {
         return array_filter(parent::collection(), [static::class, 'supports']);
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function calcule(): void
+    {
+        $this->item()->entity->calcule($this->item()->entity->data()->with(
+            ich: $this->ich(),
+            rd: $this->rd(),
+            re: $this->re(),
+            rg: $this->rg(),
+            rr: $this->rr(),
+        ));
+    }
 }

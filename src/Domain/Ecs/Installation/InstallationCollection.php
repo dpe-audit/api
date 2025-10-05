@@ -17,7 +17,7 @@ final class InstallationCollection extends ArrayCollection
 
     public function find(Id $id): ?Installation
     {
-        return array_find($this->elements, fn(Installation $item) => $item->id()->compare($id));
+        return array_find($this->elements, fn(Installation $item) => $item->id()->equals($id));
     }
 
     public function with_generateur(Id $id): self

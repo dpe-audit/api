@@ -7,8 +7,10 @@ use App\Domain\Ventilation\Generateur\TypeGenerateur;
 use App\Domain\Ventilation\Generateur\TypeVmc;
 use App\Domain\Ventilation\Installation\TypeVentilation;
 
-final class XMLVentilation extends XMLUniqueElement
+final class XMLVentilation
 {
+    use WithId, WithDescription;
+
     public function __construct(
         public readonly string $reference,
         public readonly ?string $description,
@@ -70,17 +72,10 @@ final class XMLVentilation extends XMLUniqueElement
         return $collection;
     }
 
-    /**
-     * @inheritDoc
-     */
+    /** @inheritDoc */
     public function identifiers(): array
     {
         return [$this->reference];
-    }
-
-    public function description(): string
-    {
-        return $this->description ?? 'Description non renseignée';
     }
 
     public function exposition(): Exposition

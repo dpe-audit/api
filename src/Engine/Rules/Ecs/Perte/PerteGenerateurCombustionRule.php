@@ -16,9 +16,7 @@ final class PerteGenerateurCombustionRule extends PerteGenerateurRule
     public function pertes_generation(): float
     {
         return $this->get('pertes_generation', function (): float {
-            return Mois::reduce(function (float $carry, Mois $mois): float {
-                return $carry += $this->pertes_generation_j($mois);
-            });
+            return Mois::reduce(fn(Mois $mois): float => $this->pertes_generation_j($mois));
         });
     }
 
@@ -43,9 +41,7 @@ final class PerteGenerateurCombustionRule extends PerteGenerateurRule
     public function pertes_generation_recuperables(): float
     {
         return $this->get('pertes_generation_recuperables', function (): float {
-            return Mois::reduce(function (float $carry, Mois $mois): float {
-                return $carry += $this->pertes_generation_recuperables_j($mois);
-            });
+            return Mois::reduce(fn(Mois $mois): float => $this->pertes_generation_recuperables_j($mois));
         });
     }
 

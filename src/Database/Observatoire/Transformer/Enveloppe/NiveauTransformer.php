@@ -13,6 +13,7 @@ final class NiveauTransformer
      */
     public function __invoke(XMLRessource $ressource): array
     {
+        $collection = [];
         $collection[] = new NiveauDto(
             id: Id::create(),
             description: 'Niveau reconstitué',

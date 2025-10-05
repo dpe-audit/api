@@ -3,9 +3,9 @@
 namespace App\Engine\Rules\Ventilation;
 
 use App\Domain\Batiment\TypeBatiment;
-use App\Domain\Common\Enum\Energie;
+use App\Domain\Common\Enum\{Energie, Usage};
 use App\Domain\Ventilation\Installation\TypeVentilation;
-use App\Engine\Input\Ventilation\{GenerateurInputRuleIterator, InstallationInput};
+use App\Engine\Input\Ventilation\GenerateurInputRuleIterator;
 use App\Engine\Table\VentilationTableValeurRepository;
 
 final class ConsommationAuxiliaireRule extends GenerateurInputRuleIterator
@@ -17,9 +17,9 @@ final class ConsommationAuxiliaireRule extends GenerateurInputRuleIterator
     /**
      * Consommation finale de l'auxiliaire de ventilation en kWh/an
      */
-    public function cef(): float
+    public function cef_aux(): float
     {
-        return $this->get('cef', function (): float {
+        return $this->get('cef_aux', function (): float {
             $cef = 8760 * ($this->pvent_moy() / 1000) * $this->ratio_utilisation();
             $cef *= $this->item()->rdim();
             return $this->round($cef);
@@ -29,10 +29,10 @@ final class ConsommationAuxiliaireRule extends GenerateurInputRuleIterator
     /**
      * Consommation primaire de l'auxiliaire de ventilation en kWh/an
      */
-    public function cep(): float
+    public function cep_aux(): float
     {
-        return $this->get('cep', function (): float {
-            return $this->cef() * Energie::ELECTRICITE->facteur_energie_primaire();
+        return $this->get('cep_aux', function (): float {
+            return $this->cef_aux() * Energie::ELECTRICITE->facteur_energie_primaire();
         });
     }
 
@@ -41,10 +41,10 @@ final class ConsommationAuxiliaireRule extends GenerateurInputRuleIterator
      * 
      * @see https://www.legifrance.gouv.fr/loda/article_lc/LEGIARTI000046662777
      */
-    public function eges(): float
+    public function eges_aux(): float
     {
-        return $this->get('eges', function (): float {
-            return $this->cef() * 0.064;
+        return $this->get('eges_aux', function (): float {
+            return $this->cef_aux() * Energie::ELECTRICITE->facteur_eges(Usage::AUXILIAIRE);
         });
     }
 
@@ -87,10 +87,7 @@ final class ConsommationAuxiliaireRule extends GenerateurInputRuleIterator
     {
         if ($this->data()->batiment->type_batiment() === TypeBatiment::IMMEUBLE) {
             $value = $this->pvent() * $this->qvarep_conv();
-            return $value *= array_sum(array_map(
-                fn(InstallationInput $item) => $item->surface(),
-                $this->item()->installations()
-            ));
+            return $value *= array_sum(array_map(fn($item) => $item->surface(), $this->item()->installations()));
         }
         return $this->get('pvent_moy', function () {
             return $this->repository->pvent_moy(
@@ -125,9 +122,9 @@ final class ConsommationAuxiliaireRule extends GenerateurInputRuleIterator
         $this->item()->entity->calcule($this->item()->entity->data()->with(
             ratio_utilisation: $this->ratio_utilisation(),
             pvent_moy: $this->pvent_moy(),
-            cef: $this->cef(),
-            cep: $this->cep(),
-            eges: $this->eges(),
+            cef_aux: $this->cef_aux(),
+            cep_aux: $this->cep_aux(),
+            eges_aux: $this->eges_aux(),
         ));
     }
 }

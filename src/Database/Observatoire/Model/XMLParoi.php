@@ -5,9 +5,12 @@ namespace App\Database\Observatoire\Model;
 use App\Domain\Common\ValueObject\Id;
 use App\Domain\Enveloppe\Lnc\Paroi\Isolation;
 use App\Domain\Enveloppe\Lnc\TypeLnc;
+use App\Domain\Enveloppe\Paroi\Mitoyennete;
 
-abstract class XMLParoi extends XMLUniqueElement
+abstract class XMLParoi
 {
+    use WithDescription, WithReferences;
+
     public readonly string $reference;
     public readonly ?string $reference_lnc;
     public readonly ?string $description;
@@ -52,6 +55,22 @@ abstract class XMLParoi extends XMLUniqueElement
     public function description(): string
     {
         return $this->description ?? 'Description non renseignée';
+    }
+
+    public function mitoyennete(): Mitoyennete
+    {
+        return match ($this->enum_type_adjacence_id) {
+            1 => Mitoyennete::EXTERIEUR,
+            2 => Mitoyennete::ENTERRE,
+            3 => Mitoyennete::VIDE_SANITAIRE,
+            4 => Mitoyennete::LOCAL_NON_RESIDENTIEL,
+            5 => Mitoyennete::TERRE_PLEIN,
+            6 => Mitoyennete::SOUS_SOL_NON_CHAUFFE,
+            7 => Mitoyennete::LOCAL_NON_ACCESSIBLE,
+            8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21 => Mitoyennete::LOCAL_NON_CHAUFFE,
+            20 => Mitoyennete::LOCAL_NON_RESIDENTIEL,
+            22 => Mitoyennete::LOCAL_RESIDENTIEL,
+        };
     }
 
     public function type_lnc(): ?TypeLnc

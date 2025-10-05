@@ -3,11 +3,13 @@
 namespace App\Domain\Enveloppe\Porte\Position;
 
 use App\Domain\Enveloppe\Lnc\Lnc;
+use App\Domain\Enveloppe\Paroi\Mitoyennete;
 use App\Domain\Enveloppe\Paroi\Paroi;
 
 final class Position
 {
     public function __construct(
+        public readonly TypePose $type_pose,
         public readonly bool $presence_sas,
         public readonly float $surface,
         public readonly Mitoyennete $mitoyennete,
@@ -17,6 +19,7 @@ final class Position
     ) {}
 
     public static function create(
+        TypePose $type_pose,
         bool $presence_sas,
         float $surface,
         Mitoyennete $mitoyennete,
@@ -25,6 +28,7 @@ final class Position
         ?Lnc $local_non_chauffe,
     ): self {
         return new self(
+            type_pose: $type_pose,
             presence_sas: $presence_sas,
             surface: $surface,
             mitoyennete: $mitoyennete,

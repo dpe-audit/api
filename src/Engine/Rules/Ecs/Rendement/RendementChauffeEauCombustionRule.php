@@ -18,7 +18,7 @@ final class RendementChauffeEauCombustionRule extends RendementSystemeRule
             if (0 === $this->item()->generateur()->volume_stockage()) {
                 return parent::rg();
             }
-            $becs = $this->becs();
+            $becs = $this->data()->ecs->becs();
             $rpn = $this->item()->generateur()->rpn();
             $qp0 = $this->item()->generateur()->qp0();
             $pveilleuse = $this->item()->generateur()->pveilleuse();
@@ -36,8 +36,8 @@ final class RendementChauffeEauCombustionRule extends RendementSystemeRule
     public function rgs(): float
     {
         return $this->get("rgs", function (): float {
-            $becs = $this->becs();
-            $pertes = $this->pertes_stockage();
+            $becs = $this->data()->ecs->becs();
+            $pertes = $this->item()->pertes_stockage();
             $rpn = $this->item()->generateur()->rpn();
             $qp0 = $this->item()->generateur()->qp0();
             $pveilleuse = $this->item()->generateur()->pveilleuse();

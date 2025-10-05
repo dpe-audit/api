@@ -18,7 +18,7 @@ final class SystemeCollection extends ArrayCollection
 
     public function find(Id $id): ?Systeme
     {
-        return array_find($this->elements, fn(Systeme $item): bool => $item->id()->compare($id));
+        return array_find($this->elements, fn(Systeme $item): bool => $item->id()->equals($id));
     }
 
     public function has_installation(Id $id): bool
@@ -72,7 +72,7 @@ final class SystemeCollection extends ArrayCollection
 
     public function with_generateur(Id $id): static
     {
-        return $this->filter(fn(Systeme $item): bool => $item->generateur()->id()->compare($id));
+        return $this->filter(fn(Systeme $item): bool => $item->generateur()->id()->equals($id));
     }
 
     public function with_emetteur(Id $id): static
@@ -82,7 +82,7 @@ final class SystemeCollection extends ArrayCollection
 
     public function with_installation(Id $id): static
     {
-        return $this->filter(fn(Systeme $item): bool => $item->installation()->id()->compare($id));
+        return $this->filter(fn(Systeme $item): bool => $item->installation()->id()->equals($id));
     }
 
     public function with_cascade(?int $cascade): self

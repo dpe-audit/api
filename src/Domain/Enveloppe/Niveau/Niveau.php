@@ -4,6 +4,7 @@ namespace App\Domain\Enveloppe\Niveau;
 
 use App\Domain\Common\ValueObject\Id;
 use App\Domain\Enveloppe\Enveloppe;
+use App\Domain\Enveloppe\Paroi\Inertie;
 
 final class Niveau
 {
@@ -14,9 +15,9 @@ final class Niveau
         private readonly Enveloppe $enveloppe,
         private string $description,
         private float $surface,
-        private InertieParoi $inertie_paroi_verticale,
-        private InertieParoi $inertie_plancher_haut,
-        private InertieParoi $inertie_plancher_bas,
+        private Inertie $inertie_paroi_verticale,
+        private Inertie $inertie_plancher_haut,
+        private Inertie $inertie_plancher_bas,
     ) {
         $this->data = NiveauData::create();
     }
@@ -26,9 +27,9 @@ final class Niveau
         Enveloppe $enveloppe,
         string $description,
         float $surface,
-        InertieParoi $inertie_paroi_verticale,
-        InertieParoi $inertie_plancher_haut,
-        InertieParoi $inertie_plancher_bas,
+        Inertie $inertie_paroi_verticale,
+        Inertie $inertie_plancher_haut,
+        Inertie $inertie_plancher_bas,
     ): self {
         return new self(
             id: $id,
@@ -73,17 +74,17 @@ final class Niveau
         return $this->surface;
     }
 
-    public function inertie_paroi_verticale(): InertieParoi
+    public function inertie_paroi_verticale(): Inertie
     {
         return $this->inertie_paroi_verticale;
     }
 
-    public function inertie_plancher_haut(): InertieParoi
+    public function inertie_plancher_haut(): Inertie
     {
         return $this->inertie_plancher_haut;
     }
 
-    public function inertie_plancher_bas(): InertieParoi
+    public function inertie_plancher_bas(): Inertie
     {
         return $this->inertie_plancher_bas;
     }

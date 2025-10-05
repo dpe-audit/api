@@ -2,13 +2,13 @@
 
 namespace App\Engine\Input\Refroidissement;
 
+use App\Domain\Common\Consommation\ConsommationCollection;
 use App\Domain\Common\Enum\Mois;
 use App\Domain\Refroidissement\Generateur\Generateur;
 use App\Domain\Refroidissement\Installation\Installation;
 use App\Domain\Refroidissement\Systeme\Systeme;
 use App\Engine\{Engine, Input};
-use App\Engine\Rules\Performance\PerformanceRefroidissementRule;
-use App\Engine\Rules\Refroidissement\BesoinRefroidissementRule;
+use App\Engine\Rules\Refroidissement\{BesoinRefroidissementRule, ConsommationRefroidissementRule};
 
 final class RefroidissementInput extends Input
 {
@@ -39,9 +39,9 @@ final class RefroidissementInput extends Input
         return $this->require(BesoinRefroidissementRule::class);
     }
 
-    public function consommation_rule(): PerformanceRefroidissementRule
+    public function consommation_rule(): ConsommationRefroidissementRule
     {
-        return $this->require(PerformanceRefroidissementRule::class);
+        return $this->require(ConsommationRefroidissementRule::class);
     }
 
     public function bfr(?Mois $mois = null): ?float
@@ -49,18 +49,38 @@ final class RefroidissementInput extends Input
         return $mois ? $this->besoin_rule()->bfr_j($mois) : $this->besoin_rule()->bfr();
     }
 
-    public function cef(): float
+    public function consommations(): ConsommationCollection
     {
-        return $this->consommation_rule()->cef();
+        return $this->consommation_rule()->consommations();
     }
 
-    public function cep(): float
+    public function cef_fr(): float
     {
-        return $this->consommation_rule()->cep();
+        return $this->consommation_rule()->cef_fr();
     }
 
-    public function eges(): float
+    public function cep_fr(): float
     {
-        return $this->consommation_rule()->eges();
+        return $this->consommation_rule()->cep_fr();
+    }
+
+    public function eges_fr(): float
+    {
+        return $this->consommation_rule()->eges_fr();
+    }
+
+    public function cef_aux(): float
+    {
+        return $this->consommation_rule()->cef_aux();
+    }
+
+    public function cep_aux(): float
+    {
+        return $this->consommation_rule()->cep_aux();
+    }
+
+    public function eges_aux(): float
+    {
+        return $this->consommation_rule()->eges_aux();
     }
 }

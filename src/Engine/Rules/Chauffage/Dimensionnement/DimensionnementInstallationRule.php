@@ -71,4 +71,14 @@ final class DimensionnementInstallationRule extends InstallationInputRuleIterato
         // Configuration par défaut
         return Configuration::AUTRES;
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function calcule(): void
+    {
+        $this->item()->entity->calcule($this->item()->entity->data()->with(
+            rdim: $this->rdim(),
+        ));
+    }
 }

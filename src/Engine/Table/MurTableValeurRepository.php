@@ -3,8 +3,8 @@
 namespace App\Engine\Table;
 
 use App\Domain\Adresse\ZoneClimatique;
-use App\Domain\Enveloppe\Mur\Position\Mitoyennete;
 use App\Domain\Enveloppe\Mur\TypeMur;
+use App\Domain\Enveloppe\Paroi\Mitoyennete;
 
 interface MurTableValeurRepository
 {

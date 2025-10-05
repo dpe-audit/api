@@ -2,8 +2,7 @@
 
 namespace App\Engine\Rules\Deperdition;
 
-use App\Domain\Enveloppe\Baie\Performance;
-use App\Domain\Enveloppe\Baie\Position\Mitoyennete;
+use App\Domain\Enveloppe\Paroi\{Mitoyennete, Performance};
 use App\Domain\Enveloppe\Baie\TypeFermeture;
 use App\Engine\Input\Enveloppe\BaieInputRuleIterator;
 use App\Engine\Table\BaieTableValeurRepository;
@@ -165,7 +164,7 @@ final class DeperditionBaieRule extends BaieInputRuleIterator
     public function performance(): Performance
     {
         return $this->get('performance', function (): Performance {
-            return Performance::from_data($this->ujn());
+            return Performance::from_ubaie($this->ujn());
         });
     }
 
@@ -177,6 +176,9 @@ final class DeperditionBaieRule extends BaieInputRuleIterator
         $this->item()->entity->calcule($this->item()->entity->data()->with(
             sdep: $this->sdep(),
             b: $this->b(),
+            ug: $this->ug(),
+            uw: $this->uw(),
+            deltar: $this->deltar(),
             u: $this->ujn(),
             performance: $this->performance(),
             dp: $this->dp(),

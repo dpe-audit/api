@@ -15,4 +15,14 @@ final class DimensionnementSystemeRule extends SystemeInputRuleIterator
             return 1 / count($this->item()->installation()->systemes()) * $this->item()->installation()->rdim();
         });
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function calcule(): void
+    {
+        $this->item()->entity->calcule($this->item()->entity->data()->with(
+            rdim: $this->rdim(),
+        ));
+    }
 }

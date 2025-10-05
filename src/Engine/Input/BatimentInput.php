@@ -112,7 +112,7 @@ final class BatimentInput extends Input
 
     public function surface_habitable(): float
     {
-        return $this->zone_thermique_rule()->surface_habitable();
+        return $this->zone_thermique_rule()->surface_reference();
     }
 
     public function hauteur_sous_plafond(): float
@@ -122,7 +122,7 @@ final class BatimentInput extends Input
 
     public function volume_habitable(): float
     {
-        return $this->zone_thermique_rule()->volume_habitable();
+        return $this->zone_thermique_rule()->volume_reference();
     }
 
     public function tbase(): float

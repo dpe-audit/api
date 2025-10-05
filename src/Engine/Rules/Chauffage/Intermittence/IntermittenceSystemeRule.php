@@ -73,4 +73,15 @@ final class IntermittenceSystemeRule extends SystemeInputRuleIterator
             );
         });
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function calcule(): void
+    {
+        $this->item()->entity->calcule($this->item()->entity->data()->with(
+            i0: $this->i0(),
+            int: $this->int(),
+        ));
+    }
 }

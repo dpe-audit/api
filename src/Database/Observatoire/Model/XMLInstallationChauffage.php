@@ -3,13 +3,18 @@
 namespace App\Database\Observatoire\Model;
 
 use App\Domain\Chauffage\Installation\Solaire\Usage;
+use App\Domain\Common\ValueObject\Id;
 
 /**
  * @property array<XMLEmetteurChauffage> $emetteur_chauffage_collection
  * @property array<XMLGenerateurChauffage> $generateur_chauffage_collection
  */
-final class XMLInstallationChauffage extends XMLUniqueElement
+final class XMLInstallationChauffage
 {
+    use WithDescription, WithReferences;
+
+    private ?Id $id_installation_sdb = null;
+
     public function __construct(
         public readonly string $reference,
         public readonly ?string $description,
@@ -36,8 +41,7 @@ final class XMLInstallationChauffage extends XMLUniqueElement
         public readonly ?float $fch,
         public readonly float $conso_ch,
         public readonly float $conso_ch_depensier
-    ) {
-    }
+    ) {}
 
     /**
      * XSD logement/installation_chauffage_collection/installation_chauffage
@@ -94,27 +98,51 @@ final class XMLInstallationChauffage extends XMLUniqueElement
         return [$this->reference];
     }
 
-    public function description(): string
+    public function id_installation_sdb(): ?Id
     {
-        return $this->description ?? '-';
+        if (false === $this->appoint_electrique_sdb()) {
+            return null;
+        }
+        return $this->id_installation_sdb ??= Id::create();
     }
 
     /**
      * En présence d'une installation avec appoint électrique dans la salle de bain, la surface couverte
      * par l'installation est déduite des surfaces couvertes par ces émetteurs.
      */
-    public function surface(): float
+    public function surface(?bool $appoint_sdb = null): float
     {
-        $value = $this->surface_chauffee;
-        foreach ($this->emetteur_chauffage_collection as $key => $emetteur_chauffage) {
-            $value -= $emetteur_chauffage->surface_appoint_electrique_sdp();
+        return match ($appoint_sdb) {
+            true => max($this->surface_appoint_electrique_sdb(), 0.1 * $this->surface_chauffee),
+            false => $this->surface_chauffee - $this->surface(true),
+            null => $this->surface_chauffee,
+        };
+    }
+
+    public function appoint_electrique_sdb(): bool
+    {
+        foreach ($this->emetteur_chauffage_collection as $emetteur_chauffage) {
+            if ($emetteur_chauffage->appoint_electrique_sdb()) {
+                return true;
+            }
         }
-        return $value;
+        return false;
+    }
+
+    public function surface_appoint_electrique_sdb(): float
+    {
+        return min(array_sum(array_map(
+            fn(XMLEmetteurChauffage $emetteur_chauffage) => $emetteur_chauffage->surface_appoint_electrique_sdb(),
+            $this->emetteur_chauffage_collection
+        )), $this->surface_chauffee);
     }
 
     public function installation_collective(): bool
     {
-        return $this->enum_type_installation_id === 2;
+        return match ($this->enum_type_installation_id) {
+            1 => false,
+            2, 3, 4 => true,
+        };
     }
 
     public function usage_solaire(): ?Usage
@@ -130,9 +158,12 @@ final class XMLInstallationChauffage extends XMLUniqueElement
     /**
      * En l'absence d'émetteurs, on considère la présence d'un comptage individuel (émission directe)
      */
-    public function comptage_individuel(): ?bool
+    public function comptage_individuel(?bool $appoint_sdb = null): ?bool
     {
         foreach ($this->emetteur_chauffage_collection as $emetteur_chauffage) {
+            if (null !== $appoint_sdb && $emetteur_chauffage->appoint_electrique_sdb() !== $appoint_sdb) {
+                continue;
+            }
             if ($emetteur_chauffage->comptage_individuel() !== null) {
                 return $emetteur_chauffage->comptage_individuel();
             }
@@ -140,9 +171,22 @@ final class XMLInstallationChauffage extends XMLUniqueElement
         return true;
     }
 
-    public function presence_regulation_centrale(): bool
+    public function presence_circulateur_externe(): bool
+    {
+        return $this->installation_collective();
+    }
+
+    public function niveaux_desservis(): int
+    {
+        return $this->nombre_niveau_installation_ch;
+    }
+
+    public function presence_regulation_centrale(?bool $appoint_sdb = null): bool
     {
         foreach ($this->emetteur_chauffage_collection as $emetteur_chauffage) {
+            if (null !== $appoint_sdb && $emetteur_chauffage->appoint_electrique_sdb() !== $appoint_sdb) {
+                continue;
+            }
             if (true === $emetteur_chauffage->presence_regulation_centrale()) {
                 return true;
             }
@@ -150,9 +194,12 @@ final class XMLInstallationChauffage extends XMLUniqueElement
         return false;
     }
 
-    public function regulation_centrale_minimum_temperature(): bool
+    public function regulation_centrale_minimum_temperature(?bool $appoint_sdb = null): bool
     {
         foreach ($this->emetteur_chauffage_collection as $emetteur_chauffage) {
+            if (null !== $appoint_sdb && $emetteur_chauffage->appoint_electrique_sdb() !== $appoint_sdb) {
+                continue;
+            }
             if (true === $emetteur_chauffage->regulation_centrale_minimum_temperature()) {
                 return true;
             }
@@ -160,9 +207,12 @@ final class XMLInstallationChauffage extends XMLUniqueElement
         return false;
     }
 
-    public function regulation_centrale_detection_presence(): bool
+    public function regulation_centrale_detection_presence(?bool $appoint_sdb = null): bool
     {
         foreach ($this->emetteur_chauffage_collection as $emetteur_chauffage) {
+            if (null !== $appoint_sdb && $emetteur_chauffage->appoint_electrique_sdb() !== $appoint_sdb) {
+                continue;
+            }
             if (true === $emetteur_chauffage->regulation_centrale_detection_presence()) {
                 return true;
             }
@@ -170,9 +220,12 @@ final class XMLInstallationChauffage extends XMLUniqueElement
         return false;
     }
 
-    public function presence_regulation_terminale(): bool
+    public function presence_regulation_terminale(?bool $appoint_sdb = null): bool
     {
         foreach ($this->emetteur_chauffage_collection as $emetteur_chauffage) {
+            if (null !== $appoint_sdb && $emetteur_chauffage->appoint_electrique_sdb() !== $appoint_sdb) {
+                continue;
+            }
             if (true === $emetteur_chauffage->presence_regulation_terminale()) {
                 return true;
             }
@@ -180,9 +233,12 @@ final class XMLInstallationChauffage extends XMLUniqueElement
         return false;
     }
 
-    public function regulation_terminale_minimum_temperature(): bool
+    public function regulation_terminale_minimum_temperature(?bool $appoint_sdb = null): bool
     {
         foreach ($this->emetteur_chauffage_collection as $emetteur_chauffage) {
+            if (null !== $appoint_sdb && $emetteur_chauffage->appoint_electrique_sdb() !== $appoint_sdb) {
+                continue;
+            }
             if (true === $emetteur_chauffage->regulation_terminale_minimum_temperature()) {
                 return true;
             }
@@ -190,13 +246,33 @@ final class XMLInstallationChauffage extends XMLUniqueElement
         return false;
     }
 
-    public function regulation_terminale_detection_presence(): bool
+    public function regulation_terminale_detection_presence(?bool $appoint_sdb = null): bool
     {
         foreach ($this->emetteur_chauffage_collection as $emetteur_chauffage) {
+            if (null !== $appoint_sdb && $emetteur_chauffage->appoint_electrique_sdb() !== $appoint_sdb) {
+                continue;
+            }
             if (true === $emetteur_chauffage->regulation_terminale_detection_presence()) {
                 return true;
             }
         }
         return false;
+    }
+
+    public function find_generateur_hybride_partie_chaudiere(XMLGenerateurChauffage $element): ?XMLGenerateurChauffage
+    {
+        if (false === $element->pac_hybride()) {
+            return null;
+        }
+        foreach ($this->generateur_chauffage_collection as $generateur_chauffage) {
+            if (false === $generateur_chauffage->match($element->identifiers())) {
+                continue;
+            }
+            if (false === $generateur_chauffage->pac_hybride_partie_chaudiere()) {
+                continue;
+            }
+            return $generateur_chauffage;
+        }
+        return null;
     }
 }

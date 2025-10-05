@@ -22,7 +22,7 @@ final class PositionDto
             generateur_multi_batiment: $data->generateur_multi_batiment,
             position_volume_chauffe: $data->position_volume_chauffe,
             position_chauffe_eau: $data->position_chauffe_eau,
-            generateur_mixte_id: $data->generateur_mixte?->id()->toBinary(),
+            generateur_mixte_id: $data->generateur_mixte_id,
             reseau_chaleur_id: $data->reseau_chaleur?->id(),
         );
     }

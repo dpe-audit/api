@@ -51,7 +51,7 @@ final class ChauffageDto
     {
         foreach ($this->systemes as $systeme) {
             foreach ($systeme->emetteurs as $id) {
-                if (false === array_find($this->emetteurs, fn(EmetteurDto $dto) => $dto->id === $id)) {
+                if (null === array_find($this->emetteurs, fn(EmetteurDto $dto) => $dto->id === $id)) {
                     return false;
                 }
             }
@@ -63,7 +63,7 @@ final class ChauffageDto
     public function is_generateur_exists(): bool
     {
         foreach ($this->systemes as $systeme) {
-            if (false === array_find($this->generateurs, fn(GenerateurDto $dto) => $dto->id === $systeme->generateur_id)) {
+            if (null === array_find($this->generateurs, fn(GenerateurDto $dto) => $dto->id === $systeme->generateur_id)) {
                 return false;
             }
         }
@@ -74,7 +74,7 @@ final class ChauffageDto
     public function is_installation_exists(): bool
     {
         foreach ($this->systemes as $systeme) {
-            if (false === array_find($this->installations, fn(InstallationDto $dto) => $dto->id === $systeme->installation_id)) {
+            if (null === array_find($this->installations, fn(InstallationDto $dto) => $dto->id === $systeme->installation_id)) {
                 return false;
             }
         }

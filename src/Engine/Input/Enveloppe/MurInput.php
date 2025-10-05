@@ -3,9 +3,8 @@
 namespace App\Engine\Input\Enveloppe;
 
 use App\Domain\Enveloppe\Mur\{Mur, TypeDoublage, TypeMur};
-use App\Domain\Enveloppe\Mur\Isolation\{EtatIsolation, TypeIsolation};
-use App\Domain\Enveloppe\Mur\Position\Mitoyennete;
-use App\Domain\Enveloppe\Paroi\TypeParoi;
+use App\Domain\Enveloppe\Paroi\Isolation\{EtatIsolation, TypeIsolation};
+use App\Domain\Enveloppe\Paroi\{Mitoyennete, TypeParoi};
 use App\Engine\Engine;
 use App\Engine\Rules\Deperdition\DeperditionMurRule;
 

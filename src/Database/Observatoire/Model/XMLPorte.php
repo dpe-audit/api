@@ -3,10 +3,10 @@
 namespace App\Database\Observatoire\Model;
 
 use App\Domain\Common\ValueObject\Id;
+use App\Domain\Enveloppe\Paroi\Mitoyennete;
 use App\Domain\Enveloppe\Porte\Isolation;
 use App\Domain\Enveloppe\Porte\Materiau;
-use App\Domain\Enveloppe\Porte\Position\Mitoyennete;
-use App\Domain\Enveloppe\Porte\TypePose;
+use App\Domain\Enveloppe\Porte\Position\TypePose;
 use App\Domain\Enveloppe\Porte\Vitrage\TypeVitrage;
 
 final class XMLPorte extends XMLParoi
@@ -60,24 +60,6 @@ final class XMLPorte extends XMLParoi
             $collection[] = self::from($item);
         }
         return $collection;
-    }
-
-    public function mitoyennete(): Mitoyennete
-    {
-        return $this->enum_cfg_isolation_lnc_id === 1
-            ? Mitoyennete::LOCAL_NON_ACCESSIBLE
-            : match ($this->enum_type_adjacence_id) {
-                1 => Mitoyennete::EXTERIEUR,
-                2 => Mitoyennete::ENTERRE,
-                3 => Mitoyennete::VIDE_SANITAIRE,
-                4 => Mitoyennete::LOCAL_NON_RESIDENTIEL,
-                5 => Mitoyennete::TERRE_PLEIN,
-                6 => Mitoyennete::SOUS_SOL_NON_CHAUFFE,
-                7 => Mitoyennete::LOCAL_NON_ACCESSIBLE,
-                8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21 => Mitoyennete::LOCAL_NON_CHAUFFE,
-                20 => Mitoyennete::LOCAL_NON_RESIDENTIEL,
-                22 => Mitoyennete::LOCAL_RESIDENTIEL,
-            };
     }
 
     public function isolation(): ?Isolation
@@ -135,12 +117,12 @@ final class XMLPorte extends XMLParoi
 
     public function nb_porte(): int
     {
-        return $this->nb_porte ?? 1;
+        return $this->nb_porte ?? 0;
     }
 
     public function surface(): float
     {
-        return $this->surface_porte / $this->nb_porte();
+        return $this->surface_porte;
     }
 
     public function largeur_dormant(): ?int

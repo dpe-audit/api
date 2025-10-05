@@ -2,63 +2,60 @@
 
 namespace App\Engine\Rules\Chauffage\Perte;
 
-use App\Domain\Common\Enum\Mois;
-use App\Engine\Input\Chauffage\GenerateurInput;
+use App\Domain\Common\Enum\{Mois, TypePerte};
+use App\Domain\Common\Perte\{Perte, PerteCollection};
 use App\Engine\Rule;
 
 final class PerteChauffageRule extends Rule
 {
     /**
-     * Somme des pertes de chauffage en Wh
+     * Liste des pertes de chauffage
      */
-    public function pertes(): float
+    public function pertes(): PerteCollection
     {
-        return $this->get('pertes', function (): float {
-            return array_sum(array_map(
-                fn(GenerateurInput $item) => $item->pertes_generation(),
-                $this->data()->chauffage->generateurs,
-            ));
+        return $this->get('pertes', function (): PerteCollection {
+            $collection = PerteCollection::create();
+            foreach ($this->data()->chauffage->systemes as $item) {
+                $collection->with(Perte::create(
+                    type: TypePerte::GENERATION,
+                    pertes: $item->pertes_generation(),
+                    pertes_recuperables: $item->pertes_generation_recuperables()
+                ));
+            }
+            return $collection;
         });
     }
 
     /**
-     * Somme des pertes de chauffage pour le mois j en Wh
-     */
-    public function pertes_j(Mois $mois): float
-    {
-        $key = "pertes::{$mois->value}";
-        return $this->get($key, function () use ($mois): float {
-            return array_sum(array_map(
-                fn(GenerateurInput $item) => $item->pertes_generation($mois),
-                $this->data()->chauffage->generateurs,
-            ));
-        });
-    }
-
-    /**
-     * Somme des pertes récupérables de chauffage en Wh
+     * Pertes récupérables de chauffage en Wh
      */
     public function pertes_recuperables(): float
     {
         return $this->get('pertes_recuperables', function (): float {
+            return Mois::reduce(fn(Mois $mois): float => $this->pertes_recuperables_j($mois));
+        });
+    }
+
+    /**
+     * Pertes récupérables pour le mois j en Wh
+     */
+    public function pertes_recuperables_j(Mois $mois): float
+    {
+        return $this->get('pertes_recuperables_j', function () use ($mois): float {
             return array_sum(array_map(
-                fn(GenerateurInput $item) => $item->pertes_generation_recuperables(),
-                $this->data()->chauffage->generateurs,
+                fn($item) => $item->pertes_generation_recuperables($mois),
+                $this->data()->chauffage->systemes,
             ));
         });
     }
 
     /**
-     * Somme des pertes récupérables de chauffage pour le mois j en Wh
+     * @inheritDoc
      */
-    public function pertes_recuperables_j(Mois $mois): float
+    public function calcule(): void
     {
-        $key = "pertes_recuperables::{$mois->value}";
-        return $this->get($key, function () use ($mois): float {
-            return array_sum(array_map(
-                fn(GenerateurInput $item) => $item->pertes_generation_recuperables($mois),
-                $this->data()->chauffage->generateurs,
-            ));
-        });
+        $this->ressource()->chauffage()->calcule($this->ressource()->chauffage()->data()->with(
+            pertes: $this->pertes(),
+        ));
     }
 }

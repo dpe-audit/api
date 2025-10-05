@@ -3,7 +3,8 @@
 namespace App\Engine\Input\Enveloppe;
 
 use App\Domain\Enveloppe\Inertie;
-use App\Domain\Enveloppe\Niveau\{InertieParoi, Niveau};
+use App\Domain\Enveloppe\Niveau\Niveau;
+use App\Domain\Enveloppe\Paroi\Inertie as InertieParoi;
 use App\Engine\{Engine, Input};
 use App\Engine\Rules\Inertie\InertieNiveauRule;
 

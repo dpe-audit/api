@@ -2,12 +2,14 @@
 
 namespace App\Dto\Enveloppe\Porte;
 
-use App\Domain\Enveloppe\Porte\Position\Mitoyennete;
+use App\Domain\Enveloppe\Paroi\Mitoyennete;
 use App\Domain\Enveloppe\Porte\Position\Position;
+use App\Domain\Enveloppe\Porte\Position\TypePose;
 
 final class PositionDto
 {
     public function __construct(
+        public TypePose $type_pose,
         public float $surface,
         public Mitoyennete $mitoyennete,
         public ?float $orientation,
@@ -19,6 +21,7 @@ final class PositionDto
     public static function from(Position $data): self
     {
         return new self(
+            type_pose: $data->type_pose,
             surface: $data->surface,
             mitoyennete: $data->mitoyennete,
             orientation: $data->orientation,
@@ -31,6 +34,7 @@ final class PositionDto
     public function __normalize(): array
     {
         return [
+            'type_pose' => $this->type_pose->value,
             'surface' => $this->surface,
             'mitoyennete' => $this->mitoyennete->value,
             'orientation' => $this->orientation,

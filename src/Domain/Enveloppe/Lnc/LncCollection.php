@@ -4,7 +4,6 @@ namespace App\Domain\Enveloppe\Lnc;
 
 use App\Domain\Common\Collection\ArrayCollection;
 use App\Domain\Common\ValueObject\Id;
-use App\Domain\Enveloppe\Enum\Lnc\TypeLnc;
 
 /**
  * @extends ArrayCollection<Lnc>
@@ -18,7 +17,7 @@ final class LncCollection extends ArrayCollection
 
     public function find(Id $id): ?Lnc
     {
-        return array_find($this->elements, fn(Lnc $item): bool => $item->id()->compare($id));
+        return array_find($this->elements, fn(Lnc $item): bool => $item->id()->equals($id));
     }
 
     public function with_types(TypeLnc ...$types): self

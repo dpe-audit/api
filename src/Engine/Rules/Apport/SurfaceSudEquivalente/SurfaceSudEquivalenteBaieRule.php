@@ -3,8 +3,8 @@
 namespace App\Engine\Rules\Apport\SurfaceSudEquivalente;
 
 use App\Domain\Common\Enum\Mois;
-use App\Domain\Enveloppe\Baie\Position\Mitoyennete;
 use App\Domain\Enveloppe\Lnc\TypeLnc;
+use App\Domain\Enveloppe\Paroi\Mitoyennete;
 use App\Engine\Input\Enveloppe\BaieInputRuleIterator;
 use App\Engine\Table\SollicitationsClimatiquesTableValeurRepository;
 
@@ -20,7 +20,7 @@ final class SurfaceSudEquivalenteBaieRule extends BaieInputRuleIterator
     public function sse(): float
     {
         return $this->get("sse", function (): float {
-            return Mois::reduce(fn(float $carry, Mois $mois) => $carry += $this->sse_j($mois));
+            return Mois::reduce(fn(Mois $mois) => $this->sse_j($mois));
         });
     }
 

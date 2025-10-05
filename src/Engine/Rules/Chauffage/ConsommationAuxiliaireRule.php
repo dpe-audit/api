@@ -2,7 +2,7 @@
 
 namespace App\Engine\Rules\Chauffage;
 
-use App\Domain\Common\Enum\{Energie, Mois};
+use App\Domain\Common\Enum\{Energie, Mois, Usage};
 use App\Engine\Input\Chauffage\{EmetteurInput, SystemeInputRuleIterator};
 use App\Engine\Tables\ChauffageTableValeurRepository;
 
@@ -15,9 +15,9 @@ final class ConsommationAuxiliaireRule extends SystemeInputRuleIterator
     /**
      * Consommation finale de l'auxiliaire de chauffage en kWh/an
      */
-    public function cef(): float
+    public function cef_aux(): float
     {
-        return $this->get('cef', function (): float {
+        return $this->get('cef_aux', function (): float {
             return $this->caux_generation() + $this->caux_distribution();
         });
     }
@@ -25,20 +25,20 @@ final class ConsommationAuxiliaireRule extends SystemeInputRuleIterator
     /**
      * Consommation primaire de l'auxiliaire de chauffage en kWh/an
      */
-    public function cep(): float
+    public function cep_aux(): float
     {
-        return $this->get('cep', function (): float {
-            return $this->cef() * Energie::ELECTRICITE->facteur_energie_primaire();
+        return $this->get('cep_aux', function (): float {
+            return $this->cef_aux() * Energie::ELECTRICITE->facteur_energie_primaire();
         });
     }
 
     /**
      * Emission de CO2 de l'auxiliaire de chauffage en kg/an
      */
-    public function eges(): float
+    public function eges_aux(): float
     {
-        return $this->get('eges', function (): float {
-            return $this->cef() * 0.079;
+        return $this->get('eges_aux', function (): float {
+            return $this->cef_aux() * Energie::ELECTRICITE->facteur_eges(Usage::AUXILIAIRE);
         });
     }
 
@@ -62,9 +62,7 @@ final class ConsommationAuxiliaireRule extends SystemeInputRuleIterator
     public function caux_distribution(): float
     {
         return $this->get('caux_distribution', function (): float {
-            return Mois::reduce(function (float $carry, Mois $mois): float {
-                return $carry += $this->caux_distribution_j($mois);
-            });
+            return Mois::reduce(fn(Mois $mois): float => $this->caux_distribution_j($mois));
         });
     }
 
@@ -74,10 +72,10 @@ final class ConsommationAuxiliaireRule extends SystemeInputRuleIterator
     public function caux_distribution_j(Mois $mois): float
     {
         return $this->get("caux_distribution::{$mois->value}", function (): float {
-            return Mois::reduce(function (float $carry, Mois $mois): float {
+            return Mois::reduce(function (Mois $mois): float {
                 $puissance_circulateur = $this->puissance_circulateur();
                 $nref = $this->data()->batiment->nref($mois);
-                return $carry += $puissance_circulateur * $nref / 1000;
+                return $puissance_circulateur * $nref / 1000;
             });
         });
     }
@@ -182,5 +180,17 @@ final class ConsommationAuxiliaireRule extends SystemeInputRuleIterator
                 return max($max, $item->type()->fcot());
             }, 0);
         });
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function calcule(): void
+    {
+        $this->item()->entity->calcule($this->item()->entity->data()->with(
+            cef_aux: $this->cef_aux(),
+            cep_aux: $this->cep_aux(),
+            eges_aux: $this->eges_aux(),
+        ));
     }
 }

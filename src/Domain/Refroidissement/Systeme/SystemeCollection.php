@@ -17,16 +17,16 @@ final class SystemeCollection extends ArrayCollection
 
     public function find(Id $id): ?Systeme
     {
-        return $this->first(fn(Systeme $item) => $item->id()->compare($id));
+        return $this->first(fn(Systeme $item) => $item->id()->equals($id));
     }
 
     public function with_installation(Id $id): self
     {
-        return $this->filter(fn(Systeme $item) => $item->installation()->id()->compare($id));
+        return $this->filter(fn(Systeme $item) => $item->installation()->id()->equals($id));
     }
 
     public function with_generateur(Id $id): self
     {
-        return $this->filter(fn(Systeme $item) => $item->generateur()->id()->compare($id));
+        return $this->filter(fn(Systeme $item) => $item->generateur()->id()->equals($id));
     }
 }

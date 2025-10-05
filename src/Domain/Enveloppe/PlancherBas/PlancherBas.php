@@ -4,8 +4,8 @@ namespace App\Domain\Enveloppe\PlancherBas;
 
 use App\Domain\Common\ValueObject\Id;
 use App\Domain\Enveloppe\Enveloppe;
-use App\Domain\Enveloppe\Paroi\{Paroi, TypeParoi};
-use App\Domain\Enveloppe\PlancherBas\Isolation\Isolation;
+use App\Domain\Enveloppe\Paroi\{Inertie, Mitoyennete, Paroi, TypeParoi};
+use App\Domain\Enveloppe\Paroi\Isolation\Isolation;
 use App\Domain\Enveloppe\PlancherBas\Position\Position;
 use Webmozart\Assert\Assert;
 
@@ -81,9 +81,20 @@ final class PlancherBas extends Paroi
         return $this->enveloppe;
     }
 
+    /**
+     * @inheritDoc
+     */
     public static function type_paroi(): TypeParoi
     {
         return TypeParoi::PLANCHER_BAS;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function mitoyennete(): Mitoyennete
+    {
+        return $this->position->mitoyennete;
     }
 
     public function description(): string

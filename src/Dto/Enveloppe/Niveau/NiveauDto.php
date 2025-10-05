@@ -2,9 +2,9 @@
 
 namespace App\Dto\Enveloppe\Niveau;
 
-use App\Domain\Enveloppe\Niveau\InertieParoi;
 use App\Domain\Enveloppe\Niveau\Niveau;
 use App\Domain\Enveloppe\Niveau\NiveauCollection;
+use App\Domain\Enveloppe\Paroi\Inertie;
 
 final class NiveauDto
 {
@@ -12,9 +12,9 @@ final class NiveauDto
         public string $id,
         public string $description,
         public float $surface,
-        public InertieParoi $inertie_paroi_verticale,
-        public InertieParoi $inertie_plancher_bas,
-        public InertieParoi $inertie_plancher_haut,
+        public Inertie $inertie_paroi_verticale,
+        public Inertie $inertie_plancher_bas,
+        public Inertie $inertie_plancher_haut,
     ) {}
 
     public static function from(Niveau $data): self

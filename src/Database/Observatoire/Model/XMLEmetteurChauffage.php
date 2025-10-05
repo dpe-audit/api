@@ -4,10 +4,11 @@ namespace App\Database\Observatoire\Model;
 
 use App\Domain\Chauffage\Emetteur\{TemperatureDistribution, TypeEmetteur, TypeEmission};
 use App\Domain\Chauffage\Systeme\Reseau\TypeDistribution;
-use App\Domain\Common\ValueObject\Id;
 
-final class XMLEmetteurChauffage extends XMLUniqueElement
+final class XMLEmetteurChauffage
 {
+    use WithId, WithDescription;
+
     public function __construct(
         public readonly string $reference,
         public readonly ?string $description,
@@ -74,25 +75,12 @@ final class XMLEmetteurChauffage extends XMLUniqueElement
         return $collection;
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function identifiers(): array
-    {
-        return [$this->reference];
-    }
-
-    public function description(): string
-    {
-        return $this->description ?? '-';
-    }
-
     public function appoint_electrique_sdb(): bool
     {
         return $this->enum_lien_generateur_emetteur_id === 3;
     }
 
-    public function surface_appoint_electrique_sdp(): float
+    public function surface_appoint_electrique_sdb(): float
     {
         return $this->appoint_electrique_sdb() ? $this->surface_chauffee : 0;
     }

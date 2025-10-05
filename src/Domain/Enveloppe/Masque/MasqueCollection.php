@@ -17,7 +17,7 @@ final class MasqueCollection extends ArrayCollection
 
     public function find(Id $id): ?Masque
     {
-        return array_find($this->elements, fn(Masque $item): bool => $item->id()->compare($id));
+        return array_find($this->elements, fn(Masque $item): bool => $item->id()->equals($id));
     }
 
     public function with_type(TypeMasque $type): static

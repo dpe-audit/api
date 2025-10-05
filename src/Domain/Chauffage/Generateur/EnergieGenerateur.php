@@ -20,6 +20,7 @@ enum EnergieGenerateur: string
     {
         return match ($this) {
             self::BOIS_BUCHE, self::BOIS_PLAQUETTE, self::BOIS_GRANULE => Energie::BOIS,
+            self::RESEAU_CHALEUR => Energie::RESEAU_URBAIN,
             default => Energie::from($this->value),
         };
     }

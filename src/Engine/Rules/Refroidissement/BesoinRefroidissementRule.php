@@ -13,7 +13,7 @@ final class BesoinRefroidissementRule extends Rule
     public function bfr(): float
     {
         return $this->get("bfr", function () {
-            return Mois::reduce(fn(float $carry, Mois $mois) => $carry += $this->bfr_j($mois));
+            return Mois::reduce(fn(Mois $mois) => $this->bfr_j($mois));
         });
     }
 
@@ -106,5 +106,15 @@ final class BesoinRefroidissementRule extends Rule
         return $this->get('cin', function (): float {
             return $this->data()->enveloppe->inertie()->cin() * $this->data()->batiment->surface_habitable();
         });
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function calcule(): void
+    {
+        $this->ressource()->refroidissement()->calcule($this->ressource()->refroidissement()->data()->with(
+            bfr: $this->bfr(),
+        ));
     }
 }

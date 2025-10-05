@@ -2,7 +2,7 @@
 
 namespace App\Domain\Ecs\Generateur\Position;
 
-use App\Domain\Chauffage\Generateur\Generateur;
+use App\Domain\Common\ValueObject\Id;
 use App\Domain\Reseau\Reseau;
 
 final class Position
@@ -12,7 +12,7 @@ final class Position
         public readonly bool $generateur_multi_batiment,
         public readonly bool $position_volume_chauffe,
         public readonly ?PositionChauffeEau $position_chauffe_eau,
-        public readonly ?Generateur $generateur_mixte,
+        public readonly ?Id $generateur_mixte_id,
         public readonly ?Reseau $reseau_chaleur,
     ) {}
 
@@ -21,7 +21,7 @@ final class Position
         bool $generateur_multi_batiment,
         bool $position_volume_chauffe,
         ?PositionChauffeEau $position_chauffe_eau,
-        ?Generateur $generateur_mixte,
+        ?Id $generateur_mixte_id,
         ?Reseau $reseau_chaleur
     ): self {
         return new self(
@@ -29,7 +29,7 @@ final class Position
             generateur_multi_batiment: $generateur_multi_batiment,
             position_volume_chauffe: $position_volume_chauffe,
             position_chauffe_eau: $position_chauffe_eau,
-            generateur_mixte: $generateur_mixte,
+            generateur_mixte_id: $generateur_mixte_id,
             reseau_chaleur: $reseau_chaleur
         );
     }

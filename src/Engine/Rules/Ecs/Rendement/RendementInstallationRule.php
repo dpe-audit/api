@@ -28,4 +28,84 @@ final class RendementInstallationRule extends InstallationInputRuleIterator
             ) ?? throw new \DomainException("Valeurs forfaitaires Fecs non trouvées");
         });
     }
+
+    /**
+     * Inverse du rendement de l'installation
+     */
+    public function iecs(): float
+    {
+        return $this->get('iecs', function (): float {
+            return array_sum(array_map(
+                fn($item) => $item->iecs() * $item->rdim(),
+                $this->item()->systemes()
+            ));
+        });
+    }
+
+    /**
+     * Rendement de distribution de l'installation
+     */
+    final public function rd(): float
+    {
+        return $this->get('rd', function (): float {
+            return array_sum(array_map(
+                fn($item) => $item->rd() * $item->rdim(),
+                $this->item()->systemes()
+            ));
+        });
+    }
+
+    /**
+     * Rendement de stockage de l'installation
+     */
+    public function rs(): float
+    {
+        return $this->get('rs', function (): float {
+            return array_sum(array_map(
+                fn($item) => $item->rs() * $item->rdim(),
+                $this->item()->systemes()
+            ));
+        });
+    }
+
+    /**
+     * Rendement de génération/stockage de l'installation
+     */
+    public function rgs(): float
+    {
+        return $this->get('rgs', function (): float {
+            return array_sum(array_map(
+                fn($item) => $item->rgs() * $item->rdim(),
+                $this->item()->systemes()
+            ));
+        });
+    }
+
+    /**
+     * Rendement de génération de l'installation
+     */
+    public function rg(): float
+    {
+        return $this->get('rg', function (): float {
+            return array_sum(array_map(
+                fn($item) => $item->rg() * $item->rdim(),
+                $this->item()->systemes()
+            ));
+        });
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function calcule(): void
+    {
+        $this->item()->entity->calcule($this->item()->entity->data()->with(
+            fecs: $this->fecs(),
+            iecs: $this->iecs(),
+            rd: $this->rd(),
+            rg: $this->rg(),
+            rgs: $this->rgs(),
+            rs: $this->rs(),
+        ));
+    }
 }

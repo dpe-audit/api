@@ -7,6 +7,8 @@ use App\Domain\Logement\Typologie;
 
 final class XMLLogementVisite
 {
+    use WithId;
+
     public function __construct(
         public readonly string $description,
         public readonly int $enum_position_etage_logement_id,

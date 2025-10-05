@@ -62,6 +62,26 @@ final class RessourceDto
         );
     }
 
+    #[Constraints\IsTrue]
+    public function is_generateur_mixte_exists(): bool
+    {
+        foreach ($this->chauffage->generateurs as $generateur) {
+            if ($generateur->position->generateur_mixte_id) {
+                if (null === array_find($this->ecs->generateurs, fn($item) => $item->id === $generateur->position->generateur_mixte_id)) {
+                    return false;
+                }
+            }
+        }
+        foreach ($this->ecs->generateurs as $generateur) {
+            if ($generateur->position->generateur_mixte_id) {
+                if (null === array_find($this->chauffage->generateurs, fn($item) => $item->id === $generateur->position->generateur_mixte_id)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public function __normalize(): array
     {
         return [

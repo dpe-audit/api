@@ -17,7 +17,7 @@ final class ParoiCollection extends ArrayCollection
 
     public function find(Id $id): ?Paroi
     {
-        return array_find($this->elements, fn(Paroi $item): bool => $item->id()->compare($id));
+        return array_find($this->elements, fn(Paroi $item): bool => $item->id()->equals($id));
     }
 
     public function with_mitoyennetes(Mitoyennete ...$mitoyennetes): self

@@ -2,6 +2,8 @@
 
 namespace App\Domain\Ecs;
 
+use App\Domain\Common\Consommation\ConsommationCollection;
+use App\Domain\Common\Perte\PerteCollection;
 use Webmozart\Assert\Assert;
 
 final class EcsData
@@ -10,33 +12,27 @@ final class EcsData
         public readonly ?float $nmax,
         public readonly ?float $nadeq,
         public readonly ?float $becs,
-        public readonly ?float $cef,
-        public readonly ?float $cep,
-        public readonly ?float $eges,
+        public readonly ?PerteCollection $pertes,
+        public readonly ?ConsommationCollection $consommations,
     ) {}
 
     public static function create(
         ?float $nmax = null,
         ?float $nadeq = null,
         ?float $becs = null,
-        ?float $cef = null,
-        ?float $cep = null,
-        ?float $eges = null,
+        ?PerteCollection $pertes = null,
+        ?ConsommationCollection $consommations = null,
     ): self {
         Assert::nullOrGreaterThan($nmax, 0);
         Assert::nullOrGreaterThan($nadeq, 0);
         Assert::nullOrGreaterThan($becs, 0);
-        Assert::nullOrGreaterThan($cef, 0);
-        Assert::nullOrGreaterThan($cep, 0);
-        Assert::nullOrGreaterThan($eges, 0);
 
         return new self(
             nmax: $nmax,
             nadeq: $nadeq,
             becs: $becs,
-            cef: $cef,
-            cep: $cep,
-            eges: $eges,
+            pertes: $pertes,
+            consommations: $consommations,
         );
     }
 
@@ -44,17 +40,15 @@ final class EcsData
         ?float $nmax = null,
         ?float $nadeq = null,
         ?float $becs = null,
-        ?float $cef = null,
-        ?float $cep = null,
-        ?float $eges = null,
+        ?PerteCollection $pertes = null,
+        ?ConsommationCollection $consommations = null,
     ): self {
         return self::create(
             nmax: $nmax ?? $this->nmax,
             nadeq: $nadeq ?? $this->nadeq,
             becs: $becs ?? $this->becs,
-            cef: $cef ?? $this->cef,
-            cep: $cep ?? $this->cep,
-            eges: $eges ?? $this->eges,
+            pertes: $pertes ?? $this->pertes,
+            consommations: $consommations ?? $this->consommations,
         );
     }
 }

@@ -2,11 +2,15 @@
 
 namespace App\Engine\Input\Ecs;
 
+use App\Domain\Common\Consommation\ConsommationCollection;
+use App\Domain\Common\Perte\PerteCollection;
 use App\Domain\Ecs\Installation\Installation;
 use App\Domain\Ecs\Installation\Solaire\Usage;
 use App\Engine\{Engine, Input};
 use App\Engine\Rules\Ecs\Dimensionnement\DimensionnementInstallationRule;
 use App\Engine\Rules\Ecs\Rendement\RendementInstallationRule;
+use App\Engine\Rules\Ecs\ConsommationInstallationRule;
+use App\Engine\Rules\Ecs\Perte\PerteInstallationRule;
 
 final class InstallationInput extends Input
 {
@@ -23,6 +27,9 @@ final class InstallationInput extends Input
         );
     }
 
+    /**
+     * @return SystemeInput[]
+     */
     public function systemes(): array
     {
         return array_filter(
@@ -71,5 +78,19 @@ final class InstallationInput extends Input
         /** @var RendementInstallationRule $rule */
         $rule = $this->requireIterator(RendementInstallationRule::class, $this);
         return $rule->fecs();
+    }
+
+    public function pertes(): PerteCollection
+    {
+        /** @var PerteInstallationRule $rule */
+        $rule = $this->requireIterator(PerteInstallationRule::class, $this);
+        return $rule->pertes();
+    }
+
+    public function consommations(): ConsommationCollection
+    {
+        /** @var ConsommationInstallationRule $rule */
+        $rule = $this->requireIterator(ConsommationInstallationRule::class, $this);
+        return $rule->consommations();
     }
 }

@@ -75,7 +75,7 @@ final class ApportEnveloppeRule extends Rule
     public function apport_interne(): float
     {
         return $this->get("ai", function (): float {
-            return Mois::reduce(fn(float $carry, Mois $mois) => $carry += $this->apport_interne_j($mois));
+            return Mois::reduce(fn(Mois $mois) => $this->apport_interne_j($mois));
         });
     }
 
@@ -85,7 +85,7 @@ final class ApportEnveloppeRule extends Rule
     public function apport_interne_fr(): float
     {
         return $this->get("ai_fr", function (): float {
-            return Mois::reduce(fn(float $carry, Mois $mois) => $carry += $this->apport_interne_fr_j($mois));
+            return Mois::reduce(fn(Mois $mois) => $this->apport_interne_fr_j($mois));
         });
     }
 
@@ -124,7 +124,7 @@ final class ApportEnveloppeRule extends Rule
     public function apport_solaire(): float
     {
         return $this->get("as", function (): float {
-            return Mois::reduce(fn(float $carry, Mois $mois) => $carry += $this->apport_solaire_j($mois));
+            return Mois::reduce(fn(Mois $mois) => $this->apport_solaire_j($mois));
         });
     }
 
@@ -134,7 +134,7 @@ final class ApportEnveloppeRule extends Rule
     public function apport_solaire_fr(): float
     {
         return $this->get("as_fr", function (): float {
-            return Mois::reduce(fn(float $carry, Mois $mois) => $carry += $this->apport_solaire_fr_j($mois));
+            return Mois::reduce(fn(Mois $mois) => $this->apport_solaire_fr_j($mois));
         });
     }
 

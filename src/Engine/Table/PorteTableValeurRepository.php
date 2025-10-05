@@ -3,7 +3,7 @@
 namespace App\Engine\Table;
 
 use App\Domain\Enveloppe\Porte\Materiau;
-use App\Domain\Enveloppe\Porte\Position\Mitoyennete;
+use App\Domain\Enveloppe\Paroi\Mitoyennete;
 use App\Domain\Enveloppe\Porte\Vitrage\TypeVitrage;
 
 interface PorteTableValeurRepository

@@ -11,6 +11,8 @@ use App\Domain\Enveloppe\DoubleFenetre\Vitrage\TypeVitrage;
 
 final class XMLDoubleFenetre
 {
+    use WithId;
+
     public function __construct(
         public readonly int $enum_type_pose_id,
         public readonly int $enum_type_vitrage_id,
@@ -62,7 +64,7 @@ final class XMLDoubleFenetre
 
     public function description(): string
     {
-        return 'Description non renseignée';
+        return 'Non renseigné';
     }
 
     public function type_baie(): TypeBaie

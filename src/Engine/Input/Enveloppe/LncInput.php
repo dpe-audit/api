@@ -46,7 +46,7 @@ final class LncInput extends Input
     {
         return array_filter(
             $this->context->data()->enveloppe->baies,
-            fn(BaieInput $item) => $item->local_non_chauffe()?->entity->id()->compare($this->entity->id()),
+            fn(BaieInput $item) => $item->local_non_chauffe()?->entity->id()->equals($this->entity->id()),
         );
     }
 

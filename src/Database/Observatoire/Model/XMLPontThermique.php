@@ -7,6 +7,8 @@ use App\Domain\Enveloppe\PontThermique\Liaison\TypeLiaison;
 
 final class XMLPontThermique extends XMLUniqueElement
 {
+    use WithDescription, WithReferences;
+
     public function __construct(
         public readonly string $reference,
         public readonly ?string $reference_1,

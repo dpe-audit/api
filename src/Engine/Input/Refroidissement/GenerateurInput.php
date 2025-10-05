@@ -14,6 +14,17 @@ final class GenerateurInput extends Input
         public readonly Generateur $entity,
     ) {}
 
+    /**
+     * @return SystemeInput[]
+     */
+    public function systemes(): array
+    {
+        return array_filter(
+            $this->context->data()->refroidissement->systemes,
+            fn($item) => $item->entity->generateur() === $this->entity
+        );
+    }
+
     public function seer_saisi(): ?float
     {
         return $this->entity->seer();

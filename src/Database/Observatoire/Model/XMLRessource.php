@@ -2,15 +2,13 @@
 
 namespace App\Database\Observatoire\Model;
 
-use App\Domain\Common\ValueObject\Id;
-
 /**
  * @property null|array<XMLLogement> $logement_collection
  * @property null|array<XMLLogementVisite> $logement_visite_collection
  */
 final class XMLRessource
 {
-    public readonly Id $id;
+    use WithId;
 
     public function __construct(
         public readonly ?string $numero_dpe,
@@ -20,9 +18,7 @@ final class XMLRessource
         public readonly ?XMLLogement $logement,
         public readonly ?array $logement_collection,
         public readonly ?array $logement_visite_collection,
-    ) {
-        $this->id = Id::create();
-    }
+    ) {}
 
     public static function from(\SimpleXMLElement $xml): self
     {

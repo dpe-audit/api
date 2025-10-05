@@ -2,7 +2,7 @@
 
 namespace App\Domain\Chauffage\Generateur\Position;
 
-use App\Domain\Ecs\Generateur\Generateur;
+use App\Domain\Common\ValueObject\Id;
 use App\Domain\Reseau\Reseau;
 
 final class Position
@@ -14,7 +14,7 @@ final class Position
         public readonly ?int $cascade,
         public readonly ?int $priorite_cascade,
         public readonly ?PositionChaudiere $position_chaudiere,
-        public readonly ?Generateur $generateur_mixte,
+        public readonly ?Id $generateur_mixte_id,
         public readonly ?Reseau $reseau_chaleur,
     ) {}
 
@@ -25,7 +25,7 @@ final class Position
         ?int $cascade,
         ?int $priorite_cascade,
         ?PositionChaudiere $position_chaudiere,
-        ?Generateur $generateur_mixte,
+        ?Id $generateur_mixte_id,
         ?Reseau $reseau_chaleur,
     ): self {
         return new self(
@@ -35,7 +35,7 @@ final class Position
             cascade: $cascade,
             priorite_cascade: $priorite_cascade,
             position_chaudiere: $position_chaudiere,
-            generateur_mixte: $generateur_mixte,
+            generateur_mixte_id: $generateur_mixte_id,
             reseau_chaleur: $reseau_chaleur,
         );
     }

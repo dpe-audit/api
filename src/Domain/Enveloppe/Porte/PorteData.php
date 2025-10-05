@@ -2,6 +2,7 @@
 
 namespace App\Domain\Enveloppe\Porte;
 
+use App\Domain\Enveloppe\Paroi\Performance;
 use Webmozart\Assert\Assert;
 
 final class PorteData

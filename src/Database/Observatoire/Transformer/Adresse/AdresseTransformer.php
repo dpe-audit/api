@@ -10,7 +10,6 @@ final class AdresseTransformer
     public function __invoke(XMLRessource $ressource): AdresseDto
     {
         $adresse_bien = $ressource->administratif->geolocalisation->adresses->adresse_bien;
-
         return new AdresseDto(
             nom: $adresse_bien->nom(),
             code_postal: $adresse_bien->code_postal(),

@@ -8,8 +8,10 @@ use App\Domain\Enveloppe\Lnc\Baie\TypeVitrage;
 /**
  * @property array<XMLEtsBaie> $ets_baie_collection
  */
-final class XMLEts extends XMLUniqueElement
+final class XMLEts
 {
+    use WithReferences, WithDescription;
+
     public function __construct(
         public readonly string $reference,
         public readonly ?string $description,

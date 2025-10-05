@@ -148,8 +148,8 @@ final class PontThermiqueInput extends Input
 
     public function type_pose(): TypePose
     {
-        $enum = $this->entity->liaison()->baie()?->position()?->type_pose
-            ?? $this->entity->liaison()->porte()?->type_pose();
+        $enum = $this->entity->liaison()->baie()?->position()->type_pose
+            ?? $this->entity->liaison()->porte()?->position()->type_pose;
         return $enum ? TypePose::from($enum->value) : TypePose::NU_INTERIEUR;
     }
 

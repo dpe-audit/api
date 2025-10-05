@@ -6,7 +6,7 @@ use App\Domain\Common\Enum\Mois;
 use App\Domain\Ecs\Systeme\Reseau\{BouclageReseau, IsolationReseau};
 use App\Domain\Ecs\Systeme\Systeme;
 use App\Engine\{Engine, Input};
-use App\Engine\Rules\Ecs\{ConsommationAuxiliaireRule, ConsommationEcsRule};
+use App\Engine\Rules\Ecs\{ConsommationAuxiliaireRule, ConsommationSystemeRule};
 use App\Engine\Rules\Ecs\Dimensionnement\DimensionnementSystemeRule;
 use App\Engine\Rules\Ecs\Perte\PerteSystemeRule;
 use App\Engine\Rules\Ecs\Rendement\RendementSystemeRule;
@@ -84,9 +84,9 @@ final class SystemeInput extends Input
         return $this->requireIterator(RendementSystemeRule::class, $this);
     }
 
-    public function consommation_rule(): ConsommationEcsRule
+    public function consommation_rule(): ConsommationSystemeRule
     {
-        return $this->requireIterator(ConsommationEcsRule::class, $this);
+        return $this->requireIterator(ConsommationSystemeRule::class, $this);
     }
 
     public function consommation_auxiliaire_rule(): ConsommationAuxiliaireRule
@@ -124,6 +124,54 @@ final class SystemeInput extends Input
         return $this->rendement_rule()->rg();
     }
 
+    public function pertes_generation(): float
+    {
+        return $this->perte_rule()->pertes_generation();
+    }
+
+    public function pertes_generation_recuperables(?Mois $mois = null): float
+    {
+        return $mois
+            ? $this->perte_rule()->pertes_generation_recuperables_j($mois)
+            : $this->perte_rule()->pertes_generation_recuperables();
+    }
+
+    public function pertes_stockage(): float
+    {
+        return $this->perte_rule()->pertes_stockage();
+    }
+
+    public function pertes_stockage_recuperables(?Mois $mois = null): float
+    {
+        return $mois
+            ? $this->perte_rule()->pertes_stockage_recuperables_j($mois)
+            : $this->perte_rule()->pertes_stockage_recuperables();
+    }
+
+    public function pertes_stockage_integre(): float
+    {
+        return $this->perte_rule()->pertes_stockage_integre();
+    }
+
+    public function pertes_stockage_integre_recuperables(?Mois $mois = null): float
+    {
+        return $mois
+            ? $this->perte_rule()->pertes_stockage_integre_recuperables_j($mois)
+            : $this->perte_rule()->pertes_stockage_integre_recuperables();
+    }
+
+    public function pertes_stockage_independant(): float
+    {
+        return $this->perte_rule()->pertes_stockage_independant();
+    }
+
+    public function pertes_stockage_independant_recuperables(?Mois $mois = null): float
+    {
+        return $mois
+            ? $this->perte_rule()->pertes_stockage_independant_recuperables_j($mois)
+            : $this->perte_rule()->pertes_stockage_independant_recuperables();
+    }
+
     public function pertes_distribution(?Mois $mois = null): float
     {
         return $mois ? $this->perte_rule()->pertes_distribution_j($mois) : $this->perte_rule()->pertes_distribution();
@@ -134,43 +182,33 @@ final class SystemeInput extends Input
         return $mois ? $this->perte_rule()->pertes_distribution_recuperables_j($mois) : $this->perte_rule()->pertes_distribution_recuperables();
     }
 
-    public function pertes_stockage(): float
+    public function cef_ecs(): float
     {
-        return $this->perte_rule()->pertes_stockage();
+        return $this->consommation_rule()->cef_ecs();
     }
 
-    public function pertes_stockage_recuperables(Mois $mois): float
+    public function cep_ecs(): float
     {
-        return $this->perte_rule()->pertes_stockage_recuperables_j($mois);
+        return $this->consommation_rule()->cep_ecs();
     }
 
-    public function cef(): float
+    public function eges_ecs(): float
     {
-        return $this->consommation_rule()->cef();
+        return $this->consommation_rule()->eges_ecs();
     }
 
-    public function cep(): float
+    public function cef_aux(): float
     {
-        return $this->consommation_rule()->cep();
+        return $this->consommation_auxiliaire_rule()->cef_aux();
     }
 
-    public function eges(): float
+    public function cep_aux(): float
     {
-        return $this->consommation_rule()->eges();
+        return $this->consommation_auxiliaire_rule()->cep_aux();
     }
 
-    public function cef_auxiliaire(): float
+    public function eges_aux(): float
     {
-        return $this->consommation_auxiliaire_rule()->cef();
-    }
-
-    public function cep_auxiliaire(): float
-    {
-        return $this->consommation_auxiliaire_rule()->cep();
-    }
-
-    public function eges_auxiliaire(): float
-    {
-        return $this->consommation_auxiliaire_rule()->eges();
+        return $this->consommation_auxiliaire_rule()->eges_aux();
     }
 }

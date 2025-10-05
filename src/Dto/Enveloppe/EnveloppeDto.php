@@ -90,7 +90,7 @@ final class EnveloppeDto
     {
         foreach ($this->baies as $baie) {
             foreach ($baie->masques as $id) {
-                if (false === array_find($this->masques, fn(MasqueDto $masque) => $masque->id === $id)) {
+                if (null === array_find($this->masques, fn(MasqueDto $masque) => $masque->id === $id)) {
                     return false;
                 }
             }
@@ -105,7 +105,7 @@ final class EnveloppeDto
             if (null === $baie->position->double_fenetre_id) {
                 continue;
             }
-            if (false === array_find($this->doubles_fenetres, fn(DoubleFenetreDto $double_fenetre) => $double_fenetre->id === $baie->position->double_fenetre_id)) {
+            if (null === array_find($this->doubles_fenetres, fn(DoubleFenetreDto $double_fenetre) => $double_fenetre->id === $baie->position->double_fenetre_id)) {
                 return false;
             }
         }
@@ -190,7 +190,7 @@ final class EnveloppeDto
             if (null === $id = $paroi->position->local_non_chauffe_id) {
                 continue;
             }
-            if (false === array_find($this->locaux_non_chauffes, fn(LncDto $dto) => $dto->id === $id)) {
+            if (null === array_find($this->locaux_non_chauffes, fn(LncDto $dto) => $dto->id === $id)) {
                 return false;
             }
         }
@@ -198,7 +198,7 @@ final class EnveloppeDto
             if (null === $id = $paroi->position->local_non_chauffe_id) {
                 continue;
             }
-            if (false === array_find($this->locaux_non_chauffes, fn(LncDto $dto) => $dto->id === $id)) {
+            if (null === array_find($this->locaux_non_chauffes, fn(LncDto $dto) => $dto->id === $id)) {
                 return false;
             }
         }
@@ -206,7 +206,7 @@ final class EnveloppeDto
             if (null === $id = $paroi->position->local_non_chauffe_id) {
                 continue;
             }
-            if (false === array_find($this->locaux_non_chauffes, fn(LncDto $dto) => $dto->id === $id)) {
+            if (null === array_find($this->locaux_non_chauffes, fn(LncDto $dto) => $dto->id === $id)) {
                 return false;
             }
         }
@@ -214,7 +214,7 @@ final class EnveloppeDto
             if (null === $id = $paroi->position->local_non_chauffe_id) {
                 continue;
             }
-            if (false === array_find($this->locaux_non_chauffes, fn(LncDto $dto) => $dto->id === $id)) {
+            if (null === array_find($this->locaux_non_chauffes, fn(LncDto $dto) => $dto->id === $id)) {
                 return false;
             }
         }
@@ -222,7 +222,7 @@ final class EnveloppeDto
             if (null === $id = $paroi->position->local_non_chauffe_id) {
                 continue;
             }
-            if (false === array_find($this->locaux_non_chauffes, fn(LncDto $dto) => $dto->id === $id)) {
+            if (null === array_find($this->locaux_non_chauffes, fn(LncDto $dto) => $dto->id === $id)) {
                 return false;
             }
         }

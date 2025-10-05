@@ -2,6 +2,7 @@
 
 namespace App\Engine\Rules\Chauffage\Perte;
 
+use App\Domain\Chauffage\Generateur\Pertes;
 use App\Domain\Common\Enum\Mois;
 use App\Engine\Input\Chauffage\GenerateurInputRuleIterator;
 
@@ -13,9 +14,7 @@ final class PerteGenerationRule extends GenerateurInputRuleIterator
     public function pertes_generation(): float
     {
         return $this->get('pertes_generation', function (): float {
-            return Mois::reduce(function (float $carry, Mois $mois): float {
-                return $carry += $this->pertes_generation_j($mois);
-            });
+            return Mois::reduce(fn(Mois $mois): float => $this->pertes_generation_j($mois));
         });
     }
 
@@ -46,9 +45,7 @@ final class PerteGenerationRule extends GenerateurInputRuleIterator
     public function pertes_generation_recuperables(): float
     {
         return $this->get('pertes_generation_recuperables', function (): float {
-            return Mois::reduce(function (float $carry, Mois $mois): float {
-                return $carry + $this->pertes_generation_recuperables_j($mois);
-            });
+            return Mois::reduce(fn(Mois $mois): float => $this->pertes_generation_recuperables_j($mois));
         });
     }
 
@@ -61,5 +58,18 @@ final class PerteGenerationRule extends GenerateurInputRuleIterator
         return $this->get($key, function () use ($mois): float {
             return 0.48 * $this->pertes_generation_j($mois);
         });
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function calcule(): void
+    {
+        $this->item()->entity->calcule($this->item()->entity->data()->with(
+            pertes: Pertes::create(
+                pertes_generation: $this->pertes_generation(),
+                pertes_generation_recuperables: $this->pertes_generation_recuperables(),
+            )
+        ));
     }
 }

@@ -4,7 +4,7 @@ namespace App\Domain\Enveloppe\Porte;
 
 use App\Domain\Common\ValueObject\Id;
 use App\Domain\Enveloppe\Enveloppe;
-use App\Domain\Enveloppe\Paroi\{Paroi, TypeParoi};
+use App\Domain\Enveloppe\Paroi\{Mitoyennete, Paroi, TypeParoi};
 use App\Domain\Enveloppe\Porte\Menuiserie\Menuiserie;
 use App\Domain\Enveloppe\Porte\Position\Position;
 use App\Domain\Enveloppe\Porte\Vitrage\Vitrage;
@@ -18,7 +18,6 @@ final class Porte extends Paroi
         private readonly Id $id,
         private readonly Enveloppe $enveloppe,
         private string $description,
-        private TypePose $type_pose,
         private ?Isolation $isolation,
         private ?Materiau $materiau,
         private ?int $annee_installation,
@@ -34,7 +33,6 @@ final class Porte extends Paroi
         Id $id,
         Enveloppe $enveloppe,
         string $description,
-        TypePose $type_pose,
         ?Isolation $isolation,
         ?Materiau $materiau,
         ?int $annee_installation,
@@ -50,7 +48,6 @@ final class Porte extends Paroi
             id: $id,
             enveloppe: $enveloppe,
             description: $description,
-            type_pose: $type_pose,
             isolation: $isolation,
             materiau: $materiau,
             annee_installation: $annee_installation,
@@ -83,19 +80,25 @@ final class Porte extends Paroi
         return $this->enveloppe;
     }
 
+    /**
+     * @inheritDoc
+     */
     public static function type_paroi(): TypeParoi
     {
         return TypeParoi::PORTE;
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function mitoyennete(): Mitoyennete
+    {
+        return $this->position->mitoyennete;
+    }
+
     public function description(): string
     {
         return $this->description;
-    }
-
-    public function type_pose(): TypePose
-    {
-        return $this->type_pose;
     }
 
     public function isolation(): ?Isolation

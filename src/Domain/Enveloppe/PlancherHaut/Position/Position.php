@@ -3,6 +3,7 @@
 namespace App\Domain\Enveloppe\PlancherHaut\Position;
 
 use App\Domain\Enveloppe\Lnc\Lnc;
+use App\Domain\Enveloppe\Paroi\Mitoyennete;
 
 final class Position
 {

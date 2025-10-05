@@ -2,14 +2,15 @@
 
 namespace App\Engine\Input\Ecs;
 
+use App\Domain\Common\Consommation\ConsommationCollection;
 use App\Domain\Common\Enum\Mois;
+use App\Domain\Common\Perte\PerteCollection;
 use App\Domain\Ecs\Generateur\Generateur;
 use App\Domain\Ecs\Installation\Installation;
 use App\Domain\Ecs\Systeme\Systeme;
 use App\Engine\{Engine, Input};
-use App\Engine\Rules\Ecs\BesoinEcsRule;
+use App\Engine\Rules\Ecs\{BesoinEcsRule, ConsommationEcsRule};
 use App\Engine\Rules\Ecs\Perte\PerteEcsRule;
-use App\Engine\Rules\Performance\{PerformanceAuxiliairesEcsRule, PerformanceEcsRule};
 
 final class EcsInput extends Input
 {
@@ -40,19 +41,9 @@ final class EcsInput extends Input
         return $this->require(BesoinEcsRule::class);
     }
 
-    public function pertes_rule(): PerteEcsRule
+    public function consommation_rule(): ConsommationEcsRule
     {
-        return $this->require(PerteEcsRule::class);
-    }
-
-    public function performance_rule(): PerformanceEcsRule
-    {
-        return $this->require(PerformanceEcsRule::class);
-    }
-
-    public function performance_auxiliaires_rule(): PerformanceAuxiliairesEcsRule
-    {
-        return $this->require(PerformanceAuxiliairesEcsRule::class);
+        return $this->require(ConsommationEcsRule::class);
     }
 
     public function becs(?Mois $mois = null): float
@@ -70,43 +61,52 @@ final class EcsInput extends Input
         return $this->besoin_rule()->nmax();
     }
 
-    public function pertes(): float
+    public function pertes(): PerteCollection
     {
-        return $this->pertes_rule()->pertes();
+        /** @var PerteEcsRule $rule */
+        $rule = $this->require(PerteEcsRule::class);
+        return $rule->pertes();
     }
 
     public function pertes_recuperables(?Mois $mois = null): float
     {
-        return $mois ? $this->pertes_rule()->pertes_recuperables_j($mois) : $this->pertes_rule()->pertes_recuperables();
+        /** @var PerteEcsRule $rule */
+        $rule = $this->require(PerteEcsRule::class);
+        return $mois ? $rule->pertes_recuperables_j($mois) : $rule->pertes_recuperables();
     }
 
-    public function cef(): float
+    public function consommations(): ConsommationCollection
     {
-        return $this->performance_rule()->cef();
+        return $this->consommation_rule()->consommations();
     }
 
-    public function cep(): float
+    public function cef_ecs(): float
     {
-        return $this->performance_rule()->cep();
+        return $this->consommation_rule()->cef_ecs();
     }
 
-    public function eges(): float
+    public function cep_ecs(): float
     {
-        return $this->performance_rule()->eges();
+        return $this->consommation_rule()->cep_ecs();
     }
 
-    public function cef_auxiliaires(): float
+    public function eges_ecs(): float
     {
-        return $this->performance_auxiliaires_rule()->cef();
+        return $this->consommation_rule()->eges_ecs();
     }
 
-    public function cep_auxiliaires(): float
+    public function cef_aux(): float
     {
-        return $this->performance_auxiliaires_rule()->cep();
+        return $this->consommation_rule()->cef_aux();
     }
 
-    public function eges_auxiliaires(): float
+    public function cep_aux(): float
     {
-        return $this->performance_auxiliaires_rule()->eges();
+        return $this->consommation_rule()->cep_aux();
+    }
+
+    public function eges_aux(): float
+    {
+        return $this->consommation_rule()->eges_aux();
     }
 }

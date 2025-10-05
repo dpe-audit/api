@@ -3,8 +3,7 @@
 namespace App\Engine\Table;
 
 use App\Domain\Adresse\ZoneClimatique;
-use App\Domain\Ressource\EtiquetteClimat;
-use App\Domain\Ressource\EtiquetteEnergie;
+use App\Domain\Ressource\{EtiquetteClimat, EtiquetteEnergie};
 
 interface PerformanceTableValeurRepository
 {

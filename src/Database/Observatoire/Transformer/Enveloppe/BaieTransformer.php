@@ -2,15 +2,16 @@
 
 namespace App\Database\Observatoire\Transformer\Enveloppe;
 
-use App\Database\Observatoire\Model\XMLRessource;
-use App\Dto\Enveloppe\Baie\BaieDto;
-use App\Dto\Enveloppe\Baie\MenuiserieDto;
-use App\Dto\Enveloppe\Baie\PositionDto;
-use App\Dto\Enveloppe\Baie\SurvitrageDto;
-use App\Dto\Enveloppe\Baie\VitrageDto;
+use App\Database\Observatoire\Model\{XMLBaieVitree, XMLRessource};
+use App\Dto\Enveloppe\Baie\{BaieDto, MenuiserieDto, PositionDto, SurvitrageDto, VitrageDto};
 
 final class BaieTransformer
 {
+    public function supports(XMLBaieVitree $element): bool
+    {
+        return $element->nb_baie > 0 && $element->surface() > 0;
+    }
+
     /**
      * @return array<BaieDto>
      */
@@ -20,6 +21,9 @@ final class BaieTransformer
         $collection = [];
 
         foreach ($ressource->logement()->enveloppe->baie_vitree_collection as $baie_vitree) {
+            if (false === $this->supports($baie_vitree)) {
+                continue;
+            }
             $masques = [];
 
             if ($baie_vitree->masque_proche_id()) {
@@ -31,7 +35,6 @@ final class BaieTransformer
             foreach ($baie_vitree->masque_lointain_non_homogene_collection as $index => $value) {
                 $masques[] = (string) $baie_vitree->masque_lointain_non_homogene_id($index);
             }
-
             $collection[] = new BaieDto(
                 id: (string) $baie_vitree->id(),
                 description: $baie_vitree->description(),
@@ -50,9 +53,9 @@ final class BaieTransformer
                     orientation: $baie_vitree->orientation(),
                     type_pose: $baie_vitree->type_pose(),
                     presence_soubassement: $baie_vitree->presence_soubassement(),
-                    paroi_id: $baie_vitree->paroi_id($ressource)?->toBinary(),
-                    local_non_chauffe_id: $baie_vitree->lnc_id($ressource)?->toBinary(),
-                    double_fenetre_id: $baie_vitree->double_fenetre_id()?->toBinary(),
+                    paroi_id: $baie_vitree->paroi_id($ressource)?->__toString(),
+                    local_non_chauffe_id: $baie_vitree->lnc_id($ressource)?->__toString(),
+                    double_fenetre_id: $baie_vitree->double_fenetre_id()?->__toString(),
                 ),
                 vitrage: new VitrageDto(
                     type: $baie_vitree->type_vitrage(),

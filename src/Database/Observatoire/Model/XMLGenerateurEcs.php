@@ -6,11 +6,12 @@ use App\Domain\Ecs\Generateur\EnergieGenerateur;
 use App\Domain\Ecs\Generateur\Position\PositionChauffeEau;
 use App\Domain\Ecs\Generateur\Signaletique\LabelGenerateur;
 use App\Domain\Ecs\Generateur\Signaletique\ModeCombustion;
-use App\Domain\Ecs\Generateur\TypeChaudiere;
 use App\Domain\Ecs\Generateur\TypeGenerateur;
 
-final class XMLGenerateurEcs extends XMLUniqueElement
+final class XMLGenerateurEcs
 {
+    use WithDescription, WithReferences;
+
     public function __construct(
         public readonly string $reference,
         public readonly ?string $reference_generateur_mixte,

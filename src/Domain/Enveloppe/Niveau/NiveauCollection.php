@@ -17,6 +17,6 @@ final class NiveauCollection extends ArrayCollection
 
     public function find(Id $id): ?Niveau
     {
-        return array_find($this->elements, fn(Niveau $item): bool => $item->id()->compare($id));
+        return array_find($this->elements, fn(Niveau $item): bool => $item->id()->equals($id));
     }
 }

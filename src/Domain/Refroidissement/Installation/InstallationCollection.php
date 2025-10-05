@@ -17,7 +17,7 @@ final class InstallationCollection extends ArrayCollection
 
     public function find(Id $id): ?Installation
     {
-        return array_find($this->elements, fn(Installation $item): bool => $item->id()->compare($id));
+        return array_find($this->elements, fn(Installation $item): bool => $item->id()->equals($id));
     }
 
     public function surface(): float

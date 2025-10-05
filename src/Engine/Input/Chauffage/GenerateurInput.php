@@ -89,7 +89,10 @@ final class GenerateurInput extends Input
 
     public function generateur_mixte(): ?GenerateurMixte
     {
-        return $this->entity->position()->generateur_mixte;
+        return $this->entity->position()->generateur_mixte_id ? array_find(
+            $this->context->data()->ecs->generateurs,
+            fn(GenerateurMixte $item) => $item->entity->id()->equals($this->entity->position()->generateur_mixte_id)
+        ) : null;
     }
 
     public function position_volume_chauffe(): bool

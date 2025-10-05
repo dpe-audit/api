@@ -6,9 +6,13 @@ use App\Domain\Chauffage\Installation\{Configuration, Installation};
 use App\Domain\Chauffage\Installation\Regulation\Regulation;
 use App\Domain\Chauffage\Systeme\Configuration as ConfigurationSysteme;
 use App\Domain\Chauffage\TypeChauffage;
+use App\Domain\Common\Consommation\ConsommationCollection;
+use App\Domain\Common\Perte\PerteCollection;
 use App\Engine\{Engine, Input};
+use App\Engine\Rules\Chauffage\ConsommationInstallationRule;
 use App\Engine\Rules\Chauffage\Dimensionnement\DimensionnementInstallationRule;
 use App\Engine\Rules\Chauffage\Rendement\RendementInstallationRule;
+use App\Engine\Rules\Chauffage\Perte\PerteInstallationRule;
 
 final class InstallationInput extends Input
 {
@@ -241,5 +245,19 @@ final class InstallationInput extends Input
     public function fch(): float
     {
         return $this->rendement_rule()->fch();
+    }
+
+    public function pertes(): PerteCollection
+    {
+        /** @var PerteInstallationRule $rule */
+        $rule = $this->requireIterator(PerteInstallationRule::class, $this);
+        return $rule->pertes();
+    }
+
+    public function consommations(): ConsommationCollection
+    {
+        /** @var ConsommationInstallationRule $rule */
+        $rule = $this->requireIterator(ConsommationInstallationRule::class, $this);
+        return $rule->consommations();
     }
 }

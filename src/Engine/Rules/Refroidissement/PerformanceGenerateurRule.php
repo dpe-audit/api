@@ -26,4 +26,14 @@ final class PerformanceGenerateurRule extends GenerateurInputRuleIterator
             ) ?? throw new \DomainException('Valeur forfaitaire EER non trouvé');
         });
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function calcule(): void
+    {
+        $this->item()->entity->calcule($this->item()->entity->data()->with(
+            eer: $this->eer(),
+        ));
+    }
 }

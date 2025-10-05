@@ -3,11 +3,7 @@
 namespace App\Database\Observatoire\Transformer\Enveloppe;
 
 use App\Database\Observatoire\Model\XMLRessource;
-use App\Dto\Enveloppe\DoubleFenetre\DoubleFenetreDto;
-use App\Dto\Enveloppe\DoubleFenetre\MenuiserieDto;
-use App\Dto\Enveloppe\DoubleFenetre\PositionDto;
-use App\Dto\Enveloppe\DoubleFenetre\SurvitrageDto;
-use App\Dto\Enveloppe\DoubleFenetre\VitrageDto;
+use App\Dto\Enveloppe\DoubleFenetre\{DoubleFenetreDto, MenuiserieDto, PositionDto, SurvitrageDto, VitrageDto};
 
 final class DoubleFenetreTransformer
 {
@@ -24,8 +20,8 @@ final class DoubleFenetreTransformer
                 continue;
             }
             $collection[] = new DoubleFenetreDto(
-                id: (string) $baie_vitree->id(),
-                description: $baie_vitree->description(),
+                id: (string) $baie_vitree_double_fenetre->id(),
+                description: $baie_vitree_double_fenetre->description(),
                 type: $baie_vitree_double_fenetre->type_baie(),
                 ug: $baie_vitree_double_fenetre->ug_saisi,
                 uw: $baie_vitree_double_fenetre->uw_saisi,

@@ -6,8 +6,9 @@ use App\Domain\Chauffage\Systeme\{Configuration, Systeme};
 use App\Domain\Chauffage\Systeme\Reseau\{IsolationReseau, TypeDistribution};
 use App\Domain\Chauffage\TypeChauffage;
 use App\Engine\{Engine, Input};
-use App\Engine\Rules\Chauffage\{ConsommationAuxiliaireRule, ConsommationChauffageRule};
+use App\Engine\Rules\Chauffage\{ConsommationAuxiliaireRule, ConsommationSystemeRule};
 use App\Engine\Rules\Chauffage\Dimensionnement\DimensionnementSystemeRule;
+use App\Engine\Rules\Chauffage\Perte\PerteSystemeRule;
 use App\Engine\Rules\Chauffage\Rendement\RendementSystemeRule;
 
 final class SystemeInput extends Input
@@ -85,14 +86,19 @@ final class SystemeInput extends Input
         return $this->requireIterator(RendementSystemeRule::class, $this);
     }
 
+    public function perte_rule(): PerteSystemeRule
+    {
+        return $this->requireIterator(PerteSystemeRule::class, $this);
+    }
+
     public function consommation_auxiliaire_rule(): ConsommationAuxiliaireRule
     {
         return $this->requireIterator(ConsommationAuxiliaireRule::class, $this);
     }
 
-    public function consommation_rule(): ConsommationChauffageRule
+    public function consommation_rule(): ConsommationSystemeRule
     {
-        return $this->requireIterator(ConsommationChauffageRule::class, $this);
+        return $this->requireIterator(ConsommationSystemeRule::class, $this);
     }
 
     public function configuration(): Configuration
@@ -130,33 +136,43 @@ final class SystemeInput extends Input
         return $this->rendement_rule()->rr();
     }
 
-    public function cef(): float
+    public function pertes_generation(): float
     {
-        return $this->consommation_rule()->cef();
+        return $this->perte_rule()->pertes_generation();
     }
 
-    public function cep(): float
+    public function pertes_generation_recuperables(): float
     {
-        return $this->consommation_rule()->cep();
+        return $this->perte_rule()->pertes_generation_recuperables();
     }
 
-    public function eges(): float
+    public function cef_ch(): float
     {
-        return $this->consommation_rule()->eges();
+        return $this->consommation_rule()->cef_ch();
     }
 
-    public function cef_auxiliaire(): float
+    public function cep_ch(): float
     {
-        return $this->consommation_auxiliaire_rule()->cef();
+        return $this->consommation_rule()->cep_ch();
     }
 
-    public function cep_auxiliaire(): float
+    public function eges_ch(): float
     {
-        return $this->consommation_auxiliaire_rule()->cep();
+        return $this->consommation_rule()->eges_ch();
     }
 
-    public function eges_auxiliaire(): float
+    public function cef_aux(): float
     {
-        return $this->consommation_auxiliaire_rule()->eges();
+        return $this->consommation_auxiliaire_rule()->cef_aux();
+    }
+
+    public function cep_aux(): float
+    {
+        return $this->consommation_auxiliaire_rule()->cep_aux();
+    }
+
+    public function eges_aux(): float
+    {
+        return $this->consommation_auxiliaire_rule()->eges_aux();
     }
 }

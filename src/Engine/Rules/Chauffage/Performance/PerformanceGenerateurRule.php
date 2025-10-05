@@ -171,9 +171,27 @@ abstract class PerformanceGenerateurRule extends GenerateurInputRuleIterator
 
     abstract public static function supports(GenerateurInput $item): bool;
 
-    /** @inheritDoc */
+    /**
+     * @inheritDoc
+     */
     public function collection(): array
     {
         return array_filter(parent::collection(), [static::class, 'supports']);
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function calcule(): void
+    {
+        $this->item()->entity->calcule($this->item()->entity->data()->with(
+            scop: $this->scop(),
+            rpn: $this->rpn(),
+            rpint: $this->rpint(),
+            qp0: $this->qp0(),
+            pveilleuse: $this->pveilleuse(),
+            tfonc30: $this->tfonc30(),
+            tfonc100: $this->tfonc100(),
+        ));
     }
 }

@@ -18,7 +18,7 @@ final class SystemeDto
         public string $generateur_id,
         public string $installation_id,
         public TypeChauffage $type,
-        public ReseauDto $reseau,
+        public ?ReseauDto $reseau,
         public array $emetteurs,
     ) {}
 

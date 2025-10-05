@@ -113,4 +113,15 @@ final class DimensionnementSystemeRule extends SystemeInputRuleIterator
             throw new \DomainException('Configuration du système indéterminée');
         });
     }
+
+    /**
+     * @inheritDoc
+     */
+    public function calcule(): void
+    {
+        $this->item()->entity->calcule($this->item()->entity->data()->with(
+            configuration: $this->configuration(),
+            rdim: $this->rdim(),
+        ));
+    }
 }

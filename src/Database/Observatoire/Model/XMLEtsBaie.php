@@ -4,8 +4,10 @@ namespace App\Database\Observatoire\Model;
 
 use App\Domain\Enveloppe\Lnc\Baie\Mitoyennete;
 
-final class XMLEtsBaie extends XMLUniqueElement
+final class XMLEtsBaie
 {
+    use WithId, WithDescription;
+
     public function __construct(
         public readonly string $reference,
         public readonly ?string $description,

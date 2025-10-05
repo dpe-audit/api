@@ -52,7 +52,7 @@ final class DeperditionPontThermiqueRule extends PontThermiqueInputRuleIterator
     public function calcule(): void
     {
         $this->item()->entity->calcule($this->item()->entity->data()->with(
-            kpt: $this->kpt(),
+            k: $this->kpt(),
             pt: $this->pt()
         ));
     }

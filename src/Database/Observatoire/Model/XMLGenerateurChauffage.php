@@ -2,12 +2,17 @@
 
 namespace App\Database\Observatoire\Model;
 
-use App\Domain\Chauffage\Generateur\{EnergieGenerateur, TypeChaudiere, TypeGenerateur};
-use App\Domain\Chauffage\Generateur\Signaletique\LabelGenerateur;
-use App\Domain\Chauffage\Generateur\Signaletique\ModeCombustion;
+use App\Domain\Chauffage\Generateur\{EnergieGenerateur, TypeGenerateur};
+use App\Domain\Chauffage\Generateur\Position\PositionChaudiere;
+use App\Domain\Chauffage\Generateur\Signaletique\{LabelGenerateur, ModeCombustion};
+use App\Domain\Chauffage\Systeme\Reseau\IsolationReseau;
+use App\Domain\Chauffage\Systeme\Reseau\TypeDistribution;
+use App\Domain\Chauffage\TypeChauffage;
 
-final class XMLGenerateurChauffage extends XMLUniqueElement
+final class XMLGenerateurChauffage
 {
+    use WithDescription, WithReferences;
+
     public function __construct(
         public readonly string $reference,
         public readonly ?string $reference_generateur_mixte,
@@ -48,42 +53,42 @@ final class XMLGenerateurChauffage extends XMLUniqueElement
     /**
      * XSD logement/installation_chauffage_collection/installation_chauffage/generateur_chauffage_collection/generateur_chauffage
      */
-    public static function from(\SimpleXMLElement $xml): self
+    public static function from(\SimpleXMLElement $element): self
     {
         return new self(
-            reference: (string) $xml->donnee_entree->reference,
-            reference_generateur_mixte: (string) $xml->donnee_entree->reference_generateur_mixte ?: null,
-            description: (string) $xml->donnee_entree->description ?: null,
-            ref_produit_generateur_ch: (string) $xml->donnee_entree->ref_produit_generateur_ch ?: null,
-            enum_type_generateur_ch_id: (int) $xml->donnee_entree->enum_type_generateur_ch_id,
-            enum_usage_generateur_id: (int) $xml->donnee_entree->enum_usage_generateur_id,
-            enum_type_energie_id: (int) $xml->donnee_entree->enum_type_energie_id,
-            position_volume_chauffe: (bool)(int) $xml->donnee_entree->position_volume_chauffe,
-            tv_rendement_generation_id: (int) $xml->donnee_entree->tv_rendement_generation_id ?: null,
-            tv_scop_id: (int) $xml->donnee_entree->tv_scop_id ?: null,
-            tv_temp_fonc_100_id: (int) $xml->donnee_entree->tv_temp_fonc_100_id ?: null,
-            tv_temp_fonc_30_id: (int) $xml->donnee_entree->tv_temp_fonc_30_id ?: null,
-            tv_generateur_combustion_id: (int) $xml->donnee_entree->tv_generateur_combustion_id ?: null,
-            tv_reseau_chaleur_id: (int) $xml->donnee_entree->tv_reseau_chaleur_id ?: null,
-            identifiant_reseau_chaleur: (string) $xml->donnee_entree->identifiant_reseau_chaleur ?: null,
-            date_arrete_reseau_chaleur: (string) $xml->donnee_entree->date_arrete_reseau_chaleur ?: null,
-            n_radiateurs_gaz: (int) $xml->donnee_entree->n_radiateurs_gaz ?: null,
-            priorite_generateur_cascade: (int) $xml->donnee_entree->priorite_generateur_cascade ?: null,
-            presence_ventouse: (bool)(int) $xml->donnee_entree->presence_ventouse ?: null,
-            presence_regulation_combustion: (bool)(int) $xml->donnee_entree->presence_regulation_combustion ?: null,
-            enum_methode_saisie_carac_sys_id: (int) $xml->donnee_entree->enum_methode_saisie_carac_sys_id,
-            enum_lien_generateur_emetteur_id: (int) $xml->donnee_entree->enum_lien_generateur_emetteur_id,
-            scop: (float) $xml->donnee_intermediaire->scop ?: null,
-            pn: (float) $xml->donnee_intermediaire->pn ?: null,
-            qp0: (float) $xml->donnee_intermediaire->qp0 ?: null,
-            pveilleuse: (float) $xml->donnee_intermediaire->pveilleuse ?: null,
-            temp_fonc_30: (float) $xml->donnee_intermediaire->temp_fonc_30 ?: null,
-            temp_fonc_100: (float) $xml->donnee_intermediaire->temp_fonc_100 ?: null,
-            rpn: (float) $xml->donnee_intermediaire->rpn ?: null,
-            rpint: (float) $xml->donnee_intermediaire->rpint ?: null,
-            rendement_generation: (float) $xml->donnee_intermediaire->rendement_generation ?: null,
-            conso_ch: (float) $xml->donnee_intermediaire->conso_ch,
-            conso_ch_depensier: (float) $xml->donnee_intermediaire->conso_ch_depensier
+            reference: (string) $element->donnee_entree->reference,
+            reference_generateur_mixte: (string) $element->donnee_entree->reference_generateur_mixte ?: null,
+            description: (string) $element->donnee_entree->description ?: null,
+            ref_produit_generateur_ch: (string) $element->donnee_entree->ref_produit_generateur_ch ?: null,
+            enum_type_generateur_ch_id: (int) $element->donnee_entree->enum_type_generateur_ch_id,
+            enum_usage_generateur_id: (int) $element->donnee_entree->enum_usage_generateur_id,
+            enum_type_energie_id: (int) $element->donnee_entree->enum_type_energie_id,
+            position_volume_chauffe: (bool)(int) $element->donnee_entree->position_volume_chauffe,
+            tv_rendement_generation_id: (int) $element->donnee_entree->tv_rendement_generation_id ?: null,
+            tv_scop_id: (int) $element->donnee_entree->tv_scop_id ?: null,
+            tv_temp_fonc_100_id: (int) $element->donnee_entree->tv_temp_fonc_100_id ?: null,
+            tv_temp_fonc_30_id: (int) $element->donnee_entree->tv_temp_fonc_30_id ?: null,
+            tv_generateur_combustion_id: (int) $element->donnee_entree->tv_generateur_combustion_id ?: null,
+            tv_reseau_chaleur_id: (int) $element->donnee_entree->tv_reseau_chaleur_id ?: null,
+            identifiant_reseau_chaleur: (string) $element->donnee_entree->identifiant_reseau_chaleur ?: null,
+            date_arrete_reseau_chaleur: (string) $element->donnee_entree->date_arrete_reseau_chaleur ?: null,
+            n_radiateurs_gaz: (int) $element->donnee_entree->n_radiateurs_gaz ?: null,
+            priorite_generateur_cascade: (int) $element->donnee_entree->priorite_generateur_cascade ?: null,
+            presence_ventouse: (bool)(int) $element->donnee_entree->presence_ventouse ?: null,
+            presence_regulation_combustion: (bool)(int) $element->donnee_entree->presence_regulation_combustion ?: null,
+            enum_methode_saisie_carac_sys_id: (int) $element->donnee_entree->enum_methode_saisie_carac_sys_id,
+            enum_lien_generateur_emetteur_id: (int) $element->donnee_entree->enum_lien_generateur_emetteur_id,
+            scop: (float) $element->donnee_intermediaire->scop ?: null,
+            pn: (float) $element->donnee_intermediaire->pn ?: null,
+            qp0: (float) $element->donnee_intermediaire->qp0 ?: null,
+            pveilleuse: (float) $element->donnee_intermediaire->pveilleuse ?: null,
+            temp_fonc_30: (float) $element->donnee_intermediaire->temp_fonc_30 ?: null,
+            temp_fonc_100: (float) $element->donnee_intermediaire->temp_fonc_100 ?: null,
+            rpn: (float) $element->donnee_intermediaire->rpn ?: null,
+            rpint: (float) $element->donnee_intermediaire->rpint ?: null,
+            rendement_generation: (float) $element->donnee_intermediaire->rendement_generation ?: null,
+            conso_ch: (float) $element->donnee_intermediaire->conso_ch,
+            conso_ch_depensier: (float) $element->donnee_intermediaire->conso_ch_depensier
         );
     }
 
@@ -92,11 +97,11 @@ final class XMLGenerateurChauffage extends XMLUniqueElement
      * 
      * @return array<self>
      */
-    public static function from_collection(\SimpleXMLElement $xml): array
+    public static function from_collection(\SimpleXMLElement $element): array
     {
         $collection = [];
 
-        foreach ($xml->generateur_chauffage as $item) {
+        foreach ($element->generateur_chauffage as $item) {
             $collection[] = self::from($item);
         }
         return $collection;
@@ -134,20 +139,53 @@ final class XMLGenerateurChauffage extends XMLUniqueElement
         return $this->reference_generateur_mixte;
     }
 
-    public function generateur_chauffage_hybride_partie_chaudiere(XMLRessource $ressource): ?self
+    public function generateur_chauffage_hybride_partie_chaudiere(XMLRessource $ressource): null|self|false
     {
+        if (false === $this->pac_hybride()) {
+            return null;
+        }
         if (false === $this->pac_hybride_partie_pac()) {
             return null;
         }
         foreach ($ressource->logement()->installation_chauffage_collection as $installation_chauffage) {
             foreach ($installation_chauffage->generateur_chauffage_collection as $generateur_chauffage) {
-                if (false === $generateur_chauffage->match($this->identifiers())) {
+                if ($generateur_chauffage->match($this->identifiers())) {
                     continue;
                 }
                 if (false === $generateur_chauffage->pac_hybride_partie_chaudiere()) {
                     continue;
                 }
                 return $generateur_chauffage;
+            }
+        }
+        return false;
+    }
+
+    public function type_chauffage(XMLInstallationChauffage $installation_chauffage): TypeChauffage
+    {
+        foreach ($installation_chauffage->emetteur_chauffage_collection as $emetteur_chauffage) {
+            if ($emetteur_chauffage->enum_lien_generateur_emetteur_id === $this->enum_lien_generateur_emetteur_id) {
+                return TypeChauffage::CHAUFFAGE_CENTRAL;
+            }
+        }
+        return TypeChauffage::CHAUFFAGE_DIVISE;
+    }
+
+    public function type_distribution(XMLInstallationChauffage $installation_chauffage): ?TypeDistribution
+    {
+        foreach ($installation_chauffage->emetteur_chauffage_collection as $emetteur_chauffage) {
+            if ($emetteur_chauffage->enum_lien_generateur_emetteur_id === $this->enum_lien_generateur_emetteur_id) {
+                return $emetteur_chauffage->type_distribution();
+            }
+        }
+        return null;
+    }
+
+    public function isolation_reseau(XMLInstallationChauffage $installation_chauffage): ?IsolationReseau
+    {
+        foreach ($installation_chauffage->emetteur_chauffage_collection as $emetteur_chauffage) {
+            if ($emetteur_chauffage->reseau_distribution_isole !== null) {
+                return $emetteur_chauffage->reseau_distribution_isole ? IsolationReseau::ISOLE : IsolationReseau::NON_ISOLE;
             }
         }
         return null;
@@ -175,7 +213,7 @@ final class XMLGenerateurChauffage extends XMLUniqueElement
 
     public function pac_hybride(): bool
     {
-        return \in_array($this->enum_type_generateur_ch_id, [143, 144, 145, 146, 147, 148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161, 162, 163, 164, 165, 166, 167, 168, 169, 170,]);
+        return $this->enum_type_generateur_ch_id >= 145 && $this->enum_type_generateur_ch_id <= 170;
     }
 
     public function pac_hybride_partie_pac(): bool
@@ -185,7 +223,9 @@ final class XMLGenerateurChauffage extends XMLUniqueElement
 
     public function pac_hybride_partie_chaudiere(): bool
     {
-        return \in_array($this->enum_type_generateur_ch_id, [148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161]);
+        return $this->pac_hybride()
+            && $this->enum_type_generateur_ch_id >= 148
+            && $this->enum_type_generateur_ch_id <= 161;
     }
 
     public function type(): ?TypeGenerateur
@@ -193,26 +233,25 @@ final class XMLGenerateurChauffage extends XMLUniqueElement
         return match ($this->enum_type_generateur_ch_id) {
             55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80,
             81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 106, 109, 110, 111, 119, 120, 121, 122, 123, 124, 125,
-            126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 171 => typegenerateur::CHAUDIERE,
-            105 => typegenerateur::CONVECTEUR_BI_JONCTION,
-            98, 99, 100, 101 => typegenerateur::CONVECTEUR_ELECTRIQUE,
-            20, 24, 28, 32, 36, 40 => typegenerateur::CUISINIERE,
-            21, 25, 29, 33, 37, 41 => typegenerateur::FOYER_FERME,
-            50, 51, 52 => typegenerateur::GENERATEUR_AIR_CHAUD,
-            23, 27, 31, 35, 39, 43 => typegenerateur::INSERT,
-            1, 2, 3 => typegenerateur::PAC_AIR_AIR,
-            4, 5, 6, 7, 112 => typegenerateur::PAC_AIR_EAU,
-            8, 9, 10, 11 => typegenerateur::PAC_EAU_EAU,
-            12, 13, 14, 15 => typegenerateur::PAC_EAU_GLYCOLEE_EAU,
-            16, 17, 18, 19 => typegenerateur::PAC_GEOTHERMIQUE,
-            148, 149, 150, 151, 152, 153, 154, 155, 156, 157, 158, 159, 160, 161 => typegenerateur::PAC_HYBRIDE_AIR_EAU,
-            102 => typegenerateur::PANNEAU_RAYONNANT_ELECTRIQUE,
-            103 => typegenerateur::PLANCHER_RAYONNANT_ELECTRIQUE,
-            22, 26, 30, 34, 38, 42, 44, 45, 46, 47 => typegenerateur::POELE,
-            48, 49, 140, 141 => typegenerateur::POELE_BOUILLEUR,
-            101, 104 => typegenerateur::RADIATEUR_ELECTRIQUE,
-            53, 54 => typegenerateur::RADIATEUR_GAZ,
-            107, 108, 142 => typegenerateur::RESEAU_CHALEUR,
+            126, 127, 128, 129, 130, 131, 132, 133, 134, 135, 136, 137, 138, 139, 171 => TypeGenerateur::CHAUDIERE,
+            105 => TypeGenerateur::CONVECTEUR_BI_JONCTION,
+            98, 99, 100, 101 => TypeGenerateur::CONVECTEUR_ELECTRIQUE,
+            20, 24, 28, 32, 36, 40 => TypeGenerateur::CUISINIERE,
+            21, 25, 29, 33, 37, 41 => TypeGenerateur::FOYER_FERME,
+            50, 51, 52 => TypeGenerateur::GENERATEUR_AIR_CHAUD,
+            23, 27, 31, 35, 39, 43 => TypeGenerateur::INSERT,
+            1, 2, 3 => TypeGenerateur::PAC_AIR_AIR,
+            4, 5, 6, 7, 112 => TypeGenerateur::PAC_AIR_EAU,
+            8, 9, 10, 11 => TypeGenerateur::PAC_EAU_EAU,
+            12, 13, 14, 15 => TypeGenerateur::PAC_EAU_GLYCOLEE_EAU,
+            16, 17, 18, 19 => TypeGenerateur::PAC_GEOTHERMIQUE,
+            102 => TypeGenerateur::PANNEAU_RAYONNANT_ELECTRIQUE,
+            103 => TypeGenerateur::PLANCHER_RAYONNANT_ELECTRIQUE,
+            22, 26, 30, 34, 38, 42, 44, 45, 46, 47 => TypeGenerateur::POELE,
+            48, 49, 140, 141 => TypeGenerateur::POELE_BOUILLEUR,
+            101, 104 => TypeGenerateur::RADIATEUR_ELECTRIQUE,
+            53, 54 => TypeGenerateur::RADIATEUR_GAZ,
+            107, 108, 142 => TypeGenerateur::RESEAU_CHALEUR,
             default => null,
         };
     }
@@ -232,13 +271,9 @@ final class XMLGenerateurChauffage extends XMLUniqueElement
         };
     }
 
-    public function energie_partie_chaudiere(XMLRessource $ressource): ?EnergieGenerateur
+    public function generateur_collectif(XMLInstallationChauffage $installation): bool
     {
-        if (false === $this->pac_hybride()) {
-            return null;
-        }
-        return $this->generateur_chauffage_hybride_partie_chaudiere($ressource)?->energie()
-            ?? EnergieGenerateur::FIOUL;
+        return $this->enum_lien_generateur_emetteur_id === 1 && $installation->installation_collective();
     }
 
     public function generateur_multi_batiment(): bool
@@ -249,12 +284,12 @@ final class XMLGenerateurChauffage extends XMLUniqueElement
         };
     }
 
-    public function type_chaudiere(): ?TypeChaudiere
+    public function position_chaudiere(): ?PositionChaudiere
     {
         return $this->type()->is_chaudiere() ? match (true) {
-            ($this->pn < 18) => TypeChaudiere::CHAUDIERE_MURALE,
-            ($this->pn >= 18) => TypeChaudiere::CHAUDIERE_SOL,
-            default =>  TypeChaudiere::CHAUDIERE_SOL,
+            ($this->pn < 18) => PositionChaudiere::CHAUDIERE_MURALE,
+            ($this->pn >= 18) => PositionChaudiere::CHAUDIERE_SOL,
+            default =>  PositionChaudiere::CHAUDIERE_SOL,
         } : null;
     }
 
@@ -298,15 +333,6 @@ final class XMLGenerateurChauffage extends XMLUniqueElement
             52, 83, 84, 94, 95, 96, 97, 136, 137, 138, 139, 148, 149, 150, 151, 160, 161 => ModeCombustion::CONDENSATION,
             default => null,
         };
-    }
-
-    public function mode_combustion_partie_chaudiere(XMLRessource $ressource): ?ModeCombustion
-    {
-        if (false === $this->pac_hybride()) {
-            return null;
-        }
-        return $this->generateur_chauffage_hybride_partie_chaudiere($ressource)?->mode_combustion()
-            ?? ModeCombustion::STANDARD;
     }
 
     public function label(): ?LabelGenerateur

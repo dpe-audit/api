@@ -3,6 +3,7 @@
 namespace App\Engine\Rules\Ecs\Perte;
 
 use App\Domain\Common\Enum\Mois;
+use App\Domain\Ecs\Generateur\Pertes;
 use App\Domain\Ecs\Generateur\Position\PositionChauffeEau;
 use App\Engine\Input\Ecs\GenerateurInputRuleIterator;
 use App\Engine\Table\EcsTableValeurRepository;
@@ -46,9 +47,9 @@ abstract class PerteGenerateurRule extends GenerateurInputRuleIterator
     }
 
     /**
-     * Pertes de stockage exprimées en Wh
+     * Pertes de stockage intégré exprimées en Wh
      */
-    public function pertes_stockage(): float
+    public function pertes_stockage_integre(): float
     {
         return $this->get("pertes_stockage", function (): float {
             if (0 === $vs = $this->item()->volume_stockage()) {
@@ -70,27 +71,40 @@ abstract class PerteGenerateurRule extends GenerateurInputRuleIterator
     }
 
     /**
-     * Pertes de stockage récupérables exprimées en Wh
+     * Pertes de stockage intégré récupérables exprimées en Wh
      */
-    public function pertes_stockage_recuperables(): float
+    public function pertes_stockage_integre_recuperables(): float
     {
         return $this->get("pertes_stockage_recuperables", function (): float {
-            return Mois::reduce(function (float $carry, Mois $mois): float {
-                return $carry += $this->pertes_stockage_recuperables_j($mois);
-            });
+            return Mois::reduce(fn(Mois $mois): float => $this->pertes_stockage_integre_recuperables_j($mois));
         });
     }
 
     /**
-     * Pertes mensuelles de stockage récupérables exprimées en Wh
+     * Pertes mensuelles de stockage intégré récupérables exprimées en Wh
      */
-    public function pertes_stockage_recuperables_j(Mois $mois): float
+    public function pertes_stockage_integre_recuperables_j(Mois $mois): float
     {
         $key = "pertes_stockage_recuperables::{$mois->value}";
         return $this->get($key, function () use ($mois): float {
             return $this->item()->position_volume_chauffe()
-                ? 0.48 * $this->data()->batiment->nref($mois) * ($this->pertes_stockage() / 8760)
+                ? 0.48 * $this->data()->batiment->nref($mois) * ($this->pertes_stockage_integre() / 8760)
                 : 0;
         });
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function calcule(): void
+    {
+        $this->item()->entity->calcule($this->item()->entity->data()->with(
+            pertes: Pertes::create(
+                pertes_generation: $this->pertes_generation(),
+                pertes_generation_recuperables: $this->pertes_generation_recuperables(),
+                pertes_stockage_integre: $this->pertes_stockage_integre(),
+                pertes_stockage_integre_recuperables: $this->pertes_stockage_integre_recuperables()
+            )
+        ));
     }
 }

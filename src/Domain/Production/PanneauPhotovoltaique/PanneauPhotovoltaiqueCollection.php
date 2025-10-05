@@ -17,6 +17,6 @@ final class PanneauPhotovoltaiqueCollection extends ArrayCollection
 
     public function find(Id $id): ?PanneauPhotovoltaique
     {
-        return array_find($this->elements, fn(PanneauPhotovoltaique $item) => $item->id()->compare($id));
+        return array_find($this->elements, fn(PanneauPhotovoltaique $item) => $item->id()->equals($id));
     }
 }

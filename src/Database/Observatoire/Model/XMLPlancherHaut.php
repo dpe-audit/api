@@ -2,11 +2,8 @@
 
 namespace App\Database\Observatoire\Model;
 
+use App\Domain\Enveloppe\Paroi\Inertie;
 use App\Domain\Enveloppe\PlancherHaut\Configuration;
-use App\Domain\Enveloppe\PlancherHaut\Inertie;
-use App\Domain\Enveloppe\PlancherHaut\Isolation\EtatIsolation;
-use App\Domain\Enveloppe\PlancherHaut\Isolation\TypeIsolation;
-use App\Domain\Enveloppe\PlancherHaut\Position\Mitoyennete;
 use App\Domain\Enveloppe\PlancherHaut\TypePlancherHaut;
 
 final class XMLPlancherHaut extends XMLParoiOpaque
@@ -86,48 +83,10 @@ final class XMLPlancherHaut extends XMLParoiOpaque
         };
     }
 
-    public function mitoyennete(): Mitoyennete
-    {
-        return match ($this->enum_type_adjacence_id) {
-            1 => Mitoyennete::EXTERIEUR,
-            2 => Mitoyennete::ENTERRE,
-            3 => Mitoyennete::VIDE_SANITAIRE,
-            4 => Mitoyennete::LOCAL_NON_RESIDENTIEL,
-            5 => Mitoyennete::TERRE_PLEIN,
-            6 => Mitoyennete::SOUS_SOL_NON_CHAUFFE,
-            7 => Mitoyennete::LOCAL_NON_ACCESSIBLE,
-            8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21 => Mitoyennete::LOCAL_NON_CHAUFFE,
-            20 => Mitoyennete::LOCAL_NON_RESIDENTIEL,
-            22 => Mitoyennete::LOCAL_RESIDENTIEL,
-        };
-    }
-
     public function inertie(XMLRessource $ressource): Inertie
     {
         return $ressource->logement()->enveloppe->inertie_plancher_haut_lourd
             ? Inertie::LOURDE
             : Inertie::LEGERE;
-    }
-
-    public function etat_isolation(): ?EtatIsolation
-    {
-        return match ($this->enum_type_isolation_id) {
-            2 => EtatIsolation::NON_ISOLE,
-            3, 4, 5, 6, 7, 8 => EtatIsolation::ISOLE,
-            default => null,
-        };
-    }
-
-    public function type_isolation(): ?TypeIsolation
-    {
-        return match ($this->enum_type_isolation_id) {
-            3 => TypeIsolation::ITI,
-            4 => TypeIsolation::ITE,
-            5 => TypeIsolation::ITR,
-            6 => TypeIsolation::ITI_ITE,
-            7 => TypeIsolation::ITI_ITR,
-            8 => TypeIsolation::ITE_ITR,
-            default => null
-        };
     }
 }

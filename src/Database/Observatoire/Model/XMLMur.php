@@ -2,10 +2,7 @@
 
 namespace App\Database\Observatoire\Model;
 
-use App\Domain\Enveloppe\Mur\Inertie;
-use App\Domain\Enveloppe\Mur\Isolation\EtatIsolation;
-use App\Domain\Enveloppe\Mur\Isolation\TypeIsolation;
-use App\Domain\Enveloppe\Mur\Position\Mitoyennete;
+use App\Domain\Enveloppe\Paroi\Inertie;
 use App\Domain\Enveloppe\Mur\TypeDoublage;
 use App\Domain\Enveloppe\Mur\TypeMur;
 
@@ -15,7 +12,7 @@ final class XMLMur extends XMLParoiOpaque
         public readonly int $enum_orientation_id,
         public readonly ?float $surface_paroi_totale,
         public readonly bool $enduit_isolant_paroi_ancienne,
-    
+
         public readonly ?float $umur0_saisi,
         public readonly ?float $umur_saisi,
         public readonly ?int $tv_umur0_id,
@@ -27,8 +24,7 @@ final class XMLMur extends XMLParoiOpaque
 
         public readonly float $umur,
         public readonly ?float $umur0
-    ) {
-    }
+    ) {}
 
     /**
      * XSD logement/enveloppe/mur_collection/mur
@@ -107,22 +103,6 @@ final class XMLMur extends XMLParoiOpaque
             5 => TypeDoublage::MATERIAUX_CONNU,
             default => null,
         };
-
-    }
-    public function mitoyennete(): Mitoyennete
-    {
-        return match ($this->enum_type_adjacence_id) {
-            1 => Mitoyennete::EXTERIEUR,
-            2 => Mitoyennete::ENTERRE,
-            3 => Mitoyennete::VIDE_SANITAIRE,
-            4 => Mitoyennete::LOCAL_NON_RESIDENTIEL,
-            5 => Mitoyennete::TERRE_PLEIN,
-            6 => Mitoyennete::SOUS_SOL_NON_CHAUFFE,
-            7 => Mitoyennete::LOCAL_NON_ACCESSIBLE,
-            8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 21 => Mitoyennete::LOCAL_NON_CHAUFFE,
-            20 => Mitoyennete::LOCAL_NON_RESIDENTIEL,
-            22 => Mitoyennete::LOCAL_RESIDENTIEL,
-        };
     }
 
     public function inertie(XMLRessource $ressource): Inertie
@@ -130,27 +110,5 @@ final class XMLMur extends XMLParoiOpaque
         return $ressource->logement()->enveloppe->inertie_plancher_bas_lourd
             ? Inertie::LOURDE
             : Inertie::LEGERE;
-    }
-
-    public function etat_isolation(): ?EtatIsolation
-    {
-        return match ($this->enum_type_isolation_id) {
-            2 => EtatIsolation::NON_ISOLE,
-            3, 4, 5, 6, 7, 8 => EtatIsolation::ISOLE,
-            default => null,
-        };
-    }
-
-    public function type_isolation(): ?TypeIsolation
-    {
-        return match ($this->enum_type_isolation_id) {
-            3 => TypeIsolation::ITI,
-            4 => TypeIsolation::ITE,
-            5 => TypeIsolation::ITR,
-            6 => TypeIsolation::ITI_ITE,
-            7 => TypeIsolation::ITI_ITR,
-            8 => TypeIsolation::ITE_ITR,
-            default => null
-        };
     }
 }

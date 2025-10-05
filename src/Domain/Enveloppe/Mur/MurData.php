@@ -2,15 +2,16 @@
 
 namespace App\Domain\Enveloppe\Mur;
 
+use App\Domain\Enveloppe\Paroi\Performance;
 use Webmozart\Assert\Assert;
 
 final class MurData
 {
     public function __construct(
         public readonly ?float $sdep,
-        public readonly ?float $b,
         public readonly ?float $u0,
         public readonly ?float $u,
+        public readonly ?float $b,
         public readonly ?float $dp,
         public readonly ?Performance $performance,
     ) {}

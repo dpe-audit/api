@@ -19,9 +19,9 @@ final class ZoneThermiqueRule extends Rule
     /**
      * Surface habitable de référence exprimée en m²
      */
-    public function surface_habitable(): float
+    public function surface_reference(): float
     {
-        return $this->get('surface_habitable', function () {
+        return $this->get('surface_reference', function () {
             return $this->data()->batiment->logements() === 1
                 ? $this->data()->batiment->surface_habitable_logement()
                 : $this->data()->batiment->surface_habitable_batiment();
@@ -43,10 +43,10 @@ final class ZoneThermiqueRule extends Rule
     /**
      * Volume habitable de référence exprimé en m³
      */
-    public function volume_habitable(): float
+    public function volume_reference(): float
     {
         return $this->get('volume_habitable', function () {
-            return $this->surface_habitable() * $this->hauteur_sous_plafond();
+            return $this->surface_reference() * $this->hauteur_sous_plafond();
         });
     }
 
@@ -56,5 +56,14 @@ final class ZoneThermiqueRule extends Rule
     public function nombre_logements(): int
     {
         return $this->data()->batiment->logements();
+    }
+
+    public function calcule(): void
+    {
+        $this->ressource()->calcule($this->ressource()->data()->with(
+            effet_joule: $this->effet_joule(),
+            surface_reference: $this->surface_reference(),
+            volume_reference: $this->volume_reference(),
+        ));
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Dto\Enveloppe\Mur;
 
-use App\Domain\Enveloppe\Mur\Position\Mitoyennete;
 use App\Domain\Enveloppe\Mur\Position\Position;
+use App\Domain\Enveloppe\Paroi\Mitoyennete;
 
 final class PositionDto
 {

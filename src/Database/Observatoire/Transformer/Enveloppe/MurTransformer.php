@@ -2,13 +2,17 @@
 
 namespace App\Database\Observatoire\Transformer\Enveloppe;
 
-use App\Database\Observatoire\Model\XMLRessource;
-use App\Dto\Enveloppe\Mur\IsolationDto;
-use App\Dto\Enveloppe\Mur\MurDto;
-use App\Dto\Enveloppe\Mur\PositionDto;
+use App\Database\Observatoire\Model\{XMLMur, XMLRessource};
+use App\Dto\Enveloppe\Mur\{MurDto, PositionDto};
+use App\Dto\Enveloppe\Paroi\IsolationDto;
 
 final class MurTransformer
 {
+    public function supports(XMLMur $element): bool
+    {
+        return $element->surface() > 0;
+    }
+
     /**
      * @return array<MurDto>
      */
@@ -17,7 +21,7 @@ final class MurTransformer
         $collection = [];
 
         foreach ($ressource->logement()->enveloppe->mur_collection as $mur) {
-            if (0 == $mur->surface()) {
+            if (false === $this->supports($mur)) {
                 continue;
             }
             $collection[] = new MurDto(
@@ -44,7 +48,7 @@ final class MurTransformer
                     surface: $mur->surface(),
                     mitoyennete: $mur->mitoyennete(),
                     orientation: null,
-                    local_non_chauffe_id: $mur->lnc_id($ressource)?->toBinary()
+                    local_non_chauffe_id: $mur->lnc_id($ressource)?->__toString()
                 )
             );
         }

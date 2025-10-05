@@ -2,7 +2,7 @@
 
 namespace App\Dto\Enveloppe\PlancherBas;
 
-use App\Domain\Enveloppe\PlancherBas\Position\Mitoyennete;
+use App\Domain\Enveloppe\Paroi\Mitoyennete;
 use App\Domain\Enveloppe\PlancherBas\Position\Position;
 
 final class PositionDto

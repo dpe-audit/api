@@ -3,7 +3,7 @@
 namespace App\Engine\Rules\Inertie;
 
 use App\Domain\Enveloppe\Inertie;
-use App\Domain\Enveloppe\Niveau\InertieParoi;
+use App\Domain\Enveloppe\Paroi\Inertie as InertieParoi;
 use App\Engine\Input\Enveloppe\NiveauInputRuleIterator;
 
 final class InertieNiveauRule extends NiveauInputRuleIterator

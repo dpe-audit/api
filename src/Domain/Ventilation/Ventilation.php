@@ -8,6 +8,7 @@ use Webmozart\Assert\Assert;
 
 final class Ventilation
 {
+    private VentilationData $data;
     private GenerateurCollection $generateurs;
     private InstallationCollection $installations;
 
@@ -15,6 +16,7 @@ final class Ventilation
     {
         $this->generateurs = new GenerateurCollection;
         $this->installations = new InstallationCollection;
+        $this->data = VentilationData::create();
     }
 
     public static function create(): self
@@ -22,8 +24,15 @@ final class Ventilation
         return new self();
     }
 
+    public function calcule(VentilationData $data): self
+    {
+        $this->data = $data;
+        return $this;
+    }
+
     public function reinitialise(): void
     {
+        $this->data = VentilationData::create();
         $this->installations->reinitialise();
         $this->generateurs->reinitialise();
     }
@@ -64,5 +73,10 @@ final class Ventilation
         $this->reinitialise();
 
         return $this;
+    }
+
+    public function data(): VentilationData
+    {
+        return $this->data;
     }
 }

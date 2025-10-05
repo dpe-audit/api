@@ -22,17 +22,4 @@ final class DeperditionSystemeVentilationRule extends InstallationInputRuleItera
             return 0.34 * $this->item()->qvarep_conv() * $sh * $this->item()->rdim();
         });
     }
-
-    /**
-     * @inheritDoc
-     */
-    public function calcule(): void
-    {
-        $this->item()->entity->calcule($this->item()->entity->data()->with(
-            hvent: $this->hvent(),
-            qvarep_conv: $this->item()->qvarep_conv(),
-            qvasouf_conv: $this->item()->qvasouf_conv(),
-            smea_conv: $this->item()->smea_conv(),
-        ));
-    }
 }

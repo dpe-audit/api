@@ -13,6 +13,9 @@ enum EnergieGenerateur: string
 
     public function to(): Energie
     {
-        return Energie::from($this->value);
+        return match ($this) {
+            self::RESEAU_FROID => Energie::RESEAU_URBAIN,
+            default => Energie::from($this->value),
+        };
     }
 }

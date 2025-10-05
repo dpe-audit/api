@@ -19,7 +19,7 @@ final class SurfaceSudEquivalenteEtsBaieRule extends LncBaieInputRuleIterator
     public function sst(): float
     {
         return $this->get('sst', function (): float {
-            return Mois::reduce(fn(float $carry, Mois $mois) => $carry += $this->sst_j($mois));
+            return Mois::reduce(fn(Mois $mois) => $this->sst_j($mois));
         });
     }
 
