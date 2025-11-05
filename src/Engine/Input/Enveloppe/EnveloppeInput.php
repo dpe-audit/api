@@ -5,7 +5,7 @@ namespace App\Engine\Input\Enveloppe;
 use App\Domain\Common\Enum\Mois;
 use App\Domain\Enveloppe\Baie\Baie;
 use App\Domain\Enveloppe\DoubleFenetre\DoubleFenetre;
-use App\Domain\Enveloppe\{Exposition, Inertie};
+use App\Domain\Enveloppe\{Enveloppe, Exposition, Inertie};
 use App\Domain\Enveloppe\Lnc\Lnc;
 use App\Domain\Enveloppe\Masque\Masque;
 use App\Domain\Enveloppe\Mur\Mur;
@@ -42,36 +42,36 @@ final class EnveloppeInput extends Input
     /** @var PontThermiqueInput[] */
     public readonly array $ponts_thermiques;
 
-    public function __construct(public readonly Engine $context)
+    public function __construct(public readonly Enveloppe $entity, public readonly Engine $context)
     {
-        $this->niveaux = $context->ressource()->enveloppe()->niveaux()
+        $this->niveaux = $entity->niveaux()
             ->map(fn(Niveau $item) => new NiveauInput($context, $item))
             ->values();
-        $this->locaux_non_chauffes = $context->ressource()->enveloppe()->locaux_non_chauffes()
+        $this->locaux_non_chauffes = $entity->locaux_non_chauffes()
             ->map(fn(Lnc $item) => new LncInput($context, $item))
             ->values();
-        $this->doubles_fenetres = $context->ressource()->enveloppe()->doubles_fenetres()
+        $this->doubles_fenetres = $entity->doubles_fenetres()
             ->map(fn(DoubleFenetre $item) => new DoubleFenetreInput($context, $item))
             ->values();
-        $this->masques = $context->ressource()->enveloppe()->masques()
+        $this->masques = $entity->masques()
             ->map(fn(Masque $item) => new MasqueInput($context, $item))
             ->values();
-        $this->murs = $context->ressource()->enveloppe()->murs()
+        $this->murs = $entity->murs()
             ->map(fn(Mur $item) => new MurInput($context, $item))
             ->values();
-        $this->planchers_bas = $context->ressource()->enveloppe()->planchers_bas()
+        $this->planchers_bas = $entity->planchers_bas()
             ->map(fn(PlancherBas $item) => new PlancherBasInput($context, $item))
             ->values();
-        $this->planchers_hauts = $context->ressource()->enveloppe()->planchers_hauts()
+        $this->planchers_hauts = $entity->planchers_hauts()
             ->map(fn(PlancherHaut $item) => new PlancherHautInput($context, $item))
             ->values();
-        $this->baies = $context->ressource()->enveloppe()->baies()
+        $this->baies = $entity->baies()
             ->map(fn(Baie $item) => new BaieInput($context, $item))
             ->values();
-        $this->portes = $context->ressource()->enveloppe()->portes()
+        $this->portes = $entity->portes()
             ->map(fn(Porte $item) => new PorteInput($context, $item))
             ->values();
-        $this->ponts_thermiques = $context->ressource()->enveloppe()->ponts_thermiques()
+        $this->ponts_thermiques = $entity->ponts_thermiques()
             ->map(fn(PontThermique $item) => new PontThermiqueInput($context, $item))
             ->values();
     }

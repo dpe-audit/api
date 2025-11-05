@@ -2,37 +2,13 @@
 
 namespace App\Engine;
 
-use App\Domain\Common\Enum\ScenarioUsage;
-use App\Domain\Ressource\Ressource;
-use App\Engine\Input\RessourceInput;
-
 abstract class Rule implements RuleInterface
 {
-    protected Engine $context;
+    protected Context $context;
 
-    public function context(): Engine
+    public function context(): Context
     {
         return $this->context;
-    }
-
-    public function ressource(): Ressource
-    {
-        return $this->context->ressource();
-    }
-
-    public function data(): RessourceInput
-    {
-        return $this->context->data();
-    }
-
-    public function scenario(): ScenarioUsage
-    {
-        return $this->context->scenario();
-    }
-
-    public function rules(): Rules
-    {
-        return $this->context->rules();
     }
 
     public function get(string $key, callable $cb): mixed
@@ -45,6 +21,11 @@ abstract class Rule implements RuleInterface
         return round($value, 2);
     }
 
+    public function namespace(): string
+    {
+        return static::class;
+    }
+
     /**
      * Mutation des données
      */
@@ -53,12 +34,7 @@ abstract class Rule implements RuleInterface
         return;
     }
 
-    public function namespace(): string
-    {
-        return static::class;
-    }
-
-    public function __invoke(Engine $context): void
+    public function __invoke(Context $context): void
     {
         $this->context = $context;
 

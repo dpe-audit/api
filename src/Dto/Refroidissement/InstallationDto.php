@@ -2,14 +2,17 @@
 
 namespace App\Dto\Refroidissement;
 
-use App\Domain\Refroidissement\Installation\{Installation, InstallationCollection};
+use App\Domain\Refroidissement\Installation\Installation;
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/refroidissement/installation.yaml
+ */
 final class InstallationDto
 {
     public function __construct(
-        public string $id,
-        public string $description,
-        public float $surface,
+        public readonly string $id,
+        public readonly string $description,
+        public readonly float $surface,
     ) {}
 
     public static function from(Installation $data): self
@@ -19,14 +22,6 @@ final class InstallationDto
             description: $data->description(),
             surface: $data->surface(),
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(InstallationCollection $data): array
-    {
-        return $data->map(fn(Installation $item) => self::from($item))->values();
     }
 
     public function __normalize(): array

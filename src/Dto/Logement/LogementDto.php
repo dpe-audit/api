@@ -2,11 +2,11 @@
 
 namespace App\Dto\Logement;
 
-use App\Domain\Logement\Logement;
-use App\Domain\Logement\LogementCollection;
-use App\Domain\Logement\Position;
-use App\Domain\Logement\Typologie;
+use App\Domain\Logement\{Logement, Position, Typologie};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/logement/logement.yaml
+ */
 final class LogementDto
 {
     public function __construct(
@@ -28,14 +28,6 @@ final class LogementDto
             position: $data->position(),
             typologie: $data->typologie(),
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(LogementCollection $data): array
-    {
-        return $data->map(fn(Logement $item) => self::from($item))->values();
     }
 
     public function __normalize(): array

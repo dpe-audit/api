@@ -2,6 +2,7 @@
 
 namespace App\Engine\Input\Chauffage;
 
+use App\Domain\Chauffage\Chauffage;
 use App\Domain\Chauffage\Emetteur\Emetteur;
 use App\Domain\Chauffage\Generateur\Generateur;
 use App\Domain\Chauffage\Installation\Installation;
@@ -24,18 +25,18 @@ final class ChauffageInput extends Input
     /** @var SystemeInput[] */
     public readonly array $systemes;
 
-    public function __construct(public readonly Engine $context)
+    public function __construct(public readonly Chauffage $entity, public readonly Engine $context)
     {
-        $this->installations = $context->ressource()->chauffage()->installations()
+        $this->installations = $entity->installations()
             ->map(fn(Installation $item) => new InstallationInput($context, $item))
             ->values();
-        $this->generateurs = $context->ressource()->chauffage()->generateurs()
+        $this->generateurs = $entity->generateurs()
             ->map(fn(Generateur $item) => new GenerateurInput($context, $item))
             ->values();
-        $this->emetteurs = $context->ressource()->chauffage()->emetteurs()
+        $this->emetteurs = $entity->emetteurs()
             ->map(fn(Emetteur $item) => new EmetteurInput($context, $item))
             ->values();
-        $this->systemes = $context->ressource()->chauffage()->systemes()
+        $this->systemes = $entity->systemes()
             ->map(fn(Systeme $item) => new SystemeInput($context, $item))
             ->values();
     }

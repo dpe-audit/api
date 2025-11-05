@@ -2,24 +2,23 @@
 
 namespace App\Dto\Enveloppe\Porte;
 
-use App\Domain\Enveloppe\Porte\Isolation;
-use App\Domain\Enveloppe\Porte\Materiau;
-use App\Domain\Enveloppe\Porte\Porte;
-use App\Domain\Enveloppe\Porte\PorteCollection;
-use App\Domain\Enveloppe\Porte\TypePose;
+use App\Domain\Enveloppe\Porte\{Isolation, Materiau, Porte};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/porte.yaml
+ */
 final class PorteDto
 {
     public function __construct(
-        public string $id,
-        public string $description,
-        public ?Isolation $isolation,
-        public ?Materiau $materiau,
-        public ?int $annee_installation,
-        public ?float $u,
-        public PositionDto $position,
-        public MenuiserieDto $menuiserie,
-        public VitrageDto $vitrage,
+        public readonly string $id,
+        public readonly string $description,
+        public readonly ?Isolation $isolation,
+        public readonly ?Materiau $materiau,
+        public readonly ?int $annee_installation,
+        public readonly ?float $u,
+        public readonly PositionDto $position,
+        public readonly MenuiserieDto $menuiserie,
+        public readonly VitrageDto $vitrage,
     ) {}
 
     public static function from(Porte $data): self
@@ -35,14 +34,6 @@ final class PorteDto
             menuiserie: MenuiserieDto::from($data->menuiserie()),
             vitrage: VitrageDto::from($data->vitrage()),
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(PorteCollection $data): array
-    {
-        return $data->map(fn(Porte $item) => self::from($item))->values();
     }
 
     public function __normalize(): array

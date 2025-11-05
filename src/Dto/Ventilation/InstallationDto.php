@@ -2,17 +2,19 @@
 
 namespace App\Dto\Ventilation;
 
-use App\Domain\Ventilation\Installation\{Installation, InstallationCollection};
-use App\Domain\Ventilation\Installation\TypeVentilation;
+use App\Domain\Ventilation\Installation\{Installation, TypeVentilation};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/ventilation/installation.yaml
+ */
 final class InstallationDto
 {
     public function __construct(
-        public string $id,
-        public string $description,
-        public float $surface,
-        public TypeVentilation $type,
-        public ?string $generateur_id,
+        public readonly string $id,
+        public readonly string $description,
+        public readonly float $surface,
+        public readonly TypeVentilation $type,
+        public readonly ?string $generateur_id,
     ) {}
 
     public static function from(Installation $data): self
@@ -24,14 +26,6 @@ final class InstallationDto
             type: $data->type(),
             generateur_id: $data->generateur() ? (string) $data->generateur()->id() : null,
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(InstallationCollection $data): array
-    {
-        return $data->map(fn(Installation $item) => self::from($item))->values();
     }
 
     public function __normalize(): array

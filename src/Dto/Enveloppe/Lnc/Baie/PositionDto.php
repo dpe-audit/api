@@ -2,16 +2,18 @@
 
 namespace App\Dto\Enveloppe\Lnc\Baie;
 
-use App\Domain\Enveloppe\Lnc\Baie\Position;
-use App\Domain\Enveloppe\Lnc\Baie\Mitoyennete;
+use App\Domain\Enveloppe\Lnc\Baie\{Position, Mitoyennete};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/local_non_chauffe/baie.yaml
+ */
 final class PositionDto
 {
     public function __construct(
-        public float $surface,
-        public Mitoyennete $mitoyennete,
-        public ?float $orientation,
-        public ?float $inclinaison,
+        public readonly float $surface,
+        public readonly Mitoyennete $mitoyennete,
+        public readonly ?float $orientation,
+        public readonly ?float $inclinaison,
     ) {}
 
     public static function from(Position $data): self

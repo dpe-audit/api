@@ -5,16 +5,19 @@ namespace App\Dto\Chauffage\Installation;
 use App\Domain\Chauffage\Installation\Installation;
 use App\Domain\Chauffage\Installation\InstallationCollection;
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/chauffage/installation.yaml
+ */
 final class InstallationDto
 {
     public function __construct(
-        public string $id,
-        public string $description,
-        public float $surface,
-        public bool $comptage_individuel,
-        public RegulationDto $regulation_centrale,
-        public RegulationDto $regulation_terminale,
-        public ?SolaireThermiqueDto $solaire_thermique,
+        public readonly string $id,
+        public readonly string $description,
+        public readonly float $surface,
+        public readonly bool $comptage_individuel,
+        public readonly RegulationDto $regulation_centrale,
+        public readonly RegulationDto $regulation_terminale,
+        public readonly ?SolaireThermiqueDto $solaire_thermique,
     ) {}
 
     public static function from(Installation $data): self
@@ -28,14 +31,6 @@ final class InstallationDto
             regulation_terminale: RegulationDto::from($data->regulation_terminale()),
             solaire_thermique: $data->solaire_thermique() ? SolaireThermiqueDto::from($data->solaire_thermique()) : null,
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(InstallationCollection $data): array
-    {
-        return $data->map(fn(Installation $item) => self::from($item))->values();
     }
 
     public function __normalize(): array

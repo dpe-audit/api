@@ -4,14 +4,17 @@ namespace App\Dto\Enveloppe\Paroi;
 
 use App\Domain\Enveloppe\Paroi\Isolation\{EtatIsolation, Isolation, TypeIsolation};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/paroi/isolation.yaml
+ */
 final class IsolationDto
 {
     public function __construct(
-        public EtatIsolation $etat,
-        public ?TypeIsolation $type,
-        public ?int $annee_installation,
-        public ?float $epaisseur,
-        public ?float $resistance_thermique,
+        public readonly EtatIsolation $etat,
+        public readonly ?TypeIsolation $type,
+        public readonly ?int $annee_installation,
+        public readonly ?float $epaisseur,
+        public readonly ?float $resistance_thermique,
     ) {}
 
     public static function from(Isolation $data): self

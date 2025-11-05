@@ -9,11 +9,9 @@ use App\Engine\Rules\Eclairage\ConsommationEclairageRule;
 
 final class EclairageInput extends Input
 {
-    public readonly Eclairage $entity;
-
-    public function __construct(public readonly Engine $context)
+    public function __construct(public readonly Eclairage $entity, public readonly Engine $context)
     {
-        $this->entity = $context->ressource()->eclairage();
+        $this->entity = $entity;
     }
 
     // * Données calculées

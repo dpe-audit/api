@@ -5,14 +5,17 @@ namespace App\Dto\Enveloppe\PlancherBas;
 use App\Domain\Enveloppe\Paroi\Mitoyennete;
 use App\Domain\Enveloppe\PlancherBas\Position\Position;
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/plancher_bas.yaml
+ */
 final class PositionDto
 {
     public function __construct(
-        public float $surface,
-        public Mitoyennete $mitoyennete,
-        public ?float $surface_ue,
-        public ?float $perimetre_ue,
-        public ?string $local_non_chauffe_id,
+        public readonly float $surface,
+        public readonly Mitoyennete $mitoyennete,
+        public readonly ?float $surface_ue,
+        public readonly ?float $perimetre_ue,
+        public readonly ?string $local_non_chauffe_id,
     ) {}
 
     public static function from(Position $data): self

@@ -2,17 +2,18 @@
 
 namespace App\Dto\Chauffage\Systeme;
 
-use App\Domain\Chauffage\Systeme\Reseau\IsolationReseau;
-use App\Domain\Chauffage\Systeme\Reseau\Reseau;
-use App\Domain\Chauffage\Systeme\Reseau\TypeDistribution;
+use App\Domain\Chauffage\Systeme\Reseau\{IsolationReseau, Reseau, TypeDistribution};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/chauffage/systeme.yaml
+ */
 final class ReseauDto
 {
     public function __construct(
-        public TypeDistribution $type_distribution,
-        public bool $presence_circulateur_externe,
-        public int $niveaux_desservis,
-        public ?IsolationReseau $isolation,
+        public readonly TypeDistribution $type_distribution,
+        public readonly bool $presence_circulateur_externe,
+        public readonly int $niveaux_desservis,
+        public readonly ?IsolationReseau $isolation,
     ) {}
 
     public static function from(Reseau $data): self

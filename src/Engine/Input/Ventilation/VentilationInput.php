@@ -5,6 +5,7 @@ namespace App\Engine\Input\Ventilation;
 use App\Domain\Common\Consommation\ConsommationCollection;
 use App\Domain\Ventilation\Generateur\Generateur;
 use App\Domain\Ventilation\Installation\Installation;
+use App\Domain\Ventilation\Ventilation;
 use App\Engine\{Engine, Input};
 use App\Engine\Rules\Ventilation\ConsommationVentilationRule;
 
@@ -15,12 +16,12 @@ final class VentilationInput extends Input
     /** @var GenerateurInput[] */
     public readonly array $generateurs;
 
-    public function __construct(public readonly Engine $context)
+    public function __construct(public readonly Ventilation $entity, public readonly Engine $context)
     {
-        $this->installations = $context->ressource()->ventilation()->installations()
+        $this->installations = $entity->installations()
             ->map(fn(Installation $item) => new InstallationInput($context, $item))
             ->values();
-        $this->generateurs = $context->ressource()->ventilation()->generateurs()
+        $this->generateurs = $entity->generateurs()
             ->map(fn(Generateur $item) => new GenerateurInput($context, $item))
             ->values();
     }

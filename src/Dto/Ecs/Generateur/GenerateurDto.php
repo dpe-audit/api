@@ -2,21 +2,21 @@
 
 namespace App\Dto\Ecs\Generateur;
 
-use App\Domain\Ecs\Generateur\EnergieGenerateur;
-use App\Domain\Ecs\Generateur\Generateur;
-use App\Domain\Ecs\Generateur\GenerateurCollection;
-use App\Domain\Ecs\Generateur\TypeGenerateur;
+use App\Domain\Ecs\Generateur\{Generateur, EnergieGenerateur, TypeGenerateur};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/ecs/generateur.yaml
+ */
 final class GenerateurDto
 {
     public function __construct(
-        public string $id,
-        public string $description,
-        public TypeGenerateur $type,
-        public EnergieGenerateur $energie,
-        public ?int $annee_installation,
-        public PositionDto $position,
-        public SignaletiqueDto $signaletique,
+        public readonly string $id,
+        public readonly string $description,
+        public readonly TypeGenerateur $type,
+        public readonly EnergieGenerateur $energie,
+        public readonly ?int $annee_installation,
+        public readonly PositionDto $position,
+        public readonly SignaletiqueDto $signaletique,
     ) {}
 
     public static function from(Generateur $data): self
@@ -30,14 +30,6 @@ final class GenerateurDto
             position: PositionDto::from($data->position()),
             signaletique: SignaletiqueDto::from($data->signaletique()),
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(GenerateurCollection $data): array
-    {
-        return $data->map(fn(Generateur $item) => self::from($item))->values();
     }
 
     public function __normalize(): array

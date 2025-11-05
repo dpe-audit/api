@@ -3,23 +3,22 @@
 namespace App\Dto\Enveloppe\Masque;
 
 use App\Domain\Common\Enum\Orientation;
-use App\Domain\Enveloppe\Masque\ConfigurationMasque;
-use App\Domain\Enveloppe\Masque\Masque;
-use App\Domain\Enveloppe\Masque\MasqueCollection;
-use App\Domain\Enveloppe\Masque\SecteurMasque;
-use App\Domain\Enveloppe\Masque\TypeMasque;
+use App\Domain\Enveloppe\Masque\{ConfigurationMasque, Masque, SecteurMasque, TypeMasque};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/masque.yaml
+ */
 final class MasqueDto
 {
     public function __construct(
-        public string $id,
-        public string $description,
-        public TypeMasque $type,
-        public ConfigurationMasque $configuration,
-        public ?Orientation $orientation,
-        public ?float $hauteur,
-        public ?float $profondeur,
-        public ?SecteurMasque $secteur,
+        public readonly string $id,
+        public readonly string $description,
+        public readonly TypeMasque $type,
+        public readonly ConfigurationMasque $configuration,
+        public readonly ?Orientation $orientation,
+        public readonly ?float $hauteur,
+        public readonly ?float $profondeur,
+        public readonly ?SecteurMasque $secteur,
     ) {}
 
     public static function from(Masque $data): self
@@ -34,14 +33,6 @@ final class MasqueDto
             profondeur: $data->profondeur(),
             secteur: $data->secteur(),
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(MasqueCollection $data): array
-    {
-        return $data->map(fn(Masque $item) => self::from($item))->values();
     }
 
     public function __normalize(): array

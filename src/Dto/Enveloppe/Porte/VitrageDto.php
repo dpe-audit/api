@@ -2,14 +2,16 @@
 
 namespace App\Dto\Enveloppe\Porte;
 
-use App\Domain\Enveloppe\Porte\Vitrage\TypeVitrage;
-use App\Domain\Enveloppe\Porte\Vitrage\Vitrage;
+use App\Domain\Enveloppe\Porte\Vitrage\{TypeVitrage, Vitrage};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/porte.yaml
+ */
 final class VitrageDto
 {
     public function __construct(
-        public float $surface,
-        public ?TypeVitrage $type,
+        public readonly float $surface,
+        public readonly ?TypeVitrage $type,
     ) {}
 
     public static function from(Vitrage $data): self

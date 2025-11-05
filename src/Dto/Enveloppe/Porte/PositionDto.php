@@ -3,19 +3,21 @@
 namespace App\Dto\Enveloppe\Porte;
 
 use App\Domain\Enveloppe\Paroi\Mitoyennete;
-use App\Domain\Enveloppe\Porte\Position\Position;
-use App\Domain\Enveloppe\Porte\Position\TypePose;
+use App\Domain\Enveloppe\Porte\Position\{Position, TypePose};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/porte.yaml
+ */
 final class PositionDto
 {
     public function __construct(
-        public TypePose $type_pose,
-        public float $surface,
-        public Mitoyennete $mitoyennete,
-        public ?float $orientation,
-        public bool $presence_sas,
-        public ?string $paroi_id,
-        public ?string $local_non_chauffe_id,
+        public readonly TypePose $type_pose,
+        public readonly float $surface,
+        public readonly Mitoyennete $mitoyennete,
+        public readonly ?float $orientation,
+        public readonly bool $presence_sas,
+        public readonly ?string $paroi_id,
+        public readonly ?string $local_non_chauffe_id,
     ) {}
 
     public static function from(Position $data): self

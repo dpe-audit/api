@@ -2,24 +2,29 @@
 
 namespace App\Dto\Enveloppe\Lnc;
 
-use App\Domain\Enveloppe\Lnc\Lnc;
-use App\Domain\Enveloppe\Lnc\LncCollection;
-use App\Domain\Enveloppe\Lnc\TypeLnc;
+use App\Domain\Enveloppe\Lnc\{Lnc, TypeLnc};
 use App\Dto\Enveloppe\Lnc\Baie\BaieDto;
 use App\Dto\Enveloppe\Lnc\Paroi\ParoiDto;
+use Symfony\Component\Validator\Constraints;
 
 /**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/local_non_chauffe/local_non_chauffe.yaml
+ * 
  * @property array<ParoiDto> $parois
  * @property array<BaieDto> $baies
  */
 final class LncDto
 {
     public function __construct(
-        public string $id,
-        public string $description,
-        public TypeLnc $type,
-        public array $parois,
-        public array $baies,
+        public readonly string $id,
+        public readonly string $description,
+        public readonly TypeLnc $type,
+        #[Constraints\All([new Constraints\Type(ParoiDto::class)])]
+        #[Constraints\Valid]
+        public readonly array $parois,
+        #[Constraints\All([new Constraints\Type(BaieDto::class)])]
+        #[Constraints\Valid]
+        public readonly array $baies,
     ) {}
 
     public static function from(Lnc $data): self
@@ -28,17 +33,9 @@ final class LncDto
             id: (string) $data->id(),
             description: $data->description(),
             type: $data->type(),
-            parois: ParoiDto::fromCollection($data->parois()),
-            baies: BaieDto::fromCollection($data->baies()),
+            parois: $data->parois()->map(fn($item) => ParoiDto::from($item))->values(),
+            baies: $data->baies()->map(fn($item) => BaieDto::from($item))->values(),
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(LncCollection $data): array
-    {
-        return $data->map(fn(Lnc $item) => self::from($item))->values();
     }
 
     public function __normalize(): array
@@ -47,8 +44,8 @@ final class LncDto
             'id' => $this->id,
             'description' => $this->description,
             'type' => $this->type->value,
-            'parois' => array_map(fn(ParoiDto $item) => $item->__normalize(), $this->parois),
-            'baies' => array_map(fn(BaieDto $item) => $item->__normalize(), $this->baies),
+            'parois' => array_map(fn($item) => $item->__normalize(), $this->parois),
+            'baies' => array_map(fn($item) => $item->__normalize(), $this->baies),
         ];
     }
 }

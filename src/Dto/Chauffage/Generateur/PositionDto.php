@@ -4,17 +4,20 @@ namespace App\Dto\Chauffage\Generateur;
 
 use App\Domain\Chauffage\Generateur\Position\{Position, PositionChaudiere};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/chauffage/generateur.yaml
+ */
 final class PositionDto
 {
     public function __construct(
-        public bool $generateur_collectif,
-        public bool $generateur_multi_batiment,
-        public bool $position_volume_chauffe,
-        public ?int $cascade,
-        public ?int $priorite_cascade,
-        public ?PositionChaudiere $position_chaudiere,
-        public ?string $generateur_mixte_id,
-        public ?string $reseau_chaleur_id,
+        public readonly bool $generateur_collectif,
+        public readonly bool $generateur_multi_batiment,
+        public readonly bool $position_volume_chauffe,
+        public readonly ?int $cascade,
+        public readonly ?int $priorite_cascade,
+        public readonly ?PositionChaudiere $position_chaudiere,
+        public readonly ?string $generateur_mixte_id,
+        public readonly ?string $reseau_chaleur_id,
     ) {}
 
     public static function from(Position $data): self

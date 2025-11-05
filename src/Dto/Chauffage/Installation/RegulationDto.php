@@ -4,12 +4,15 @@ namespace App\Dto\Chauffage\Installation;
 
 use App\Domain\Chauffage\Installation\Regulation\Regulation;
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/chauffage/installation.yaml
+ */
 final class RegulationDto
 {
     public function __construct(
-        public bool $presence_regulation,
-        public ?bool $minimum_temperature,
-        public ?bool $detection_presence,
+        public readonly bool $presence_regulation,
+        public readonly ?bool $minimum_temperature,
+        public readonly ?bool $detection_presence,
     ) {}
 
     public static function from(Regulation $data): self

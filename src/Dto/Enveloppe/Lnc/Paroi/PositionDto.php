@@ -2,14 +2,16 @@
 
 namespace App\Dto\Enveloppe\Lnc\Paroi;
 
-use App\Domain\Enveloppe\Lnc\Paroi\Position;
-use App\Domain\Enveloppe\Lnc\Paroi\Mitoyennete;
+use App\Domain\Enveloppe\Lnc\Paroi\{Position, Mitoyennete};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/local_non_chauffe/paroi.yaml
+ */
 final class PositionDto
 {
     public function __construct(
-        public float $surface,
-        public Mitoyennete $mitoyennete,
+        public readonly float $surface,
+        public readonly Mitoyennete $mitoyennete,
     ) {}
 
     public static function from(Position $data): self

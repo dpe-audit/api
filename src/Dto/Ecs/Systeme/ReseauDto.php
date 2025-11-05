@@ -2,17 +2,18 @@
 
 namespace App\Dto\Ecs\Systeme;
 
-use App\Domain\Ecs\Systeme\Reseau\BouclageReseau;
-use App\Domain\Ecs\Systeme\Reseau\IsolationReseau;
-use App\Domain\Ecs\Systeme\Reseau\Reseau;
+use App\Domain\Ecs\Systeme\Reseau\{BouclageReseau, IsolationReseau, Reseau};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/ecs/systeme.yaml
+ */
 final class ReseauDto
 {
     public function __construct(
-        public bool $alimentation_contigue,
-        public int $niveaux_desservis,
-        public ?IsolationReseau $isolation,
-        public ?BouclageReseau $bouclage,
+        public readonly bool $alimentation_contigue,
+        public readonly int $niveaux_desservis,
+        public readonly ?IsolationReseau $isolation,
+        public readonly ?BouclageReseau $bouclage,
     ) {}
 
     public static function from(Reseau $data): self

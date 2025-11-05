@@ -2,24 +2,24 @@
 
 namespace App\Dto\Chauffage\Systeme;
 
-use App\Domain\Chauffage\Emetteur\Emetteur;
 use App\Domain\Chauffage\Systeme\Systeme;
-use App\Domain\Chauffage\Systeme\SystemeCollection;
 use App\Domain\Chauffage\TypeChauffage;
 
 /**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/chauffage/systeme.yaml
+ * 
  * @property array<string> $emetteurs
  */
 final class SystemeDto
 {
     public function __construct(
-        public string $id,
-        public string $description,
-        public string $generateur_id,
-        public string $installation_id,
-        public TypeChauffage $type,
-        public ?ReseauDto $reseau,
-        public array $emetteurs,
+        public readonly string $id,
+        public readonly string $description,
+        public readonly string $generateur_id,
+        public readonly string $installation_id,
+        public readonly TypeChauffage $type,
+        public readonly ?ReseauDto $reseau,
+        public readonly array $emetteurs,
     ) {}
 
     public static function from(Systeme $data): self
@@ -31,16 +31,8 @@ final class SystemeDto
             installation_id: (string) $data->installation()->id(),
             type: $data->type(),
             reseau: ReseauDto::from($data->reseau()),
-            emetteurs: $data->emetteurs()->map(fn(Emetteur $item) => (string) $item->id())->values(),
+            emetteurs: $data->emetteurs()->map(fn($item) => (string) $item->id())->values(),
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(SystemeCollection $data): array
-    {
-        return $data->map(fn(Systeme $item) => self::from($item))->values();
     }
 
     public function __normalize(): array

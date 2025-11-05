@@ -2,20 +2,21 @@
 
 namespace App\Dto\Ventilation;
 
-use App\Domain\Ventilation\Generateur\{Generateur, GenerateurCollection};
-use App\Domain\Ventilation\Generateur\TypeGenerateur;
-use App\Domain\Ventilation\Generateur\TypeVmc;
+use App\Domain\Ventilation\Generateur\{Generateur, TypeGenerateur, TypeVmc};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/ventilation/generateur.yaml
+ */
 final class GenerateurDto
 {
     public function __construct(
-        public string $id,
-        public string $description,
-        public TypeGenerateur $type,
-        public ?TypeVmc $type_vmc,
-        public bool $generateur_collectif,
-        public ?bool $presence_echangeur_thermique,
-        public ?int $annee_installation,
+        public readonly string $id,
+        public readonly string $description,
+        public readonly TypeGenerateur $type,
+        public readonly ?TypeVmc $type_vmc,
+        public readonly bool $generateur_collectif,
+        public readonly ?bool $presence_echangeur_thermique,
+        public readonly ?int $annee_installation,
     ) {}
 
     public static function from(Generateur $data): self
@@ -29,14 +30,6 @@ final class GenerateurDto
             presence_echangeur_thermique: $data->presence_echangeur_thermique(),
             annee_installation: $data->annee_installation(),
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(GenerateurCollection $data): array
-    {
-        return $data->map(fn(Generateur $item) => self::from($item))->values();
     }
 
     public function __normalize(): array

@@ -9,7 +9,7 @@ use App\Domain\Enveloppe\Baie\Vitrage\Vitrage;
 use App\Domain\Enveloppe\Baie\Survitrage\Survitrage;
 use App\Domain\Enveloppe\Enveloppe;
 use App\Domain\Enveloppe\Masque\{Masque, MasqueCollection};
-use App\Domain\Enveloppe\Paroi\{Paroi, TypeParoi};
+use App\Domain\Enveloppe\Paroi\{Mitoyennete, Paroi, TypeParoi};
 use Webmozart\Assert\Assert;
 
 final class Baie extends Paroi
@@ -101,6 +101,11 @@ final class Baie extends Paroi
     public static function type_paroi(): TypeParoi
     {
         return TypeParoi::BAIE;
+    }
+
+    public function mitoyennete(): Mitoyennete
+    {
+        return $this->position->mitoyennete;
     }
 
     public function description(): string

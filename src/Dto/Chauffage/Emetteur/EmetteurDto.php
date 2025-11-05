@@ -2,20 +2,20 @@
 
 namespace App\Dto\Chauffage\Emetteur;
 
-use App\Domain\Chauffage\Emetteur\Emetteur;
-use App\Domain\Chauffage\Emetteur\EmetteurCollection;
-use App\Domain\Chauffage\Emetteur\TemperatureDistribution;
-use App\Domain\Chauffage\Emetteur\TypeEmetteur;
+use App\Domain\Chauffage\Emetteur\{Emetteur, TemperatureDistribution, TypeEmetteur};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/chauffage/emetteur.yaml
+ */
 final class EmetteurDto
 {
     public function __construct(
-        public string $id,
-        public string $description,
-        public TypeEmetteur $type,
-        public TemperatureDistribution $temperature_distribution,
-        public bool $presence_robinet_thermostatique,
-        public ?int $annee_installation,
+        public readonly string $id,
+        public readonly string $description,
+        public readonly TypeEmetteur $type,
+        public readonly TemperatureDistribution $temperature_distribution,
+        public readonly bool $presence_robinet_thermostatique,
+        public readonly ?int $annee_installation,
     ) {}
 
     public static function from(Emetteur $data): self
@@ -28,14 +28,6 @@ final class EmetteurDto
             presence_robinet_thermostatique: $data->presence_robinet_thermostatique(),
             annee_installation: $data->annee_installation(),
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(EmetteurCollection $data): array
-    {
-        return $data->map(fn(Emetteur $item) => self::from($item))->values();
     }
 
     public function __normalize(): array

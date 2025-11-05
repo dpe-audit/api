@@ -2,8 +2,7 @@
 
 namespace App\Dto\Enveloppe;
 
-use App\Domain\Enveloppe\Enveloppe;
-use App\Domain\Enveloppe\Exposition;
+use App\Domain\Enveloppe\{Enveloppe, Exposition};
 use App\Dto\Enveloppe\Baie\BaieDto;
 use App\Dto\Enveloppe\DoubleFenetre\DoubleFenetreDto;
 use App\Dto\Enveloppe\Lnc\LncDto;
@@ -17,6 +16,8 @@ use App\Dto\Enveloppe\Porte\PorteDto;
 use Symfony\Component\Validator\Constraints;
 
 /**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/enveloppe.yaml
+ * 
  * @property array<BaieDto> $baies
  * @property array<DoubleFenetreDto> $doubles_fenetres
  * @property array<LncDto> $locaux_non_chauffes
@@ -72,16 +73,16 @@ final class EnveloppeDto
             exposition: $data->exposition(),
             q4pa_conv: $data->q4pa_conv(),
             presence_brasseurs_air: $data->presence_brasseurs_air(),
-            niveaux: NiveauDto::fromCollection($data->niveaux()),
-            locaux_non_chauffes: LncDto::fromCollection($data->locaux_non_chauffes()),
-            doubles_fenetres: DoubleFenetreDto::fromCollection($data->doubles_fenetres()),
-            masques: MasqueDto::fromCollection($data->masques()),
-            baies: BaieDto::fromCollection($data->baies()),
-            murs: MurDto::fromCollection($data->murs()),
-            planchers_bas: PlancherBasDto::fromCollection($data->planchers_bas()),
-            planchers_hauts: PlancherHautDto::fromCollection($data->planchers_hauts()),
-            portes: PorteDto::fromCollection($data->portes()),
-            ponts_thermiques: PontThermiqueDto::fromCollection($data->ponts_thermiques()),
+            niveaux: $data->niveaux()->map(fn($item) => NiveauDto::from($item))->values(),
+            locaux_non_chauffes: $data->locaux_non_chauffes()->map(fn($item) => LncDto::from($item))->values(),
+            doubles_fenetres: $data->doubles_fenetres()->map(fn($item) => DoubleFenetreDto::from($item))->values(),
+            masques: $data->masques()->map(fn($item) => MasqueDto::from($item))->values(),
+            baies: $data->baies()->map(fn($item) => BaieDto::from($item))->values(),
+            murs: $data->murs()->map(fn($item) => MurDto::from($item))->values(),
+            planchers_bas: $data->planchers_bas()->map(fn($item) => PlancherBasDto::from($item))->values(),
+            planchers_hauts: $data->planchers_hauts()->map(fn($item) => PlancherHautDto::from($item))->values(),
+            portes: $data->portes()->map(fn($item) => PorteDto::from($item))->values(),
+            ponts_thermiques: $data->ponts_thermiques()->map(fn($item) => PontThermiqueDto::from($item))->values(),
         );
     }
 
@@ -235,16 +236,16 @@ final class EnveloppeDto
             'exposition' => $this->exposition->value,
             'q4pa_conv' => $this->q4pa_conv,
             'presence_brasseurs_air' => $this->presence_brasseurs_air,
-            'niveaux' => array_map(fn(NiveauDto $dto) => $dto->__normalize(), $this->niveaux),
-            'locaux_non_chauffes' => array_map(fn(LncDto $dto) => $dto->__normalize(), $this->locaux_non_chauffes),
-            'doubles_fenetres' => array_map(fn(DoubleFenetreDto $dto) => $dto->__normalize(), $this->doubles_fenetres),
-            'masques' => array_map(fn(MasqueDto $dto) => $dto->__normalize(), $this->masques),
-            'baies' => array_map(fn(BaieDto $dto) => $dto->__normalize(), $this->baies),
-            'murs' => array_map(fn(MurDto $dto) => $dto->__normalize(), $this->murs),
-            'planchers_bas' => array_map(fn(PlancherBasDto $dto) => $dto->__normalize(), $this->planchers_bas),
-            'planchers_hauts' => array_map(fn(PlancherHautDto $dto) => $dto->__normalize(), $this->planchers_hauts),
-            'portes' => array_map(fn(PorteDto $dto) => $dto->__normalize(), $this->portes),
-            'ponts_thermiques' => array_map(fn(PontThermiqueDto $dto) => $dto->__normalize(), $this->ponts_thermiques),
+            'niveaux' => array_map(fn($dto) => $dto->__normalize(), $this->niveaux),
+            'locaux_non_chauffes' => array_map(fn($dto) => $dto->__normalize(), $this->locaux_non_chauffes),
+            'doubles_fenetres' => array_map(fn($dto) => $dto->__normalize(), $this->doubles_fenetres),
+            'masques' => array_map(fn($dto) => $dto->__normalize(), $this->masques),
+            'baies' => array_map(fn($dto) => $dto->__normalize(), $this->baies),
+            'murs' => array_map(fn($dto) => $dto->__normalize(), $this->murs),
+            'planchers_bas' => array_map(fn($dto) => $dto->__normalize(), $this->planchers_bas),
+            'planchers_hauts' => array_map(fn($dto) => $dto->__normalize(), $this->planchers_hauts),
+            'portes' => array_map(fn($dto) => $dto->__normalize(), $this->portes),
+            'ponts_thermiques' => array_map(fn($dto) => $dto->__normalize(), $this->ponts_thermiques),
         ];
     }
 }

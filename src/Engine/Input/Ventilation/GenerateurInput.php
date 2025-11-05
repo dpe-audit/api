@@ -3,14 +3,14 @@
 namespace App\Engine\Input\Ventilation;
 
 use App\Domain\Ventilation\Generateur\{Generateur, TypeGenerateur, TypeVmc};
-use App\Engine\{Engine, Input};
+use App\Engine\{Context, Engine, Input};
 use App\Engine\Rules\Ventilation\ConsommationAuxiliaireRule;
 use App\Engine\Rules\Ventilation\DimensionnementGenerateurRule;
 
 final class GenerateurInput extends Input
 {
     public function __construct(
-        public readonly Engine $context,
+        public readonly Context $context,
         public readonly Generateur $entity,
     ) {}
 

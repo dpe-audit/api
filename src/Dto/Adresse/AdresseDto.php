@@ -4,14 +4,17 @@ namespace App\Dto\Adresse;
 
 use App\Domain\Adresse\Adresse;
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/adresse/adresse.yaml
+ */
 final class AdresseDto
 {
     public function __construct(
-        public string $nom,
-        public string $code_postal,
-        public string $code_insee,
-        public string $commune,
-        public ?string $ban_id,
+        public readonly string $nom,
+        public readonly string $code_postal,
+        public readonly string $code_insee,
+        public readonly string $commune,
+        public readonly ?string $ban_id,
     ) {}
 
     public static function from(Adresse $data): self

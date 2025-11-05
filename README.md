@@ -16,6 +16,12 @@ symfony server:start
 
 ## Usage
 
+### GET /ressources
+
+Recherche une liste de ressources.
+
+### POST /ressources
+
 **GET /audits** : Recherche de DPE-Audit disponibles dans l'opendata de l'ADEME.
 
 **POST /audit** : Publie un audit énergétique conforme au [standard d'échange de données](https://github.com/action-21/dpe-audit-schema). Une simulation des performances est automatiquement effecuée pour chaque requête.

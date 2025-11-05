@@ -2,9 +2,8 @@
 
 namespace App\Domain\Batiment;
 
-/**
- * @see https://github.com/dpe-audit/schemas/blob/main/schemas/batiment.yaml
- */
+use App\Domain\Adresse\Adresse;
+
 final class Batiment
 {
     public function __construct(
@@ -18,6 +17,7 @@ final class Batiment
         public readonly float $hauteur_sous_plafond,
         public readonly float $volume_habitable,
         public readonly bool $materiaux_anciens,
+        public readonly Adresse $adresse,
         public readonly ?string $rnb_id,
     ) {}
 
@@ -29,6 +29,7 @@ final class Batiment
         float $surface_habitable,
         float $hauteur_sous_plafond,
         bool $materiaux_anciens,
+        Adresse $adresse,
         ?string $rnb_id,
     ): self {
         return new self(
@@ -42,6 +43,7 @@ final class Batiment
             hauteur_sous_plafond: $hauteur_sous_plafond,
             volume_habitable: $surface_habitable * $hauteur_sous_plafond,
             materiaux_anciens: $materiaux_anciens,
+            adresse: $adresse,
             rnb_id: $rnb_id,
         );
     }

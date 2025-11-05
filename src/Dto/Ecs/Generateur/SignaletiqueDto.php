@@ -2,22 +2,23 @@
 
 namespace App\Dto\Ecs\Generateur;
 
-use App\Domain\Ecs\Generateur\Signaletique\LabelGenerateur;
-use App\Domain\Ecs\Generateur\Signaletique\ModeCombustion;
-use App\Domain\Ecs\Generateur\Signaletique\Signaletique;
+use App\Domain\Ecs\Generateur\Signaletique\{LabelGenerateur, ModeCombustion, Signaletique};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/ecs/generateur.yaml
+ */
 final class SignaletiqueDto
 {
     public function __construct(
-        public ?int $volume_stockage,
-        public ?float $pn,
-        public ?LabelGenerateur $label,
-        public ?float $cop,
-        public ?ModeCombustion $mode_combustion,
-        public ?bool $presence_ventouse,
-        public ?float $pveilleuse,
-        public ?float $qp0,
-        public ?float $rpn,
+        public readonly ?int $volume_stockage,
+        public readonly ?float $pn,
+        public readonly ?LabelGenerateur $label,
+        public readonly ?float $cop,
+        public readonly ?ModeCombustion $mode_combustion,
+        public readonly ?bool $presence_ventouse,
+        public readonly ?float $pveilleuse,
+        public readonly ?float $qp0,
+        public readonly ?float $rpn,
     ) {}
 
     public static function from(Signaletique $data): self

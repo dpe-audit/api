@@ -4,11 +4,11 @@ namespace App\Engine;
 
 abstract class Input
 {
-    public readonly Engine $context;
+    public readonly Context $context;
 
     public function require(string $class): RuleInterface
     {
-        if (null === $rule = $this->context->rules()->find($class)) {
+        if (null === $rule = $this->context->engine()->rules()->find($class)) {
             throw new \DomainException(sprintf("Dépendance %s non trouvée", $class));
         }
         $rule($this->context);
@@ -17,7 +17,7 @@ abstract class Input
 
     public function requireIterator(string $class, Input $item): RuleIterator
     {
-        foreach ($this->context->rules()->search($class) as $iterator) {
+        foreach ($this->context->engine()->rules()->search($class) as $iterator) {
             if (!$iterator instanceof RuleIterator) {
                 continue;
             }

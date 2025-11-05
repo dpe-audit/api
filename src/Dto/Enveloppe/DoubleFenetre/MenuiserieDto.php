@@ -2,17 +2,19 @@
 
 namespace App\Dto\Enveloppe\DoubleFenetre;
 
-use App\Domain\Enveloppe\DoubleFenetre\Menuiserie\Materiau;
-use App\Domain\Enveloppe\DoubleFenetre\Menuiserie\Menuiserie;
+use App\Domain\Enveloppe\DoubleFenetre\Menuiserie\{Materiau, Menuiserie};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/double_fenetre.yaml
+ */
 final class MenuiserieDto
 {
     public function __construct(
-        public ?Materiau $materiau,
-        public ?float $largeur_dormant,
-        public ?bool $presence_joint,
-        public ?bool $presence_retour_isolation,
-        public ?bool $presence_rupteur_pont_thermique,
+        public readonly ?Materiau $materiau,
+        public readonly ?float $largeur_dormant,
+        public readonly ?bool $presence_joint,
+        public readonly ?bool $presence_retour_isolation,
+        public readonly ?bool $presence_rupteur_pont_thermique,
     ) {}
 
     public static function from(Menuiserie $data): self

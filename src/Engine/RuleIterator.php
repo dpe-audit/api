@@ -54,7 +54,7 @@ abstract class RuleIterator extends Rule implements \Iterator
         return array_key_exists($this->position(), $this->collection());
     }
 
-    public function __invoke(Engine $context): void
+    public function __invoke(Context $context): void
     {
         $this->context = $context;
         $this->rewind();

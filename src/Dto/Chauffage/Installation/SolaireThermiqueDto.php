@@ -5,12 +5,15 @@ namespace App\Dto\Chauffage\Installation;
 use App\Domain\Chauffage\Installation\Solaire\Solaire;
 use App\Domain\Chauffage\Installation\Solaire\Usage;
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/chauffage/installation.yaml
+ */
 final class SolaireThermiqueDto
 {
     public function __construct(
-        public Usage $usage,
-        public ?int $annee_installation,
-        public ?float $fch,
+        public readonly Usage $usage,
+        public readonly ?int $annee_installation,
+        public readonly ?float $fch,
     ) {}
 
     public static function from(Solaire $data): self

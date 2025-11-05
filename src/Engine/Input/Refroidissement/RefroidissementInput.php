@@ -6,6 +6,7 @@ use App\Domain\Common\Consommation\ConsommationCollection;
 use App\Domain\Common\Enum\Mois;
 use App\Domain\Refroidissement\Generateur\Generateur;
 use App\Domain\Refroidissement\Installation\Installation;
+use App\Domain\Refroidissement\Refroidissement;
 use App\Domain\Refroidissement\Systeme\Systeme;
 use App\Engine\{Engine, Input};
 use App\Engine\Rules\Refroidissement\{BesoinRefroidissementRule, ConsommationRefroidissementRule};
@@ -19,15 +20,15 @@ final class RefroidissementInput extends Input
     /** @var SystemeInput[] */
     public readonly array $systemes;
 
-    public function __construct(public readonly Engine $context)
+    public function __construct(public readonly Refroidissement $entity, public readonly Engine $context)
     {
-        $this->installations = $context->ressource()->refroidissement()->installations()
+        $this->installations = $entity->installations()
             ->map(fn(Installation $item) => new InstallationInput($context, $item))
             ->values();
-        $this->generateurs = $context->ressource()->refroidissement()->generateurs()
+        $this->generateurs = $entity->generateurs()
             ->map(fn(Generateur $item) => new GenerateurInput($context, $item))
             ->values();
-        $this->systemes = $context->ressource()->refroidissement()->systemes()
+        $this->systemes = $entity->systemes()
             ->map(fn(Systeme $item) => new SystemeInput($context, $item))
             ->values();
     }

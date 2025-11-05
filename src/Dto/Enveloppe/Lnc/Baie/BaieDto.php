@@ -2,20 +2,20 @@
 
 namespace App\Dto\Enveloppe\Lnc\Baie;
 
-use App\Domain\Enveloppe\Lnc\Baie\Baie;
-use App\Domain\Enveloppe\Lnc\Baie\BaieCollection;
-use App\Domain\Enveloppe\Lnc\Baie\Materiau;
-use App\Domain\Enveloppe\Lnc\Baie\TypeVitrage;
+use App\Domain\Enveloppe\Lnc\Baie\{Baie, Materiau, TypeVitrage};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/local_non_chauffe/baie.yaml
+ */
 final class BaieDto
 {
     public function __construct(
-        public string $id,
-        public string $description,
-        public ?Materiau $materiau,
-        public TypeVitrage $type_vitrage,
-        public ?bool $presence_rupteur_pont_thermique,
-        public PositionDto $position,
+        public readonly string $id,
+        public readonly string $description,
+        public readonly ?Materiau $materiau,
+        public readonly TypeVitrage $type_vitrage,
+        public readonly ?bool $presence_rupteur_pont_thermique,
+        public readonly PositionDto $position,
     ) {}
 
     public static function from(Baie $data): self
@@ -28,14 +28,6 @@ final class BaieDto
             presence_rupteur_pont_thermique: $data->presence_rupteur_pont_thermique(),
             position: PositionDto::from($data->position()),
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(BaieCollection $data): array
-    {
-        return $data->map(fn(Baie $item) => self::from($item))->values();
     }
 
     public function __normalize(): array

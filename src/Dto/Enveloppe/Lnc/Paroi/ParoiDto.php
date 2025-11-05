@@ -2,17 +2,18 @@
 
 namespace App\Dto\Enveloppe\Lnc\Paroi;
 
-use App\Domain\Enveloppe\Lnc\Paroi\Isolation;
-use App\Domain\Enveloppe\Lnc\Paroi\Paroi;
-use App\Domain\Enveloppe\Lnc\Paroi\ParoiCollection;
+use App\Domain\Enveloppe\Lnc\Paroi\{Isolation, Paroi};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/local_non_chauffe/paroi.yaml
+ */
 final class ParoiDto
 {
     public function __construct(
-        public string $id,
-        public string $description,
-        public ?Isolation $isolation,
-        public PositionDto $position,
+        public readonly string $id,
+        public readonly string $description,
+        public readonly ?Isolation $isolation,
+        public readonly PositionDto $position,
     ) {}
 
     public static function from(Paroi $data): self
@@ -23,14 +24,6 @@ final class ParoiDto
             isolation: $data->isolation(),
             position: PositionDto::from($data->position()),
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(ParoiCollection $data): array
-    {
-        return $data->map(fn(Paroi $item) => self::from($item))->values();
     }
 
     public function __normalize(): array

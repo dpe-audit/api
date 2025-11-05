@@ -2,15 +2,17 @@
 
 namespace App\Dto\Enveloppe\DoubleFenetre;
 
-use App\Domain\Enveloppe\DoubleFenetre\Position\Position;
-use App\Domain\Enveloppe\DoubleFenetre\Position\TypePose;
+use App\Domain\Enveloppe\DoubleFenetre\Position\{Position, TypePose};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/double_fenetre.yaml
+ */
 final class PositionDto
 {
     public function __construct(
-        public float $inclinaison,
-        public ?TypePose $type_pose,
-        public ?bool $presence_soubassement,
+        public readonly float $inclinaison,
+        public readonly ?TypePose $type_pose,
+        public readonly ?bool $presence_soubassement,
     ) {}
 
     public static function from(Position $data): self

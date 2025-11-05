@@ -3,16 +3,18 @@
 namespace App\Dto\Enveloppe\PontThermique;
 
 use App\Domain\Enveloppe\PontThermique\PontThermique;
-use App\Domain\Enveloppe\PontThermique\PontThermiqueCollection;
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/pont_thermique.yaml
+ */
 final class PontThermiqueDto
 {
     public function __construct(
-        public string $id,
-        public string $description,
-        public float $longueur,
-        public ?float $kpt,
-        public LiaisonDto $liaison,
+        public readonly string $id,
+        public readonly string $description,
+        public readonly float $longueur,
+        public readonly ?float $kpt,
+        public readonly LiaisonDto $liaison,
     ) {}
 
     public static function from(PontThermique $data): self
@@ -24,14 +26,6 @@ final class PontThermiqueDto
             kpt: $data->kpt(),
             liaison: LiaisonDto::from($data->liaison()),
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(PontThermiqueCollection $data): array
-    {
-        return $data->map(fn(PontThermique $item) => self::from($item))->values();
     }
 
     public function __normalize(): array

@@ -2,18 +2,21 @@
 
 namespace App\Dto\Production;
 
-use App\Domain\Production\PanneauPhotovoltaique\{PanneauPhotovoltaique, PanneauPhotovoltaiqueCollection};
+use App\Domain\Production\PanneauPhotovoltaique\PanneauPhotovoltaique;
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/production/panneau_photovoltaique.yaml
+ */
 final class PanneauPhotovoltaiqueDto
 {
     public function __construct(
-        public string $id,
-        public string $description,
-        public float $orientation,
-        public float $inclinaison,
-        public int $modules,
-        public ?float $surface,
-        public bool $installation_collective,
+        public readonly string $id,
+        public readonly string $description,
+        public readonly float $orientation,
+        public readonly float $inclinaison,
+        public readonly int $modules,
+        public readonly ?float $surface,
+        public readonly bool $installation_collective,
     ) {}
 
     public static function from(PanneauPhotovoltaique $data): self
@@ -27,14 +30,6 @@ final class PanneauPhotovoltaiqueDto
             surface: $data->surface(),
             installation_collective: $data->installation_collective(),
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(PanneauPhotovoltaiqueCollection $data): array
-    {
-        return $data->map(fn(PanneauPhotovoltaique $item): self => self::from($item))->values();
     }
 
     public function __normalize(): array

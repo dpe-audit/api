@@ -2,14 +2,16 @@
 
 namespace App\Dto\Enveloppe\Baie;
 
-use App\Domain\Enveloppe\Baie\Survitrage\TypeSurvitrage;
-use App\Domain\Enveloppe\Baie\Survitrage\Survitrage;
+use App\Domain\Enveloppe\Baie\Survitrage\{TypeSurvitrage, Survitrage};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/baie.yaml
+ */
 final class SurvitrageDto
 {
     public function __construct(
-        public TypeSurvitrage $type,
-        public ?float $epaisseur_lame,
+        public readonly TypeSurvitrage $type,
+        public readonly ?float $epaisseur_lame,
     ) {}
 
     public static function from(Survitrage $data): self

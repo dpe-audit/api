@@ -2,15 +2,17 @@
 
 namespace App\Dto\Ecs\Installation;
 
-use App\Domain\Ecs\Installation\Solaire\Solaire;
-use App\Domain\Ecs\Installation\Solaire\Usage;
+use App\Domain\Ecs\Installation\Solaire\{Solaire, Usage};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/ecs/installation.yaml
+ */
 final class SolaireThermiqueDto
 {
     public function __construct(
-        public Usage $usage,
-        public ?int $annee_installation,
-        public ?float $fecs,
+        public readonly Usage $usage,
+        public readonly ?int $annee_installation,
+        public readonly ?float $fecs,
     ) {}
 
     public static function from(Solaire $data): self

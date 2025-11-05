@@ -3,17 +3,19 @@
 namespace App\Dto\Ecs\Systeme;
 
 use App\Domain\Ecs\Systeme\Systeme;
-use App\Domain\Ecs\Systeme\SystemeCollection;
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/ecs/systeme.yaml
+ */
 final class SystemeDto
 {
     public function __construct(
-        public string $id,
-        public string $description,
-        public string $generateur_id,
-        public string $installation_id,
-        public ReseauDto $reseau,
-        public StockageDto $stockage,
+        public readonly string $id,
+        public readonly string $description,
+        public readonly string $generateur_id,
+        public readonly string $installation_id,
+        public readonly ReseauDto $reseau,
+        public readonly StockageDto $stockage,
     ) {}
 
     public static function from(Systeme $data): self
@@ -26,14 +28,6 @@ final class SystemeDto
             reseau: ReseauDto::from($data->reseau()),
             stockage: StockageDto::from($data->stockage()),
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(SystemeCollection $data): array
-    {
-        return $data->map(fn(Systeme $item) => self::from($item))->values();
     }
 
     public function __normalize(): array

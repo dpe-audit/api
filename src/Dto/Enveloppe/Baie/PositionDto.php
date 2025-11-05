@@ -2,22 +2,24 @@
 
 namespace App\Dto\Enveloppe\Baie;
 
-use App\Domain\Enveloppe\Baie\Position\Position;
-use App\Domain\Enveloppe\Baie\Position\TypePose;
+use App\Domain\Enveloppe\Baie\Position\{Position, TypePose};
 use App\Domain\Enveloppe\Paroi\Mitoyennete;
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/baie.yaml
+ */
 final class PositionDto
 {
     public function __construct(
-        public float $surface,
-        public Mitoyennete $mitoyennete,
-        public ?TypePose $type_pose,
-        public float $inclinaison,
-        public ?float $orientation,
-        public ?bool $presence_soubassement,
-        public ?string $paroi_id,
-        public ?string $local_non_chauffe_id,
-        public ?string $double_fenetre_id,
+        public readonly float $surface,
+        public readonly Mitoyennete $mitoyennete,
+        public readonly ?TypePose $type_pose,
+        public readonly float $inclinaison,
+        public readonly ?float $orientation,
+        public readonly ?bool $presence_soubassement,
+        public readonly ?string $paroi_id,
+        public readonly ?string $local_non_chauffe_id,
+        public readonly ?string $double_fenetre_id,
     ) {}
 
     public static function from(Position $data): self

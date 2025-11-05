@@ -2,16 +2,17 @@
 
 namespace App\Dto\Enveloppe\DoubleFenetre;
 
-use App\Domain\Enveloppe\DoubleFenetre\Vitrage\NatureGazLame;
-use App\Domain\Enveloppe\DoubleFenetre\Vitrage\TypeVitrage;
-use App\Domain\Enveloppe\DoubleFenetre\Vitrage\Vitrage;
+use App\Domain\Enveloppe\DoubleFenetre\Vitrage\{NatureGazLame, TypeVitrage, Vitrage};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/double_fenetre.yaml
+ */
 final class VitrageDto
 {
     public function __construct(
-        public TypeVitrage $type,
-        public ?NatureGazLame $nature_lame,
-        public ?float $epaisseur_lame,
+        public readonly TypeVitrage $type,
+        public readonly ?NatureGazLame $nature_lame,
+        public readonly ?float $epaisseur_lame,
     ) {}
 
     public static function from(Vitrage $data): self

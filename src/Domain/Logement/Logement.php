@@ -3,7 +3,7 @@
 namespace App\Domain\Logement;
 
 use App\Domain\Common\ValueObject\Id;
-use App\Domain\Ressource\Ressource;
+use App\Domain\Diagnostic\Diagnostic;
 
 /**
  * @see https://github.com/dpe-audit/schemas/blob/main/schemas/logement.yaml
@@ -12,7 +12,7 @@ final class Logement
 {
     public function __construct(
         private readonly Id $id,
-        private readonly Ressource $ressource,
+        private readonly Diagnostic $diagnostic,
         private string $description,
         private float $surface_habitable,
         private float $hauteur_sous_plafond,
@@ -22,7 +22,7 @@ final class Logement
 
     public static function create(
         Id $id,
-        Ressource $ressource,
+        Diagnostic $diagnostic,
         string $description,
         float $surface_habitable,
         float $hauteur_sous_plafond,
@@ -31,7 +31,7 @@ final class Logement
     ): self {
         return new self(
             id: $id,
-            ressource: $ressource,
+            diagnostic: $diagnostic,
             description: $description,
             position: $position,
             typologie: $typologie,
@@ -45,9 +45,9 @@ final class Logement
         return $this->id;
     }
 
-    public function ressource(): Ressource
+    public function diagnostic(): Diagnostic
     {
-        return $this->ressource;
+        return $this->diagnostic;
     }
 
     public function description(): string

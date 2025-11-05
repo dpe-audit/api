@@ -2,15 +2,18 @@
 
 namespace App\Dto\Refroidissement;
 
-use App\Domain\Refroidissement\Systeme\{Systeme, SystemeCollection};
+use App\Domain\Refroidissement\Systeme\Systeme;
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/refroidissement/systeme.yaml
+ */
 final class SystemeDto
 {
     public function __construct(
-        public string $id,
-        public string $description,
-        public string $installation_id,
-        public string $generateur_id,
+        public readonly string $id,
+        public readonly string $description,
+        public readonly string $installation_id,
+        public readonly string $generateur_id,
     ) {}
 
     public static function from(Systeme $data): self
@@ -21,14 +24,6 @@ final class SystemeDto
             installation_id: (string) $data->installation()->id(),
             generateur_id: (string) $data->generateur()->id(),
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(SystemeCollection $data): array
-    {
-        return $data->map(fn(Systeme $item) => self::from($item))->values();
     }
 
     public function __normalize(): array

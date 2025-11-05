@@ -2,17 +2,19 @@
 
 namespace App\Dto\Enveloppe\PontThermique;
 
-use App\Domain\Enveloppe\PontThermique\Liaison\Liaison;
-use App\Domain\Enveloppe\PontThermique\Liaison\TypeLiaison;
+use App\Domain\Enveloppe\PontThermique\Liaison\{Liaison, TypeLiaison};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/pont_thermique.yaml
+ */
 final class LiaisonDto
 {
     public function __construct(
-        public TypeLiaison $type,
-        public bool $pont_thermique_partiel,
-        public string $mur_id,
-        public ?string $plancher_id,
-        public ?string $ouverture_id,
+        public readonly TypeLiaison $type,
+        public readonly bool $pont_thermique_partiel,
+        public readonly string $mur_id,
+        public readonly ?string $plancher_id,
+        public readonly ?string $ouverture_id,
     ) {}
 
     public static function from(Liaison $data): self

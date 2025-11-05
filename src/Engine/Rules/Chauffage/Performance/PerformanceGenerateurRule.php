@@ -35,7 +35,7 @@ abstract class PerformanceGenerateurRule extends GenerateurInputRuleIterator
     }
 
     /**
-     * Coefficient de performance énergétique
+     * Coefficient de performance énergétique en %
      */
     public function rpn(): ?float
     {
@@ -51,7 +51,7 @@ abstract class PerformanceGenerateurRule extends GenerateurInputRuleIterator
     }
 
     /**
-     * Rendement à charge intermédiaire
+     * Rendement à charge intermédiaire en %
      */
     public function rpint(): ?float
     {
@@ -110,7 +110,7 @@ abstract class PerformanceGenerateurRule extends GenerateurInputRuleIterator
     }
 
     /**
-     * Température de fonctionnement à 30% de charge
+     * Température de fonctionnement à 30% de charge en °C
      */
     public function tfonc30(): ?float
     {
@@ -137,7 +137,7 @@ abstract class PerformanceGenerateurRule extends GenerateurInputRuleIterator
     }
 
     /**
-     * Température de fonctionnement à 100% de charge
+     * Température de fonctionnement à 100% de charge en °C
      */
     public function tfonc100(): ?float
     {

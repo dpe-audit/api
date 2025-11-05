@@ -4,12 +4,15 @@ namespace App\Dto\Enveloppe\Porte;
 
 use App\Domain\Enveloppe\Porte\Menuiserie\Menuiserie;
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/porte.yaml
+ */
 final class MenuiserieDto
 {
     public function __construct(
-        public ?float $largeur_dormant,
-        public ?bool $presence_joint,
-        public ?bool $presence_retour_isolation,
+        public readonly ?float $largeur_dormant,
+        public readonly ?bool $presence_joint,
+        public readonly ?bool $presence_retour_isolation,
     ) {}
 
     public static function from(Menuiserie $data): self

@@ -6,21 +6,24 @@ use App\Domain\Chauffage\Generateur\Signaletique\LabelGenerateur;
 use App\Domain\Chauffage\Generateur\Signaletique\ModeCombustion;
 use App\Domain\Chauffage\Generateur\Signaletique\Signaletique;
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/chauffage/generateur.yaml
+ */
 final class SignaletiqueDto
 {
     public function __construct(
-        public ?float $pn,
-        public ?LabelGenerateur $label,
-        public ?float $scop,
-        public ?ModeCombustion $mode_combustion,
-        public ?bool $presence_ventouse,
-        public ?bool $presence_regulation_combustion,
-        public ?float $pveilleuse,
-        public ?float $qp0,
-        public ?float $rpn,
-        public ?float $rpint,
-        public ?float $tfonc30,
-        public ?float $tfonc100,
+        public readonly ?float $pn,
+        public readonly ?LabelGenerateur $label,
+        public readonly ?float $scop,
+        public readonly ?ModeCombustion $mode_combustion,
+        public readonly ?bool $presence_ventouse,
+        public readonly ?bool $presence_regulation_combustion,
+        public readonly ?float $pveilleuse,
+        public readonly ?float $qp0,
+        public readonly ?float $rpn,
+        public readonly ?float $rpint,
+        public readonly ?float $tfonc30,
+        public readonly ?float $tfonc100,
     ) {}
 
     public static function from(Signaletique $data): self

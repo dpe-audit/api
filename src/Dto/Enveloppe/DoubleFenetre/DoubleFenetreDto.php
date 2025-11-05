@@ -2,23 +2,24 @@
 
 namespace App\Dto\Enveloppe\DoubleFenetre;
 
-use App\Domain\Enveloppe\DoubleFenetre\DoubleFenetre;
-use App\Domain\Enveloppe\DoubleFenetre\DoubleFenetreCollection;
-use App\Domain\Enveloppe\DoubleFenetre\TypeBaie;
+use App\Domain\Enveloppe\DoubleFenetre\{DoubleFenetre, TypeBaie};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/double_fenetre.yaml
+ */
 final class DoubleFenetreDto
 {
     public function __construct(
-        public string $id,
-        public string $description,
-        public TypeBaie $type,
-        public ?float $ug,
-        public ?float $uw,
-        public ?float $sw,
-        public PositionDto $position,
-        public VitrageDto $vitrage,
-        public ?SurvitrageDto $survitrage,
-        public ?MenuiserieDto $menuiserie,
+        public readonly string $id,
+        public readonly string $description,
+        public readonly TypeBaie $type,
+        public readonly ?float $ug,
+        public readonly ?float $uw,
+        public readonly ?float $sw,
+        public readonly PositionDto $position,
+        public readonly VitrageDto $vitrage,
+        public readonly ?SurvitrageDto $survitrage,
+        public readonly ?MenuiserieDto $menuiserie,
     ) {}
 
     public static function from(DoubleFenetre $data): self
@@ -35,14 +36,6 @@ final class DoubleFenetreDto
             survitrage: $data->survitrage() ? SurvitrageDto::from($data->survitrage()) : null,
             menuiserie: $data->menuiserie() ? MenuiserieDto::from($data->menuiserie()) : null,
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(DoubleFenetreCollection $data): array
-    {
-        return $data->map(fn(DoubleFenetre $item) => self::from($item))->values();
     }
 
     public function __normalize(): array

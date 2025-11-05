@@ -3,24 +3,25 @@
 namespace App\Dto\Enveloppe\PlancherBas;
 
 use App\Domain\Enveloppe\Paroi\Inertie;
-use App\Domain\Enveloppe\PlancherBas\PlancherBas;
-use App\Domain\Enveloppe\PlancherBas\PlancherBasCollection;
-use App\Domain\Enveloppe\PlancherBas\TypePlancherBas;
+use App\Domain\Enveloppe\PlancherBas\{PlancherBas, TypePlancherBas};
 use App\Dto\Enveloppe\Paroi\IsolationDto;
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/plancher_bas.yaml
+ */
 final class PlancherBasDto
 {
     public function __construct(
-        public string $id,
-        public string $description,
-        public ?TypePlancherBas $type_structure,
-        public ?Inertie $inertie,
-        public ?int $annee_construction,
-        public ?int $annee_renovation,
-        public ?float $u0,
-        public ?float $u,
-        public PositionDto $position,
-        public IsolationDto $isolation,
+        public readonly string $id,
+        public readonly string $description,
+        public readonly ?TypePlancherBas $type_structure,
+        public readonly ?Inertie $inertie,
+        public readonly ?int $annee_construction,
+        public readonly ?int $annee_renovation,
+        public readonly ?float $u0,
+        public readonly ?float $u,
+        public readonly PositionDto $position,
+        public readonly IsolationDto $isolation,
     ) {}
 
     public static function from(PlancherBas $data): self
@@ -37,14 +38,6 @@ final class PlancherBasDto
             position: PositionDto::from($data->position()),
             isolation: IsolationDto::from($data->isolation()),
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(PlancherBasCollection $data): array
-    {
-        return $data->map(fn(PlancherBas $item) => self::from($item))->values();
     }
 
     public function __normalize(): array

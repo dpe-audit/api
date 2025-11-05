@@ -1,0 +1,143 @@
+<?php
+
+namespace App\Legacy\Transformer\Enveloppe;
+
+use App\Domain\Enveloppe\DoubleFenetre\TypeBaie;
+use App\Domain\Enveloppe\DoubleFenetre\Menuiserie\Materiau;
+use App\Domain\Enveloppe\DoubleFenetre\Position\TypePose;
+use App\Domain\Enveloppe\DoubleFenetre\Survitrage\TypeSurvitrage;
+use App\Domain\Enveloppe\DoubleFenetre\Vitrage\{NatureGazLame, TypeVitrage};
+use App\Dto\Enveloppe\DoubleFenetre\{DoubleFenetreDto, MenuiserieDto, PositionDto, SurvitrageDto, VitrageDto};
+use App\Legacy\Model\BaieVitree;
+
+final class BaieDoubleFenetreTransformer
+{
+    private BaieVitree $baie_vitree;
+
+    public function type_baie(): TypeBaie
+    {
+        return match ($this->baie_vitree->enum_type_baie_id) {
+            1 => TypeBaie::BRIQUE_VERRE_PLEINE,
+            2 => TypeBaie::BRIQUE_VERRE_CREUSE,
+            3 => TypeBaie::POLYCARBONATE,
+            4 => TypeBaie::FENETRE_BATTANTE,
+            5 => TypeBaie::FENETRE_COULISSANTE,
+            6 => TypeBaie::PORTE_FENETRE_COULISSANTE,
+            7 => TypeBaie::PORTE_FENETRE_BATTANTE,
+            8 => TypeBaie::PORTE_FENETRE_BATTANTE,
+        };
+    }
+
+    public function type_pose(): ?TypePose
+    {
+        return match ($this->baie_vitree->enum_type_pose_id) {
+            1 => TypePose::NU_EXTERIEUR,
+            2 => TypePose::NU_INTERIEUR,
+            3 => TypePose::TUNNEL,
+            4 => null,
+        };
+    }
+
+    public function inclinaison(): float
+    {
+        return match ($this->baie_vitree->enum_inclinaison_vitrage_id) {
+            1 => 15,
+            2 => 50,
+            3 => 90,
+            4 => 0,
+        };
+    }
+
+    public function presence_soubassement(): ?bool
+    {
+        return match ($this->baie_vitree->enum_type_baie_id) {
+            7 => true,
+            8 => false,
+            default => null,
+        };
+    }
+
+    public function materiau(): ?Materiau
+    {
+        return match ($this->baie_vitree->enum_type_materiaux_menuiserie_id) {
+            3 => Materiau::BOIS,
+            4 => Materiau::BOIS_METAL,
+            5 => Materiau::PVC,
+            6 => Materiau::METAL,
+            7 => Materiau::METAL,
+            default => null,
+        };
+    }
+
+    public function type_vitrage(): TypeVitrage
+    {
+        return match ($this->baie_vitree->enum_type_vitrage_id) {
+            1, 4 => TypeVitrage::SIMPLE_VITRAGE,
+            2 => $this->baie_vitree->vitrage_vir ? TypeVitrage::DOUBLE_VITRAGE_FE : TypeVitrage::DOUBLE_VITRAGE,
+            3 => $this->baie_vitree->vitrage_vir ? TypeVitrage::TRIPLE_VITRAGE_FE : TypeVitrage::TRIPLE_VITRAGE,
+            5 => TypeVitrage::BRIQUE_VERRE,
+            6 => TypeVitrage::POLYCARBONATE,
+        };
+    }
+
+    public function type_survitrage(): ?TypeSurvitrage
+    {
+        return match ($this->baie_vitree->enum_type_vitrage_id) {
+            4 => $this->baie_vitree->vitrage_vir ? TypeSurvitrage::SURVITRAGE_FE : TypeSurvitrage::SURVITRAGE_SIMPLE,
+            1, 2, 3, 5, 6 => null,
+        };
+    }
+
+    public function nature_lame(): ?NatureGazLame
+    {
+        return match ($this->baie_vitree->enum_type_gaz_lame_id) {
+            1 => NatureGazLame::AIR,
+            2 => NatureGazLame::ARGON,
+            default => null,
+        };
+    }
+
+    public function presence_rupteur_pont_thermique(): bool
+    {
+        return $this->baie_vitree->enum_type_materiaux_menuiserie_id === 6 ? true : false;
+    }
+
+    public function __invoke(BaieVitree $baie_vitree): ?DoubleFenetreDto
+    {
+        $this->baie_vitree = $baie_vitree;
+
+        if (false === $baie_vitree->double_fenetre) {
+            return null;
+        }
+
+        return new DoubleFenetreDto(
+            id: $baie_vitree->id(),
+            description: $baie_vitree->description(),
+            type: $this->type_baie(),
+            ug: $baie_vitree->ug_saisi,
+            uw: $baie_vitree->uw_saisi,
+            sw: $baie_vitree->sw_saisi,
+            position: new PositionDto(
+                inclinaison: $this->inclinaison(),
+                type_pose: $this->type_pose(),
+                presence_soubassement: $this->presence_soubassement()
+            ),
+            vitrage: new VitrageDto(
+                type: $this->type_vitrage(),
+                nature_lame: $this->nature_lame(),
+                epaisseur_lame: $baie_vitree->epaisseur_lame,
+            ),
+            survitrage: $this->type_survitrage() ? new SurvitrageDto(
+                type: $this->type_survitrage(),
+                epaisseur_lame: null,
+            ) : null,
+            menuiserie: $this->type_baie()->is_paroi_vitree() ? null : new MenuiserieDto(
+                materiau: $this->materiau(),
+                largeur_dormant: null,
+                presence_joint: null,
+                presence_retour_isolation: null,
+                presence_rupteur_pont_thermique: $this->presence_rupteur_pont_thermique(),
+            )
+        );
+    }
+}

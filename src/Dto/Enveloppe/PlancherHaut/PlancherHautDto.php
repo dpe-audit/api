@@ -3,26 +3,26 @@
 namespace App\Dto\Enveloppe\PlancherHaut;
 
 use App\Domain\Enveloppe\Paroi\Inertie;
-use App\Domain\Enveloppe\PlancherHaut\Configuration;
-use App\Domain\Enveloppe\PlancherHaut\PlancherHaut;
-use App\Domain\Enveloppe\PlancherHaut\PlancherHautCollection;
-use App\Domain\Enveloppe\PlancherHaut\TypePlancherHaut;
+use App\Domain\Enveloppe\PlancherHaut\{Configuration, PlancherHaut, TypePlancherHaut};
 use App\Dto\Enveloppe\Paroi\IsolationDto;
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/plancher_haut.yaml
+ */
 final class PlancherHautDto
 {
     public function __construct(
-        public string $id,
-        public string $description,
-        public Configuration $configuration,
-        public ?TypePlancherHaut $type_structure,
-        public ?Inertie $inertie,
-        public ?int $annee_construction,
-        public ?int $annee_renovation,
-        public ?float $u0,
-        public ?float $u,
-        public PositionDto $position,
-        public IsolationDto $isolation,
+        public readonly string $id,
+        public readonly string $description,
+        public readonly Configuration $configuration,
+        public readonly ?TypePlancherHaut $type_structure,
+        public readonly ?Inertie $inertie,
+        public readonly ?int $annee_construction,
+        public readonly ?int $annee_renovation,
+        public readonly ?float $u0,
+        public readonly ?float $u,
+        public readonly PositionDto $position,
+        public readonly IsolationDto $isolation,
     ) {}
 
     public static function from(PlancherHaut $data): self
@@ -40,14 +40,6 @@ final class PlancherHautDto
             position: PositionDto::from($data->position()),
             isolation: IsolationDto::from($data->isolation()),
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(PlancherHautCollection $data): array
-    {
-        return $data->map(fn(PlancherHaut $item) => self::from($item))->values();
     }
 
     public function __normalize(): array

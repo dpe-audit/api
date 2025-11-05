@@ -2,33 +2,31 @@
 
 namespace App\Dto\Enveloppe\Baie;
 
-use App\Domain\Enveloppe\Baie\Baie;
-use App\Domain\Enveloppe\Baie\BaieCollection;
-use App\Domain\Enveloppe\Baie\TypeBaie;
-use App\Domain\Enveloppe\Baie\TypeFermeture;
-use App\Domain\Enveloppe\Masque\Masque;
+use App\Domain\Enveloppe\Baie\{Baie, TypeBaie, TypeFermeture};
 
 /**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/baie.yaml
+ * 
  * @property array<string> $masques
  */
 final class BaieDto
 {
     public function __construct(
-        public string $id,
-        public string $description,
-        public TypeBaie $type,
-        public bool $presence_protection_solaire,
-        public TypeFermeture $type_fermeture,
-        public ?int $annee_installation,
-        public ?float $ug,
-        public ?float $uw,
-        public ?float $ujn,
-        public ?float $sw,
-        public PositionDto $position,
-        public VitrageDto $vitrage,
-        public ?SurvitrageDto $survitrage,
-        public ?MenuiserieDto $menuiserie,
-        public array $masques,
+        public readonly string $id,
+        public readonly string $description,
+        public readonly TypeBaie $type,
+        public readonly bool $presence_protection_solaire,
+        public readonly TypeFermeture $type_fermeture,
+        public readonly ?int $annee_installation,
+        public readonly ?float $ug,
+        public readonly ?float $uw,
+        public readonly ?float $ujn,
+        public readonly ?float $sw,
+        public readonly PositionDto $position,
+        public readonly VitrageDto $vitrage,
+        public readonly ?SurvitrageDto $survitrage,
+        public readonly ?MenuiserieDto $menuiserie,
+        public readonly array $masques,
     ) {}
 
     public static function from(Baie $data): self
@@ -48,16 +46,8 @@ final class BaieDto
             vitrage: VitrageDto::from($data->vitrage()),
             survitrage: $data->survitrage() ? SurvitrageDto::from($data->survitrage()) : null,
             menuiserie: $data->menuiserie() ? MenuiserieDto::from($data->menuiserie()) : null,
-            masques: $data->masques()->map(fn (Masque $item) => (string) $item->id())->values(),
+            masques: $data->masques()->map(fn($item) => (string) $item->id())->values(),
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(BaieCollection $data): array
-    {
-        return $data->map(fn(Baie $item) => self::from($item))->values();
     }
 
     public function __normalize(): array

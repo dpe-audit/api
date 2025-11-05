@@ -2,20 +2,21 @@
 
 namespace App\Dto\Refroidissement;
 
-use App\Domain\Refroidissement\Generateur\EnergieGenerateur;
-use App\Domain\Refroidissement\Generateur\{Generateur, GenerateurCollection};
-use App\Domain\Refroidissement\Generateur\TypeGenerateur;
+use App\Domain\Refroidissement\Generateur\{Generateur, EnergieGenerateur, TypeGenerateur};
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/refroidissement/generateur.yaml
+ */
 final class GenerateurDto
 {
     public function __construct(
-        public string $id,
-        public string $description,
-        public TypeGenerateur $type,
-        public EnergieGenerateur $energie,
-        public ?int $annee_installation,
-        public ?float $seer,
-        public ?string $reseau_froid_id,
+        public readonly string $id,
+        public readonly string $description,
+        public readonly TypeGenerateur $type,
+        public readonly EnergieGenerateur $energie,
+        public readonly ?int $annee_installation,
+        public readonly ?float $seer,
+        public readonly ?string $reseau_froid_id,
     ) {}
 
     public static function from(Generateur $data): self
@@ -29,14 +30,6 @@ final class GenerateurDto
             seer: $data->seer(),
             reseau_froid_id: $data->reseau_froid() ? (string) $data->reseau_froid()->id() : null,
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(GenerateurCollection $data): array
-    {
-        return $data->map(fn(Generateur $item) => self::from($item))->values();
     }
 
     public function __normalize(): array

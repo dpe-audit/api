@@ -2,7 +2,6 @@
 
 namespace App\Domain\Common\Perte;
 
-use App\Domain\Common\Enum\TypePerte;
 use Webmozart\Assert\Assert;
 
 final class Perte

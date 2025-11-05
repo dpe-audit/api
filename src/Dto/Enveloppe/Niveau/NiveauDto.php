@@ -3,18 +3,20 @@
 namespace App\Dto\Enveloppe\Niveau;
 
 use App\Domain\Enveloppe\Niveau\Niveau;
-use App\Domain\Enveloppe\Niveau\NiveauCollection;
 use App\Domain\Enveloppe\Paroi\Inertie;
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/niveau.yaml
+ */
 final class NiveauDto
 {
     public function __construct(
-        public string $id,
-        public string $description,
-        public float $surface,
-        public Inertie $inertie_paroi_verticale,
-        public Inertie $inertie_plancher_bas,
-        public Inertie $inertie_plancher_haut,
+        public readonly string $id,
+        public readonly string $description,
+        public readonly float $surface,
+        public readonly Inertie $inertie_paroi_verticale,
+        public readonly Inertie $inertie_plancher_bas,
+        public readonly Inertie $inertie_plancher_haut,
     ) {}
 
     public static function from(Niveau $data): self
@@ -27,14 +29,6 @@ final class NiveauDto
             inertie_plancher_bas: $data->inertie_plancher_bas(),
             inertie_plancher_haut: $data->inertie_plancher_haut(),
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(NiveauCollection $data): array
-    {
-        return $data->map(fn(Niveau $item) => self::from($item))->values();
     }
 
     public function __normalize(): array

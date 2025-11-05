@@ -3,15 +3,17 @@
 namespace App\Dto\Ecs\Installation;
 
 use App\Domain\Ecs\Installation\Installation;
-use App\Domain\Ecs\Installation\InstallationCollection;
 
+/**
+ * @see https://github.com/dpe-audit/schemas/blob/main/schemas/ecs/installation.yaml
+ */
 final class InstallationDto
 {
     public function __construct(
-        public string $id,
-        public string $description,
-        public float $surface,
-        public ?SolaireThermiqueDto $solaire_thermique,
+        public readonly string $id,
+        public readonly string $description,
+        public readonly float $surface,
+        public readonly ?SolaireThermiqueDto $solaire_thermique,
     ) {}
 
     public static function from(Installation $data): self
@@ -22,14 +24,6 @@ final class InstallationDto
             surface: $data->surface(),
             solaire_thermique: $data->solaire_thermique() ? SolaireThermiqueDto::from($data->solaire_thermique()) : null,
         );
-    }
-
-    /**
-     * @return array<self>
-     */
-    public static function fromCollection(InstallationCollection $data): array
-    {
-        return $data->map(fn(Installation $item) => self::from($item))->values();
     }
 
     public function __normalize(): array

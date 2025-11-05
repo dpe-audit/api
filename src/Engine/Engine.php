@@ -13,7 +13,7 @@ final class Engine
 {
     private ScenarioUsage $scenario;
     private Ressource $ressource;
-    private RessourceInput $data;
+    private mixed $data;
     private Store $store;
 
     public function __construct(private Rules $rules)
@@ -49,7 +49,7 @@ final class Engine
         return $this->store;
     }
 
-    public function __invoke(Ressource $ressource, ScenarioUsage $scenario): Ressource
+    public function __invoke(mixed $data, ScenarioUsage $scenario): Ressource
     {
         $this->ressource = $ressource;
         $this->scenario = $scenario;
