@@ -101,6 +101,7 @@ final class SystemeTransformer
             generateur_id: $generateur_chauffage->id(),
             installation_id: $this->installation_id(),
             type: $this->type_chauffage(),
+            cascade: $generateur_chauffage->priorite_generateur_cascade,
             reseau: new ReseauDto(
                 type_distribution: $this->type_distribution(),
                 presence_circulateur_externe: $this->presence_circulateur_externe(),

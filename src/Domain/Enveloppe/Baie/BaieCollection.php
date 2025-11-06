@@ -2,7 +2,7 @@
 
 namespace App\Domain\Enveloppe\Baie;
 
-use App\Domain\Common\Collection\ArrayCollection;
+use App\Domain\Common\Enum\Orientation;
 use App\Domain\Common\ValueObject\Id;
 use App\Domain\Enveloppe\Paroi\ParoiCollection;
 
@@ -19,6 +19,11 @@ final class BaieCollection extends ParoiCollection
     public function find(Id $id): ?Baie
     {
         return array_find($this->elements, fn(Baie $item): bool => $item->id() === $id);
+    }
+
+    public function with_orientation(Orientation $orientation): self
+    {
+        return $this->filter(fn(Baie $item): bool => $item->position()->orientation() === $orientation);
     }
 
     public function surface(): float

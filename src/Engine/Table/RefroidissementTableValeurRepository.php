@@ -2,7 +2,7 @@
 
 namespace App\Engine\Table;
 
-use App\Domain\Adresse\ZoneClimatique;
+use App\Domain\Batiment\ZoneClimatique;
 
 interface RefroidissementTableValeurRepository
 {

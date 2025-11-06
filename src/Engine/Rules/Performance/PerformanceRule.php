@@ -2,46 +2,25 @@
 
 namespace App\Engine\Rules\Performance;
 
-use App\Domain\Common\Consommation\ConsommationCollection;
-use App\Domain\Common\Perte\PerteCollection;
-use App\Domain\Ressource\{Bilan, EtiquetteClimat, EtiquetteEnergie};
-use App\Engine\Rule;
+use App\Domain\Common\Bilan\{Bilan, EtiquetteClimat, EtiquetteEnergie};
+use App\Domain\Diagnostic\Diagnostic;
+use App\Domain\Scenario\Etape\Etape;
+use App\Engine\{Context, Rule};
+use App\Engine\Rules\Batiment\{WithBatiment, WithBatimentRule};
+use App\Engine\Rules\Chauffage\PerformanceChauffageRule;
+use App\Engine\Rules\Eclairage\PerformanceEclairageRule;
+use App\Engine\Rules\Ecs\PerformanceEcsRule;
+use App\Engine\Rules\Refroidissement\PerformanceRefroidissementRule;
+use App\Engine\Rules\Ventilation\PerformanceVentilationRule;
 use App\Engine\Table\PerformanceTableValeurRepository;
 
 final class PerformanceRule extends Rule
 {
+    use WithBatiment, WithBatimentRule;
+
     public function __construct(
         private PerformanceTableValeurRepository $repository
     ) {}
-
-    /**
-     * Liste des consommations
-     */
-    public function consommations(): ConsommationCollection
-    {
-        return $this->get('consommations', function (): ConsommationCollection {
-            return ConsommationCollection::create(...[
-                ...$this->data()->chauffage->consommations()->values(),
-                ...$this->data()->ecs->consommations()->values(),
-                ...$this->data()->refroidissement->consommations()->values(),
-                ...$this->data()->ventilation->consommations()->values(),
-                ...$this->data()->eclairage->consommations()->values(),
-            ]);
-        });
-    }
-
-    /**
-     * Liste des pertes
-     */
-    public function pertes(): PerteCollection
-    {
-        return $this->get('pertes', function (): PerteCollection {
-            return PerteCollection::create(...[
-                ...$this->data()->chauffage->pertes()->values(),
-                ...$this->data()->ecs->pertes()->values(),
-            ]);
-        });
-    }
 
     /**
      * Consommation finale d'énergie en kWh/m²/an
@@ -49,7 +28,15 @@ final class PerformanceRule extends Rule
     public function cef(): float
     {
         return $this->get('cef', function (): float {
-            return $this->consommations()->cef() / $this->data()->batiment->surface_habitable();
+            $value = $this->require(PerformanceChauffageRule::class)->cef_ch()
+                + $this->require(PerformanceChauffageRule::class)->cef_aux()
+                + $this->require(PerformanceEcsRule::class)->cef_ecs()
+                + $this->require(PerformanceEcsRule::class)->cef_aux()
+                + $this->require(PerformanceRefroidissementRule::class)->cef_fr()
+                + $this->require(PerformanceRefroidissementRule::class)->cef_aux()
+                + $this->require(PerformanceVentilationRule::class)->cef_aux()
+                + $this->require(PerformanceEclairageRule::class)->cef_ecl();
+            return $value / $this->surface_reference();
         });
     }
 
@@ -59,7 +46,15 @@ final class PerformanceRule extends Rule
     public function cep(): float
     {
         return $this->get('cep', function (): float {
-            return $this->consommations()->cep() / $this->data()->batiment->surface_habitable();
+            $value = $this->require(PerformanceChauffageRule::class)->cep_ch()
+                + $this->require(PerformanceChauffageRule::class)->cep_aux()
+                + $this->require(PerformanceEcsRule::class)->cep_ecs()
+                + $this->require(PerformanceEcsRule::class)->cep_aux()
+                + $this->require(PerformanceRefroidissementRule::class)->cep_fr()
+                + $this->require(PerformanceRefroidissementRule::class)->cep_aux()
+                + $this->require(PerformanceVentilationRule::class)->cep_aux()
+                + $this->require(PerformanceEclairageRule::class)->cep_ecl();
+            return $value / $this->surface_reference();
         });
     }
 
@@ -69,7 +64,15 @@ final class PerformanceRule extends Rule
     public function eges(): float
     {
         return $this->get('eges', function (): float {
-            return $this->consommations()->eges() / $this->data()->batiment->surface_habitable();
+            $value = $this->require(PerformanceChauffageRule::class)->eges_ch()
+                + $this->require(PerformanceChauffageRule::class)->eges_aux()
+                + $this->require(PerformanceEcsRule::class)->eges_ecs()
+                + $this->require(PerformanceEcsRule::class)->eges_aux()
+                + $this->require(PerformanceRefroidissementRule::class)->eges_fr()
+                + $this->require(PerformanceRefroidissementRule::class)->eges_aux()
+                + $this->require(PerformanceVentilationRule::class)->eges_aux()
+                + $this->require(PerformanceEclairageRule::class)->eges_ecl();
+            return $value / $this->surface_reference();
         });
     }
 
@@ -80,8 +83,8 @@ final class PerformanceRule extends Rule
     {
         return $this->get('etiquette_energie', function (): EtiquetteEnergie {
             return $this->repository->etiquette_energie(
-                zone_climatique: $this->data()->batiment->zone_climatique(),
-                altitude: $this->data()->batiment->altitude(),
+                zone_climatique: $this->zone_climatique(),
+                altitude: $this->altitude(),
                 cep: $this->cep(),
                 eges: $this->eges(),
             ) ?? throw new \DomainException("Etiquette énergie non trouvée");
@@ -95,8 +98,8 @@ final class PerformanceRule extends Rule
     {
         return $this->get('etiquette_climat', function (): EtiquetteClimat {
             return $this->repository->etiquette_climat(
-                zone_climatique: $this->data()->batiment->zone_climatique(),
-                altitude: $this->data()->batiment->altitude(),
+                zone_climatique: $this->zone_climatique(),
+                altitude: $this->altitude(),
                 eges: $this->eges(),
             ) ?? throw new \DomainException("Etiquette climat non trouvée");
         });
@@ -105,11 +108,14 @@ final class PerformanceRule extends Rule
     /**
      * @inheritDoc
      */
-    public function calcule(): void
+    public function __invoke(mixed $data, Context $context): void
     {
-        $this->ressource()->calcule($this->ressource()->data()->with(
-            pertes: $this->pertes(),
-            consommations: $this->consommations(),
+        parent::__invoke($data, $context);
+
+        if (!$data instanceof Diagnostic || !$data instanceof Etape) {
+            return;
+        }
+        $data->calcule($data->data()->with(
             bilan: Bilan::create(
                 cef: $this->cef(),
                 cep: $this->cep(),

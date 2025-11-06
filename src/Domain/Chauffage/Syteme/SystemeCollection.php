@@ -87,13 +87,7 @@ final class SystemeCollection extends ArrayCollection
 
     public function with_cascade(?int $cascade): self
     {
-        return $this->filter(fn(Systeme $item): bool => $item->generateur()->position()->cascade === $cascade);
-    }
-
-    public function with_priorite_cascade(?int $priorite): self
-    {
-        return $this->with_cascade(true)
-            ->filter(fn(Systeme $item): bool => $item->generateur()->position()->priorite_cascade === $priorite);
+        return $this->filter(fn(Systeme $item): bool => $item->cascade() === $cascade);
     }
 
     public function has_generateur_collectif(): bool

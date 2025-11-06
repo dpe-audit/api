@@ -4,6 +4,7 @@ namespace App\Domain\Enveloppe\Mur;
 
 use App\Domain\Common\ValueObject\Id;
 use App\Domain\Enveloppe\Enveloppe;
+use App\Domain\Enveloppe\Lnc\Lnc;
 use App\Domain\Enveloppe\Mur\Position\Position;
 use App\Domain\Enveloppe\Paroi\{Inertie, Mitoyennete, Paroi, TypeParoi};
 use App\Domain\Enveloppe\Paroi\Isolation\Isolation;
@@ -104,9 +105,25 @@ final class Mur extends Paroi
     /**
      * @inheritDoc
      */
+    public function local_non_chauffe(): ?Lnc
+    {
+        return $this->position->local_non_chauffe;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function mitoyennete(): Mitoyennete
     {
         return $this->position->mitoyennete;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function surface(): float
+    {
+        return $this->position->surface;
     }
 
     public function description(): string

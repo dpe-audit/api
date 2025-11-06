@@ -2,14 +2,11 @@
 
 namespace App\Engine\Table;
 
-use App\Domain\Adresse\ZoneClimatique;
-use App\Domain\Enveloppe\Paroi\Mitoyennete;
+use App\Domain\Batiment\ZoneClimatique;
 use App\Domain\Enveloppe\PlancherHaut\{Configuration, TypePlancherHaut};
 
-interface PlancherHautTableValeurRepository
+interface PlancherHautTableValeurRepository extends ParoiTableValeurRepository
 {
-    public function b(Mitoyennete $mitoyennete): ?float;
-
     public function u0(?TypePlancherHaut $type_structure): ?float;
 
     public function u(

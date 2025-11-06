@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Engine\Rules\Chauffage\Systeme\Combustion;
+
+use App\Domain\Chauffage\Systeme\Systeme;
+
+final class PerformanceChaudiereBoisRule extends PerformanceChaudiereRule
+{
+    public static function supports(Systeme $entity): bool
+    {
+        $match = parent::supports($entity);
+        $match = $match && $entity->generateur()->energie()?->is_bois();
+        return $match;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function qp(TauxCharge $x): float
+    {
+        $QP0 = $this->qp0();
+        $QP50 = $this->qp50();
+        $QP100 = $this->qp100();
+        $tch = $this->tch_final($x);
+
+        return $x->value < 50
+            ? ((($QP50 - 0.15 * $QP0) * $tch) / 0.5) + 0.15 * $QP0
+            : ((($QP100 - $QP50) * $tch) / 0.5) + 2 * $QP50 - $QP100;
+    }
+
+    /**
+     * Pertes de charge à 50% de puissance
+     */
+    public function qp50(): float
+    {
+        $pn = $this->pn();
+        $rpint = $this->rpint();
+        return 0.5 * $pn * ((100 - $rpint) / $rpint);
+    }
+
+    /**
+     * Pertes de charge à 100% de puissance
+     */
+    public function qp100(): float
+    {
+        $pn = $this->pn();
+        $rpn = $this->rpn();
+        return $pn * ((100 - $rpn) / $rpn);
+    }
+}

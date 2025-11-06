@@ -2,7 +2,7 @@
 
 namespace App\Engine\Table;
 
-use App\Domain\Adresse\ZoneClimatique;
+use App\Domain\Batiment\ZoneClimatique;
 use App\Domain\Common\Enum\Orientation;
 use App\Domain\Enveloppe\Lnc\Baie\Materiau;
 use App\Domain\Enveloppe\Lnc\Baie\TypeVitrage;

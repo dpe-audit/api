@@ -2,9 +2,9 @@
 
 namespace App\Engine\Table;
 
-use App\Domain\Adresse\ZoneClimatique;
+use App\Domain\Batiment\ZoneClimatique;
 use App\Domain\Common\Enum\{Orientation, Mois};
-use App\Engine\SollicitationsClimatiques\SollicitationsExterieures;
+use App\Engine\Rules\Batiment\SollicitationsExterieures;
 
 interface SollicitationsClimatiquesTableValeurRepository
 {

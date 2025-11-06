@@ -22,7 +22,6 @@ final class SystemeData
         public readonly ?float $cef_aux,
         public readonly ?float $cep_aux,
         public readonly ?float $eges_aux,
-        public readonly ?Pertes $pertes,
     ) {}
 
     public static function create(
@@ -41,7 +40,6 @@ final class SystemeData
         ?float $cef_aux = null,
         ?float $cep_aux = null,
         ?float $eges_aux = null,
-        ?Pertes $pertes = null,
     ): self {
         Assert::nullOrGreaterThanEq($rdim, 0);
         Assert::nullOrLessThanEq($rdim, 1);
@@ -75,7 +73,6 @@ final class SystemeData
             cef_aux: $cef_aux,
             cep_aux: $cep_aux,
             eges_aux: $eges_aux,
-            pertes: $pertes,
         );
     }
 
@@ -95,7 +92,6 @@ final class SystemeData
         ?float $cef_aux = null,
         ?float $cep_aux = null,
         ?float $eges_aux = null,
-        ?Pertes $pertes = null,
     ): self {
         return self::create(
             configuration: $configuration ?? $this->configuration,
@@ -113,7 +109,6 @@ final class SystemeData
             cef_aux: $cef_aux ?? $this->cef_aux,
             cep_aux: $cep_aux ?? $this->cep_aux,
             eges_aux: $eges_aux ?? $this->eges_aux,
-            pertes: $pertes ?? $this->pertes,
         );
     }
 }

@@ -7,5 +7,7 @@ use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 #[AutoconfigureTag('app.engine.rule')]
 interface RuleInterface
 {
-    public function __invoke(Context $context): void;
+    public function setContext(Context $context): void;
+
+    public function __invoke(mixed $data, Context $context): void;
 }

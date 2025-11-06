@@ -9,18 +9,21 @@ use App\Domain\Common\Enum\ScenarioUsage;
  */
 final class Context
 {
+    /** @var Store[] */
+    private array $stores = [];
+
     public function __construct(
         private Engine $engine,
+        private Input $input,
         private ScenarioUsage $scenario,
-        /** @var Store[] */
-        private array $stores = [],
     ) {}
 
-    public static function create(Engine $engine, ScenarioUsage $scenario =  ScenarioUsage::CONVENTIONNEL): self
+    public static function create(Engine $engine, Input $input, ?ScenarioUsage $scenario = null): self
     {
         return new self(
             engine: $engine,
-            scenario: $scenario,
+            input: $input,
+            scenario: $scenario ?? ScenarioUsage::CONVENTIONNEL,
         );
     }
 
@@ -38,6 +41,11 @@ final class Context
     public function engine(): Engine
     {
         return $this->engine;
+    }
+
+    public function input(): Input
+    {
+        return $this->input;
     }
 
     public function scenario(): ScenarioUsage

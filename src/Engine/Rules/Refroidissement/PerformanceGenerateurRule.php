@@ -2,14 +2,82 @@
 
 namespace App\Engine\Rules\Refroidissement;
 
-use App\Engine\Input\Refroidissement\GenerateurInputRuleIterator;
+use App\Domain\Refroidissement\Generateur\Generateur;
+use App\Engine\{Context, RuleIterator};
+use App\Engine\Rules\Batiment\WithBatimentRule;
 use App\Engine\Table\RefroidissementTableValeurRepository;
 
-final class PerformanceGenerateurRule extends GenerateurInputRuleIterator
+/**
+ * @extends RuleIterator<Generateur>
+ */
+final class PerformanceGenerateurRule extends RuleIterator
 {
+    use WithBatimentRule;
+
     public function __construct(
         private RefroidissementTableValeurRepository $repository
     ) {}
+
+    /**
+     * @inheritDoc
+     */
+    public function collection(): array
+    {
+        return $this->input()->refroidissement->generateurs()->values();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function namespace(): string
+    {
+        return static::class . '\\' . (string) $this->item()->id();
+    }
+
+    // * Données d'entrée
+
+    public function seer_saisi(): ?float
+    {
+        return $this->item()->seer();
+    }
+
+    public function annee_installation(): int
+    {
+        return current(array_filter([
+            $this->item()->annee_installation(),
+            $this->input()->batiment->annee_construction,
+        ]));
+    }
+
+    // * Données intermédiaires
+
+    /**
+     * @return float[]
+     */
+    public function rdim_systemes(): array
+    {
+        return $this->input()->refroidissement->systemes()
+            ->with_generateur($this->item()->id())
+            ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->rdim())
+            ->values();
+    }
+
+    public function bfr(): float
+    {
+        return $this->require(PerformanceRefroidissementRule::class)->bfr();
+    }
+
+    // * Données calculées
+
+    /**
+     * Ratio de dimensionnement du générateur
+     */
+    public function rdim(): float
+    {
+        return $this->get('rdim', function (): float {
+            return array_sum($this->rdim_systemes());
+        });
+    }
 
     /**
      * Coefficient d'efficience énergétique
@@ -17,12 +85,12 @@ final class PerformanceGenerateurRule extends GenerateurInputRuleIterator
     public function eer(): float
     {
         return $this->get('eer', function () {
-            if ($this->item()->seer_saisi()) {
-                return $this->item()->seer_saisi() * 0.95;
+            if ($this->seer_saisi()) {
+                return $this->seer_saisi() * 0.95;
             }
             return $this->repository->eer(
-                zone_climatique: $this->data()->batiment->zone_climatique(),
-                annee_installation_generateur: $this->item()->annee_installation(),
+                zone_climatique: $this->zone_climatique(),
+                annee_installation_generateur: $this->annee_installation(),
             ) ?? throw new \DomainException('Valeur forfaitaire EER non trouvé');
         });
     }
@@ -30,10 +98,15 @@ final class PerformanceGenerateurRule extends GenerateurInputRuleIterator
     /**
      * @inheritDoc
      */
-    public function calcule(): void
+    public function __invoke(mixed $data, Context $context): void
     {
-        $this->item()->entity->calcule($this->item()->entity->data()->with(
-            eer: $this->eer(),
-        ));
+        parent::__invoke($data, $context);
+
+        foreach ($this as $rule) {
+            $rule->item()->calcule($rule->item()->data()->with(
+                rdim: $this->rdim(),
+                eer: $this->eer(),
+            ));
+        }
     }
 }

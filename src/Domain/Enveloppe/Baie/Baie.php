@@ -8,6 +8,7 @@ use App\Domain\Enveloppe\Baie\Position\Position;
 use App\Domain\Enveloppe\Baie\Vitrage\Vitrage;
 use App\Domain\Enveloppe\Baie\Survitrage\Survitrage;
 use App\Domain\Enveloppe\Enveloppe;
+use App\Domain\Enveloppe\Lnc\Lnc;
 use App\Domain\Enveloppe\Masque\{Masque, MasqueCollection};
 use App\Domain\Enveloppe\Paroi\{Mitoyennete, Paroi, TypeParoi};
 use Webmozart\Assert\Assert;
@@ -98,14 +99,36 @@ final class Baie extends Paroi
         return $this->enveloppe;
     }
 
+    /**
+     * @inheritDoc
+     */
     public static function type_paroi(): TypeParoi
     {
         return TypeParoi::BAIE;
     }
 
+    /**
+     * @inheritDoc
+     */
+    public function local_non_chauffe(): ?Lnc
+    {
+        return $this->position->local_non_chauffe;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function mitoyennete(): Mitoyennete
     {
         return $this->position->mitoyennete;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function surface(): float
+    {
+        return $this->position->surface;
     }
 
     public function description(): string

@@ -6,9 +6,9 @@ final class Reseau
 {
     public function __construct(
         private readonly string $id,
-        private Float $contenu_co2,
-        private Float $contenu_co2_acv,
-        private Float $taux_enr,
+        private float $contenu_co2,
+        private float $contenu_co2_acv,
+        private float $taux_enr,
     ) {}
 
     public function id(): string

@@ -18,6 +18,7 @@ final class SystemeDto
         public readonly string $generateur_id,
         public readonly string $installation_id,
         public readonly TypeChauffage $type,
+        public readonly ?int $cascade,
         public readonly ?ReseauDto $reseau,
         public readonly array $emetteurs,
     ) {}
@@ -30,6 +31,7 @@ final class SystemeDto
             generateur_id: (string) $data->generateur()->id(),
             installation_id: (string) $data->installation()->id(),
             type: $data->type(),
+            cascade: $data->cascade(),
             reseau: ReseauDto::from($data->reseau()),
             emetteurs: $data->emetteurs()->map(fn($item) => (string) $item->id())->values(),
         );
@@ -43,6 +45,7 @@ final class SystemeDto
             'generateur_id' => $this->generateur_id,
             'installation_id' => $this->installation_id,
             'type' => $this->type->value,
+            'cascade' => $this->cascade,
             'reseau' => $this->reseau->__normalize(),
             'emetteurs' => $this->emetteurs,
         ];

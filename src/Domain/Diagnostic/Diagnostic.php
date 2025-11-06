@@ -156,7 +156,7 @@ final class Diagnostic
     public function add_logement(Logement $entity): self
     {
         Assert::null($this->logements->find($entity->id()));
-        Assert::same($entity->ressource(), $this);
+        Assert::same($entity->diagnostic(), $this);
 
         $this->logements->add($entity);
         $this->reinitialise();

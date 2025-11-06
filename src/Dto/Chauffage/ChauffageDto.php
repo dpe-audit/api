@@ -102,6 +102,28 @@ final class ChauffageDto
         return true;
     }
 
+    public function is_cascade_valid(): bool
+    {
+        foreach ($this->systemes as $systeme) {
+            $id = $systeme->id;
+            $generateur_id = $systeme->generateur_id;
+            $cascade = $systeme->cascade;
+
+            foreach ($this->systemes as $compare) {
+                if ($id === $compare->id) {
+                    continue;
+                }
+                if ($generateur_id !== $compare->generateur_id) {
+                    continue;
+                }
+                if ($cascade !== $compare->cascade) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
     public function __normalize(): array
     {
         return [

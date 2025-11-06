@@ -3,7 +3,7 @@
 namespace App\Database\Local\Table;
 
 use App\Database\Local\XMLTableDatabase;
-use App\Domain\Adresse\ZoneClimatique;
+use App\Domain\Batiment\ZoneClimatique;
 use App\Engine\Table\EclairageTableValeurRepository;
 
 final class XMLEclairageTableValeurRepository implements EclairageTableValeurRepository

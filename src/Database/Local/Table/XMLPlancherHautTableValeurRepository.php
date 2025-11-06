@@ -2,7 +2,7 @@
 
 namespace App\Database\Local\Table;
 
-use App\Domain\Adresse\ZoneClimatique;
+use App\Domain\Batiment\ZoneClimatique;
 use App\Domain\Enveloppe\PlancherHaut\{Configuration, TypePlancherHaut};
 use App\Engine\Table\PlancherHautTableValeurRepository;
 

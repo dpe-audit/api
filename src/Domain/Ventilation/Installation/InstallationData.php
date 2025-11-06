@@ -2,7 +2,6 @@
 
 namespace App\Domain\Ventilation\Installation;
 
-use App\Domain\Common\Consommation\ConsommationCollection;
 use Webmozart\Assert\Assert;
 
 final class InstallationData
@@ -12,7 +11,6 @@ final class InstallationData
         public readonly ?float $qvarep_conv,
         public readonly ?float $qvasouf_conv,
         public readonly ?float $smea_conv,
-        public readonly ?ConsommationCollection $consommations,
     ) {}
 
     public static function create(
@@ -20,7 +18,6 @@ final class InstallationData
         ?float $qvarep_conv = null,
         ?float $qvasouf_conv = null,
         ?float $smea_conv = null,
-        ?ConsommationCollection $consommations = null,
     ): self {
         Assert::nullOrGreaterThan($rdim, 0);
         Assert::nullOrLessThanEq($rdim, 1);
@@ -33,7 +30,6 @@ final class InstallationData
             qvarep_conv: $qvarep_conv,
             qvasouf_conv: $qvasouf_conv,
             smea_conv: $smea_conv,
-            consommations: $consommations,
         );
     }
 
@@ -42,14 +38,12 @@ final class InstallationData
         ?float $qvarep_conv = null,
         ?float $qvasouf_conv = null,
         ?float $smea_conv = null,
-        ?ConsommationCollection $consommations = null,
     ): self {
         return self::create(
             rdim: $rdim ?? $this->rdim,
             qvarep_conv: $qvarep_conv ?? $this->qvarep_conv,
             qvasouf_conv: $qvasouf_conv ?? $this->qvasouf_conv,
             smea_conv: $smea_conv ?? $this->smea_conv,
-            consommations: $consommations ?? $this->consommations,
         );
     }
 }

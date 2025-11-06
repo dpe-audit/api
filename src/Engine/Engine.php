@@ -3,23 +3,13 @@
 namespace App\Engine;
 
 use App\Domain\Common\Enum\ScenarioUsage;
-use App\Domain\Ressource\Ressource;
-use App\Engine\Input\RessourceInput;
 
 /**
  * @property Rules|RuleInterface[] $rules
  */
 final class Engine
 {
-    private ScenarioUsage $scenario;
-    private Ressource $ressource;
-    private mixed $data;
-    private Store $store;
-
-    public function __construct(private Rules $rules)
-    {
-        $this->store = new Store();
-    }
+    public function __construct(private Rules $rules) {}
 
     /**
      * @return Rules|RuleInterface[]
@@ -29,39 +19,16 @@ final class Engine
         return $this->rules;
     }
 
-    public function scenario(): ScenarioUsage
+    public function __invoke(mixed $data, Input $input,  ScenarioUsage $scenario): mixed
     {
-        return $this->scenario;
-    }
-
-    public function ressource(): Ressource
-    {
-        return $this->ressource;
-    }
-
-    public function data(): RessourceInput
-    {
-        return $this->data;
-    }
-
-    public function store(): Store
-    {
-        return $this->store;
-    }
-
-    public function __invoke(mixed $data, ScenarioUsage $scenario): Ressource
-    {
-        $this->ressource = $ressource;
-        $this->scenario = $scenario;
-        $this->data = new RessourceInput($this);
-        $this->store->clear();
+        $context = Context::create(engine: $this, input: $input, scenario: $scenario);
 
         foreach ($this->rules as $rule) {
             //$time = new \DateTime;
-            $rule->__invoke(context: $this);
+            $rule->__invoke($data, $context);
             //$duration = (new \DateTime)->diff($time);
             //echo $rule::class . '|' . $duration->f . "\n";
         }
-        return $ressource;
+        return $data;
     }
 }

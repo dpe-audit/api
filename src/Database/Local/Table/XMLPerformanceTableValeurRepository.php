@@ -3,8 +3,8 @@
 namespace App\Database\Local\Table;
 
 use App\Database\Local\XMLTableDatabase;
-use App\Domain\Adresse\ZoneClimatique;
-use App\Domain\Ressource\{EtiquetteClimat, EtiquetteEnergie};
+use App\Domain\Batiment\ZoneClimatique;
+use App\Domain\Common\Bilan\{EtiquetteClimat, EtiquetteEnergie};
 use App\Engine\Table\PerformanceTableValeurRepository;
 
 final class XMLPerformanceTableValeurRepository implements PerformanceTableValeurRepository

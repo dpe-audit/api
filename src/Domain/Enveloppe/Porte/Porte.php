@@ -4,6 +4,7 @@ namespace App\Domain\Enveloppe\Porte;
 
 use App\Domain\Common\ValueObject\Id;
 use App\Domain\Enveloppe\Enveloppe;
+use App\Domain\Enveloppe\Lnc\Lnc;
 use App\Domain\Enveloppe\Paroi\{Mitoyennete, Paroi, TypeParoi};
 use App\Domain\Enveloppe\Porte\Menuiserie\Menuiserie;
 use App\Domain\Enveloppe\Porte\Position\Position;
@@ -91,9 +92,25 @@ final class Porte extends Paroi
     /**
      * @inheritDoc
      */
+    public function local_non_chauffe(): ?Lnc
+    {
+        return $this->position->local_non_chauffe;
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function mitoyennete(): Mitoyennete
     {
         return $this->position->mitoyennete;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function surface(): float
+    {
+        return $this->position->surface;
     }
 
     public function description(): string

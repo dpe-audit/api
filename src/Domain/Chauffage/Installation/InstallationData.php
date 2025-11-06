@@ -2,8 +2,6 @@
 
 namespace App\Domain\Chauffage\Installation;
 
-use App\Domain\Common\Consommation\ConsommationCollection;
-use App\Domain\Common\Perte\PerteCollection;
 use Webmozart\Assert\Assert;
 
 final class InstallationData
@@ -18,8 +16,6 @@ final class InstallationData
         public readonly ?float $rd,
         public readonly ?float $rg,
         public readonly ?float $rr,
-        public readonly ?PerteCollection $pertes,
-        public readonly ?ConsommationCollection $consommations,
     ) {}
 
     public static function create(
@@ -32,8 +28,6 @@ final class InstallationData
         ?float $rd = null,
         ?float $rg = null,
         ?float $rr = null,
-        ?PerteCollection $pertes = null,
-        ?ConsommationCollection $consommations = null,
     ): self {
         Assert::nullOrGreaterThanEq($fch, 0);
         Assert::nullOrLessThanEq($fch, 1);
@@ -57,8 +51,6 @@ final class InstallationData
             rd: $rd,
             rg: $rg,
             rr: $rr,
-            pertes: $pertes,
-            consommations: $consommations,
         );
     }
 
@@ -72,8 +64,6 @@ final class InstallationData
         ?float $rd = null,
         ?float $rg = null,
         ?float $rr = null,
-        ?PerteCollection $pertes = null,
-        ?ConsommationCollection $consommations = null,
     ): self {
         return self::create(
             fch: $fch ?? $this->fch,
@@ -85,8 +75,6 @@ final class InstallationData
             rd: $rd ?? $this->rd,
             rg: $rg ?? $this->rg,
             rr: $rr ?? $this->rr,
-            pertes: $pertes ?? $this->pertes,
-            consommations: $consommations ?? $this->consommations,
         );
     }
 }

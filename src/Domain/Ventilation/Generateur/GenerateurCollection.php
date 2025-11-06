@@ -10,7 +10,7 @@ use App\Domain\Common\ValueObject\Id;
  */
 final class GenerateurCollection extends ArrayCollection
 {
-    public function reinitialise(): self
+    public function reinitialise(): static
     {
         return $this->walk(fn(Generateur $item) => $item->reinitialise());
     }

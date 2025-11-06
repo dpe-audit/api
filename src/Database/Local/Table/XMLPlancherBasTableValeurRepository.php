@@ -2,7 +2,7 @@
 
 namespace App\Database\Local\Table;
 
-use App\Domain\Adresse\ZoneClimatique;
+use App\Domain\Batiment\ZoneClimatique;
 use App\Domain\Enveloppe\PlancherBas\Position\Mitoyennete;
 use App\Domain\Enveloppe\PlancherBas\TypePlancherBas;
 use App\Engine\Table\PlancherBasTableValeurRepository;

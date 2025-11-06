@@ -2,32 +2,59 @@
 
 namespace App\Engine;
 
-abstract class Input
-{
-    public readonly Context $context;
+use App\Domain\Batiment\Batiment;
+use App\Domain\Chauffage\Chauffage;
+use App\Domain\Diagnostic\Diagnostic;
+use App\Domain\Eclairage\Eclairage;
+use App\Domain\Ecs\Ecs;
+use App\Domain\Enveloppe\Enveloppe;
+use App\Domain\Logement\Logement;
+use App\Domain\Production\Production;
+use App\Domain\Refroidissement\Refroidissement;
+use App\Domain\Scenario\Etape\Etape;
+use App\Domain\Ventilation\Ventilation;
 
-    public function require(string $class): RuleInterface
+final class Input
+{
+    public function __construct(
+        public readonly Batiment $batiment,
+        public readonly ?Logement $logement,
+        public readonly Enveloppe $enveloppe,
+        public readonly Chauffage $chauffage,
+        public readonly Ecs $ecs,
+        public readonly Refroidissement $refroidissement,
+        public readonly Ventilation $ventilation,
+        public readonly Production $production,
+        public readonly Eclairage $eclairage,
+    ) {}
+
+    public static function from_diagnostic(Diagnostic $entity, ?Logement $logement = null): self
     {
-        if (null === $rule = $this->context->engine()->rules()->find($class)) {
-            throw new \DomainException(sprintf("Dépendance %s non trouvée", $class));
-        }
-        $rule($this->context);
-        return $rule;
+        return new self(
+            batiment: $entity->batiment(),
+            logement: $logement,
+            enveloppe: $entity->enveloppe(),
+            chauffage: $entity->chauffage(),
+            ecs: $entity->ecs(),
+            refroidissement: $entity->refroidissement(),
+            ventilation: $entity->ventilation(),
+            production: $entity->production(),
+            eclairage: $entity->eclairage(),
+        );
     }
 
-    public function requireIterator(string $class, Input $item): RuleIterator
+    public static function from_etape(Etape $entity, ?Logement $logement = null): self
     {
-        foreach ($this->context->engine()->rules()->search($class) as $iterator) {
-            if (!$iterator instanceof RuleIterator) {
-                continue;
-            }
-            foreach ($iterator as $rule) {
-                if ($rule->item() === $item) {
-                    $rule($this->context);
-                    return $rule;
-                }
-            }
-        }
-        throw new \DomainException(sprintf("Dépendance %s non trouvée", $class));
+        return new self(
+            batiment: $entity->scenario()->audit()->diagnostic()->batiment(),
+            logement: $logement,
+            enveloppe: $entity->enveloppe(),
+            chauffage: $entity->chauffage(),
+            ecs: $entity->ecs(),
+            refroidissement: $entity->refroidissement(),
+            ventilation: $entity->ventilation(),
+            production: $entity->production(),
+            eclairage: $entity->eclairage(),
+        );
     }
 }

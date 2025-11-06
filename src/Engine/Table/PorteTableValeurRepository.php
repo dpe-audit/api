@@ -3,13 +3,10 @@
 namespace App\Engine\Table;
 
 use App\Domain\Enveloppe\Porte\Materiau;
-use App\Domain\Enveloppe\Paroi\Mitoyennete;
 use App\Domain\Enveloppe\Porte\Vitrage\TypeVitrage;
 
-interface PorteTableValeurRepository
+interface PorteTableValeurRepository extends ParoiTableValeurRepository
 {
-    public function b(Mitoyennete $mitoyennete): ?float;
-
     public function u(
         bool $presence_sas,
         bool $isolation,

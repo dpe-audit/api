@@ -2,18 +2,84 @@
 
 namespace App\Engine;
 
+use App\Domain\Common\Enum\ScenarioUsage;
+
 abstract class Rule implements RuleInterface
 {
-    protected Context $context;
+    private Context $context;
+
+    public function setContext(Context $context): void
+    {
+        $this->context = $context;
+    }
 
     public function context(): Context
     {
         return $this->context;
     }
 
+    /**
+     * Scénario applicable
+     */
+    public function scenario(): ScenarioUsage
+    {
+        return $this->context->scenario();
+    }
+
+    /**
+     * Données d'entrées
+     */
+    public function input(): Input
+    {
+        return $this->context->input();
+    }
+
+    /**
+     * Mémorisation des calculs
+     */
     public function get(string $key, callable $cb): mixed
     {
         return $this->context->store()->get($this->namespace(), $key, $cb);
+    }
+
+    /**
+     * Dépendance
+     * 
+     * @template U
+     * @param class-string<U> $className
+     * @return U
+     */
+    public function require(string $className): RuleInterface
+    {
+        if (null === $rule = $this->context->rules()->find($className)) {
+            throw new \DomainException(sprintf("Règle %s non trouvée", $className));
+        }
+        $rule->setContext($this->context);
+        return $rule;
+    }
+
+    /**
+     * Dépendance itérable
+     * 
+     * @template U
+     * @param class-string<U> $className
+     * @param mixed $item
+     * @return U
+     */
+    public function requireIterator(string $className, mixed $item): RuleIterator
+    {
+        foreach ($this->context->rules()->search($className) as $iterator) {
+            if (!$iterator instanceof RuleIterator) {
+                continue;
+            }
+            foreach ($iterator as $rule) {
+                if ($rule->item() === $item) {
+                    $rule->setContext($this->context);
+                    return $rule;
+                }
+            }
+        }
+        throw new \DomainException(sprintf("Règle %s non trouvée", $className));
     }
 
     public static function round(int|float $value): float
@@ -26,20 +92,8 @@ abstract class Rule implements RuleInterface
         return static::class;
     }
 
-    /**
-     * Mutation des données
-     */
-    public function calcule(): void
+    public function __invoke(mixed $data, Context $context): void
     {
-        return;
-    }
-
-    public function __invoke(Context $context): void
-    {
-        $this->context = $context;
-
-        if (false === $context->store()->has($this->namespace())) {
-            $this->calcule();
-        }
+        $this->setContext($context);
     }
 }

@@ -2,8 +2,8 @@
 
 namespace App\Engine\Table;
 
-use App\Domain\Adresse\ZoneClimatique;
-use App\Domain\Ressource\{EtiquetteClimat, EtiquetteEnergie};
+use App\Domain\Batiment\ZoneClimatique;
+use App\Domain\Common\Bilan\{EtiquetteClimat, EtiquetteEnergie};
 
 interface PerformanceTableValeurRepository
 {

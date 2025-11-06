@@ -2,6 +2,8 @@
 
 namespace App\Domain\Enveloppe\Lnc\Baie;
 
+use App\Domain\Common\Enum\Orientation;
+
 final class Position
 {
     public function __construct(
@@ -23,5 +25,13 @@ final class Position
             inclinaison: $inclinaison,
             orientation: $orientation,
         );
+    }
+
+    public function orientation(bool $enum = false): null|float|Orientation
+    {
+        if ($this->orientation === null) {
+            return null;
+        }
+        return $enum ? Orientation::from_azimut($this->orientation) : $this->orientation;
     }
 }

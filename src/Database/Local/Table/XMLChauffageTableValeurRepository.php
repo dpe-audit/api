@@ -4,7 +4,7 @@ namespace App\Database\Local\Table;
 
 use App\Services\ExpressionResolver\ExpressionResolver;
 use App\Database\Local\{XMLTableElement, XMLTableDatabase};
-use App\Domain\Adresse\ZoneClimatique;
+use App\Domain\Batiment\ZoneClimatique;
 use App\Domain\Batiment\TypeBatiment;
 use App\Domain\Chauffage\Emetteur\{TemperatureDistribution, TypeEmission};
 use App\Domain\Chauffage\Generateur\{EnergieGenerateur, TypeGenerateur};
@@ -126,14 +126,14 @@ final class XMLChauffageTableValeurRepository implements ChauffageTableValeurRep
         TypeGenerateur $type_generateur,
         EnergieGenerateur $energie_generateur,
         ?LabelGenerateur $label_generateur,
-        int $anne_installation_generateur
+        int $annee_installation_generateur
     ): ?float {
         return $this->db->repository('chauffage.rg')
             ->createQuery()
             ->and('type_generateur', $type_generateur)
             ->and('energie_generateur', $energie_generateur)
             ->and('label_generateur', $label_generateur)
-            ->andCompareTo('annee_installation_generateur', $anne_installation_generateur)
+            ->andCompareTo('annee_installation_generateur', $annee_installation_generateur)
             ->getOne()
             ?->floatval('rg');
     }

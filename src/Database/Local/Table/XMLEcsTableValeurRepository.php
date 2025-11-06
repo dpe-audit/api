@@ -3,7 +3,7 @@
 namespace App\Database\Local\Table;
 
 use App\Database\Local\{XMLTableElement, XMLTableDatabase};
-use App\Domain\Adresse\ZoneClimatique;
+use App\Domain\Batiment\ZoneClimatique;
 use App\Domain\Batiment\TypeBatiment;
 use App\Domain\Ecs\Generateur\EnergieGenerateur;
 use App\Domain\Ecs\Generateur\Signaletique\LabelGenerateur;

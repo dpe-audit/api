@@ -10,7 +10,7 @@ use App\Domain\Common\ValueObject\Id;
  */
 final class InstallationCollection extends ArrayCollection
 {
-    public function reinitialise(): self
+    public function reinitialise(): static
     {
         return $this->walk(fn(Installation $item) => $item->reinitialise());
     }
@@ -20,7 +20,7 @@ final class InstallationCollection extends ArrayCollection
         return array_find($this->elements, fn(Installation $item): bool => $item->id()->equals($id));
     }
 
-    public function with_generateur(Id $generateur_id): self
+    public function with_generateur(Id $generateur_id): static
     {
         return $this->filter(fn(Installation $item): bool => $item->generateur()?->id()->equals($generateur_id));
     }

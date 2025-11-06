@@ -2,8 +2,7 @@
 
 namespace App\Engine\Rules\Production;
 
-use App\Engine\Input\Production\PanneauPhotovoltaiqueInput;
-use App\Engine\Rule;
+use App\Engine\{Context, Rule};
 
 final class ProductionRenouvelableRule extends Rule
 {
@@ -13,20 +12,20 @@ final class ProductionRenouvelableRule extends Rule
     public function ppv(): float
     {
         return $this->get('ppv', function (): float {
-            return array_reduce(
-                $this->data()->production->panneaux_photovoltaiques,
-                fn(float $carry, PanneauPhotovoltaiqueInput $item) => $carry += $item->ppv(),
-                0,
-            );
+            return $this->input()->production->panneaux_photovoltaiques()
+                ->map(fn($item) => $this->requireIterator(ProductionPhotovoltaiqueRule::class, $item)->ppv())
+                ->reduce(fn(float $carry, float $item) => $carry += $item);
         });
     }
 
     /**
      * @inheritDoc
      */
-    public function calcule(): void
+    public function __invoke(mixed $data, Context $context): void
     {
-        $this->ressource()->production()->calcule($this->ressource()->production()->data()->with(
+        parent::__invoke($data, $context);
+
+        $context->input()->production->calcule($context->input()->production->data()->with(
             ppv: $this->ppv(),
         ));
     }

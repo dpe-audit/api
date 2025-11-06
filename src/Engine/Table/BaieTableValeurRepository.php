@@ -7,12 +7,9 @@ use App\Domain\Enveloppe\Baie\Menuiserie\Materiau;
 use App\Domain\Enveloppe\Baie\Position\TypePose;
 use App\Domain\Enveloppe\Baie\Survitrage\TypeSurvitrage;
 use App\Domain\Enveloppe\Baie\Vitrage\{NatureGazLame, TypeVitrage};
-use App\Domain\Enveloppe\Paroi\Mitoyennete;
 
-interface BaieTableValeurRepository
+interface BaieTableValeurRepository extends ParoiTableValeurRepository
 {
-    public function b(Mitoyennete $mitoyennete): ?float;
-
     public function ug(
         TypeBaie $type_baie,
         ?TypeVitrage $type_vitrage,

@@ -2,6 +2,7 @@
 
 namespace App\Domain\Enveloppe\Baie\Position;
 
+use App\Domain\Common\Enum\Orientation;
 use App\Domain\Enveloppe\DoubleFenetre\DoubleFenetre;
 use App\Domain\Enveloppe\Lnc\Lnc;
 use App\Domain\Enveloppe\Paroi\Mitoyennete;
@@ -43,5 +44,13 @@ final class Position
             local_non_chauffe: $local_non_chauffe,
             double_fenetre: $double_fenetre,
         );
+    }
+
+    public function orientation(bool $enum = false): null|float|Orientation
+    {
+        if (null === $this->orientation) {
+            return null;
+        }
+        return $enum ? Orientation::from_azimut($this->orientation) : $this->orientation;
     }
 }

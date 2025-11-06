@@ -2,7 +2,7 @@
 
 namespace App\Engine\Tables;
 
-use App\Domain\Adresse\ZoneClimatique;
+use App\Domain\Batiment\ZoneClimatique;
 use App\Domain\Batiment\TypeBatiment;
 use App\Domain\Chauffage\Emetteur\{TemperatureDistribution, TypeEmission};
 use App\Domain\Chauffage\Generateur\{EnergieGenerateur, TypeGenerateur};
@@ -60,7 +60,7 @@ interface ChauffageTableValeurRepository
         TypeGenerateur $type_generateur,
         EnergieGenerateur $energie_generateur,
         LabelGenerateur $label_generateur,
-        int $anne_installation_generateur,
+        int $annee_installation_generateur,
     ): ?float;
 
     public function rr(

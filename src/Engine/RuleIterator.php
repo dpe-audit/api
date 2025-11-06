@@ -3,7 +3,7 @@
 namespace App\Engine;
 
 /**
- * @template T of Input
+ * @template T
  */
 abstract class RuleIterator extends Rule implements \Iterator
 {
@@ -19,7 +19,7 @@ abstract class RuleIterator extends Rule implements \Iterator
      * 
      * @return T
      */
-    public function item(): Input
+    public function item(): mixed
     {
         return $this->collection()[$this->position()];
     }
@@ -54,15 +54,9 @@ abstract class RuleIterator extends Rule implements \Iterator
         return array_key_exists($this->position(), $this->collection());
     }
 
-    public function __invoke(Context $context): void
+    public function __invoke(mixed $data, Context $context): void
     {
-        $this->context = $context;
+        $this->setContext($context);
         $this->rewind();
-
-        foreach ($this as $rule) {
-            if (false === $context->store()->has($rule->namespace())) {
-                $rule->calcule();
-            }
-        }
     }
 }

@@ -194,8 +194,6 @@ final class GenerateurTransformer
                 generateur_collectif: $this->generateur_collectif(),
                 generateur_multi_batiment: $this->generateur_multi_batiment(),
                 position_volume_chauffe: $generateur_chauffage->position_volume_chauffe,
-                cascade: $generateur_chauffage->priorite_generateur_cascade > 0 ? 1 : null,
-                priorite_cascade: $generateur_chauffage->priorite_generateur_cascade,
                 position_chaudiere: $this->position_chaudiere(),
                 generateur_mixte_id: $this->generateur_mixte_id(),
                 reseau_chaleur_id: $this->reseau_chaleur_id(),

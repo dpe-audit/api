@@ -2,10 +2,8 @@
 
 namespace App\Domain\Diagnostic;
 
-use App\Domain\Adresse\ZoneClimatique;
+use App\Domain\Batiment\ZoneClimatique;
 use App\Domain\Common\Bilan\Bilan;
-use App\Domain\Common\Consommation\ConsommationCollection;
-use App\Domain\Common\Perte\PerteCollection;
 use Webmozart\Assert\Assert;
 
 final class DiagnosticData
@@ -17,8 +15,6 @@ final class DiagnosticData
         public readonly ?float $surface_reference,
         public readonly ?float $volume_reference,
         public readonly ?Bilan $bilan,
-        public readonly ?PerteCollection $pertes,
-        public readonly ?ConsommationCollection $consommations,
     ) {}
 
     public static function create(
@@ -28,8 +24,6 @@ final class DiagnosticData
         ?float $surface_reference = null,
         ?float $volume_reference = null,
         ?Bilan $bilan = null,
-        ?PerteCollection $pertes = null,
-        ?ConsommationCollection $consommations = null,
     ): self {
         Assert::nullOrGreaterThan($surface_reference, 0);
         Assert::nullOrGreaterThan($volume_reference, 0);
@@ -41,8 +35,6 @@ final class DiagnosticData
             surface_reference: $surface_reference,
             volume_reference: $volume_reference,
             bilan: $bilan,
-            pertes: $pertes,
-            consommations: $consommations,
         );
     }
 
@@ -53,8 +45,6 @@ final class DiagnosticData
         ?float $surface_reference = null,
         ?float $volume_reference = null,
         ?Bilan $bilan = null,
-        ?PerteCollection $pertes = null,
-        ?ConsommationCollection $consommations = null,
     ): self {
         return self::create(
             zone_climatique: $zone_climatique ?? $this->zone_climatique,
@@ -63,8 +53,6 @@ final class DiagnosticData
             surface_reference: $surface_reference ?? $this->surface_reference,
             volume_reference: $volume_reference ?? $this->volume_reference,
             bilan: $bilan ?? $this->bilan,
-            pertes: $pertes ?? $this->pertes,
-            consommations: $consommations ?? $this->consommations,
         );
     }
 }

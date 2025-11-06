@@ -22,6 +22,7 @@ final class Systeme
         private readonly Generateur $generateur,
         private string $description,
         private TypeChauffage $type,
+        private ?int $cascade,
         private ?Reseau $reseau,
     ) {
         $this->emetteurs = new EmetteurCollection();
@@ -35,6 +36,7 @@ final class Systeme
         Generateur $generateur,
         string $description,
         TypeChauffage $type,
+        ?int $cascade,
         ?Reseau $reseau,
     ): self {
         Assert::notNull($chauffage->installations()->find($installation->id()));
@@ -47,6 +49,7 @@ final class Systeme
             generateur: $generateur,
             description: $description,
             type: $type,
+            cascade: $cascade,
             reseau: $reseau,
         );
     }
@@ -96,6 +99,11 @@ final class Systeme
     public function type(): TypeChauffage
     {
         return $this->type;
+    }
+
+    public function cascade(): ?int
+    {
+        return $this->cascade;
     }
 
     public function reseau(): ?Reseau

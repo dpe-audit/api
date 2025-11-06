@@ -2,14 +2,11 @@
 
 namespace App\Engine\Table;
 
-use App\Domain\Adresse\ZoneClimatique;
+use App\Domain\Batiment\ZoneClimatique;
 use App\Domain\Enveloppe\Mur\TypeMur;
-use App\Domain\Enveloppe\Paroi\Mitoyennete;
 
-interface MurTableValeurRepository
+interface MurTableValeurRepository extends ParoiTableValeurRepository
 {
-    public function b(Mitoyennete $mitoyennete): ?float;
-
     public function u0(
         int $annee_construction,
         ?TypeMur $type_structure,

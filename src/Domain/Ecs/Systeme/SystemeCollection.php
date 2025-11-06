@@ -39,4 +39,9 @@ final class SystemeCollection extends ArrayCollection
     {
         return $this->with_generateur($id)->count() > 0;
     }
+
+    public function volume_stockage(): float
+    {
+        return $this->reduce(fn(Systeme $item) => $item->stockage()->volume);
+    }
 }

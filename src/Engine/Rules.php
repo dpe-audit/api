@@ -38,29 +38,6 @@ final class Rules implements \IteratorAggregate
         return $rules;
     }
 
-    public function require(string $class): RuleInterface
-    {
-        if (null === $rule = $this->find($class)) {
-            throw new \DomainException(sprintf("Règle %s non trouvée", $class));
-        }
-        return $rule;
-    }
-
-    public function requireIterator(string $class, mixed $data): RuleIterator
-    {
-        foreach ($this->search($class) as $iterator) {
-            if (!$iterator instanceof RuleIterator) {
-                continue;
-            }
-            foreach ($iterator as $rule) {
-                if ($rule->item() === $data) {
-                    return $rule;
-                }
-            }
-        }
-        throw new \DomainException(sprintf("Règle %s non trouvée", $class));
-    }
-
     public function getIterator(): \ArrayIterator
     {
         return new \ArrayIterator($this->rules);

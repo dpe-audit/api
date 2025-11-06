@@ -19,7 +19,10 @@ final class SystemeData
         public readonly ?float $cef_aux,
         public readonly ?float $cep_aux,
         public readonly ?float $eges_aux,
-        public readonly ?Pertes $pertes,
+        public readonly ?float $pertes_stockage,
+        public readonly ?float $pertes_stockage_recuperables,
+        public readonly ?float $pertes_distribution,
+        public readonly ?float $pertes_distribution_recuperables,
     ) {}
 
     public static function create(
@@ -35,7 +38,10 @@ final class SystemeData
         ?float $cef_aux = null,
         ?float $cep_aux = null,
         ?float $eges_aux = null,
-        ?Pertes $pertes = null,
+        ?float $pertes_stockage = null,
+        ?float $pertes_stockage_recuperables = null,
+        ?float $pertes_distribution = null,
+        ?float $pertes_distribution_recuperables = null,
     ): self {
         Assert::nullOrGreaterThanEq($rdim, 0);
         Assert::nullOrLessThanEq($rdim, 1);
@@ -50,6 +56,10 @@ final class SystemeData
         Assert::nullOrGreaterThanEq($cef_aux, 0);
         Assert::nullOrGreaterThanEq($cep_aux, 0);
         Assert::nullOrGreaterThanEq($eges_aux, 0);
+        Assert::nullOrGreaterThanEq($pertes_stockage, 0);
+        Assert::nullOrGreaterThanEq($pertes_stockage_recuperables, 0);
+        Assert::nullOrGreaterThanEq($pertes_distribution, 0);
+        Assert::nullOrGreaterThanEq($pertes_distribution_recuperables, 0);
 
         return new self(
             rdim: $rdim,
@@ -64,7 +74,10 @@ final class SystemeData
             cef_aux: $cef_aux,
             cep_aux: $cep_aux,
             eges_aux: $eges_aux,
-            pertes: $pertes,
+            pertes_stockage: $pertes_stockage,
+            pertes_stockage_recuperables: $pertes_stockage_recuperables,
+            pertes_distribution: $pertes_distribution,
+            pertes_distribution_recuperables: $pertes_distribution_recuperables,
         );
     }
 
@@ -81,7 +94,10 @@ final class SystemeData
         ?float $cef_aux = null,
         ?float $cep_aux = null,
         ?float $eges_aux = null,
-        ?Pertes $pertes = null,
+        ?float $pertes_stockage = null,
+        ?float $pertes_stockage_recuperables = null,
+        ?float $pertes_distribution = null,
+        ?float $pertes_distribution_recuperables = null,
     ): self {
         return self::create(
             rdim: $rdim ?? $this->rdim,
@@ -96,7 +112,10 @@ final class SystemeData
             cef_aux: $cef_aux ?? $this->cef_aux,
             cep_aux: $cep_aux ?? $this->cep_aux,
             eges_aux: $eges_aux ?? $this->eges_aux,
-            pertes: $pertes ?? $this->pertes,
+            pertes_stockage: $pertes_stockage ?? $this->pertes_stockage,
+            pertes_stockage_recuperables: $pertes_stockage_recuperables ?? $this->pertes_stockage_recuperables,
+            pertes_distribution: $pertes_distribution ?? $this->pertes_distribution,
+            pertes_distribution_recuperables: $pertes_distribution_recuperables ?? $this->pertes_distribution_recuperables,
         );
     }
 }

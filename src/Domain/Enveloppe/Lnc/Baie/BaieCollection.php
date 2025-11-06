@@ -48,4 +48,26 @@ final class BaieCollection extends ArrayCollection
             fn(float $surface, Baie $item): float => $surface + $item->position()->surface
         );
     }
+
+    /**
+     * Orientations majoritaires des baies
+     * 
+     * @return Orientation[]
+     */
+    public function orientations(): array
+    {
+        /** @var array<string, float> */
+        $orientations = [];
+
+        foreach (Orientation::cases() as $orientation) {
+            $orientations[$orientation->value] = array_reduce(
+                array_filter($this->elements, fn($item) => $item->position()->orientation() === $orientation),
+                fn(float $carry, $item): float => $carry += $item->position()->surface,
+                0
+            );
+        }
+        $max = max($orientations);
+        $keys = array_keys($orientations, $max);
+        return array_map(fn($key) => Orientation::from($key), $keys);
+    }
 }
