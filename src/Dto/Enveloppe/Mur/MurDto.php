@@ -5,6 +5,7 @@ namespace App\Dto\Enveloppe\Mur;
 use App\Domain\Enveloppe\Mur\{Mur, TypeDoublage, TypeMur};
 use App\Domain\Enveloppe\Paroi\Inertie;
 use App\Dto\Enveloppe\Paroi\IsolationDto;
+use App\Validation;
 
 /**
  * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/mur.yaml
@@ -20,7 +21,9 @@ final class MurDto
         public readonly ?bool $presence_enduit_isolant,
         public readonly ?bool $paroi_ancienne,
         public readonly ?Inertie $inertie,
+        #[Validation\Annee\AnneeValid]
         public readonly ?int $annee_construction,
+        #[Validation\Annee\AnneeValid]
         public readonly ?int $annee_renovation,
         public readonly ?float $u0,
         public readonly ?float $u,

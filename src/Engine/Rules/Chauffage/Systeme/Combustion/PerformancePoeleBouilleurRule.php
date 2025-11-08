@@ -2,16 +2,15 @@
 
 namespace App\Engine\Rules\Chauffage\Systeme\Combustion;
 
-use App\Domain\Chauffage\Systeme\Systeme;
 use App\Engine\Rules\Chauffage\Systeme\PerformanceCombustionRule;
 
 final class PerformancePoeleBouilleurRule extends PerformanceCombustionRule
 {
-    public static function supports(Systeme $entity): bool
+    public function supports(): bool
     {
-        return $entity->generateur()->type()?->is_poele_bouilleur()
-            && $entity->generateur()->energie()?->is_combustible()
-            && false === $entity->generateur()->position()->generateur_multi_batiment;
+        return $this->type_generateur()->is_poele_bouilleur()
+            && $this->energie_generateur()->is_combustible()
+            && false === $this->generateur_multi_batiment();
     }
 
     /**

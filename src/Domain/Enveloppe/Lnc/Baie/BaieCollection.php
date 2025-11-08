@@ -44,9 +44,7 @@ final class BaieCollection extends ArrayCollection
 
     public function surface(): float
     {
-        return $this->reduce(
-            fn(float $surface, Baie $item): float => $surface + $item->position()->surface
-        );
+        return $this->reduce(fn(float $surface, Baie $item): float => $surface + $item->position()->surface);
     }
 
     /**

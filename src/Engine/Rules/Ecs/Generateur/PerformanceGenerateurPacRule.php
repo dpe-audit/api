@@ -2,24 +2,14 @@
 
 namespace App\Engine\Rules\Ecs\Generateur;
 
-use App\Domain\Ecs\Generateur\Generateur;
 use App\Engine\Rules\Ecs\PerformanceGenerateurRule;
 
 final class PerformanceGenerateurPacRule extends PerformanceGenerateurRule
 {
-    public static function supports(Generateur $entity): bool
+    public function supports(): bool
     {
-        return $entity->type()?->is_pac() && false === $entity->position()->generateur_multi_batiment;
+        return $this->type()->is_pac() && false === $this->generateur_multi_batiment();
     }
-
-    // * Données d'entrée
-
-    public function cop_saisi(): ?float
-    {
-        return $this->item()->signaletique()->cop;
-    }
-
-    // * Données de sortie
 
     /**
      * @inheritDoc

@@ -13,9 +13,10 @@ use App\Engine\Table\PorteTableValeurRepository;
  */
 final class DeperditionPorteRule extends DeperditionParoiRule
 {
-    public function __construct(
-        private PorteTableValeurRepository $repository
-    ) {}
+    public function __construct(private PorteTableValeurRepository $repository)
+    {
+        parent::__construct($repository);
+    }
 
     /**
      * @inheritDoc

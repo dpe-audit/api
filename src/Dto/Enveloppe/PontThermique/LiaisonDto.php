@@ -23,8 +23,8 @@ final class LiaisonDto
             type: $data->type,
             pont_thermique_partiel: $data->pont_thermique_partiel,
             mur_id: (string) $data->mur->id(),
-            plancher_id: (string) $data->plancher->id(),
-            ouverture_id: (string) $data->ouverture->id(),
+            plancher_id: (string) $data->plancher?->id(),
+            ouverture_id: (string) $data->ouverture?->id(),
         );
     }
 

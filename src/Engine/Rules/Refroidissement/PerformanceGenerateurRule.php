@@ -21,20 +21,18 @@ final class PerformanceGenerateurRule extends RuleIterator
     /**
      * @inheritDoc
      */
-    public function collection(): array
-    {
-        return $this->input()->refroidissement->generateurs()->values();
-    }
-
-    /**
-     * @inheritDoc
-     */
     public function namespace(): string
     {
         return static::class . '\\' . (string) $this->item()->id();
     }
 
-    // * Données d'entrée
+    /**
+     * @inheritDoc
+     */
+    public function collection(): array
+    {
+        return $this->input()->refroidissement->generateurs()->values();
+    }
 
     public function seer_saisi(): ?float
     {
@@ -48,8 +46,6 @@ final class PerformanceGenerateurRule extends RuleIterator
             $this->input()->batiment->annee_construction,
         ]));
     }
-
-    // * Données intermédiaires
 
     /**
      * @return float[]
@@ -66,8 +62,6 @@ final class PerformanceGenerateurRule extends RuleIterator
     {
         return $this->require(PerformanceRefroidissementRule::class)->bfr();
     }
-
-    // * Données calculées
 
     /**
      * Ratio de dimensionnement du générateur

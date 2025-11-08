@@ -53,7 +53,7 @@ final class Logement
             climatisation_collection: $climatisation_collection,
             installation_ecs_collection: $installation_ecs_collection,
             installation_chauffage_collection: $installation_chauffage_collection,
-            production_elec_enr: $xml->production_elec_enr ? ProductionElecEnr::from($xml->production_elec_enr) : null,
+            production_elec_enr: !empty($xml->production_elec_enr) ? ProductionElecEnr::from($xml->production_elec_enr) : null,
             sortie: Sortie::from($xml->sortie)
         );
     }
@@ -62,7 +62,7 @@ final class Logement
     {
         foreach ($this->installation_chauffage_collection as $installation_chauffage) {
             foreach ($installation_chauffage->generateur_chauffage_collection as $generateur_chauffage) {
-                if ($generateur_chauffage->reference === $reference) {
+                if ($generateur_chauffage->match($reference)) {
                     return $generateur_chauffage;
                 }
             }
@@ -74,7 +74,7 @@ final class Logement
     {
         foreach ($this->installation_ecs_collection as $installation_ecs) {
             foreach ($installation_ecs->generateur_ecs_collection as $generateur_ecs) {
-                if ($generateur_ecs->reference === $reference) {
+                if ($generateur_ecs->match($reference)) {
                     return $generateur_ecs;
                 }
             }
@@ -86,6 +86,9 @@ final class Logement
     {
         foreach ($this->installation_chauffage_collection as $installation_chauffage) {
             foreach ($installation_chauffage->generateur_chauffage_collection as $generateur_chauffage) {
+                if ($generateur_chauffage->match($generateur_ecs->reference)) {
+                    return $generateur_chauffage;
+                }
                 if ($generateur_chauffage->match_generateur_ecs($generateur_ecs)) {
                     return $generateur_chauffage;
                 }
@@ -98,6 +101,9 @@ final class Logement
     {
         foreach ($this->installation_ecs_collection as $installation_ecs) {
             foreach ($installation_ecs->generateur_ecs_collection as $generateur_ecs) {
+                if ($generateur_ecs->match($generateur_chauffage->reference)) {
+                    return $generateur_ecs;
+                }
                 if ($generateur_ecs->match_generateur_chauffage($generateur_chauffage)) {
                     return $generateur_ecs;
                 }

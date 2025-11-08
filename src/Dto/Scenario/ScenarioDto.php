@@ -18,7 +18,6 @@ final class ScenarioDto
         public readonly TypeScenario $type,
         public readonly string $nom,
         public readonly string $description,
-
         #[Constraints\All([new Constraints\Type(EtapeDto::class)])]
         #[Constraints\Valid]
         public readonly array $etapes,

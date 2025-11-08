@@ -2,53 +2,11 @@
 
 namespace App\Engine\Rules\Refroidissement;
 
-use App\Domain\Common\Enum\{Energie, Usage};
+use App\Domain\Common\Enum\Usage;
 use App\Engine\Context;
 
 final class PerformanceSystemeRule extends PerformanceAuxiliaireRule
 {
-    /**
-     * @inheritDoc
-     */
-    public function collection(): array
-    {
-        return $this->input()->refroidissement->systemes()->values();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function namespace(): string
-    {
-        return static::class . '\\' . (string) $this->item()->id();
-    }
-
-    // * Données d'entrées
-
-    public function energie(): Energie
-    {
-        return $this->item()->generateur()->energie()->to();
-    }
-
-    public function contenu_co2_reseau_froid(): ?float
-    {
-        return $this->item()->generateur()->reseau_froid()?->contenu_co2();
-    }
-
-    // * Données intermédiaires
-
-    public function bfr(): float
-    {
-        return $this->require(PerformanceRefroidissementRule::class)->bfr();
-    }
-
-    public function eer(): float
-    {
-        return $this->requireIterator(PerformanceGenerateurRule::class, $this->item()->generateur())->eer();
-    }
-
-    // * Données calculées
-
     /**
      * Consommation finale du système de refroidissement en kWh/an
      */
@@ -65,7 +23,7 @@ final class PerformanceSystemeRule extends PerformanceAuxiliaireRule
     public function cep_fr(): float
     {
         return $this->get('cep_fr', function (): float {
-            return $this->cef_fr() * $this->energie()->facteur_energie_primaire();
+            return $this->cef_fr() * $this->energie_generateur()->to()->facteur_energie_primaire();
         });
     }
 
@@ -77,7 +35,7 @@ final class PerformanceSystemeRule extends PerformanceAuxiliaireRule
         return $this->get('eges_fr', function (): float {
             return (null !== $contenu_co2 = $this->contenu_co2_reseau_froid())
                 ? $this->cef_fr() * $contenu_co2
-                : $this->cef_fr() * $this->energie()->facteur_eges(Usage::REFROIDISSEMENT);
+                : $this->cef_fr() * $this->energie_generateur()->to()->facteur_eges(Usage::REFROIDISSEMENT);
         });
     }
 

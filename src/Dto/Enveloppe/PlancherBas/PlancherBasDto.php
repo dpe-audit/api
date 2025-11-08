@@ -5,6 +5,7 @@ namespace App\Dto\Enveloppe\PlancherBas;
 use App\Domain\Enveloppe\Paroi\Inertie;
 use App\Domain\Enveloppe\PlancherBas\{PlancherBas, TypePlancherBas};
 use App\Dto\Enveloppe\Paroi\IsolationDto;
+use App\Validation;
 
 /**
  * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/plancher_bas.yaml
@@ -16,7 +17,9 @@ final class PlancherBasDto
         public readonly string $description,
         public readonly ?TypePlancherBas $type_structure,
         public readonly ?Inertie $inertie,
+        #[Validation\Annee\AnneeValid]
         public readonly ?int $annee_construction,
+        #[Validation\Annee\AnneeValid]
         public readonly ?int $annee_renovation,
         public readonly ?float $u0,
         public readonly ?float $u,

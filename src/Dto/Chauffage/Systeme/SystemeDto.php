@@ -32,7 +32,7 @@ final class SystemeDto
             installation_id: (string) $data->installation()->id(),
             type: $data->type(),
             cascade: $data->cascade(),
-            reseau: ReseauDto::from($data->reseau()),
+            reseau: $data->reseau() ? ReseauDto::from($data->reseau()) : null,
             emetteurs: $data->emetteurs()->map(fn($item) => (string) $item->id())->values(),
         );
     }
@@ -46,7 +46,7 @@ final class SystemeDto
             'installation_id' => $this->installation_id,
             'type' => $this->type->value,
             'cascade' => $this->cascade,
-            'reseau' => $this->reseau->__normalize(),
+            'reseau' => $this->reseau?->__normalize(),
             'emetteurs' => $this->emetteurs,
         ];
     }

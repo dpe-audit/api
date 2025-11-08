@@ -13,7 +13,7 @@ use App\Engine\Table\ParoiTableValeurRepository;
  */
 abstract class DeperditionParoiRule extends RuleIterator
 {
-    private ParoiTableValeurRepository $repository;
+    public function __construct(private ParoiTableValeurRepository $paroi_repository) {}
 
     // * Données d'entrée
 
@@ -74,7 +74,7 @@ abstract class DeperditionParoiRule extends RuleIterator
         return $this->get('b', function (): float {
             return $this->mitoyennete() === Mitoyennete::LOCAL_NON_CHAUFFE
                 ? $this->b_lnc() ?? throw new \DomainException('Valeur b non calculée')
-                : $this->repository->b($this->mitoyennete()) ?? throw new \DomainException('Valeur forfaitaire b non trouvée');
+                : $this->paroi_repository->b($this->mitoyennete()) ?? throw new \DomainException('Valeur forfaitaire b non trouvée');
         });
     }
 

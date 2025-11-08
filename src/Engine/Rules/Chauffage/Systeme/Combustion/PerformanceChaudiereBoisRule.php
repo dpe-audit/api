@@ -2,15 +2,11 @@
 
 namespace App\Engine\Rules\Chauffage\Systeme\Combustion;
 
-use App\Domain\Chauffage\Systeme\Systeme;
-
 final class PerformanceChaudiereBoisRule extends PerformanceChaudiereRule
 {
-    public static function supports(Systeme $entity): bool
+    public function supports(): bool
     {
-        $match = parent::supports($entity);
-        $match = $match && $entity->generateur()->energie()?->is_bois();
-        return $match;
+        return parent::supports() && $this->energie_generateur()->is_bois();
     }
 
     /**

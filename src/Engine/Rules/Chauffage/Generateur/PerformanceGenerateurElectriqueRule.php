@@ -2,16 +2,15 @@
 
 namespace App\Engine\Rules\Chauffage\Generateur;
 
-use App\Domain\Chauffage\Generateur\Generateur;
 use App\Engine\Rules\Chauffage\PerformanceGenerateurRule;
 
 final class PerformanceGenerateurElectriqueRule extends PerformanceGenerateurRule
 {
-    public static function supports(Generateur $entity): bool
+    public function supports(): bool
     {
-        return $entity->energie()?->is_electricite()
-            && false === $entity->type()?->is_pac()
-            && false === $entity->position()->generateur_multi_batiment;
+        return $this->energie_generateur()->is_electricite()
+            && false === $this->type_generateur()->is_pac()
+            && false === $this->generateur_multi_batiment();
     }
 
     /** @inheritDoc */

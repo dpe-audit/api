@@ -6,6 +6,6 @@ trait WithDescription
 {
     public function description(): string
     {
-        return $this->description ?? 'Non renseigné';
+        return $this->description ? trim($this->description) : 'Non renseigné';
     }
 }

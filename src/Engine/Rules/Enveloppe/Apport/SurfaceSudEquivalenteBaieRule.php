@@ -137,8 +137,7 @@ final class SurfaceSudEquivalenteBaieRule extends RuleIterator
                 ->filter(fn($fe) => null !== $fe)
                 ->reduce(fn($carry, $fe) => min($carry, $fe), 1);
 
-            $fe2 = min($fe2, 1 - min($omb, 100) / 100);
-            return static::round($fe2);
+            return min($fe2, 1 - min($omb, 100) / 100);
         });
     }
 
@@ -166,19 +165,13 @@ final class SurfaceSudEquivalenteBaieRule extends RuleIterator
     /**
      * Surface sud équivalente en m²
      */
-    public function sse(): float
+    public function sse(?Mois $mois = null): float
     {
-        return $this->get("sse", function (): float {
-            return Mois::reduce(fn(Mois $mois) => $this->sse_j($mois));
-        });
-    }
-
-    /**
-     * Surface sud équivalente pour le mois j en m²
-     */
-    public function sse_j(Mois $mois): float
-    {
-        return $this->get("sse::{$mois->value}", function () use ($mois): float {
+        $key = $mois ? "sse::{$mois->value}" : 'sse';
+        return $this->get($key, function () use ($mois): float {
+            if (null === $mois) {
+                return Mois::reduce(fn(Mois $item) => $this->sse($item));
+            }
             if ($this->mitoyennete() !== Mitoyennete::EXTERIEUR) {
                 return 0;
             }
@@ -189,9 +182,9 @@ final class SurfaceSudEquivalenteBaieRule extends RuleIterator
             $a = $this->surface();
             $sw = $this->sw();
             $fe = $this->fe();
-            $c1 = $this->c1_j($mois);
+            $c1 = $this->c1($mois);
             $t = $this->t();
-            return static::round($a * $sw * $fe * $c1 * $t);
+            return $a * $sw * $fe * $c1 * $t;
         });
     }
 
@@ -236,12 +229,12 @@ final class SurfaceSudEquivalenteBaieRule extends RuleIterator
     }
 
     /**
-     * Coefficient d'orientation et d'inclinaison de la baie pour le mois j
+     * Coefficient d'orientation et d'inclinaison de la baie
      */
-    public function c1_j(Mois $mois): float
+    public function c1(Mois $mois): float
     {
         return $this->get("c1::{$mois->value}", function () use ($mois): float {
-            return array_find($this->c1(), fn(array $item) => $item['mois'] === $mois)['c1']
+            return array_find($this->c1_collection(), fn(array $item) => $item['mois'] === $mois)['c1']
                 ?? throw new \DomainException("Valeur forfaitaire C1 non trouvée pour le mois {$mois->value}");
         });
     }
@@ -251,7 +244,7 @@ final class SurfaceSudEquivalenteBaieRule extends RuleIterator
      * 
      * @return array{mois: Mois, c1: float}[]
      */
-    public function c1(): array
+    public function c1_collection(): array
     {
         return $this->get('c1', function (): array {
             return $this->ext_repository->c1(

@@ -3,9 +3,6 @@
 namespace App\Engine\Rules\Ecs;
 
 use App\Domain\Common\Enum\Mois;
-use App\Domain\Ecs\Generateur\{EnergieGenerateur, Generateur, TypeGenerateur};
-use App\Domain\Ecs\Generateur\Position\PositionChauffeEau;
-use App\Domain\Ecs\Generateur\Signaletique\LabelGenerateur;
 use App\Engine\Context;
 use App\Engine\Rules\Batiment\WithBatimentRule;
 use App\Engine\Table\EcsTableValeurRepository;
@@ -17,58 +14,6 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
     public function __construct(
         protected EcsTableValeurRepository $repository,
     ) {}
-
-    abstract public static function supports(Generateur $entity): bool;
-
-    /**
-     * @inheritDoc
-     */
-    public function collection(): array
-    {
-        return $this->input()->ecs->generateurs()
-            ->filter(fn(Generateur $item) => static::supports($item))
-            ->values();
-    }
-
-    // * Données d'entrée
-
-    public function type(): TypeGenerateur
-    {
-        return $this->item()->type() ?? TypeGenerateur::CHAUDIERE;
-    }
-
-    public function energie(): EnergieGenerateur
-    {
-        return $this->item()->energie() ?? EnergieGenerateur::FIOUL;
-    }
-
-    public function contenu_co2_reseau_chaleur(): ?float
-    {
-        return $this->item()->position()->reseau_chaleur?->contenu_co2();
-    }
-
-    public function position_chauff_eau(): PositionChauffeEau
-    {
-        return $this->item()->position()->position_chauff_eau ?? PositionChauffeEau::CHAUFFE_EAU_VERTICAL;
-    }
-
-    public function annee_installation(): int
-    {
-        return $this->item()->annee_installation() ?? $this->input()->batiment->annee_construction;
-    }
-
-    public function position_volume_chauffe(): bool
-    {
-        return $this->item()->position()->position_volume_chauffe;
-    }
-
-    public function label(): ?LabelGenerateur
-    {
-        return $this->item()->signaletique()->label;
-    }
-
-
-    // * Données de sortie
 
     /**
      * Coefficient de performance énergétique
@@ -128,14 +73,11 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
             if (0 === $vs = $this->volume_stockage()) {
                 return 0;
             }
-            if (false === \in_array($this->position_chauff_eau(), [
-                PositionChauffeEau::CHAUFFE_EAU_HORIZONTAL,
-                PositionChauffeEau::CHAUFFE_EAU_VERTICAL,
-            ])) {
+            if (null === $this->position_chauff_eau()) {
                 return (67662 * \pow($vs, 0.55)) / 12;
             }
             $cr = $this->repository->cr(
-                type_generateur: $this->type(),
+                position_chauffe_eau: $this->position_chauff_eau(),
                 label_generateur: $this->label(),
                 volume_stockage: $vs,
             ) ?? throw new \DomainException("Valeur forfaitaire Cr non trouvée");

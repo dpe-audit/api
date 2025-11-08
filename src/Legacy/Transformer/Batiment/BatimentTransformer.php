@@ -71,6 +71,8 @@ final class BatimentTransformer
 
     public function __invoke(Context $context): BatimentDto
     {
+        $this->context = $context;
+
         return new BatimentDto(
             rnb_id: $context->ressource()->administratif()->geolocalisation->id_batiment_rnb,
             type: $this->type_batiment(),

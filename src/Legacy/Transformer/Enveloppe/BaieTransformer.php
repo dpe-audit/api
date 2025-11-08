@@ -140,13 +140,35 @@ final class BaieTransformer extends ParoiTransformer
         };
     }
 
+    public function epaisseur_lame_survitrage(): ?float
+    {
+        if ($this->type_vitrage()->vitrage_complexe()) {
+            return null;
+        }
+        if (null === $this->type_survitrage()) {
+            return null;
+        }
+        return $this->paroi->epaisseur_lame;
+    }
+
     public function nature_lame(): ?NatureGazLame
     {
+        if (false === $this->type_vitrage()->vitrage_complexe()) {
+            return null;
+        }
         return match ($this->paroi->enum_type_gaz_lame_id) {
             1 => NatureGazLame::AIR,
             2 => NatureGazLame::ARGON,
             default => null,
         };
+    }
+
+    public function epaisseur_lame(): ?float
+    {
+        if (false === $this->type_vitrage()->vitrage_complexe()) {
+            return null;
+        }
+        return $this->paroi->epaisseur_lame;
     }
 
     public function presence_rupteur_pont_thermique(): bool
@@ -204,11 +226,11 @@ final class BaieTransformer extends ParoiTransformer
             vitrage: new VitrageDto(
                 type: $this->type_vitrage(),
                 nature_lame: $this->nature_lame(),
-                epaisseur_lame: $paroi->epaisseur_lame,
+                epaisseur_lame: $this->epaisseur_lame(),
             ),
             survitrage: $this->type_survitrage() ? new SurvitrageDto(
                 type: $this->type_survitrage(),
-                epaisseur_lame: null,
+                epaisseur_lame: $this->epaisseur_lame_survitrage(),
             ) : null,
             menuiserie: $this->type_baie()->is_paroi_vitree() ? null : new MenuiserieDto(
                 materiau: $this->materiau(),

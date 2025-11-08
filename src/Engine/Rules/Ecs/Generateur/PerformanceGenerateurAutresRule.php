@@ -2,14 +2,13 @@
 
 namespace App\Engine\Rules\Ecs\Generateur;
 
-use App\Domain\Ecs\Generateur\Generateur;
 use App\Engine\Rules\Ecs\PerformanceGenerateurRule;
 
 final class PerformanceGenerateurAutresRule extends PerformanceGenerateurRule
 {
-    public static function supports(Generateur $entity): bool
+    public function supports(): bool
     {
-        return PerformanceGenerateurPacRule::supports($entity) === false
-            && PerformanceGenerateurCombustionRule::supports($entity) === false;
+        return $this->generateur_multi_batiment()
+            || (false === $this->type()->is_chaudiere() && false === $this->type()->is_pac());
     }
 }

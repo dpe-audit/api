@@ -2,17 +2,16 @@
 
 namespace App\Engine\Rules\Chauffage\Generateur;
 
-use App\Domain\Chauffage\Generateur\Generateur;
 use App\Engine\Rules\Chauffage\PerformanceGenerateurRule;
 
 final class PerformanceGenerateurCombustionRule extends PerformanceGenerateurRule
 {
-    public static function supports(Generateur $entity): bool
+    public function supports(): bool
     {
-        return $entity->energie()?->is_combustible()
-            && false === $entity->type()?->is_poele_insert()
-            && false === $entity->type()?->is_radiateur_gaz()
-            && false === $entity->position()->generateur_multi_batiment;
+        return $this->energie_generateur()->is_combustible()
+            && false === $this->type_generateur()->is_poele_insert()
+            && false === $this->type_generateur()->is_radiateur_gaz()
+            && false === $this->generateur_multi_batiment();
     }
 
     /** @inheritDoc */

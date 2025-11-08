@@ -5,7 +5,7 @@ namespace App\Legacy\Transformer\Chauffage;
 use App\Domain\Chauffage\TypeChauffage;
 use App\Domain\Chauffage\Systeme\Reseau\{IsolationReseau, TypeDistribution};
 use App\Dto\Chauffage\Systeme\{ReseauDto, SystemeDto};
-use App\Legacy\Model\{GenerateurChauffage, InstallationChauffage};
+use App\Legacy\Model\{GenerateurChauffage, EmetteurChauffage, InstallationChauffage};
 use App\Legacy\Transformer\Context;
 
 final class SystemeTransformer
@@ -16,6 +16,9 @@ final class SystemeTransformer
     public function installation_id(): string
     {
         foreach ($this->installation_chauffage->emetteur_chauffage_collection as $emetteur_chauffage) {
+            if ($emetteur_chauffage->enum_lien_generateur_emetteur_id !== $this->generateur_chauffage->enum_lien_generateur_emetteur_id) {
+                continue;
+            }
             if ($emetteur_chauffage->enum_lien_generateur_emetteur_id === 3) {
                 return $this->installation_chauffage->installation_sdb_id();
             }
@@ -25,33 +28,48 @@ final class SystemeTransformer
 
     public function type_chauffage(): TypeChauffage
     {
-        foreach ($this->installation_chauffage->emetteur_chauffage_collection as $emetteur_chauffage) {
-            if ($emetteur_chauffage->enum_lien_generateur_emetteur_id === $this->generateur_chauffage->enum_lien_generateur_emetteur_id) {
-                return TypeChauffage::CHAUFFAGE_CENTRAL;
-            }
-        }
-        return TypeChauffage::CHAUFFAGE_DIVISE;
+        return $this->type_distribution() ? TypeChauffage::CHAUFFAGE_CENTRAL : TypeChauffage::CHAUFFAGE_DIVISE;
     }
 
     public function type_distribution(): ?TypeDistribution
     {
         foreach ($this->installation_chauffage->emetteur_chauffage_collection as $emetteur_chauffage) {
-            if ($emetteur_chauffage->enum_lien_generateur_emetteur_id === $this->generateur_chauffage->enum_lien_generateur_emetteur_id) {
-                return match ($emetteur_chauffage->enum_type_emission_distribution_id) {
-                    46, 47, 48, 49, 11, 12, 13, 14, 43, 15, 16, 17, 18, 44, 24,
-                    25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39 => TypeDistribution::HYDRAULIQUE,
-                    42, 45 => TypeDistribution::FLUIDE_FRIGORIGENE,
-                    5 => TypeDistribution::AERAULIQUE,
-                    default => null,
-                };
+            if ($emetteur_chauffage->enum_lien_generateur_emetteur_id !== $this->generateur_chauffage->enum_lien_generateur_emetteur_id) {
+                continue;
+            }
+            $value = match ($emetteur_chauffage->enum_type_emission_distribution_id) {
+                11, 12, 13, 14, 15, 16, 17, 18 => TypeDistribution::HYDRAULIQUE,
+                24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39 => TypeDistribution::HYDRAULIQUE,
+                43, 44, 45 => TypeDistribution::HYDRAULIQUE,
+                5, 42, 46, 47, 48, 49 => TypeDistribution::AERAULIQUE,
+                default => null,
+            };
+            if ($value) {
+                return $value;
             }
         }
         return null;
     }
 
+    public function presence_fluide_frigorigene(): bool
+    {
+        foreach ($this->installation_chauffage->emetteur_chauffage_collection as $emetteur_chauffage) {
+            if ($emetteur_chauffage->enum_lien_generateur_emetteur_id !== $this->generateur_chauffage->enum_lien_generateur_emetteur_id) {
+                continue;
+            }
+            if (in_array($emetteur_chauffage->enum_type_emission_distribution_id, [42, 43, 44, 45])) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function isolation_reseau(): ?IsolationReseau
     {
         foreach ($this->installation_chauffage->emetteur_chauffage_collection as $emetteur_chauffage) {
+            if ($emetteur_chauffage->enum_lien_generateur_emetteur_id !== $this->generateur_chauffage->enum_lien_generateur_emetteur_id) {
+                continue;
+            }
             if ($emetteur_chauffage->reseau_distribution_isole !== null) {
                 return $emetteur_chauffage->reseau_distribution_isole ? IsolationReseau::ISOLE : IsolationReseau::NON_ISOLE;
             }
@@ -73,16 +91,19 @@ final class SystemeTransformer
     }
 
     /**
-     * @return array<string>
+     * @return array<EmetteurChauffage>
      */
     public function emetteurs(): array
     {
         $collection = [];
-
-        foreach ($this->installation_chauffage->emetteur_chauffage_collection as $emetteur_chauffage) {
-            if ($emetteur_chauffage->enum_lien_generateur_emetteur_id === $this->generateur_chauffage->enum_lien_generateur_emetteur_id) {
-                $collection[] = $emetteur_chauffage->id();
+        foreach ($this->installation_chauffage->emetteur_chauffage_collection as $emetteur) {
+            if (in_array($emetteur->enum_lien_generateur_emetteur_id, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 19, 20, 21, 22, 23, 40, 42, 46, 47, 48, 49, 50])) {
+                continue;
             }
+            if ($emetteur->enum_lien_generateur_emetteur_id !== $this->generateur_chauffage->enum_lien_generateur_emetteur_id) {
+                continue;
+            }
+            $collection[] = $emetteur;
         }
         return $collection;
     }
@@ -102,13 +123,17 @@ final class SystemeTransformer
             installation_id: $this->installation_id(),
             type: $this->type_chauffage(),
             cascade: $generateur_chauffage->priorite_generateur_cascade,
-            reseau: new ReseauDto(
+            reseau: $this->type_distribution() ? new ReseauDto(
                 type_distribution: $this->type_distribution(),
+                presence_fluide_frigorigene: $this->presence_fluide_frigorigene(),
                 presence_circulateur_externe: $this->presence_circulateur_externe(),
                 niveaux_desservis: $this->niveaux_desservis(),
                 isolation: $this->isolation_reseau(),
+            ) : null,
+            emetteurs: array_map(
+                fn(EmetteurChauffage $emetteur) => $emetteur->id(),
+                $this->emetteurs()
             ),
-            emetteurs: $this->emetteurs()
         );
     }
 }

@@ -4,6 +4,7 @@ namespace App\Dto\Chauffage\Installation;
 
 use App\Domain\Chauffage\Installation\Solaire\Solaire;
 use App\Domain\Chauffage\Installation\Solaire\Usage;
+use App\Validation;
 
 /**
  * @see https://github.com/dpe-audit/schemas/blob/main/schemas/chauffage/installation.yaml
@@ -12,6 +13,7 @@ final class SolaireThermiqueDto
 {
     public function __construct(
         public readonly Usage $usage,
+        #[Validation\Annee\AnneeValid]
         public readonly ?int $annee_installation,
         public readonly ?float $fch,
     ) {}

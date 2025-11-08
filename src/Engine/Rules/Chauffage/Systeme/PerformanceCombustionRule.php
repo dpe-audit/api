@@ -3,25 +3,11 @@
 namespace App\Engine\Rules\Chauffage\Systeme;
 
 use App\Domain\Common\Enum\ScenarioUsage;
-use App\Engine\Rules\Chauffage\{PerformanceGenerateurRule, PerformanceSystemeRule};
+use App\Engine\Rules\Chauffage\PerformanceSystemeRule;
 use App\Engine\Rules\Chauffage\Systeme\Combustion\TauxCharge;
 
 abstract class PerformanceCombustionRule extends PerformanceSystemeRule
 {
-    // * Données d'entrée
-
-    public function cascade(): ?int
-    {
-        return null !== $this->item()->cascade() ? min($this->item()->cascade(), 2) : null;
-    }
-
-    // * Données intermédiaires
-
-    private function performance_generateur_rule(): PerformanceGenerateurRule
-    {
-        return $this->requireIterator(PerformanceGenerateurRule::class, $this->item()->generateur());
-    }
-
     /**
      * Sommes des puissances nominales des générateurs en cascade
      * 
@@ -54,41 +40,6 @@ abstract class PerformanceCombustionRule extends PerformanceSystemeRule
             $pn += $rule->pn();
         }
         return $pn;
-    }
-
-    public function pn(): float
-    {
-        return $this->performance_generateur_rule()->pn();
-    }
-
-    public function rpn(): float
-    {
-        return $this->performance_generateur_rule()->rpn();
-    }
-
-    public function rpint(): float
-    {
-        return $this->performance_generateur_rule()->rpint();
-    }
-
-    public function qp0(): float
-    {
-        return $this->performance_generateur_rule()->qp0() / 1000;
-    }
-
-    public function pveilleuse(): float
-    {
-        return $this->performance_generateur_rule()->pveilleuse() / 1000;
-    }
-
-    public function tfonc30(): ?float
-    {
-        return $this->performance_generateur_rule()->tfonc30();
-    }
-
-    public function tfonc100(): ?float
-    {
-        return $this->performance_generateur_rule()->tfonc100();
     }
 
     // * Données de sortie

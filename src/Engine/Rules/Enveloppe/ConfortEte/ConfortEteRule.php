@@ -9,74 +9,71 @@ use App\Domain\Enveloppe\Inertie;
 use App\Domain\Enveloppe\Paroi\Mitoyennete;
 use App\Engine\{Context, Rule};
 use App\Engine\Rules\Enveloppe\Deperdition\DeperditionPlancherHautRule;
+use App\Engine\Rules\Enveloppe\Inertie\InertieNiveauRule;
 use App\Engine\Rules\Enveloppe\WithInertieRule;
 
 final class ConfortEteRule extends Rule
 {
     use WithInertieRule;
 
-    // * Données d'entrée
-
     public function presence_brasseur_air(): bool
     {
         return $this->input()->enveloppe->presence_brasseurs_air() ?? false;
     }
 
-    // * Données interémédiaires
+    /**
+     * @return array<int, array{surface: float, inertie: Inertie}>
+     */
+    public function inertie_niveaux(): array
+    {
+        return $this->input()->enveloppe->niveaux()
+            ->map(fn($entity) => $this->requireIterator(InertieNiveauRule::class, $entity))
+            ->map(fn(InertieNiveauRule $rule) => [
+                'surface' => $rule->surface(),
+                'inertie' => $rule->inertie(),
+            ])
+            ->values();
+    }
 
     /**
-     * Isolation majoritaire des planchers hauts
-     * 
      * TODO: intégrer le cas des appartements au RDC ou étages intermédiaires
      */
     public function isolation_plancher_haut(): bool
     {
-        return $this->get('isolation_plancher_haut', function (): bool {
-            $surface = 0;
-            $total = 0;
+        $collection = $this->input()->enveloppe->planchers_hauts()
+            ->map(fn($entity) => $this->requireIterator(DeperditionPlancherHautRule::class, $entity))
+            ->filter(fn(DeperditionPlancherHautRule $rule) => $rule->mitoyennete() === Mitoyennete::EXTERIEUR);
 
-            foreach ($this->input()->enveloppe->planchers_hauts() as $item) {
-                if ($item->mitoyennete() !== Mitoyennete::EXTERIEUR) {
-                    continue;
-                }
-                $rule = $this->requireIterator(DeperditionPlancherHautRule::class, $item);
+        $surface_isole = $collection
+            ->filter(fn(DeperditionPlancherHautRule $rule) => $rule->isolation())
+            ->reduce(fn($carry, DeperditionPlancherHautRule $rule) => $carry + $rule->sdep());
 
-                if ($rule->isolation()) {
-                    $surface += $rule->sdep();
-                }
-                $total += $rule->sdep();
-            }
-            return $surface ? $surface > $total / 2 : true;
-        });
+        $surface_totale = $collection
+            ->reduce(fn($carry, DeperditionPlancherHautRule $rule) => $carry + $rule->sdep());
+
+        return $surface_isole > $surface_totale / 2;
     }
 
-    /**
-     * Indicateur de présence de protections solaires
-     */
     public function presence_protection_solaire(): bool
     {
-        return $this->get('presence_protection_solaire', function (): bool {
-            foreach ($this->input()->enveloppe->baies() as $item) {
-                if (false === in_array($item->position()->orientation(), [
-                    Orientation::EST,
-                    Orientation::SUD,
-                    Orientation::OUEST,
-                ])) {
-                    continue;
-                }
-                if ($item->presence_protection_solaire()) {
-                    continue;
-                }
-                if ($item->type_fermeture() !== TypeFermeture::SANS_FERMETURE) {
-                    continue;
-                }
-                return false;
+        foreach ($this->input()->enveloppe->baies() as $item) {
+            if (false === in_array($item->position()->orientation(), [
+                Orientation::EST,
+                Orientation::SUD,
+                Orientation::OUEST,
+            ])) {
+                continue;
             }
-            return true;
-        });
+            if ($item->presence_protection_solaire()) {
+                continue;
+            }
+            if ($item->type_fermeture() !== TypeFermeture::SANS_FERMETURE) {
+                continue;
+            }
+            return false;
+        }
+        return true;
     }
-
-    // * Données calculées
 
     /**
      * Inertie lourde

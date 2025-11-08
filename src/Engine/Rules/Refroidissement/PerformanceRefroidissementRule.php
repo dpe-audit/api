@@ -84,40 +84,30 @@ final class PerformanceRefroidissementRule extends Rule
     }
 
     /**
-     * Besoin annuel de refroidissement exprimé en kWh
+     * Besoin de refroidissement en kWh
      */
-    public function bfr(): float
+    public function bfr(?Mois $mois = null): float
     {
-        return $this->get("bfr", function () {
-            return Mois::reduce(fn(Mois $mois) => $this->bfr_j($mois));
-        });
-    }
-
-    /**
-     * Besoin mensuel de refroidissement exprimé en kWh
-     */
-    public function bfr_j(Mois $mois): float
-    {
-        return $this->get("bfr::{$mois->value}", function () use ($mois) {
+        $key = $mois ? "bfr::{$mois->value}" : 'bfr';
+        return $this->get($key, function () use ($mois): float {
+            if (null === $mois) {
+                return Mois::reduce(fn(Mois $item) => $this->bfr($item));
+            }
             $text_fr = $this->text_fr($mois);
             $nref_fr = $this->nref_fr($mois);
 
             if (!$text_fr || !$nref_fr) {
                 return 0;
             }
-            if (0.5 > ($rbth = $this->rbth_j($mois))) {
+            if (0.5 > $this->rbth($mois)) {
                 return 0;
             }
-            $fut = $this->fut_j($mois);
+            $fut = $this->fut($mois);
             $tint = $this->tint();
 
-            if (0.5 > $rbth) {
-                return 0;
-            }
-            $gv = $this->gv();
-            $apports = $this->apport($mois);
-            $bfr = $apports / 1000;
-            $bfr -= $fut * ($gv / 1000) * ($tint - $text_fr) * $nref_fr;
+            $gv = $this->gv() / 1000;
+            $bfr = $this->apport_fr($mois) / 1000;
+            $bfr -= $fut * $gv * ($tint - $text_fr) * $nref_fr;
             return max($bfr, 0);
         });
     }
@@ -125,11 +115,11 @@ final class PerformanceRefroidissementRule extends Rule
     /**
      * Ratio mensuel de bilan thermique
      */
-    public function rbth_j(Mois $mois): float
+    public function rbth(Mois $mois): float
     {
         return $this->get("rbth::{$mois->value}", function () use ($mois) {
             $gv = $this->gv();
-            $apports = $this->apport($mois);
+            $apports = $this->apport_fr($mois);
             $text_fr = $this->text_fr($mois);
             $nref_fr = $this->nref_fr($mois);
             $rbth = $gv * ($text_fr - $this->tint()) * $nref_fr;
@@ -140,11 +130,11 @@ final class PerformanceRefroidissementRule extends Rule
     /**
      * Facteur mensuel d'utilisation des apports
      */
-    public function fut_j(Mois $mois): float
+    public function fut(Mois $mois): float
     {
         return $this->get("fut::{$mois->value}", function () use ($mois) {
             $t = $this->t();
-            $rbth = $this->rbth_j($mois);
+            $rbth = $this->rbth($mois);
             $a = 1 + ($t / 15);
 
             return $rbth > 0 && $rbth !== 1

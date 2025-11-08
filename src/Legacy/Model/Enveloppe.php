@@ -98,36 +98,36 @@ final class Enveloppe
 
     public function match_ets(string $reference): ?Ets
     {
-        return array_find($this->ets_collection, fn($item) => $item->reference === $reference);
+        return array_find($this->ets_collection, fn($item) => $item->match_reference($reference));
     }
 
     public function match_mur(string $reference): ?Mur
     {
-        return array_find($this->mur_collection, fn($item) => $item->reference === $reference);
+        return array_find($this->mur_collection, fn($item) => $item->match_reference($reference));
     }
 
     public function match_plancher_bas(string $reference): ?PlancherBas
     {
-        return array_find($this->plancher_bas_collection, fn($item) => $item->reference === $reference);
+        return array_find($this->plancher_bas_collection, fn($item) => $item->match_reference($reference));
     }
 
     public function match_plancher_haut(string $reference): ?PlancherHaut
     {
-        return array_find($this->plancher_haut_collection, fn($item) => $item->reference === $reference);
+        return array_find($this->plancher_haut_collection, fn($item) => $item->match_reference($reference));
     }
 
     public function match_porte(string $reference): ?Porte
     {
-        return array_find($this->porte_collection, fn($item) => $item->reference === $reference);
+        return array_find($this->porte_collection, fn($item) => $item->match_reference($reference));
     }
 
     public function match_baie_vitree(string $reference): ?BaieVitree
     {
-        return array_find($this->baie_vitree_collection, fn($item) => $item->reference === $reference);
+        return array_find($this->baie_vitree_collection, fn($item) => $item->match_reference($reference));
     }
 
     public function match_paroi(string $reference): ?Paroi
     {
-        return array_find($this->parois(), fn($item) => $item->reference === $reference);
+        return array_find($this->parois(), fn($item) => $item->match_reference($reference));
     }
 }

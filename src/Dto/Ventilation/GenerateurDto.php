@@ -3,6 +3,7 @@
 namespace App\Dto\Ventilation;
 
 use App\Domain\Ventilation\Generateur\{Generateur, TypeGenerateur, TypeVmc};
+use App\Validation;
 
 /**
  * @see https://github.com/dpe-audit/schemas/blob/main/schemas/ventilation/generateur.yaml
@@ -16,6 +17,7 @@ final class GenerateurDto
         public readonly ?TypeVmc $type_vmc,
         public readonly bool $generateur_collectif,
         public readonly ?bool $presence_echangeur_thermique,
+        #[Validation\Annee\AnneeValid]
         public readonly ?int $annee_installation,
     ) {}
 

@@ -2,15 +2,13 @@
 
 namespace App\Engine\Rules\Ecs\Systeme;
 
-use App\Domain\Ecs\Systeme\Systeme;
 use App\Engine\Rules\Ecs\{PerformanceGenerateurRule, PerformanceSystemeRule};
 
 final class PerformanceSystemePacRule extends PerformanceSystemeRule
 {
-    public static function supports(Systeme $entity): bool
+    public function supports(): bool
     {
-        return $entity->generateur()->type()?->is_pac()
-            && false === $entity->generateur()->position()->generateur_multi_batiment;
+        return $this->type_generateur()->is_pac() && false === $this->generateur_multi_batiment();
     }
 
     // * Données intermédiaire

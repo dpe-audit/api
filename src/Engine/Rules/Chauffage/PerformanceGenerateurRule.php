@@ -2,118 +2,20 @@
 
 namespace App\Engine\Rules\Chauffage;
 
-use App\Domain\Chauffage\Emetteur\{Emetteur, TemperatureDistribution, TypeEmission};
-use App\Domain\Chauffage\Generateur\{TypeGenerateur, EnergieGenerateur, Generateur};
-use App\Domain\Chauffage\Generateur\Signaletique\ModeCombustion;
+use App\Domain\Chauffage\Emetteur\TypeEmission;
 use App\Domain\Common\Enum\Mois;
 use App\Engine\Context;
 
 abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
 {
-    abstract public static function supports(Generateur $entity): bool;
-
-    /**
-     * @inheritDoc
-     */
-    public function collection(): array
+    public function emissions(): array
     {
-        return $this->input()->chauffage->generateurs()
-            ->filter(fn(Generateur $item) => static::supports($item))
-            ->values();
+        $emissions = array_map(fn(array $item) => $item['type_emission'], $this->emetteurs());
+        if (0 === count($emissions)) {
+            $emissions[] = TypeEmission::from_type_generateur($this->type_generateur());
+        }
+        return array_unique($emissions);
     }
-
-    // * Données d'entrée
-
-    public function generateur_mixte(): bool
-    {
-        return $this->item()->position()->generateur_mixte_id !== null;
-    }
-
-    public function type_generateur(): TypeGenerateur
-    {
-        return $this->item()->type();
-    }
-
-    public function energie_generateur(): EnergieGenerateur
-    {
-        return $this->item()->energie();
-    }
-
-    public function mode_combustion(): ModeCombustion
-    {
-        return $this->item()->signaletique()->mode_combustion ?? ModeCombustion::STANDARD;
-    }
-
-    public function presence_ventouse(): bool
-    {
-        return $this->item()->signaletique()->presence_ventouse ?? false;
-    }
-
-    public function presence_regulation_combustion(): bool
-    {
-        return $this->item()->signaletique()->presence_regulation_combustion ?? false;
-    }
-
-    public function scop_saisi(): ?float
-    {
-        return $this->item()->signaletique()->scop;
-    }
-
-    public function qp0_saisi(): ?float
-    {
-        return $this->item()->signaletique()->qp0;
-    }
-
-    public function rpn_saisi(): ?float
-    {
-        return $this->item()->signaletique()->rpn;
-    }
-
-    public function rpint_saisi(): ?float
-    {
-        return $this->item()->signaletique()->rpint;
-    }
-
-    public function pveilleuse_saisi(): ?float
-    {
-        return $this->item()->signaletique()->pveilleuse;
-    }
-
-    public function tfonc30_saisi(): ?float
-    {
-        return $this->item()->signaletique()->tfonc30;
-    }
-
-    public function tfonc100_saisi(): ?float
-    {
-        return $this->item()->signaletique()->tfonc100;
-    }
-
-    /**
-     * @return array<int, array{
-     *      type_emission: TypeEmission,
-     *      temperature_distribution: TemperatureDistribution,
-     *      annee_installation: int,
-     * }>
-     */
-    public function emetteurs(): array
-    {
-        return $this->item()->emetteurs()
-            ->map(fn(Emetteur $entity) => [
-                'type_emission' => $entity->type_emission(),
-                'temperature_distribution' => $entity->temperature_distribution(),
-                'annee_installation' => $entity->annee_installation() ?? $this->input()->batiment->annee_construction,
-            ])->values();
-    }
-
-    // * Données intermédiaires
-
-    public function bch_hp(?Mois $mois): float
-    {
-        return $this->require(PerformanceChauffageRule::class)->bch_hp($mois);
-    }
-
-    // * Données de sortie
 
     /**
      * Coefficient de performance énergétique
@@ -125,12 +27,12 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
                 return $this->scop_saisi();
             }
             $scops = [];
-            foreach ($this->emetteurs() as $emetteur) {
+            foreach ($this->emissions() as $emission) {
                 $scops[] = $this->repository->scop(
                     zone_climatique: $this->zone_climatique(),
                     type_generateur: $this->type_generateur(),
                     annee_installation_generateur: $this->annee_installation(),
-                    type_emission: $emetteur['type_emission'],
+                    type_emission: $emission,
                 ) ?? throw new \DomainException("Valeurs forfaitaires SCOP non trouvées");
             }
             return max($scops);

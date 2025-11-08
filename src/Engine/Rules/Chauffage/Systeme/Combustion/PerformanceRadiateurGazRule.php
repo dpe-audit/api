@@ -2,15 +2,13 @@
 
 namespace App\Engine\Rules\Chauffage\Systeme\Combustion;
 
-use App\Domain\Chauffage\Systeme\Systeme;
 use App\Engine\Rules\Chauffage\Systeme\PerformanceCombustionRule;
 
 final class PerformanceRadiateurGazRule extends PerformanceCombustionRule
 {
-    public static function supports(Systeme $entity): bool
+    public function supports(): bool
     {
-        return $entity->generateur()->type()?->is_radiateur_gaz()
-            && $entity->generateur()->energie()?->is_combustible();
+        return $this->type_generateur()->is_radiateur_gaz() && $this->energie_generateur()->is_combustible();
     }
 
     /**

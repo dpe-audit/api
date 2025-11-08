@@ -9,11 +9,11 @@ use App\Dto\Refroidissement\InstallationDto;
 
 final class CreateInstallationHandler
 {
-    public function __invoke(InstallationDto $payload, Refroidissement $entity): Installation
+    public function __invoke(InstallationDto $payload, Refroidissement $aggregate): Installation
     {
         return Installation::create(
             id: Id::fromString($payload->id),
-            refroidissement: $entity,
+            refroidissement: $aggregate,
             description: $payload->description,
             surface: $payload->surface,
         );

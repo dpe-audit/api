@@ -12,7 +12,7 @@ use App\Domain\Chauffage\Generateur\Position\PositionChaudiere;
 use App\Domain\Chauffage\Generateur\Signaletique\{LabelGenerateur, ModeCombustion};
 use App\Domain\Chauffage\Installation\Regulation\TypeIntermittence;
 use App\Domain\Chauffage\Systeme\Reseau\{IsolationReseau, TypeDistribution};
-use App\Engine\Tables\ChauffageTableValeurRepository;
+use App\Engine\Table\ChauffageTableValeurRepository;
 
 final class XMLChauffageTableValeurRepository implements ChauffageTableValeurRepository
 {
@@ -96,12 +96,14 @@ final class XMLChauffageTableValeurRepository implements ChauffageTableValeurRep
         TypeDistribution $type_distribution,
         TemperatureDistribution $temperature_distribution,
         bool $reseau_collectif,
+        ?bool $presence_fluide_frigorigene,
         ?IsolationReseau $isolation_reseau
     ): ?float {
         return $this->db->repository('chauffage.rd')
             ->createQuery()
             ->and('type_distribution', $type_distribution)
             ->and('temperature_distribution', $temperature_distribution)
+            ->and('presence_fluide_frigorigene', $presence_fluide_frigorigene)
             ->and('reseau_collectif', $reseau_collectif)
             ->and('isolation_reseau', $isolation_reseau)
             ->getOne()

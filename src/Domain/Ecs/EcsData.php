@@ -47,9 +47,9 @@ final class EcsData
         Assert::nullOrGreaterThan($cef_ecs, 0);
         Assert::nullOrGreaterThan($cep_ecs, 0);
         Assert::nullOrGreaterThan($eges_ecs, 0);
-        Assert::nullOrGreaterThan($cef_aux, 0);
-        Assert::nullOrGreaterThan($cep_aux, 0);
-        Assert::nullOrGreaterThan($eges_aux, 0);
+        Assert::nullOrGreaterThanEq($cef_aux, 0);
+        Assert::nullOrGreaterThanEq($cep_aux, 0);
+        Assert::nullOrGreaterThanEq($eges_aux, 0);
         Assert::nullOrGreaterThanEq($pertes_generation, 0);
         Assert::nullOrGreaterThanEq($pertes_generation_recuperables, 0);
         Assert::nullOrGreaterThanEq($pertes_stockage, 0);

@@ -19,9 +19,10 @@ final class DeperditionPlancherHautRule extends DeperditionParoiRule
     // Lambda par défaut des planchers hauts isolés
     final public const LAMBDA_ISOLATION_DEFAUT = 0.04;
 
-    public function __construct(
-        private PlancherHautTableValeurRepository $repository,
-    ) {}
+    public function __construct(private PlancherHautTableValeurRepository $repository)
+    {
+        parent::__construct($repository);
+    }
 
     /**
      * @inheritDoc

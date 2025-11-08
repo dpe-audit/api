@@ -3,51 +3,16 @@
 namespace App\Engine\Rules\Ecs\Generateur;
 
 use App\Domain\Common\Enum\Mois;
-use App\Domain\Ecs\Generateur\Generateur;
-use App\Domain\Ecs\Generateur\Signaletique\{ModeCombustion};
 use App\Engine\Rules\Ecs\PerformanceGenerateurRule;
 
 final class PerformanceGenerateurCombustionRule extends PerformanceGenerateurRule
 {
-    public static function supports(Generateur $entity): bool
+    public function supports(): bool
     {
-        return (null === $entity->type() || $entity->energie()?->is_combustible())
-            && false === $entity->position()->generateur_multi_batiment;
+        return $this->type()->is_chaudiere()
+            && $this->energie()->is_combustible()
+            && false === $this->generateur_multi_batiment();
     }
-
-    // * Données d'entrée
-
-    public function mode_combustion(): ModeCombustion
-    {
-        return $this->item()->signaletique()->mode_combustion ?? ModeCombustion::STANDARD;
-    }
-
-    public function presence_ventouse(): bool
-    {
-        return $this->item()->signaletique()->presence_ventouse ?? false;
-    }
-
-    public function generateur_mixte(): bool
-    {
-        return $this->item()->position()->generateur_mixte_id !== null;
-    }
-
-    public function rpn_saisi(): ?float
-    {
-        return $this->item()->signaletique()->rpn;
-    }
-
-    public function qp0_saisi(): ?float
-    {
-        return $this->item()->signaletique()->qp0;
-    }
-
-    public function pveilleuse_saisi(): float
-    {
-        return $this->item()->signaletique()->pveilleuse ?? 0;
-    }
-
-    // * Données de sortie
 
     /**
      * @inheritDoc

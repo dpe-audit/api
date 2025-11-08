@@ -2,15 +2,12 @@
 
 namespace App\Engine;
 
-use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
-
 /**
  * @property array<RuleInterface> $rules
  */
 final class Rules implements \IteratorAggregate
 {
     public function __construct(
-        #[AutowireIterator('app.engine.performance.rule')]
         private iterable $rules,
     ) {}
 

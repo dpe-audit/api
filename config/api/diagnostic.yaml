@@ -1,0 +1,22 @@
+resources:
+  App\Dto\Diagnostic\DiagnosticDto:
+    shortName: Diagnostic
+    collectDenormalizationErrors: true
+    normalizationContext:
+      groups: ["read"]
+    denormalizationContext:
+      groups: ["write"]
+    operations:
+      diagnostic.get:
+        uriTemplate: /diagnostic/{id}
+        class: ApiPlatform\Metadata\Get
+        provider: App\Provider\DiagnosticItemProvider
+        openapi:
+          summary: Retourne un Diagnostic de Performance Energétique (DPE)
+
+      diagnostic.post.simule:
+        uriTemplate: /diagnostic/calcule
+        class: ApiPlatform\Metadata\Post
+        processor: App\Processor\CalculeDiagnosticProcessor
+        openapi:
+          summary: Calcule les données d'un Diagnostic de Performance Energétique (DPE)

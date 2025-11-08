@@ -2,88 +2,17 @@
 
 namespace App\Engine\Rules\Ventilation;
 
-use App\Domain\Ventilation\Generateur\{TypeGenerateur, TypeVmc};
-use App\Domain\Ventilation\Installation\{Installation, TypeVentilation};
-use App\Engine\{Context, RuleIterator};
+use App\Engine\Context;
 use App\Engine\Rules\Batiment\WithBatimentRule;
 use App\Engine\Table\VentilationTableValeurRepository;
 
-/**
- * @extends RuleIterator<Installation>
- */
-final class PerformanceInstallationRule extends RuleIterator
+final class PerformanceInstallationRule extends CommonInstallationRule
 {
     use WithBatimentRule;
 
     public function __construct(
         private VentilationTableValeurRepository $repository,
     ) {}
-
-    /**
-     * @inheritDoc
-     */
-    public function collection(): array
-    {
-        return $this->input()->ventilation->installations()->values();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function namespace(): string
-    {
-        return static::class . '\\' . (string) $this->item()->id();
-    }
-
-    // * Données d'entrée
-
-    public function surface(): float
-    {
-        return $this->item()->surface();
-    }
-
-    public function surface_totale(): float
-    {
-        return $this->input()->ventilation->installations()->surface();
-    }
-
-    public function type_installation(): TypeVentilation
-    {
-        return $this->item()->type();
-    }
-
-    public function type_generateur(): ?TypeGenerateur
-    {
-        return $this->item()->generateur()?->type();
-    }
-
-    public function type_vmc(): ?TypeVmc
-    {
-        return $this->item()->generateur()
-            ? $this->item()->generateur()->type_vmc() ?? TypeVmc::AUTOREGLABLE
-            : null;
-    }
-
-    public function generateur_collectif(): ?bool
-    {
-        return $this->item()->generateur()->generateur_collectif();
-    }
-
-    public function presence_echangeur_thermique(): ?bool
-    {
-        return $this->item()->generateur()
-            ? $this->item()->generateur()->presence_echangeur_thermique() ?? false
-            : null;
-    }
-
-    public function annee_installation(): ?int
-    {
-        return $this->item()->generateur()
-            ? $this->item()->generateur()->annee_installation() ?? $this->input()->batiment->annee_construction
-            : null;
-    }
-
-    // * Données calculées
 
     /**
      * Ratio de dimensionnement de l'installation

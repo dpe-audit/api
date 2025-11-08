@@ -1,1 +1,1102 @@
-<?xml version="1.0" encoding="UTF-8"?><table name="mur.u0"><row><type_structure>inconnu</type_structure><epaisseur_structure></epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.5</u0></row><row><type_structure>pierre_moellons</type_structure><epaisseur_structure>20</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>3.2</u0></row><row><type_structure>pierre_moellons</type_structure><epaisseur_structure>25</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.85</u0></row><row><type_structure>pierre_moellons</type_structure><epaisseur_structure>30</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.65</u0></row><row><type_structure>pierre_moellons</type_structure><epaisseur_structure>35</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.45</u0></row><row><type_structure>pierre_moellons</type_structure><epaisseur_structure>40</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.3</u0></row><row><type_structure>pierre_moellons</type_structure><epaisseur_structure>45</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.15</u0></row><row><type_structure>pierre_moellons</type_structure><epaisseur_structure>50</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.05</u0></row><row><type_structure>pierre_moellons</type_structure><epaisseur_structure>55</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.9</u0></row><row><type_structure>pierre_moellons</type_structure><epaisseur_structure>60</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.8</u0></row><row><type_structure>pierre_moellons</type_structure><epaisseur_structure>65</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.75</u0></row><row><type_structure>pierre_moellons</type_structure><epaisseur_structure>70</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.65</u0></row><row><type_structure>pierre_moellons</type_structure><epaisseur_structure>75</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.55</u0></row><row><type_structure>pierre_moellons</type_structure><epaisseur_structure>80</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.5</u0></row><row><type_structure>pierre_moellons_avec_remplissage</type_structure><epaisseur_structure>50</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.9</u0></row><row><type_structure>pierre_moellons_avec_remplissage</type_structure><epaisseur_structure>55</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.75</u0></row><row><type_structure>pierre_moellons_avec_remplissage</type_structure><epaisseur_structure>60</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.6</u0></row><row><type_structure>pierre_moellons_avec_remplissage</type_structure><epaisseur_structure>65</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.5</u0></row><row><type_structure>pierre_moellons_avec_remplissage</type_structure><epaisseur_structure>70</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.45</u0></row><row><type_structure>pierre_moellons_avec_remplissage</type_structure><epaisseur_structure>75</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.3</u0></row><row><type_structure>pierre_moellons_avec_remplissage</type_structure><epaisseur_structure>80</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.25</u0></row><row><type_structure>pise_ou_beton_terre</type_structure><epaisseur_structure>40</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.75</u0></row><row><type_structure>pise_ou_beton_terre</type_structure><epaisseur_structure>45</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.65</u0></row><row><type_structure>pise_ou_beton_terre</type_structure><epaisseur_structure>50</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.55</u0></row><row><type_structure>pise_ou_beton_terre</type_structure><epaisseur_structure>55</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.45</u0></row><row><type_structure>pise_ou_beton_terre</type_structure><epaisseur_structure>60</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.35</u0></row><row><type_structure>pise_ou_beton_terre</type_structure><epaisseur_structure>65</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.25</u0></row><row><type_structure>pise_ou_beton_terre</type_structure><epaisseur_structure>70</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.2</u0></row><row><type_structure>pise_ou_beton_terre</type_structure><epaisseur_structure>75</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.15</u0></row><row><type_structure>pise_ou_beton_terre</type_structure><epaisseur_structure>80</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.1</u0></row><row><type_structure>pan_bois_sans_remplissage</type_structure><epaisseur_structure>8</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>3</u0></row><row><type_structure>pan_bois_sans_remplissage</type_structure><epaisseur_structure>10</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.7</u0></row><row><type_structure>pan_bois_sans_remplissage</type_structure><epaisseur_structure>13</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.35</u0></row><row><type_structure>pan_bois_sans_remplissage</type_structure><epaisseur_structure>18</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.98</u0></row><row><type_structure>pan_bois_sans_remplissage</type_structure><epaisseur_structure>24</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.65</u0></row><row><type_structure>pan_bois_sans_remplissage</type_structure><epaisseur_structure>32</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.35</u0></row><row><type_structure>pan_bois_avec_remplissage</type_structure><epaisseur_structure></epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.7</u0></row><row><type_structure>bois_rondin</type_structure><epaisseur_structure>10</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.6</u0></row><row><type_structure>bois_rondin</type_structure><epaisseur_structure>15</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.2</u0></row><row><type_structure>bois_rondin</type_structure><epaisseur_structure>20</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>0.95</u0></row><row><type_structure>bois_rondin</type_structure><epaisseur_structure>25</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>0.8</u0></row><row><type_structure>brique_pleine_simple</type_structure><epaisseur_structure>9</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>3.9</u0></row><row><type_structure>brique_pleine_simple</type_structure><epaisseur_structure>12</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>3.45</u0></row><row><type_structure>brique_pleine_simple</type_structure><epaisseur_structure>15</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>3.05</u0></row><row><type_structure>brique_pleine_simple</type_structure><epaisseur_structure>19</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.75</u0></row><row><type_structure>brique_pleine_simple</type_structure><epaisseur_structure>23</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.5</u0></row><row><type_structure>brique_pleine_simple</type_structure><epaisseur_structure>28</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.25</u0></row><row><type_structure>brique_pleine_simple</type_structure><epaisseur_structure>34</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2</u0></row><row><type_structure>brique_pleine_simple</type_structure><epaisseur_structure>45</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.65</u0></row><row><type_structure>brique_pleine_simple</type_structure><epaisseur_structure>55</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.45</u0></row><row><type_structure>brique_pleine_simple</type_structure><epaisseur_structure>60</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.35</u0></row><row><type_structure>brique_pleine_simple</type_structure><epaisseur_structure>70</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.2</u0></row><row><type_structure>brique_pleine_double_avec_lame_air</type_structure><epaisseur_structure>20</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2</u0></row><row><type_structure>brique_pleine_double_avec_lame_air</type_structure><epaisseur_structure>25</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.85</u0></row><row><type_structure>brique_pleine_double_avec_lame_air</type_structure><epaisseur_structure>30</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.65</u0></row><row><type_structure>brique_pleine_double_avec_lame_air</type_structure><epaisseur_structure>35</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.55</u0></row><row><type_structure>brique_pleine_double_avec_lame_air</type_structure><epaisseur_structure>45</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.35</u0></row><row><type_structure>brique_pleine_double_avec_lame_air</type_structure><epaisseur_structure>50</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.25</u0></row><row><type_structure>brique_pleine_double_avec_lame_air</type_structure><epaisseur_structure>60</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.2</u0></row><row><type_structure>brique_creuse</type_structure><epaisseur_structure>15</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.15</u0></row><row><type_structure>brique_creuse</type_structure><epaisseur_structure>18</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.05</u0></row><row><type_structure>brique_creuse</type_structure><epaisseur_structure>20</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2</u0></row><row><type_structure>brique_creuse</type_structure><epaisseur_structure>23</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.85</u0></row><row><type_structure>brique_creuse</type_structure><epaisseur_structure>25</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.7</u0></row><row><type_structure>brique_creuse</type_structure><epaisseur_structure>28</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.68</u0></row><row><type_structure>brique_creuse</type_structure><epaisseur_structure>33</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.65</u0></row><row><type_structure>brique_creuse</type_structure><epaisseur_structure>38</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.55</u0></row><row><type_structure>brique_creuse</type_structure><epaisseur_structure>43</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.4</u0></row><row><type_structure>bloc_beton_plein</type_structure><epaisseur_structure>20</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.9</u0></row><row><type_structure>bloc_beton_plein</type_structure><epaisseur_structure>23</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.75</u0></row><row><type_structure>bloc_beton_plein</type_structure><epaisseur_structure>25</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.6</u0></row><row><type_structure>bloc_beton_plein</type_structure><epaisseur_structure>28</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.5</u0></row><row><type_structure>bloc_beton_plein</type_structure><epaisseur_structure>30</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.4</u0></row><row><type_structure>bloc_beton_plein</type_structure><epaisseur_structure>33</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.3</u0></row><row><type_structure>bloc_beton_plein</type_structure><epaisseur_structure>35</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.2</u0></row><row><type_structure>bloc_beton_plein</type_structure><epaisseur_structure>38</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.1</u0></row><row><type_structure>bloc_beton_plein</type_structure><epaisseur_structure>40</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.05</u0></row><row><type_structure>bloc_beton_creux</type_structure><epaisseur_structure>20</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.8</u0></row><row><type_structure>bloc_beton_creux</type_structure><epaisseur_structure>23</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.65</u0></row><row><type_structure>bloc_beton_creux</type_structure><epaisseur_structure>25</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.3</u0></row><row><type_structure>beton_banche</type_structure><epaisseur_structure>20</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.9</u0></row><row><type_structure>beton_banche</type_structure><epaisseur_structure>22.5</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.75</u0></row><row><type_structure>beton_banche</type_structure><epaisseur_structure>25</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.65</u0></row><row><type_structure>beton_banche</type_structure><epaisseur_structure>28</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.5</u0></row><row><type_structure>beton_banche</type_structure><epaisseur_structure>30</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.4</u0></row><row><type_structure>beton_banche</type_structure><epaisseur_structure>35</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.2</u0></row><row><type_structure>beton_banche</type_structure><epaisseur_structure>40</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.05</u0></row><row><type_structure>beton_banche</type_structure><epaisseur_structure>45</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.9</u0></row><row><type_structure>beton_machefer</type_structure><epaisseur_structure>20</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.75</u0></row><row><type_structure>beton_machefer</type_structure><epaisseur_structure>22.5</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.5</u0></row><row><type_structure>beton_machefer</type_structure><epaisseur_structure>25</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.4</u0></row><row><type_structure>beton_machefer</type_structure><epaisseur_structure>28</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.25</u0></row><row><type_structure>beton_machefer</type_structure><epaisseur_structure>30</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.15</u0></row><row><type_structure>beton_machefer</type_structure><epaisseur_structure>35</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.95</u0></row><row><type_structure>beton_machefer</type_structure><epaisseur_structure>40</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.8</u0></row><row><type_structure>brique_terre_cuite_alveolaire</type_structure><epaisseur_structure>30</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>0.47</u0></row><row><type_structure>brique_terre_cuite_alveolaire</type_structure><epaisseur_structure>37.5</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>0.4</u0></row><row><type_structure>beton_cellulaire</type_structure><epaisseur_structure>15</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="2012" eq="" /><u0>0.9</u0></row><row><type_structure>beton_cellulaire</type_structure><epaisseur_structure>17.5</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="2012" eq="" /><u0>0.79</u0></row><row><type_structure>beton_cellulaire</type_structure><epaisseur_structure>20</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="2012" eq="" /><u0>0.7</u0></row><row><type_structure>beton_cellulaire</type_structure><epaisseur_structure>22.5</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="2012" eq="" /><u0>0.63</u0></row><row><type_structure>beton_cellulaire</type_structure><epaisseur_structure>25</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="2012" eq="" /><u0>0.57</u0></row><row><type_structure>beton_cellulaire</type_structure><epaisseur_structure>27.5</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="2012" eq="" /><u0>0.53</u0></row><row><type_structure>beton_cellulaire</type_structure><epaisseur_structure>30</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="2012" eq="" /><u0>0.49</u0></row><row><type_structure>beton_cellulaire</type_structure><epaisseur_structure>32.5</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="2012" eq="" /><u0>0.45</u0></row><row><type_structure>beton_cellulaire</type_structure><epaisseur_structure>35</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="2012" eq="" /><u0>0.42</u0></row><row><type_structure>beton_cellulaire</type_structure><epaisseur_structure>37.5</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="2012" eq="" /><u0>0.4</u0></row><row><type_structure>beton_cellulaire</type_structure><epaisseur_structure>15</epaisseur_structure><annee_construction gt="" gte="2013" lt="" lte="" eq="" /><u0>0.69</u0></row><row><type_structure>beton_cellulaire</type_structure><epaisseur_structure>17.5</epaisseur_structure><annee_construction gt="" gte="2013" lt="" lte="" eq="" /><u0>0.6</u0></row><row><type_structure>beton_cellulaire</type_structure><epaisseur_structure>20</epaisseur_structure><annee_construction gt="" gte="2013" lt="" lte="" eq="" /><u0>0.53</u0></row><row><type_structure>beton_cellulaire</type_structure><epaisseur_structure>22.5</epaisseur_structure><annee_construction gt="" gte="2013" lt="" lte="" eq="" /><u0>0.48</u0></row><row><type_structure>beton_cellulaire</type_structure><epaisseur_structure>25</epaisseur_structure><annee_construction gt="" gte="2013" lt="" lte="" eq="" /><u0>0.43</u0></row><row><type_structure>beton_cellulaire</type_structure><epaisseur_structure>27.5</epaisseur_structure><annee_construction gt="" gte="2013" lt="" lte="" eq="" /><u0>0.4</u0></row><row><type_structure>beton_cellulaire</type_structure><epaisseur_structure>30</epaisseur_structure><annee_construction gt="" gte="2013" lt="" lte="" eq="" /><u0>0.36</u0></row><row><type_structure>beton_cellulaire</type_structure><epaisseur_structure>32.5</epaisseur_structure><annee_construction gt="" gte="2013" lt="" lte="" eq="" /><u0>0.3</u0></row><row><type_structure>beton_cellulaire</type_structure><epaisseur_structure>35</epaisseur_structure><annee_construction gt="" gte="2013" lt="" lte="" eq="" /><u0>0.28</u0></row><row><type_structure>beton_cellulaire</type_structure><epaisseur_structure>37.5</epaisseur_structure><annee_construction gt="" gte="2013" lt="" lte="" eq="" /><u0>0.22</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>10</epaisseur_structure><annee_construction gt="" gte="2006" lt="" lte="" eq="" /><u0>0.45</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>15</epaisseur_structure><annee_construction gt="" gte="2006" lt="" lte="" eq="" /><u0>0.35</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>20</epaisseur_structure><annee_construction gt="" gte="2006" lt="" lte="" eq="" /><u0>0.26</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>25</epaisseur_structure><annee_construction gt="" gte="2006" lt="" lte="" eq="" /><u0>0.21</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>30</epaisseur_structure><annee_construction gt="" gte="2006" lt="" lte="" eq="" /><u0>0.17</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>35</epaisseur_structure><annee_construction gt="" gte="2006" lt="" lte="" eq="" /><u0>0.15</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>40</epaisseur_structure><annee_construction gt="" gte="2006" lt="" lte="" eq="" /><u0>0.13</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>45</epaisseur_structure><annee_construction gt="" gte="2006" lt="" lte="" eq="" /><u0>0.11</u0></row><row><type_structure>sandwich_beton_isolant_beton_sans_isolation_rapportee</type_structure><epaisseur_structure>15</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>0.9</u0></row><row><type_structure>sandwich_beton_isolant_beton_sans_isolation_rapportee</type_structure><epaisseur_structure>20</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>0.48</u0></row><row><type_structure>sandwich_beton_isolant_beton_sans_isolation_rapportee</type_structure><epaisseur_structure>25</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>0.45</u0></row><row><type_structure>cloison_platre</type_structure><epaisseur_structure></epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>3.33</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>10</epaisseur_structure><annee_construction gt="" gte="2001" lt="" lte="2005" eq="" /><u0>0.52</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>15</epaisseur_structure><annee_construction gt="" gte="2001" lt="" lte="2005" eq="" /><u0>0.41</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>20</epaisseur_structure><annee_construction gt="" gte="2001" lt="" lte="2005" eq="" /><u0>0.3</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>25</epaisseur_structure><annee_construction gt="" gte="2001" lt="" lte="2005" eq="" /><u0>0.24</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>30</epaisseur_structure><annee_construction gt="" gte="2001" lt="" lte="2005" eq="" /><u0>0.2</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>35</epaisseur_structure><annee_construction gt="" gte="2001" lt="" lte="2005" eq="" /><u0>0.17</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>40</epaisseur_structure><annee_construction gt="" gte="2001" lt="" lte="2005" eq="" /><u0>0.15</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>45</epaisseur_structure><annee_construction gt="" gte="2001" lt="" lte="2005" eq="" /><u0>0.13</u0></row><row><type_structure>ossature_bois_sans_remplissage</type_structure><epaisseur_structure>8</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>3</u0></row><row><type_structure>ossature_bois_sans_remplissage</type_structure><epaisseur_structure>10</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.7</u0></row><row><type_structure>ossature_bois_sans_remplissage</type_structure><epaisseur_structure>13</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>2.35</u0></row><row><type_structure>ossature_bois_sans_remplissage</type_structure><epaisseur_structure>18</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.98</u0></row><row><type_structure>ossature_bois_sans_remplissage</type_structure><epaisseur_structure>24</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.65</u0></row><row><type_structure>ossature_bois_sans_remplissage</type_structure><epaisseur_structure>32</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.35</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>10</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="2000" eq="" /><u0>0.65</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>15</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="2000" eq="" /><u0>0.45</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>20</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="2000" eq="" /><u0>0.34</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>25</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="2000" eq="" /><u0>0.28</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>30</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="2000" eq="" /><u0>0.23</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>35</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="2000" eq="" /><u0>0.2</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>40</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="2000" eq="" /><u0>0.18</u0></row><row><type_structure>ossature_bois_avec_remplissage_isolant</type_structure><epaisseur_structure>45</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="2000" eq="" /><u0>0.16</u0></row><row><type_structure>ossature_bois_avec_remplissage_tout_venant</type_structure><epaisseur_structure>8</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.7</u0></row><row><type_structure>ossature_bois_avec_remplissage_tout_venant</type_structure><epaisseur_structure>10</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.7</u0></row><row><type_structure>ossature_bois_avec_remplissage_tout_venant</type_structure><epaisseur_structure>13</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.7</u0></row><row><type_structure>ossature_bois_avec_remplissage_tout_venant</type_structure><epaisseur_structure>18</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.7</u0></row><row><type_structure>ossature_bois_avec_remplissage_tout_venant</type_structure><epaisseur_structure>24</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.7</u0></row><row><type_structure>ossature_bois_avec_remplissage_tout_venant</type_structure><epaisseur_structure>32</epaisseur_structure><annee_construction gt="" gte="" lt="" lte="" eq="" /><u0>1.7</u0></row></table>
+<?xml version="1.0" encoding="UTF-8"?>
+<table name="mur.u0">
+    <row>
+        <type_structure>inconnu</type_structure>
+        <epaisseur_structure lt="" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.5</umur0>
+        <tv_umur0_id>1</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pierre_moellons</type_structure>
+        <epaisseur_structure lt="20" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>3.2</umur0>
+        <tv_umur0_id>2</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pierre_moellons</type_structure>
+        <epaisseur_structure lt="25" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.85</umur0>
+        <tv_umur0_id>3</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pierre_moellons</type_structure>
+        <epaisseur_structure lt="30" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.65</umur0>
+        <tv_umur0_id>4</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pierre_moellons</type_structure>
+        <epaisseur_structure lt="35" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.45</umur0>
+        <tv_umur0_id>5</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pierre_moellons</type_structure>
+        <epaisseur_structure lt="40" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.3</umur0>
+        <tv_umur0_id>6</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pierre_moellons</type_structure>
+        <epaisseur_structure lt="45" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.15</umur0>
+        <tv_umur0_id>7</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pierre_moellons</type_structure>
+        <epaisseur_structure lt="50" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.05</umur0>
+        <tv_umur0_id>8</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pierre_moellons</type_structure>
+        <epaisseur_structure lt="55" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.9</umur0>
+        <tv_umur0_id>9</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pierre_moellons</type_structure>
+        <epaisseur_structure lt="60" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.8</umur0>
+        <tv_umur0_id>10</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pierre_moellons</type_structure>
+        <epaisseur_structure lt="65" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.75</umur0>
+        <tv_umur0_id>11</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pierre_moellons</type_structure>
+        <epaisseur_structure lt="70" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.65</umur0>
+        <tv_umur0_id>12</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pierre_moellons</type_structure>
+        <epaisseur_structure lt="75" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.55</umur0>
+        <tv_umur0_id>13</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pierre_moellons</type_structure>
+        <epaisseur_structure lt="" gte="80" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.5</umur0>
+        <tv_umur0_id>14</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pierre_moellons_avec_remplissage</type_structure>
+        <epaisseur_structure lt="50" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.9</umur0>
+        <tv_umur0_id>15</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pierre_moellons_avec_remplissage</type_structure>
+        <epaisseur_structure lt="55" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.75</umur0>
+        <tv_umur0_id>16</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pierre_moellons_avec_remplissage</type_structure>
+        <epaisseur_structure lt="60" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.6</umur0>
+        <tv_umur0_id>17</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pierre_moellons_avec_remplissage</type_structure>
+        <epaisseur_structure lt="65" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.5</umur0>
+        <tv_umur0_id>18</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pierre_moellons_avec_remplissage</type_structure>
+        <epaisseur_structure lt="70" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.45</umur0>
+        <tv_umur0_id>19</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pierre_moellons_avec_remplissage</type_structure>
+        <epaisseur_structure lt="75" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.3</umur0>
+        <tv_umur0_id>20</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pierre_moellons_avec_remplissage</type_structure>
+        <epaisseur_structure lt="" gte="80" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.25</umur0>
+        <tv_umur0_id>21</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pise_ou_beton_terre</type_structure>
+        <epaisseur_structure lt="40" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.75</umur0>
+        <tv_umur0_id>22</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pise_ou_beton_terre</type_structure>
+        <epaisseur_structure lt="45" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.65</umur0>
+        <tv_umur0_id>23</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pise_ou_beton_terre</type_structure>
+        <epaisseur_structure lt="50" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.55</umur0>
+        <tv_umur0_id>24</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pise_ou_beton_terre</type_structure>
+        <epaisseur_structure lt="55" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.45</umur0>
+        <tv_umur0_id>25</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pise_ou_beton_terre</type_structure>
+        <epaisseur_structure lt="60" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.35</umur0>
+        <tv_umur0_id>26</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pise_ou_beton_terre</type_structure>
+        <epaisseur_structure lt="65" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.25</umur0>
+        <tv_umur0_id>27</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pise_ou_beton_terre</type_structure>
+        <epaisseur_structure lt="70" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.2</umur0>
+        <tv_umur0_id>28</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pise_ou_beton_terre</type_structure>
+        <epaisseur_structure lt="75" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.15</umur0>
+        <tv_umur0_id>29</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pise_ou_beton_terre</type_structure>
+        <epaisseur_structure lt="" gte="80" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.1</umur0>
+        <tv_umur0_id>30</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pan_bois_sans_remplissage</type_structure>
+        <epaisseur_structure lt="8" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>3</umur0>
+        <tv_umur0_id>31</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pan_bois_sans_remplissage</type_structure>
+        <epaisseur_structure lt="10" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.7</umur0>
+        <tv_umur0_id>32</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pan_bois_sans_remplissage</type_structure>
+        <epaisseur_structure lt="13" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.35</umur0>
+        <tv_umur0_id>33</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pan_bois_sans_remplissage</type_structure>
+        <epaisseur_structure lt="18" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.98</umur0>
+        <tv_umur0_id>34</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pan_bois_sans_remplissage</type_structure>
+        <epaisseur_structure lt="24" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.65</umur0>
+        <tv_umur0_id>35</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pan_bois_sans_remplissage</type_structure>
+        <epaisseur_structure lt="" gte="32" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.35</umur0>
+        <tv_umur0_id>36</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>pan_bois_avec_remplissage</type_structure>
+        <epaisseur_structure lt="" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.7</umur0>
+        <tv_umur0_id>37</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>bois_rondin</type_structure>
+        <epaisseur_structure lt="10" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.6</umur0>
+        <tv_umur0_id>38</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>bois_rondin</type_structure>
+        <epaisseur_structure lt="15" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.2</umur0>
+        <tv_umur0_id>39</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>bois_rondin</type_structure>
+        <epaisseur_structure lt="20" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>0.95</umur0>
+        <tv_umur0_id>40</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>bois_rondin</type_structure>
+        <epaisseur_structure lt="" gte="25" />
+        <annee_construction gte="" gte="" />
+        <umur0>0.8</umur0>
+        <tv_umur0_id>41</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_pleine_simple</type_structure>
+        <epaisseur_structure lt="9" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>3.9</umur0>
+        <tv_umur0_id>42</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_pleine_simple</type_structure>
+        <epaisseur_structure lt="12" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>3.45</umur0>
+        <tv_umur0_id>43</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_pleine_simple</type_structure>
+        <epaisseur_structure lt="15" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>3.05</umur0>
+        <tv_umur0_id>44</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_pleine_simple</type_structure>
+        <epaisseur_structure lt="19" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.75</umur0>
+        <tv_umur0_id>45</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_pleine_simple</type_structure>
+        <epaisseur_structure lt="23" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.5</umur0>
+        <tv_umur0_id>46</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_pleine_simple</type_structure>
+        <epaisseur_structure lt="28" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.25</umur0>
+        <tv_umur0_id>47</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_pleine_simple</type_structure>
+        <epaisseur_structure lt="34" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2</umur0>
+        <tv_umur0_id>48</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_pleine_simple</type_structure>
+        <epaisseur_structure lt="45" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.65</umur0>
+        <tv_umur0_id>49</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_pleine_simple</type_structure>
+        <epaisseur_structure lt="55" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.45</umur0>
+        <tv_umur0_id>50</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_pleine_simple</type_structure>
+        <epaisseur_structure lt="60" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.35</umur0>
+        <tv_umur0_id>51</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_pleine_simple</type_structure>
+        <epaisseur_structure lt="" gte="70" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.2</umur0>
+        <tv_umur0_id>52</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_pleine_double_avec_lame_air</type_structure>
+        <epaisseur_structure lt="20" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2</umur0>
+        <tv_umur0_id>53</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_pleine_double_avec_lame_air</type_structure>
+        <epaisseur_structure lt="25" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.85</umur0>
+        <tv_umur0_id>54</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_pleine_double_avec_lame_air</type_structure>
+        <epaisseur_structure lt="30" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.65</umur0>
+        <tv_umur0_id>55</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_pleine_double_avec_lame_air</type_structure>
+        <epaisseur_structure lt="35" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.55</umur0>
+        <tv_umur0_id>56</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_pleine_double_avec_lame_air</type_structure>
+        <epaisseur_structure lt="45" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.35</umur0>
+        <tv_umur0_id>57</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_pleine_double_avec_lame_air</type_structure>
+        <epaisseur_structure lt="50" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.25</umur0>
+        <tv_umur0_id>58</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_pleine_double_avec_lame_air</type_structure>
+        <epaisseur_structure lt="" gte="60" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.2</umur0>
+        <tv_umur0_id>59</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_creuse</type_structure>
+        <epaisseur_structure lt="15" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.15</umur0>
+        <tv_umur0_id>60</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_creuse</type_structure>
+        <epaisseur_structure lt="18" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.05</umur0>
+        <tv_umur0_id>61</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_creuse</type_structure>
+        <epaisseur_structure lt="20" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2</umur0>
+        <tv_umur0_id>62</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_creuse</type_structure>
+        <epaisseur_structure lt="23" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.85</umur0>
+        <tv_umur0_id>63</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_creuse</type_structure>
+        <epaisseur_structure lt="25" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.7</umur0>
+        <tv_umur0_id>64</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_creuse</type_structure>
+        <epaisseur_structure lt="28" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.68</umur0>
+        <tv_umur0_id>65</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_creuse</type_structure>
+        <epaisseur_structure lt="33" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.65</umur0>
+        <tv_umur0_id>66</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_creuse</type_structure>
+        <epaisseur_structure lt="38" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.55</umur0>
+        <tv_umur0_id>67</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_creuse</type_structure>
+        <epaisseur_structure lt="" gte="43" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.4</umur0>
+        <tv_umur0_id>68</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>bloc_beton_plein</type_structure>
+        <epaisseur_structure lt="20" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.9</umur0>
+        <tv_umur0_id>69</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>bloc_beton_plein</type_structure>
+        <epaisseur_structure lt="23" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.75</umur0>
+        <tv_umur0_id>70</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>bloc_beton_plein</type_structure>
+        <epaisseur_structure lt="25" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.6</umur0>
+        <tv_umur0_id>71</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>bloc_beton_plein</type_structure>
+        <epaisseur_structure lt="28" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.5</umur0>
+        <tv_umur0_id>72</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>bloc_beton_plein</type_structure>
+        <epaisseur_structure lt="30" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.4</umur0>
+        <tv_umur0_id>73</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>bloc_beton_plein</type_structure>
+        <epaisseur_structure lt="33" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.3</umur0>
+        <tv_umur0_id>74</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>bloc_beton_plein</type_structure>
+        <epaisseur_structure lt="35" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.2</umur0>
+        <tv_umur0_id>75</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>bloc_beton_plein</type_structure>
+        <epaisseur_structure lt="38" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.1</umur0>
+        <tv_umur0_id>76</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>bloc_beton_plein</type_structure>
+        <epaisseur_structure lt="" gte="40" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.05</umur0>
+        <tv_umur0_id>77</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>bloc_beton_creux</type_structure>
+        <epaisseur_structure lt="20" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.8</umur0>
+        <tv_umur0_id>78</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>bloc_beton_creux</type_structure>
+        <epaisseur_structure lt="23" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.65</umur0>
+        <tv_umur0_id>79</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>bloc_beton_creux</type_structure>
+        <epaisseur_structure lt="" gte="25" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.3</umur0>
+        <tv_umur0_id>80</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_banche</type_structure>
+        <epaisseur_structure lt="20" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.9</umur0>
+        <tv_umur0_id>81</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_banche</type_structure>
+        <epaisseur_structure lt="22.5" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.75</umur0>
+        <tv_umur0_id>82</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_banche</type_structure>
+        <epaisseur_structure lt="25" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.65</umur0>
+        <tv_umur0_id>83</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_banche</type_structure>
+        <epaisseur_structure lt="28" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.5</umur0>
+        <tv_umur0_id>84</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_banche</type_structure>
+        <epaisseur_structure lt="30" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.4</umur0>
+        <tv_umur0_id>85</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_banche</type_structure>
+        <epaisseur_structure lt="35" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.2</umur0>
+        <tv_umur0_id>86</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_banche</type_structure>
+        <epaisseur_structure lt="40" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.05</umur0>
+        <tv_umur0_id>87</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_banche</type_structure>
+        <epaisseur_structure lt="" gte="45" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.9</umur0>
+        <tv_umur0_id>88</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_machefer</type_structure>
+        <epaisseur_structure lt="20" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.75</umur0>
+        <tv_umur0_id>89</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_machefer</type_structure>
+        <epaisseur_structure lt="22.5" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.5</umur0>
+        <tv_umur0_id>90</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_machefer</type_structure>
+        <epaisseur_structure lt="25" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.4</umur0>
+        <tv_umur0_id>91</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_machefer</type_structure>
+        <epaisseur_structure lt="28" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.25</umur0>
+        <tv_umur0_id>92</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_machefer</type_structure>
+        <epaisseur_structure lt="30" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.15</umur0>
+        <tv_umur0_id>93</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_machefer</type_structure>
+        <epaisseur_structure lt="35" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.95</umur0>
+        <tv_umur0_id>94</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_machefer</type_structure>
+        <epaisseur_structure lt="" gte="40" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.8</umur0>
+        <tv_umur0_id>95</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_terre_cuite_alveolaire</type_structure>
+        <epaisseur_structure lt="30" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>0.47</umur0>
+        <tv_umur0_id>96</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>brique_terre_cuite_alveolaire</type_structure>
+        <epaisseur_structure lt="" gte="37.5" />
+        <annee_construction gte="" gte="" />
+        <umur0>0.4</umur0>
+        <tv_umur0_id>97</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_cellulaire</type_structure>
+        <epaisseur_structure lt="15" gte="" />
+        <annee_construction gte="" gte="2012" />
+        <umur0>0.9</umur0>
+        <tv_umur0_id>98</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_cellulaire</type_structure>
+        <epaisseur_structure lt="17.5" gte="" />
+        <annee_construction gte="" gte="2012" />
+        <umur0>0.79</umur0>
+        <tv_umur0_id>99</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_cellulaire</type_structure>
+        <epaisseur_structure lt="20" gte="" />
+        <annee_construction gte="" gte="2012" />
+        <umur0>0.7</umur0>
+        <tv_umur0_id>100</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_cellulaire</type_structure>
+        <epaisseur_structure lt="22.5" gte="" />
+        <annee_construction gte="" gte="2012" />
+        <umur0>0.63</umur0>
+        <tv_umur0_id>101</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_cellulaire</type_structure>
+        <epaisseur_structure lt="25" gte="" />
+        <annee_construction gte="" gte="2012" />
+        <umur0>0.57</umur0>
+        <tv_umur0_id>102</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_cellulaire</type_structure>
+        <epaisseur_structure lt="27.5" gte="" />
+        <annee_construction gte="" gte="2012" />
+        <umur0>0.53</umur0>
+        <tv_umur0_id>103</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_cellulaire</type_structure>
+        <epaisseur_structure lt="30" gte="" />
+        <annee_construction gte="" gte="2012" />
+        <umur0>0.49</umur0>
+        <tv_umur0_id>104</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_cellulaire</type_structure>
+        <epaisseur_structure lt="32.5" gte="" />
+        <annee_construction gte="" gte="2012" />
+        <umur0>0.45</umur0>
+        <tv_umur0_id>105</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_cellulaire</type_structure>
+        <epaisseur_structure lt="35" gte="" />
+        <annee_construction gte="" gte="2012" />
+        <umur0>0.42</umur0>
+        <tv_umur0_id>106</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_cellulaire</type_structure>
+        <epaisseur_structure lt="37.5" gte="" />
+        <annee_construction gte="" gte="2012" />
+        <umur0>0.4</umur0>
+        <tv_umur0_id>107</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_cellulaire</type_structure>
+        <epaisseur_structure lt="15" gte="" />
+        <annee_construction gte="2013" gte="" />
+        <umur0>0.69</umur0>
+        <tv_umur0_id>108</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_cellulaire</type_structure>
+        <epaisseur_structure lt="17.5" gte="" />
+        <annee_construction gte="2013" gte="" />
+        <umur0>0.6</umur0>
+        <tv_umur0_id>109</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_cellulaire</type_structure>
+        <epaisseur_structure lt="20" gte="" />
+        <annee_construction gte="2013" gte="" />
+        <umur0>0.53</umur0>
+        <tv_umur0_id>110</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_cellulaire</type_structure>
+        <epaisseur_structure lt="22.5" gte="" />
+        <annee_construction gte="2013" gte="" />
+        <umur0>0.48</umur0>
+        <tv_umur0_id>111</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_cellulaire</type_structure>
+        <epaisseur_structure lt="25" gte="" />
+        <annee_construction gte="2013" gte="" />
+        <umur0>0.43</umur0>
+        <tv_umur0_id>112</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_cellulaire</type_structure>
+        <epaisseur_structure lt="27.5" gte="" />
+        <annee_construction gte="2013" gte="" />
+        <umur0>0.4</umur0>
+        <tv_umur0_id>113</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_cellulaire</type_structure>
+        <epaisseur_structure lt="30" gte="" />
+        <annee_construction gte="2013" gte="" />
+        <umur0>0.36</umur0>
+        <tv_umur0_id>114</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_cellulaire</type_structure>
+        <epaisseur_structure lt="32.5" gte="" />
+        <annee_construction gte="2013" gte="" />
+        <umur0>0.3</umur0>
+        <tv_umur0_id>115</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_cellulaire</type_structure>
+        <epaisseur_structure lt="35" gte="" />
+        <annee_construction gte="2013" gte="" />
+        <umur0>0.28</umur0>
+        <tv_umur0_id>116</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>beton_cellulaire</type_structure>
+        <epaisseur_structure lt="" gte="37.5" />
+        <annee_construction gte="2013" gte="" />
+        <umur0>0.22</umur0>
+        <tv_umur0_id>117</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="10" gte="" />
+        <annee_construction gte="2006" gte="" />
+        <umur0>0.45</umur0>
+        <tv_umur0_id>118</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="15" gte="" />
+        <annee_construction gte="2006" gte="" />
+        <umur0>0.35</umur0>
+        <tv_umur0_id>119</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="20" gte="" />
+        <annee_construction gte="2006" gte="" />
+        <umur0>0.26</umur0>
+        <tv_umur0_id>120</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="25" gte="" />
+        <annee_construction gte="2006" gte="" />
+        <umur0>0.21</umur0>
+        <tv_umur0_id>121</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="30" gte="" />
+        <annee_construction gte="2006" gte="" />
+        <umur0>0.17</umur0>
+        <tv_umur0_id>122</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="35" gte="" />
+        <annee_construction gte="2006" gte="" />
+        <umur0>0.15</umur0>
+        <tv_umur0_id>123</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="40" gte="" />
+        <annee_construction gte="2006" gte="" />
+        <umur0>0.13</umur0>
+        <tv_umur0_id>124</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="" gte="45" />
+        <annee_construction gte="2006" gte="" />
+        <umur0>0.11</umur0>
+        <tv_umur0_id>125</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>sandwich_beton_isolant_beton_sans_isolation_rapportee</type_structure>
+        <epaisseur_structure lt="15" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>0.9</umur0>
+        <tv_umur0_id>126</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>sandwich_beton_isolant_beton_sans_isolation_rapportee</type_structure>
+        <epaisseur_structure lt="20" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>0.48</umur0>
+        <tv_umur0_id>127</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>sandwich_beton_isolant_beton_sans_isolation_rapportee</type_structure>
+        <epaisseur_structure lt="" gte="25" />
+        <annee_construction gte="" gte="" />
+        <umur0>0.45</umur0>
+        <tv_umur0_id>128</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>cloison_platre</type_structure>
+        <epaisseur_structure lt="" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>3.33</umur0>
+        <tv_umur0_id>129</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="10" gte="" />
+        <annee_construction gte="2001" gte="2005" />
+        <umur0>0.52</umur0>
+        <tv_umur0_id>130</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="15" gte="" />
+        <annee_construction gte="2001" gte="2005" />
+        <umur0>0.41</umur0>
+        <tv_umur0_id>131</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="20" gte="" />
+        <annee_construction gte="2001" gte="2005" />
+        <umur0>0.3</umur0>
+        <tv_umur0_id>132</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="25" gte="" />
+        <annee_construction gte="2001" gte="2005" />
+        <umur0>0.24</umur0>
+        <tv_umur0_id>133</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="30" gte="" />
+        <annee_construction gte="2001" gte="2005" />
+        <umur0>0.2</umur0>
+        <tv_umur0_id>134</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="35" gte="" />
+        <annee_construction gte="2001" gte="2005" />
+        <umur0>0.17</umur0>
+        <tv_umur0_id>135</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="40" gte="" />
+        <annee_construction gte="2001" gte="2005" />
+        <umur0>0.15</umur0>
+        <tv_umur0_id>136</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="" gte="45" />
+        <annee_construction gte="2001" gte="2005" />
+        <umur0>0.13</umur0>
+        <tv_umur0_id>137</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_sans_remplissage</type_structure>
+        <epaisseur_structure lt="8" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>3</umur0>
+        <tv_umur0_id>138</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_sans_remplissage</type_structure>
+        <epaisseur_structure lt="10" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.7</umur0>
+        <tv_umur0_id>139</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_sans_remplissage</type_structure>
+        <epaisseur_structure lt="13" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>2.35</umur0>
+        <tv_umur0_id>140</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_sans_remplissage</type_structure>
+        <epaisseur_structure lt="18" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.98</umur0>
+        <tv_umur0_id>141</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_sans_remplissage</type_structure>
+        <epaisseur_structure lt="24" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.65</umur0>
+        <tv_umur0_id>142</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_sans_remplissage</type_structure>
+        <epaisseur_structure lt="" gte="32" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.35</umur0>
+        <tv_umur0_id>143</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="10" gte="" />
+        <annee_construction gte="" gte="2000" />
+        <umur0>0.65</umur0>
+        <tv_umur0_id>144</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="15" gte="" />
+        <annee_construction gte="" gte="2000" />
+        <umur0>0.45</umur0>
+        <tv_umur0_id>145</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="20" gte="" />
+        <annee_construction gte="" gte="2000" />
+        <umur0>0.34</umur0>
+        <tv_umur0_id>146</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="25" gte="" />
+        <annee_construction gte="" gte="2000" />
+        <umur0>0.28</umur0>
+        <tv_umur0_id>147</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="30" gte="" />
+        <annee_construction gte="" gte="2000" />
+        <umur0>0.23</umur0>
+        <tv_umur0_id>148</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="35" gte="" />
+        <annee_construction gte="" gte="2000" />
+        <umur0>0.2</umur0>
+        <tv_umur0_id>149</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="40" gte="" />
+        <annee_construction gte="" gte="2000" />
+        <umur0>0.18</umur0>
+        <tv_umur0_id>150</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_isolant</type_structure>
+        <epaisseur_structure lt="" gte="45" />
+        <annee_construction gte="" gte="2000" />
+        <umur0>0.16</umur0>
+        <tv_umur0_id>151</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_tout_venant</type_structure>
+        <epaisseur_structure lt="8" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.7</umur0>
+        <tv_umur0_id>152</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_tout_venant</type_structure>
+        <epaisseur_structure lt="10" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.7</umur0>
+        <tv_umur0_id>153</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_tout_venant</type_structure>
+        <epaisseur_structure lt="13" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.7</umur0>
+        <tv_umur0_id>154</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_tout_venant</type_structure>
+        <epaisseur_structure lt="18" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.7</umur0>
+        <tv_umur0_id>155</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_tout_venant</type_structure>
+        <epaisseur_structure lt="24" gte="" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.7</umur0>
+        <tv_umur0_id>156</tv_umur0_id>
+    </row>
+    <row>
+        <type_structure>ossature_bois_avec_remplissage_tout_venant</type_structure>
+        <epaisseur_structure lt="" gte="32" />
+        <annee_construction gte="" gte="" />
+        <umur0>1.7</umur0>
+        <tv_umur0_id>157</tv_umur0_id>
+    </row>
+</table>

@@ -19,9 +19,10 @@ final class DeperditionPlancherBasRule extends DeperditionParoiRule
     // Lambda par défaut des planchers bas isolés
     final public const LAMBDA_ISOLATION_DEFAUT = 0.042;
 
-    public function __construct(
-        private PlancherBasTableValeurRepository $repository,
-    ) {}
+    public function __construct(private PlancherBasTableValeurRepository $repository)
+    {
+        parent::__construct($repository);
+    }
 
     /**
      * @inheritDoc
@@ -119,6 +120,14 @@ final class DeperditionPlancherBasRule extends DeperditionParoiRule
     // * Données calculées
 
     /**
+     * @inheritDoc
+     */
+    public function u(): float
+    {
+        return $this->ue();
+    }
+
+    /**
      * Coefficient de transmission thermique du plancher bas non isolé exprimé en W/m².K
      */
     public function u0(): float
@@ -133,9 +142,9 @@ final class DeperditionPlancherBasRule extends DeperditionParoiRule
     /**
      * Coefficient de transmission thermique du plancher haut exprimé en W/m².K
      */
-    public function u(): float
+    public function upb(): float
     {
-        return $this->get('u', function (): float {
+        return $this->get('upb', function (): float {
             if ($this->etat_isolation() === EtatIsolation::NON_ISOLE) {
                 return $this->u0();
             }
@@ -151,9 +160,8 @@ final class DeperditionPlancherBasRule extends DeperditionParoiRule
                 zone_climatique: $this->zone_climatique(),
                 effet_joule: $this->effet_joule(),
                 annee_construction_isolation: $this->annee_construction_isolation(),
-            )) {
-                throw new \DomainException('Valeur forfaitaire Upb non trouvée');
-            }
+            )) throw new \DomainException('Valeur forfaitaire Upb non trouvée');
+
             return \min($this->u0(), $u);
         });
     }
@@ -161,13 +169,13 @@ final class DeperditionPlancherBasRule extends DeperditionParoiRule
     /**
      * Coefficient de transmission thermique du plancher bas isolé exprimé en W/m².K
      */
-    public function u_final(): float
+    public function ue(): float
     {
-        return $this->get('u_final', function (): float {
+        return $this->get('u', function (): float {
             if ($this->u_saisi()) {
                 return $this->u_saisi();
             }
-            $u = $this->u();
+            $u = $this->upb();
 
             $u_final = \in_array($this->mitoyennete(), [
                 Mitoyennete::TERRE_PLEIN,
@@ -191,7 +199,7 @@ final class DeperditionPlancherBasRule extends DeperditionParoiRule
     public function performance(): Performance
     {
         return $this->get('performance', function (): Performance {
-            return Performance::from_upb(upb: $this->u_final());
+            return Performance::from_upb(upb: $this->u());
         });
     }
 
@@ -207,7 +215,7 @@ final class DeperditionPlancherBasRule extends DeperditionParoiRule
                 sdep: $rule->sdep(),
                 b: $rule->b(),
                 u0: $rule->u0(),
-                u: $rule->u_final(),
+                u: $rule->u(),
                 performance: $rule->performance(),
                 dp: $rule->dp(),
             ));

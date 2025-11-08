@@ -8,10 +8,10 @@ use App\Domain\Common\ValueObject\Id;
 /**
  * @extends ArrayCollection<Paroi>
  */
-abstract class ParoiCollection extends ArrayCollection
+class ParoiCollection extends ArrayCollection
 {
     public function find(Id $id): ?Paroi
     {
-        return array_find($this->elements, fn(Paroi $item): bool => $item->id() === $id);
+        return array_find($this->elements, fn(Paroi $item): bool => $item->id()->equals($id));
     }
 }

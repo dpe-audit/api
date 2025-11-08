@@ -2,85 +2,12 @@
 
 namespace App\Engine\Rules\Chauffage;
 
-use App\Domain\Chauffage\Emetteur\{Emetteur, TypeEmetteur, TypeEmission, TemperatureDistribution};
 use App\Domain\Common\Enum\{Energie, Mois, Usage};
-use App\Engine\Rules\Batiment\WithBatimentRule;
-use App\Engine\Rules\Enveloppe\WithDeperditionRule;
-use App\Engine\Tables\ChauffageTableValeurRepository;
+use App\Engine\Table\ChauffageTableValeurRepository;
 
-abstract class PerformanceAuxiliaireRule extends DimensionnementSystemeRule
+abstract class PerformanceAuxiliaireRule extends CommonSystemeRule
 {
-    use WithBatimentRule, WithDeperditionRule;
-
-    public function __construct(
-        protected ChauffageTableValeurRepository $repository
-    ) {}
-
-    // * Données d'entrée
-
-    public function surface_installation(): float
-    {
-        return $this->item()->installation()->surface();
-    }
-
-    public function niveaux_desservis(): int
-    {
-        return $this->item()->reseau()->niveaux_desservis;
-    }
-
-    public function presence_ventouse(): bool
-    {
-        return $this->item()->generateur()->signaletique()->presence_ventouse ?? false;
-    }
-
-    public function generateur_multi_batiment(): bool
-    {
-        return $this->item()->generateur()->position()->generateur_multi_batiment;
-    }
-
-    /**
-     * @return array<int, array{
-     *      type: ?TypeEmetteur,
-     *      type_emission: TypeEmission,
-     *      temperature_distribution: ?TemperatureDistribution,
-     *      robinet_thermostatique: ?bool
-     * }>
-     */
-    public function emetteurs(): array
-    {
-        $values = $this->item()->emetteurs()
-            ->map(fn(Emetteur $entity) => [
-                'type' => $entity->type(),
-                'type_emission' => $entity->type_emission(),
-                'temperature_distribution' => $entity->temperature_distribution(),
-                'robinet_thermostatique' => $entity->presence_robinet_thermostatique(),
-            ])
-            ->values();
-
-        if (0 === count($values)) {
-            $values[] = [
-                'type' => null,
-                'type_emission' => TypeEmission::from_type_generateur($this->item()->generateur()->type()),
-                'temperature_distribution' => null,
-                'robinet_thermostatique' => null,
-            ];
-        }
-        return $values;
-    }
-
-    // * Données intermédiaires
-
-    public function bch(): float
-    {
-        return $this->require(PerformanceChauffageRule::class)->bch();
-    }
-
-    public function pn(): float
-    {
-        return $this->requireIterator(PerformanceGenerateurRule::class, $this->item()->generateur())->pn();
-    }
-
-    // * Données de sortie
+    public function __construct(protected ChauffageTableValeurRepository $repository) {}
 
     /**
      * Consommation finale de l'auxiliaire de chauffage en kWh/an
@@ -209,7 +136,9 @@ abstract class PerformanceAuxiliaireRule extends DimensionnementSystemeRule
             $fcot = $this->fcot();
             $niveaux_desservis = $this->niveaux_desservis();
             $surface = $this->surface_installation();
-            return 5 * $fcot * ($niveaux_desservis + \pow($surface / $niveaux_desservis, 0.5));
+            return $niveaux_desservis && $surface
+                ? 5 * $fcot * ($niveaux_desservis + \pow($surface / $niveaux_desservis, 0.5))
+                : 0;
         });
     }
 
@@ -220,7 +149,7 @@ abstract class PerformanceAuxiliaireRule extends DimensionnementSystemeRule
     {
         return $this->get('chute_nominale_temperature', function (): float {
             return array_reduce($this->emetteurs(), function (float $carry, array $item): float {
-                return max($carry, $item['temperature_distribution']?->chute_nominale_temperature());
+                return max($carry, $item['temperature_distribution']?->chute_nominale_temperature() ?? 0);
             }, 0);
         });
     }
@@ -241,7 +170,7 @@ abstract class PerformanceAuxiliaireRule extends DimensionnementSystemeRule
     {
         return $this->get('fcot', function (): float {
             return array_reduce($this->emetteurs(), function (float $max, array $item): float {
-                return max($max, $item['type']?->fcot());
+                return max($max, $item['type']?->fcot() ?? 0);
             }, 0);
         });
     }

@@ -60,14 +60,17 @@ final class EmetteurTransformer
         };
     }
 
-    public function __invoke(EmetteurChauffage $emetteur_chauffage): ?EmetteurDto
+    public function __invoke(EmetteurChauffage $emetteur, Context $context): ?EmetteurDto
     {
+        $this->context = $context;
+        $this->emetteur_chauffage = $emetteur;
+
         if (null === $type = $this->type()) {
             return null;
         }
         return new EmetteurDto(
-            id: $emetteur_chauffage->id(),
-            description: $emetteur_chauffage->description(),
+            id: $emetteur->id(),
+            description: $emetteur->description(),
             type: $type,
             temperature_distribution: $this->temperature_distribution(),
             presence_robinet_thermostatique: $this->presence_robinet_thermostatique(),

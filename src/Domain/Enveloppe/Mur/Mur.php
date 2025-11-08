@@ -23,7 +23,7 @@ final class Mur extends Paroi
         private TypeDoublage $type_doublage,
         private bool $presence_enduit_isolant,
         private bool $paroi_ancienne,
-        private Inertie $inertie,
+        private ?Inertie $inertie,
         private ?int $annee_construction,
         private ?int $annee_renovation,
         private ?float $u0,
@@ -43,7 +43,7 @@ final class Mur extends Paroi
         TypeDoublage $type_doublage,
         bool $presence_enduit_isolant,
         bool $paroi_ancienne,
-        Inertie $inertie,
+        ?Inertie $inertie,
         ?int $annee_construction,
         ?int $annee_renovation,
         ?float $u0,
@@ -156,7 +156,7 @@ final class Mur extends Paroi
         return $this->paroi_ancienne;
     }
 
-    public function inertie(): Inertie
+    public function inertie(): ?Inertie
     {
         return $this->inertie;
     }

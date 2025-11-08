@@ -17,7 +17,7 @@ final class PorteCollection extends ParoiCollection
 
     public function find(Id $id): ?Porte
     {
-        return array_find($this->elements, fn(Porte $item): bool => $item->id() === $id);
+        return array_find($this->elements, fn(Porte $item): bool => $item->id()->equals($id));
     }
 
     public function surface(): float

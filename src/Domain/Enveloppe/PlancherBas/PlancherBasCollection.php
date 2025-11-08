@@ -17,7 +17,7 @@ final class PlancherBasCollection extends ParoiCollection
 
     public function find(Id $id): ?PlancherBas
     {
-        return array_find($this->elements, fn(PlancherBas $item): bool => $item->id() === $id);
+        return array_find($this->elements, fn(PlancherBas $item): bool => $item->id()->equals($id));
     }
 
     public function surface(): float

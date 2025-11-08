@@ -21,6 +21,7 @@ final class ProductionPhotovoltaiqueRule extends RuleIterator
     public function __construct(
         private ProductionTableValeurRepository $repository
     ) {}
+
     /**
      * @inheritDoc
      */
@@ -36,8 +37,6 @@ final class ProductionPhotovoltaiqueRule extends RuleIterator
     {
         return static::class . '\\' . (string) $this->item()->id();
     }
-
-    // * Données d'entrée
 
     public function surface_capteurs(): float
     {
@@ -59,28 +58,20 @@ final class ProductionPhotovoltaiqueRule extends RuleIterator
         return $this->item()->orientation();
     }
 
-    // * Données calculées
-
     /**
-     * Production photovoltaïque du panneau exprimée en kWh/an
+     * Production photovoltaïque du panneau en kWh/an
      */
-    public function ppv(): float
+    public function ppv(?Mois $mois = null): float
     {
-        return $this->get('ppv', function (): float {
-            return Mois::reduce(fn(Mois $mois) => $this->ppv_j($mois));
-        });
-    }
-
-    /**
-     * Production photovoltaïque du panneau pour le mois j en kWh/an
-     */
-    public function ppv_j(Mois $mois): float
-    {
-        return $this->get("ppv::{$mois->value}", function () use ($mois): float {
+        $key = $mois ? "ppv::{$mois->value}" : 'ppv';
+        return $this->get($key, function () use ($mois): float {
+            if (null === $mois) {
+                return Mois::reduce(fn(Mois $item) => $this->ppv($item));
+            }
             $s = $this->surface_capteurs();
             $ppv = $this->kpv() * $s * self::RENDEMENT_MODULE;
             $ppv *= $this->epv($mois) * self::COEFFICIENT_PERTE;
-            return $this->round($ppv);
+            return $ppv;
         });
     }
 

@@ -3,6 +3,7 @@
 namespace App\Dto\Ecs\Generateur;
 
 use App\Domain\Ecs\Generateur\{Generateur, EnergieGenerateur, TypeGenerateur};
+use App\Validation;
 
 /**
  * @see https://github.com/dpe-audit/schemas/blob/main/schemas/ecs/generateur.yaml
@@ -14,6 +15,7 @@ final class GenerateurDto
         public readonly string $description,
         public readonly TypeGenerateur $type,
         public readonly EnergieGenerateur $energie,
+        #[Validation\Annee\AnneeValid]
         public readonly ?int $annee_installation,
         public readonly PositionDto $position,
         public readonly SignaletiqueDto $signaletique,

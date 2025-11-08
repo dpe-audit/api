@@ -4,7 +4,7 @@ namespace App\Handler\Enveloppe;
 
 use App\Domain\Common\ValueObject\Id;
 use App\Domain\Enveloppe\Enveloppe;
-use App\Domain\Enveloppe\Mur\Isolation\Isolation;
+use App\Domain\Enveloppe\Paroi\Isolation\Isolation;
 use App\Domain\Enveloppe\Mur\Mur;
 use App\Domain\Enveloppe\Mur\Position\Position;
 use App\Dto\Enveloppe\Mur\MurDto;

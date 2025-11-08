@@ -24,8 +24,11 @@ final class EcsTransformer
             $installations[] = $this->installation_transformer->__invoke($installation_ecs, $context);
 
             foreach ($installation_ecs->generateur_ecs_collection as $generateur_ecs) {
-                $generateurs[] = $this->generateur_transformer->__invoke($generateur_ecs, $installation_ecs, $context);
-                $systemes[] = $this->systeme_transformer->__invoke($generateur_ecs, $installation_ecs, $context);
+                $generateur = $this->generateur_transformer->__invoke($generateur_ecs, $installation_ecs, $context);
+                if ($generateur) {
+                    $generateurs[] = $generateur;
+                    $systemes[] = $this->systeme_transformer->__invoke($generateur_ecs, $installation_ecs, $context);
+                }
             }
         }
 

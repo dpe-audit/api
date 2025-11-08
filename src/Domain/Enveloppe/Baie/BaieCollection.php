@@ -18,7 +18,7 @@ final class BaieCollection extends ParoiCollection
 
     public function find(Id $id): ?Baie
     {
-        return array_find($this->elements, fn(Baie $item): bool => $item->id() === $id);
+        return array_find($this->elements, fn(Baie $item): bool => $item->id()->equals($id));
     }
 
     public function with_orientation(Orientation $orientation): self

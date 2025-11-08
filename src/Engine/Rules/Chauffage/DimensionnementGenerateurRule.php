@@ -2,83 +2,11 @@
 
 namespace App\Engine\Rules\Chauffage;
 
-use App\Domain\Chauffage\Generateur\{Generateur, TypeGenerateur};
-use App\Domain\Chauffage\Generateur\Position\PositionChaudiere;
-use App\Engine\RuleIterator;
-use App\Engine\Rules\Batiment\WithBatimentRule;
-use App\Engine\Rules\Ecs\DimensionnementGenerateurRule as DimensionnementGenerateurEcsRule;
-use App\Engine\Rules\Enveloppe\WithDeperditionRule;
-use App\Engine\Tables\ChauffageTableValeurRepository;
+use App\Engine\Table\ChauffageTableValeurRepository;
 
-/**
- * @extends RuleIterator<Generateur>
- */
-abstract class DimensionnementGenerateurRule extends RuleIterator
+abstract class DimensionnementGenerateurRule extends CommonGenerateurRule
 {
-    use WithBatimentRule, WithDeperditionRule;
-
-    public function __construct(
-        protected readonly ChauffageTableValeurRepository $repository,
-    ) {}
-
-    /**
-     * @inheritDoc
-     */
-    public function namespace(): string
-    {
-        return static::class . '\\' . (string) $this->item()->id();
-    }
-
-    // * Données d'entrée
-
-    public function type_generateur(): TypeGenerateur
-    {
-        return $this->item()->type() ?? TypeGenerateur::CHAUDIERE;
-    }
-
-    public function position_chaudiere(): PositionChaudiere
-    {
-        return $this->item()->position()->position_chaudiere ?? PositionChaudiere::CHAUDIERE_SOL;
-    }
-
-    public function annee_installation(): int
-    {
-        return $this->item()->annee_installation() ?? $this->input()->batiment->annee_construction;
-    }
-
-    public function generateur_collectif(): bool
-    {
-        return $this->item()->position()->generateur_collectif;
-    }
-
-    public function pn_saisi(): ?float
-    {
-        return $this->item()->signaletique()->pn;
-    }
-
-    // * Données intermédiaires
-
-    /**
-     * @return float[]
-     */
-    public function rdim_systemes(): array
-    {
-        return $this->input()->ecs->systemes()
-            ->with_generateur($this->item()->id())
-            ->map(fn($item) => $this->requireIterator(DimensionnementSystemeRule::class, $item)->rdim())
-            ->values();
-    }
-
-    public function pecs(): float
-    {
-        if (null === $this->item()->position()->generateur_mixte_id) {
-            return 0;
-        }
-        $entity = $this->input()->ecs->generateurs()->find($this->item()->position()->generateur_mixte_id);
-        return $this->requireIterator(DimensionnementGenerateurEcsRule::class, $entity)->pecs();
-    }
-
-    // * Données de sortie
+    public function __construct(protected readonly ChauffageTableValeurRepository $repository) {}
 
     /**
      * Ratio de dimensionnement du générateur
@@ -96,7 +24,7 @@ abstract class DimensionnementGenerateurRule extends RuleIterator
     public function pch(): float
     {
         return $this->get('pch', function (): float {
-            $pch = (1.2 * $this->gv() * (19 -  $this->tbase())) / (1000 * \pow(0.95, 3)) * 1000 * $this->rdim();
+            $pch = $this->require(PerformanceChauffageRule::class)->pch() * $this->rdim();
             return $this->generateur_collectif() ? $pch * (1 / $this->ratio_proratisation()) : $pch;
         });
     }
@@ -124,14 +52,11 @@ abstract class DimensionnementGenerateurRule extends RuleIterator
             if (false === $this->type_generateur()->is_poele_bouilleur()) {
                 return $this->pch();
             }
-            if (null === $pn = $this->repository->pn(
+            return $this->repository->pn(
                 position_chaudiere: $this->position_chaudiere(),
                 annee_installation_generateur: $this->annee_installation(),
                 pdim: $this->pdim(),
-            )) {
-                throw new \DomainException('Valeur forfaitaire Pn non trouvée');
-            }
-            return $pn;
+            ) ?? throw new \DomainException('Valeur forfaitaire Pn non trouvée');
         });
     }
 

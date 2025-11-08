@@ -7,6 +7,7 @@ use App\Dto\Ecs\Generateur\GenerateurDto;
 use App\Dto\Ecs\Installation\InstallationDto;
 use App\Dto\Ecs\Systeme\SystemeDto;
 use Symfony\Component\Validator\Constraints;
+use App\Validation;
 
 /**
  * @see https://github.com/dpe-audit/schemas/blob/main/schemas/ecs/ecs.yaml
@@ -15,6 +16,7 @@ use Symfony\Component\Validator\Constraints;
  * @property array<InstallationDto> $installations
  * @property array<SystemeDto> $systemes
  */
+#[Validation\Ecs\EcsValid]
 final class EcsDto
 {
     public function __construct(
@@ -40,32 +42,14 @@ final class EcsDto
         );
     }
 
-    #[Constraints\IsTrue]
-    public function is_generateur_exists(): bool
+    public function find_generateur(string $id): ?GenerateurDto
     {
-        foreach ($this->systemes as $systeme) {
-            foreach ($this->generateurs as $generateur) {
-                if ($generateur->id === $systeme->generateur_id) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        return true;
+        return array_find($this->generateurs, fn($item) => $item->id === $id);
     }
 
-    #[Constraints\IsTrue]
-    public function is_installation_exists(): bool
+    public function find_installation(string $id): ?InstallationDto
     {
-        foreach ($this->systemes as $systeme) {
-            foreach ($this->installations as $installation) {
-                if ($installation->id === $systeme->installation_id) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        return true;
+        return array_find($this->installations, fn($item) => $item->id === $id);
     }
 
     public function __normalize(): array

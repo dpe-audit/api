@@ -26,19 +26,21 @@ final class XMLTableCollection implements \Countable, \IteratorAggregate
         return $this->count() ? end($this->values) : null;
     }
 
-    public function usort(string $name, float $value): static
+    /**
+     * @return array<array{x: float, y: float, q?: float}>
+     */
+    public function points(string $x, string $y, ?string $q = null): array
     {
-        if (null === $value) {
-            return $this;
+        $points = [];
+        /** @var XMLTableElement $element */
+        foreach ($this->values as $element) {
+            $row = ['x' => $element->floatval($x), 'y' => $element->floatval($y)];
+            if ($q) {
+                $row['q'] = $element->floatval($q);
+            }
+            $points[] = $row;
         }
-        $elements = [...$this->values];
-
-        usort(
-            $elements,
-            fn(XMLTableElement $a, XMLTableElement $b): int => \round(\abs($a->floatval($name) - $value) - \abs($b->floatval($name) - $value))
-        );
-
-        return new static($elements);
+        return $points;
     }
 
     public function slice(int $offset, ?int $length): static
@@ -46,8 +48,9 @@ final class XMLTableCollection implements \Countable, \IteratorAggregate
         return new static(\array_slice($this->values, $offset, $length));
     }
 
-    public function find(string $name, ?string $value): ?XMLTableElement
+    public function find(string $name, mixed $value): ?XMLTableElement
     {
+        $value = (string) $value;
         return array_find($this->values, fn(XMLTableElement $element): bool => $element->strval($name) === $value);
     }
 

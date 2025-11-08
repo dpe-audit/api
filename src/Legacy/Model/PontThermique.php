@@ -43,11 +43,8 @@ final class PontThermique
         );
     }
 
-    /**
-     * @inheritDoc
-     */
-    public function identifiers(): array
+    public function pt(): float
     {
-        return [$this->reference];
+        return $this->k * $this->pourcentage_valeur_pont_thermique * $this->l;
     }
 }

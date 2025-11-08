@@ -3,6 +3,7 @@
 namespace App\Dto\Enveloppe\Baie;
 
 use App\Domain\Enveloppe\Baie\{Baie, TypeBaie, TypeFermeture};
+use App\Validation;
 
 /**
  * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/baie.yaml
@@ -17,6 +18,7 @@ final class BaieDto
         public readonly TypeBaie $type,
         public readonly bool $presence_protection_solaire,
         public readonly TypeFermeture $type_fermeture,
+        #[Validation\Annee\AnneeValid]
         public readonly ?int $annee_installation,
         public readonly ?float $ug,
         public readonly ?float $uw,

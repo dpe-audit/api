@@ -25,20 +25,20 @@ final class ApportEnveloppeRule extends Rule
         });
     }
 
-    public function sse_j(Mois $mois): float
+    public function sse(Mois $mois): float
     {
         return $this->get("sse::{$mois->value}", function () use ($mois): float {
             return $this->input()->enveloppe->baies()
-                ->map(fn($item) => $this->requireIterator(SurfaceSudEquivalenteBaieRule::class, $item)->sse_j($mois))
+                ->map(fn($item) => $this->requireIterator(SurfaceSudEquivalenteBaieRule::class, $item)->sse($mois))
                 ->reduce(fn($carry, $item) => $carry + $item);
         });
     }
 
-    public function ssind_j(Mois $mois): float
+    public function ssind(Mois $mois): float
     {
         return $this->get("ssind::{$mois->value}", function () use ($mois): float {
             return $this->input()->enveloppe->locaux_non_chauffes()
-                ->map(fn($item) => $this->requireIterator(SurfaceSudEquivalenteEtsRule::class, $item)->ssind_j($mois))
+                ->map(fn($item) => $this->requireIterator(SurfaceSudEquivalenteEtsRule::class, $item)->ssind($mois))
                 ->reduce(fn($carry, $item) => $carry + $item);
         });
     }
@@ -48,9 +48,13 @@ final class ApportEnveloppeRule extends Rule
     /**
      * Fraction des besoins de chauffage couverts par les apports gratuits
      */
-    public function f(Mois $mois): float
+    public function f(?Mois $mois = null): float
     {
-        return $this->get("f::{$mois->value}", function () use ($mois): float {
+        $key = $mois ? "f::{$mois->value}" : 'f';
+        return $this->get($key, function () use ($mois): float {
+            if (null === $mois) {
+                return Mois::reduce(fn(Mois $item) => $this->f($item) * ($item->nj() / Mois::NOMBRE_JOURS_OCCUPATION));
+            }
             $gv = $this->gv();
             $dh = $this->dh($mois);
             $e = $this->inertie()->exposant();
@@ -58,76 +62,43 @@ final class ApportEnveloppeRule extends Rule
             $ai = $this->apport_interne($mois);
             $x = ($gv && $dh) ? ($as + $ai) / ($gv * $dh) : 0;
             $f = $x < 1 ? ($x - \pow($x, $e)) / (1 - \pow($x, $e)) : 1;
+
             return \min(1, $f);
         });
     }
 
     /**
-     * Somme des apports gratuits en période de chauffage en Wh
+     * Apports gratuits en période de chauffage en Wh
      */
-    public function apport(): float
+    public function apport(?Mois $mois = null): float
     {
-        return $this->get('apport', function (): float {
-            return $this->apport_interne() + $this->apport_solaire();
+        $key = $mois ? "apport::{$mois->value}" : 'apport';
+        return $this->get($key, function () use ($mois): float {
+            return $this->apport_interne($mois) + $this->apport_solaire($mois);
         });
     }
 
     /**
-     * Somme des apports gratuits en période de chauffage pour le mois j en Wh
+     * Apports gratuits en période de refroidissement en Wh
      */
-    public function apport_j(Mois $mois): float
+    public function apport_fr(?Mois $mois = null): float
     {
-        return $this->get("apport::{$mois->value}", function () use ($mois): float {
-            return $this->apport_interne_j($mois) + $this->apport_solaire_j($mois);
-        });
-    }
-
-    /**
-     * Somme des apports gratuits en période de chauffage en Wh
-     */
-    public function apport_fr(): float
-    {
-        return $this->get('apport_fr', function (): float {
-            return $this->apport_interne_fr() + $this->apport_solaire_fr();
-        });
-    }
-
-    /**
-     * Somme des apports gratuits en période de refroidissement pour le mois j en Wh
-     */
-    public function apport_fr_j(Mois $mois): float
-    {
-        return $this->get("apport_fr::{$mois->value}", function () use ($mois): float {
+        $key = $mois ? "apport_fr::{$mois->value}" : 'apport_fr';
+        return $this->get($key, function () use ($mois): float {
             return $this->apport_interne_fr($mois) + $this->apport_solaire_fr($mois);
         });
     }
 
     /**
-     * Apports internes annuels en période de chauffage exprimés en Wh
+     * Apports internes en période de chauffage en Wh
      */
-    public function apport_interne(): float
+    public function apport_interne(?Mois $mois = null): float
     {
-        return $this->get("ai", function (): float {
-            return Mois::reduce(fn(Mois $mois) => $this->apport_interne_j($mois));
-        });
-    }
-
-    /**
-     * Apports internes annuels en période de refroidissement exprimés en Wh
-     */
-    public function apport_interne_fr(): float
-    {
-        return $this->get("ai_fr", function (): float {
-            return Mois::reduce(fn(Mois $mois) => $this->apport_interne_fr_j($mois));
-        });
-    }
-
-    /**
-     * Apports internes mensuels en période de chauffage exprimés en Wh
-     */
-    public function apport_interne_j(Mois $mois): float
-    {
-        return $this->get("ai::{$mois->value}", function () use ($mois): float {
+        $key = $mois ? "ai::{$mois->value}" : 'ai';
+        return $this->get($key, function () use ($mois): float {
+            if (null === $mois) {
+                return Mois::reduce(fn(Mois $item) => $this->apport_interne($item));
+            }
             $nref = $this->nref($mois);
             $sh = $this->surface_reference();
             $nadeq = $this->nadeq();
@@ -138,11 +109,15 @@ final class ApportEnveloppeRule extends Rule
     }
 
     /**
-     * Apports internes mensuels en période de refroidissement exprimés en Wh
+     * Apports internes en période de refroidissement en Wh
      */
-    public function apport_interne_fr_j(Mois $mois): float
+    public function apport_interne_fr(?Mois $mois = null): float
     {
-        return $this->get("ai_fr::{$mois->value}", function () use ($mois): float {
+        $key = $mois ? "ai_fr::{$mois->value}" : 'ai_fr';
+        return $this->get($key, function () use ($mois): float {
+            if (null === $mois) {
+                return Mois::reduce(fn(Mois $item) => $this->apport_interne_fr($item));
+            }
             $nref = $this->nref_fr($mois);
             $sh = $this->surface_reference();
             $nadeq = $this->nadeq();
@@ -151,47 +126,36 @@ final class ApportEnveloppeRule extends Rule
             return $ai * $nref;
         });
     }
-    /**
-     * Apports solaires annuels en période de chauffage exprimés en Wh
-     */
-    public function apport_solaire(): float
-    {
-        return $this->get("as", function (): float {
-            return Mois::reduce(fn(Mois $mois) => $this->apport_solaire_j($mois));
-        });
-    }
 
     /**
-     * Apports solaires annuels en période de refroidissement exprimés en Wh
+     * Apports solaires en période de chauffage en Wh
      */
-    public function apport_solaire_fr(): float
+    public function apport_solaire(?Mois $mois = null): float
     {
-        return $this->get("as_fr", function (): float {
-            return Mois::reduce(fn(Mois $mois) => $this->apport_solaire_fr_j($mois));
-        });
-    }
-
-    /**
-     * Apports solaires mensuels en période de chauffage exprimés en Wh
-     */
-    public function apport_solaire_j(Mois $mois): float
-    {
-        return $this->get("as::{$mois->value}", function () use ($mois): float {
-            $sse = $this->sse_j($mois);
-            $ssind = $this->ssind_j($mois);
+        $key = $mois ? "as::{$mois->value}" : 'as';
+        return $this->get($key, function () use ($mois): float {
+            if (null === $mois) {
+                return Mois::reduce(fn(Mois $item) => $this->apport_solaire($item));
+            }
+            $sse = $this->sse($mois);
+            $ssind = $this->ssind($mois);
             $e = $this->e($mois);
             return 1000 * ($sse + $ssind) * $e;
         });
     }
 
     /**
-     * Apports solaires mensuels en période de refroidissement exprimés en Wh
+     * Apports solaires  en période de refroidissement en Wh
      */
-    public function apport_solaire_fr_j(Mois $mois): float
+    public function apport_solaire_fr(?Mois $mois = null): float
     {
-        return $this->get("as_fr::{$mois->value}", function () use ($mois): float {
-            $sse = $this->sse_j($mois);
-            $ssind = $this->ssind_j($mois);
+        $key = $mois ? "as_fr::{$mois->value}" : 'as_fr';
+        return $this->get($key, function () use ($mois): float {
+            if (null === $mois) {
+                return Mois::reduce(fn(Mois $item) => $this->apport_solaire_fr($item));
+            }
+            $sse = $this->sse($mois);
+            $ssind = $this->ssind($mois);
             $e = $this->e_fr($mois);
             return 1000 * ($sse + $ssind) * $e;
         });
@@ -206,6 +170,7 @@ final class ApportEnveloppeRule extends Rule
 
         $context->input()->enveloppe->calcule($context->input()->enveloppe->data()->with(
             apports: $context->input()->enveloppe->data()->apports->with(
+                f: $this->f(),
                 apport: $this->apport(),
                 apport_fr: $this->apport_fr(),
                 apport_interne: $this->apport_interne(),

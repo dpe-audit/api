@@ -12,7 +12,7 @@ interface BaieTableValeurRepository extends ParoiTableValeurRepository
 {
     public function ug(
         TypeBaie $type_baie,
-        ?TypeVitrage $type_vitrage,
+        TypeVitrage $type_vitrage,
         ?NatureGazLame $nature_gaz_lame,
         ?float $inclinaison_vitrage,
         ?float $epaisseur_lame_air,

@@ -82,20 +82,13 @@ final class SurfaceSudEquivalenteEtsBaieRule extends RuleIterator
     /**
      * Surface sud équivalente des apports totaux dans la véranda
      */
-    public function sst(): float
+    public function sst(?Mois $mois = null): float
     {
-        return $this->get('sst', function (): float {
-            return Mois::reduce(fn(Mois $mois) => $this->sst_j($mois));
-        });
-    }
-
-    /**
-     * Surface sud équivalente des apports totaux dans la véranda
-     */
-    public function sst_j(Mois $mois): float
-    {
-        return $this->get("sst::{$mois->value}", function () use ($mois): float {
-            return $this->surface() * (0.8 * $this->t() + 0.024) * $this->fe() * $this->c1_j($mois);
+        $key = $mois ? "sst::{$mois->value}" : 'sst';
+        return $this->get($key, function () use ($mois): float {
+            return $mois
+                ? $this->surface() * (0.8 * $this->t() + 0.024) * $this->fe() * $this->c1($mois)
+                : Mois::reduce(fn(Mois $item) => $this->sst($item));
         });
     }
 
@@ -122,12 +115,12 @@ final class SurfaceSudEquivalenteEtsBaieRule extends RuleIterator
     }
 
     /**
-     * Coefficient d'orientation et d'inclinaison de la baie pour le mois j
+     * Coefficient d'orientation et d'inclinaison de la baie
      */
-    public function c1_j(Mois $mois): float
+    public function c1(Mois $mois): float
     {
         return $this->get("c1::{$mois->value}", function () use ($mois): float {
-            return array_find($this->c1(), fn(array $item) => $item['mois'] === $mois)['c1']
+            return array_find($this->c1_collection(), fn(array $item) => $item['mois'] === $mois)['c1']
                 ?? throw new \DomainException("Valeur forfaitaire C1 non trouvée pour le mois {$mois->value}");
         });
     }
@@ -137,7 +130,7 @@ final class SurfaceSudEquivalenteEtsBaieRule extends RuleIterator
      * 
      * @return array{mois: Mois, c1: float}[]
      */
-    public function c1(): array
+    private function c1_collection(): array
     {
         return $this->get('c1', function (): array {
             return $this->ext_repository->c1(

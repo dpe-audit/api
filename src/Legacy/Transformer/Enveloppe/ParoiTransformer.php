@@ -42,8 +42,29 @@ abstract class ParoiTransformer
         if ($this->mitoyennete() !== Mitoyennete::LOCAL_NON_CHAUFFE) {
             return null;
         }
-        if ($this->paroi->reference_lnc) {
-            return $this->context->logement()->enveloppe->match_ets($this->paroi->reference_lnc)?->id();
+        if ($this->paroi->enum_type_adjacence_id === 10) {
+            if ($this->paroi->reference_lnc) {
+                if ($id = $this->context->logement()->enveloppe->match_ets($this->paroi->reference_lnc)?->id()) {
+                    return $id;
+                }
+            }
+            foreach ($this->context->logement()->enveloppe->ets_collection as $ets) {
+                if ($ets->enum_cfg_isolation_lnc_id !== $this->paroi->enum_cfg_isolation_lnc_id) {
+                    continue;
+                }
+                if ($ets->tv_coef_reduction_deperdition_id !== $this->paroi->tv_coef_reduction_deperdition_id) {
+                    continue;
+                }
+                return $ets->id();
+            }
+            foreach ($this->context->logement()->enveloppe->ets_collection as $ets) {
+                if ($ets->enum_cfg_isolation_lnc_id === $this->paroi->enum_cfg_isolation_lnc_id) {
+                    return $ets->id();
+                }
+                if ($ets->tv_coef_reduction_deperdition_id === $this->paroi->tv_coef_reduction_deperdition_id) {
+                    return $ets->id();
+                }
+            }
         }
         return $this->paroi->id();
     }

@@ -4,12 +4,17 @@ namespace App\Engine;
 
 use App\Domain\Common\Enum\ScenarioUsage;
 
+use Symfony\Component\DependencyInjection\Attribute\AutowireIterator;
+
 /**
  * @property Rules|RuleInterface[] $rules
  */
 final class Engine
 {
-    public function __construct(private Rules $rules) {}
+    public function __construct(
+        #[AutowireIterator('app.engine.rule')]
+        private iterable $rules,
+    ) {}
 
     /**
      * @return Rules|RuleInterface[]
@@ -19,9 +24,10 @@ final class Engine
         return $this->rules;
     }
 
-    public function __invoke(mixed $data, Input $input,  ScenarioUsage $scenario): mixed
+    public function __invoke(mixed $data, Input $input, ScenarioUsage $scenario): mixed
     {
-        $context = Context::create(engine: $this, input: $input, scenario: $scenario);
+        $rules = new Rules($this->rules);
+        $context = Context::create(rules: $rules, input: $input, scenario: $scenario);
 
         foreach ($this->rules as $rule) {
             //$time = new \DateTime;

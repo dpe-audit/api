@@ -11,6 +11,7 @@ final class ReseauDto
 {
     public function __construct(
         public readonly TypeDistribution $type_distribution,
+        public readonly bool $presence_fluide_frigorigene,
         public readonly bool $presence_circulateur_externe,
         public readonly int $niveaux_desservis,
         public readonly ?IsolationReseau $isolation,
@@ -20,6 +21,7 @@ final class ReseauDto
     {
         return new self(
             type_distribution: $data->type_distribution,
+            presence_fluide_frigorigene: $data->presence_fluide_frigorigene,
             presence_circulateur_externe: $data->presence_circulateur_externe,
             niveaux_desservis: $data->niveaux_desservis,
             isolation: $data->isolation,
@@ -30,6 +32,7 @@ final class ReseauDto
     {
         return [
             'type_distribution' => $this->type_distribution->value,
+            'presence_fluide_frigorigene' => $this->presence_fluide_frigorigene,
             'presence_circulateur_externe' => $this->presence_circulateur_externe,
             'niveaux_desservis' => $this->niveaux_desservis,
             'isolation' => $this->isolation?->value,

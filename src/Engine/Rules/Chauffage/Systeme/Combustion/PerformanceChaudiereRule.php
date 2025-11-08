@@ -2,36 +2,17 @@
 
 namespace App\Engine\Rules\Chauffage\Systeme\Combustion;
 
-use App\Domain\Chauffage\Systeme\Systeme;
-use App\Engine\Rules\Chauffage\PerformanceGenerateurRule;
 use App\Engine\Rules\Chauffage\Systeme\PerformanceCombustionRule;
 
 abstract class PerformanceChaudiereRule extends PerformanceCombustionRule
 {
-    public static function supports(Systeme $entity): bool
+    public function supports(): bool
     {
-        $match = $entity->generateur()->type()?->is_chaudiere();
-        $match = $match || ($entity->generateur()->type()?->is_pac() && null !== $entity->generateur()->bienergie());
-        $match = $match || null === $entity->generateur()->type();
-        $match = $match && false === $entity->generateur()->position()->generateur_multi_batiment;
-        return $match;
+        return $this->type_generateur()->is_chaudiere()
+            || ($this->type_generateur()->is_pac() && null !== $this->bienergie_generateur())
+            && $this->energie_generateur()->is_combustible()
+            && false === $this->generateur_multi_batiment();
     }
-
-    // * Données d'entrée
-
-    public function regulation(): bool
-    {
-        return $this->regulation_centrale() || $this->regulation_terminale();
-    }
-
-    // * Données intermédiaires
-
-    public function scop(): ?float
-    {
-        return $this->requireIterator(PerformanceGenerateurRule::class, $this->item()->generateur())->scop();
-    }
-
-    // * Données de sortie
 
     /**
      * @inheritDoc

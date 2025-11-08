@@ -140,6 +140,18 @@ final class PerformanceChauffageRule extends Rule
     }
 
     /**
+     * Puissance conventionnelle de chauffage en kW
+     */
+    public function pch(): float
+    {
+        return $this->get('pch', function (): float {
+            $value = 1.2 * $this->gv() * (19 - $this->tbase());
+            $value /= 1000 * \pow(0.95, 3);
+            return $value;
+        });
+    }
+
+    /**
      * Pertes récupérables pour le chauffage en Wh
      */
     public function pertes_recuperables(?Mois $mois = null): float

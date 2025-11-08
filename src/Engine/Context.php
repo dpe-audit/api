@@ -13,15 +13,15 @@ final class Context
     private array $stores = [];
 
     public function __construct(
-        private Engine $engine,
+        private Rules $rules,
         private Input $input,
         private ScenarioUsage $scenario,
     ) {}
 
-    public static function create(Engine $engine, Input $input, ?ScenarioUsage $scenario = null): self
+    public static function create(Rules $rules, Input $input, ?ScenarioUsage $scenario = null): self
     {
         return new self(
-            engine: $engine,
+            rules: $rules,
             input: $input,
             scenario: $scenario ?? ScenarioUsage::CONVENTIONNEL,
         );
@@ -38,9 +38,9 @@ final class Context
         $this->scenario = $scenario;
     }
 
-    public function engine(): Engine
+    public function rules(): Rules
     {
-        return $this->engine;
+        return $this->rules;
     }
 
     public function input(): Input
@@ -60,10 +60,5 @@ final class Context
             $this->stores[$key] = new Store();
         }
         return $this->stores[$key];
-    }
-
-    public function rules(): Rules
-    {
-        return $this->engine->rules();
     }
 }

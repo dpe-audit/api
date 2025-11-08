@@ -72,9 +72,9 @@ abstract class Rule implements RuleInterface
             if (!$iterator instanceof RuleIterator) {
                 continue;
             }
+            $iterator->setContext($this->context);
             foreach ($iterator as $rule) {
                 if ($rule->item() === $item) {
-                    $rule->setContext($this->context);
                     return $rule;
                 }
             }

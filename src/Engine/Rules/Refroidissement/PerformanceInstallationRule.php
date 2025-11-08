@@ -4,12 +4,15 @@ namespace App\Engine\Rules\Refroidissement;
 
 use App\Domain\Refroidissement\Installation\Installation;
 use App\Engine\{Context, RuleIterator};
+use App\Engine\Rules\Batiment\WithBatimentRule;
 
 /**
  * @extends RuleIterator<Installation>
  */
 final class PerformanceInstallationRule extends RuleIterator
 {
+    use WithBatimentRule;
+
     /**
      * @inheritDoc
      */
@@ -26,19 +29,10 @@ final class PerformanceInstallationRule extends RuleIterator
         return static::class . '\\' . (string) $this->item()->id();
     }
 
-    // * Données d'entrée
-
     public function surface(): float
     {
         return $this->item()->surface();
     }
-
-    public function surface_totale(): float
-    {
-        return $this->input()->refroidissement->installations()->surface();
-    }
-
-    // * Données calculées
 
     /**
      * Ratio de dimensionnement de l'installation de refroidissement
@@ -46,7 +40,7 @@ final class PerformanceInstallationRule extends RuleIterator
     public function rdim(): float
     {
         return $this->get('rdim', function (): float {
-            return $this->surface() / $this->surface_totale();
+            return min($this->surface() / $this->surface_reference(), 1);
         });
     }
 

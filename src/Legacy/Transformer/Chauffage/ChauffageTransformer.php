@@ -30,8 +30,12 @@ final class ChauffageTransformer
                 $emetteurs[] = $this->emetteur_transformer->__invoke($emetteur_chauffage, $context);
             }
             foreach ($installation_chauffage->generateur_chauffage_collection as $generateur_chauffage) {
-                $generateurs[] = $this->generateur_transformer->__invoke($generateur_chauffage, $installation_chauffage, $context);
-                $systemes[] = $this->systeme_transformer->__invoke($generateur_chauffage, $installation_chauffage, $context);
+                $generateur = $this->generateur_transformer->__invoke($generateur_chauffage, $installation_chauffage, $context);
+
+                if ($generateur) {
+                    $generateurs[] = $generateur;
+                    $systemes[] = $this->systeme_transformer->__invoke($generateur_chauffage, $installation_chauffage, $context);
+                }
             }
         }
 

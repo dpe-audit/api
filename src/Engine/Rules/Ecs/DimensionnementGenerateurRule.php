@@ -2,60 +2,8 @@
 
 namespace App\Engine\Rules\Ecs;
 
-use App\Domain\Ecs\Generateur\Generateur;
-use App\Engine\Rules\Chauffage\DimensionnementGenerateurRule as DimensionnementGenerateurChauffageRule;
-use App\Engine\RuleIterator;
-
-/**
- * @extends RuleIterator<Generateur>
- */
-abstract class DimensionnementGenerateurRule extends RuleIterator
+abstract class DimensionnementGenerateurRule extends CommonGenerateurRule
 {
-    /**
-     * @inheritDoc
-     */
-    public function namespace(): string
-    {
-        return static::class . '\\' . (string) $this->item()->id();
-    }
-
-    // * Données d'entrée
-
-    public function volume_stockage(): float
-    {
-        return $this->item()->signaletique()->volume_stockage
-            + $this->input()->ecs->systemes()->with_generateur($this->item()->id())->volume_stockage();
-    }
-
-    public function pn_saisi(): ?float
-    {
-        return $this->item()->signaletique()->pn;
-    }
-
-    // * Données intermédiaires
-
-    /**
-     * @return float[]
-     */
-    public function rdim_systemes(): array
-    {
-        return $this->input()->ecs->systemes()
-            ->with_generateur($this->item()->id())
-            ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->rdim())
-            ->values();
-    }
-
-    public function pch(): float
-    {
-        if (null === $this->item()->position()->generateur_mixte_id) {
-            return 0;
-        }
-        $entity = $this->input()->chauffage->generateurs()->find($this->item()->position()->generateur_mixte_id);
-        return $this->requireIterator(DimensionnementGenerateurChauffageRule::class, $entity)->pch();
-    }
-
-    // * Données de sortie
-
     /**
      * Ratio de dimensionnement du générateur
      */

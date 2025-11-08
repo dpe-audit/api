@@ -6,5 +6,4 @@ enum TypeDistribution: string
 {
     case HYDRAULIQUE = 'hydraulique';
     case AERAULIQUE = 'aeraulique';
-    case FLUIDE_FRIGORIGENE = 'fluide_frigorigene';
 }

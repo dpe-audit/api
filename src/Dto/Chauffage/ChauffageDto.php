@@ -3,11 +3,11 @@
 namespace App\Dto\Chauffage;
 
 use App\Domain\Chauffage\Chauffage;
-use App\Domain\Chauffage\TypeChauffage;
 use App\Dto\Chauffage\Emetteur\EmetteurDto;
 use App\Dto\Chauffage\Generateur\GenerateurDto;
 use App\Dto\Chauffage\Installation\InstallationDto;
 use App\Dto\Chauffage\Systeme\SystemeDto;
+use App\Validation;
 use Symfony\Component\Validator\Constraints;
 
 /**
@@ -18,6 +18,7 @@ use Symfony\Component\Validator\Constraints;
  * @property array<InstallationDto> $installations
  * @property array<SystemeDto> $systemes
  */
+#[Validation\Chauffage\ChauffageValid]
 final class ChauffageDto
 {
     public function __construct(
@@ -45,83 +46,19 @@ final class ChauffageDto
         );
     }
 
-    #[Constraints\IsTrue]
-    public function is_emetteur_exists(): bool
+    public function find_emetteur(string $id): ?EmetteurDto
     {
-        foreach ($this->systemes as $systeme) {
-            foreach ($systeme->emetteurs as $id) {
-                if (null === array_find($this->emetteurs, fn(EmetteurDto $dto) => $dto->id === $id)) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return array_find($this->emetteurs, fn($item) => $item->id === $id);
     }
 
-    #[Constraints\IsTrue]
-    public function is_generateur_exists(): bool
+    public function find_generateur(string $id): ?GenerateurDto
     {
-        foreach ($this->systemes as $systeme) {
-            if (null === array_find($this->generateurs, fn(GenerateurDto $dto) => $dto->id === $systeme->generateur_id)) {
-                return false;
-            }
-        }
-        return true;
+        return array_find($this->generateurs, fn($item) => $item->id === $id);
     }
 
-    #[Constraints\IsTrue]
-    public function is_installation_exists(): bool
+    public function find_installation(string $id): ?InstallationDto
     {
-        foreach ($this->systemes as $systeme) {
-            if (null === array_find($this->installations, fn(InstallationDto $dto) => $dto->id === $systeme->installation_id)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    public function is_type_chauffage_valid(): bool
-    {
-        foreach ($this->systemes as $systeme) {
-            foreach ($this->generateurs as $generateur) {
-                if ($generateur->id !== $systeme->generateur_id) {
-                    continue;
-                }
-                if ($systeme->type === TypeChauffage::CHAUFFAGE_CENTRAL) {
-                    if ($generateur->type && false === $generateur->type->is_chauffage_central()) {
-                        return false;
-                    }
-                }
-                if ($systeme->type === TypeChauffage::CHAUFFAGE_DIVISE) {
-                    if ($generateur->type && false === $generateur->type->is_chauffage_divise()) {
-                        return false;
-                    }
-                }
-            }
-        }
-        return true;
-    }
-
-    public function is_cascade_valid(): bool
-    {
-        foreach ($this->systemes as $systeme) {
-            $id = $systeme->id;
-            $generateur_id = $systeme->generateur_id;
-            $cascade = $systeme->cascade;
-
-            foreach ($this->systemes as $compare) {
-                if ($id === $compare->id) {
-                    continue;
-                }
-                if ($generateur_id !== $compare->generateur_id) {
-                    continue;
-                }
-                if ($cascade !== $compare->cascade) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return array_find($this->installations, fn($item) => $item->id === $id);
     }
 
     public function __normalize(): array

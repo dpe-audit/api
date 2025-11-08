@@ -29,8 +29,6 @@ final class CreateGenerateurHandler
                 generateur_multi_batiment: $payload->position->generateur_multi_batiment,
                 position_volume_chauffe: $payload->position->position_volume_chauffe,
                 position_chaudiere: $payload->position->position_chaudiere,
-                cascade: $payload->position->cascade,
-                priorite_cascade: $payload->position->priorite_cascade,
                 generateur_mixte_id: $payload->position->generateur_mixte_id
                     ? Id::fromString($payload->position->generateur_mixte_id)
                     : null,

@@ -5,30 +5,22 @@ namespace App\Engine;
 final class Store
 {
     /**
-     * @var array<string, self>
+     * @var array<string, mixed>
      */
     private array $values = [];
 
     public function get(string $namespace, string $key, callable $callback): mixed
     {
-        if (false === array_key_exists($namespace, $this->values)) {
-            $this->values[$namespace] = new self();
-        }
-        if (false === array_key_exists($key, $this->values[$namespace]->values())) {
-            $this->values[$namespace]->values()[$key] = $callback();
-        }
-        return $this->values[$namespace]->values()[$key];
-    }
+        $key = "$namespace::$key";
+        if (false === array_key_exists($key, $this->values)) {
+            $value = $callback();
 
-    public function has(string $namespace, ?string $key = null): bool
-    {
-        if (false === array_key_exists($namespace, $this->values)) {
-            return false;
+            if (is_numeric($value)) {
+                $value = round($value, 2);
+            }
+            $this->values[$key] = $value;
         }
-        if (null === $key) {
-            return true;
-        }
-        return array_key_exists($key, $this->values[$namespace]->values());
+        return $this->values[$key];
     }
 
     public function clear(): void

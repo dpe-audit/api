@@ -2,100 +2,13 @@
 
 namespace App\Engine\Rules\Chauffage;
 
-use App\Domain\Chauffage\Emetteur\{Emetteur, TemperatureDistribution};
 use App\Domain\Chauffage\Generateur\EnergieGenerateur;
-use App\Domain\Chauffage\Generateur\Signaletique\LabelGenerateur;
-use App\Domain\Chauffage\Installation\Regulation\TypeIntermittence;
-use App\Domain\Chauffage\Systeme\Reseau\{IsolationReseau, TypeDistribution};
 use App\Domain\Chauffage\Systeme\{Systeme, Configuration};
 use App\Domain\Common\Enum\{Mois, Usage};
 use App\Engine\Context;
-use App\Engine\Rules\Batiment\{WithBatiment, WithBatimentRule};
-use App\Engine\Rules\Enveloppe\{WithDeperditionRule, WithInertieRule};
 
 abstract class PerformanceSystemeRule extends PerformanceAuxiliaireRule
 {
-    use WithBatiment, WithBatimentRule, WithDeperditionRule, WithInertieRule;
-
-    abstract public static function supports(Systeme $entity): bool;
-
-    /**
-     * @inheritDoc
-     */
-    public function collection(): array
-    {
-        return $this->input()->chauffage->systemes()
-            ->filter(fn(Systeme $entity) => static::supports($entity))
-            ->values();
-    }
-
-    // * Données d'entrée
-
-    public function installation_collective(): bool
-    {
-        return $this->item()->installation()->systemes()->has_generateur_collectif();
-    }
-
-    public function contenu_co2_reseau_chaleur(): ?float
-    {
-        return $this->item()->generateur()->position()->reseau_chaleur?->contenu_co2();
-    }
-
-    public function annee_installation_generateur(): int
-    {
-        return $this->item()->generateur()->annee_installation() ?? $this->input()->batiment->annee_construction;
-    }
-
-    public function label_generateur(): ?LabelGenerateur
-    {
-        return $this->item()->generateur()->signaletique()->label;
-    }
-
-    public function type_distribution(): TypeDistribution
-    {
-        return $this->item()->reseau()->type_distribution;
-    }
-
-    public function isolation_reseau(): IsolationReseau
-    {
-        return $this->item()->reseau()->isolation ?? IsolationReseau::NON_ISOLE;
-    }
-
-    public function comptage_individuel(): bool
-    {
-        return $this->item()->installation()->comptage_individuel();
-    }
-
-    public function regulation_centrale(): bool
-    {
-        return $this->item()->installation()->regulation_centrale()->presence_regulation;
-    }
-
-    public function regulation_terminale(): bool
-    {
-        return $this->item()->installation()->regulation_terminale()->presence_regulation;
-    }
-
-    public function type_intermittence(): TypeIntermittence
-    {
-        return $this->get('type_intermittence', function (): TypeIntermittence {
-            return TypeIntermittence::determine(
-                regulation_centrale: $this->item()->installation()->regulation_centrale(),
-                regulation_terminale: $this->item()->installation()->regulation_terminale(),
-                chauffage_collectif: $this->systeme_collectif(),
-            );
-        });
-    }
-
-    /**
-     * @return TemperatureDistribution[]
-     */
-    private function temperatures_distribution(): array
-    {
-        $values = $this->item()->emetteurs()->map(fn(Emetteur $entity) => $entity->temperature_distribution())->values();
-        return array_unique($values);
-    }
-
     // * Données intermédiaires
 
     public function bch(): float
@@ -119,11 +32,6 @@ abstract class PerformanceSystemeRule extends PerformanceAuxiliaireRule
         return $bch;
     }
 
-    public function fch(): float
-    {
-        return $this->requireIterator(PerformanceInstallationRule::class, $this->item()->installation())->fch();
-    }
-
     public function pertes_generation(?Mois $mois = null): float
     {
         $key = $mois ? "pertes_generation::{$mois->value}" : 'pertes_generation';
@@ -143,6 +51,7 @@ abstract class PerformanceSystemeRule extends PerformanceAuxiliaireRule
     }
 
     // * Données de sortie
+
     /**
      * Consommation finale du système de chauffage en kWh/an
      */
@@ -276,11 +185,16 @@ abstract class PerformanceSystemeRule extends PerformanceAuxiliaireRule
     public function rd(): float
     {
         return $this->get('rd', function (): float {
+            $temperature_distribution = $this->temperatures_distribution();
+            if (count($temperature_distribution) === 0) {
+                return 1;
+            }
             $values = [];
-            foreach ($this->temperatures_distribution() as $temperature_distribution) {
+            foreach ($temperature_distribution as $temperature_distribution) {
                 $values[] = $this->repository->rd(
                     type_distribution: $this->type_distribution(),
                     temperature_distribution: $temperature_distribution,
+                    presence_fluide_frigorigene: $this->presence_fluide_frigorigene(),
                     isolation_reseau: $this->isolation_reseau(),
                     reseau_collectif: $this->systeme_collectif(),
                 ) ?? throw new \DomainException('Valeur forfaitaire Rd non trouvée');

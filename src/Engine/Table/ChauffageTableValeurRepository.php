@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Engine\Tables;
+namespace App\Engine\Table;
 
 use App\Domain\Batiment\ZoneClimatique;
 use App\Domain\Batiment\TypeBatiment;
@@ -47,6 +47,7 @@ interface ChauffageTableValeurRepository
         TypeDistribution $type_distribution,
         TemperatureDistribution $temperature_distribution,
         bool $reseau_collectif,
+        ?bool $presence_fluide_frigorigene,
         ?IsolationReseau $isolation_reseau,
     ): ?float;
 

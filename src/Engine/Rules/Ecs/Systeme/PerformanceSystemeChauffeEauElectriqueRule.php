@@ -5,17 +5,16 @@ namespace App\Engine\Rules\Ecs\Systeme;
 use App\Domain\Ecs\Generateur\EnergieGenerateur;
 use App\Domain\Ecs\Generateur\Position\PositionChauffeEau;
 use App\Domain\Ecs\Generateur\Signaletique\LabelGenerateur;
-use App\Domain\Ecs\Systeme\Systeme;
 use App\Engine\Rules\Ecs\PerformanceSystemeRule;
 
 final class PerformanceSystemeChauffeEauElectriqueRule extends PerformanceSystemeRule
 {
-    public static function supports(Systeme $entity): bool
+    public function supports(): bool
     {
-        $match = $entity->generateur()->type()?->is_chaudiere();
-        $match = $match || $entity->generateur()->type()?->is_chauffe_eau();
-        $match = $match && $entity->generateur()->energie() === EnergieGenerateur::ELECTRICITE;
-        return $match && false === $entity->generateur()->position()->generateur_multi_batiment;
+        return $this->type_generateur()->is_chaudiere()
+            || $this->type_generateur()->is_chauffe_eau()
+            && $this->energie_generateur() === EnergieGenerateur::ELECTRICITE
+            && false === $this->generateur_multi_batiment();
     }
 
     // * Données d'entrée

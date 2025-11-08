@@ -9,8 +9,8 @@ interface MurTableValeurRepository extends ParoiTableValeurRepository
 {
     public function u0(
         int $annee_construction,
+        float $epaisseur_structure,
         ?TypeMur $type_structure,
-        ?float $epaisseur_structure,
     ): ?float;
 
     public function u(

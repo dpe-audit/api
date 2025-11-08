@@ -4,8 +4,6 @@ namespace App\Engine\Rules\Refroidissement;
 
 abstract class PerformanceAuxiliaireRule extends DimensionnementSystemeRule
 {
-    // * Données calculées
-
     /**
      * Consommation d'énergie finale de l'auxiliaire de refroidissement en kWh/an
      */

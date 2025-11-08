@@ -18,6 +18,16 @@ final class GenerateurTransformer
 
     public function generateur_mixte_id(): ?string
     {
+        foreach ($this->context->logement()->installation_chauffage_collection as $installation_chauffage) {
+            foreach ($installation_chauffage->generateur_chauffage_collection as $generateur_chauffage) {
+                if (null === $generateur_chauffage->reference_generateur_mixte) {
+                    continue;
+                }
+                if ($this->generateur_ecs->match($generateur_chauffage->reference_generateur_mixte)) {
+                    return $generateur_chauffage->id();
+                }
+            }
+        }
         if (null === $reference = $this->generateur_ecs->reference_generateur_mixte) {
             return null;
         }

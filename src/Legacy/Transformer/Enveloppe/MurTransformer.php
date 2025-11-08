@@ -55,13 +55,6 @@ final class MurTransformer extends ParoiOpaqueTransformer
         };
     }
 
-    public function inertie(): Inertie
-    {
-        return $this->context->logement()->enveloppe->inertie_plancher_bas_lourd
-            ? Inertie::LOURDE
-            : Inertie::LEGERE;
-    }
-
     public function __invoke(Mur $paroi, Context $context): MurDto
     {
         $this->context = $context;

@@ -1,1 +1,102 @@
-<?xml version="1.0" encoding="UTF-8"?><table name="porte.u"><row><presence_sas>1</presence_sas><isolation></isolation><materiau></materiau><type_vitrage></type_vitrage><taux_vitrage gt="" lt="" gte="" lte="" eq="" /><u>1.5</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>pvc</materiau><type_vitrage></type_vitrage><taux_vitrage gt="" lt="" gte="" lte="" eq="" /><u>3.5</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>bois</materiau><type_vitrage></type_vitrage><taux_vitrage gt="" lt="" gte="" lte="" eq="" /><u>3.5</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>bois_metal</materiau><type_vitrage></type_vitrage><taux_vitrage gt="" lt="" gte="" lte="" eq="" /><u>3.5</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>metal</materiau><type_vitrage></type_vitrage><taux_vitrage gt="" lt="" gte="" lte="" eq="" /><u>5.8</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>pvc</materiau><type_vitrage>simple_vitrage</type_vitrage><taux_vitrage gt="0" lt="30" gte="" lte="" eq="" /><u>4</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>bois</materiau><type_vitrage>simple_vitrage</type_vitrage><taux_vitrage gt="0" lt="30" gte="" lte="" eq="" /><u>4</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>bois_metal</materiau><type_vitrage>simple_vitrage</type_vitrage><taux_vitrage gt="0" lt="30" gte="" lte="" eq="" /><u>4</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>metal</materiau><type_vitrage>simple_vitrage</type_vitrage><taux_vitrage gt="0" lt="30" gte="" lte="" eq="" /><u>5.8</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>pvc</materiau><type_vitrage>simple_vitrage</type_vitrage><taux_vitrage gt="" lt="" gte="30" lte="60" eq="" /><u>4.5</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>bois</materiau><type_vitrage>simple_vitrage</type_vitrage><taux_vitrage gt="" lt="" gte="30" lte="60" eq="" /><u>4.5</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>bois_metal</materiau><type_vitrage>simple_vitrage</type_vitrage><taux_vitrage gt="" lt="" gte="30" lte="60" eq="" /><u>4.5</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>metal</materiau><type_vitrage>simple_vitrage</type_vitrage><taux_vitrage gt="" lt="" gte="30" lte="60" eq="" /><u>5.8</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>pvc</materiau><type_vitrage>double_vitrage</type_vitrage><taux_vitrage gt="0" lt="30" gte="" lte="" eq="" /><u>3.3</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>bois</materiau><type_vitrage>double_vitrage</type_vitrage><taux_vitrage gt="0" lt="30" gte="" lte="" eq="" /><u>3.3</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>bois_metal</materiau><type_vitrage>double_vitrage</type_vitrage><taux_vitrage gt="0" lt="30" gte="" lte="" eq="" /><u>3.3</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>metal</materiau><type_vitrage>double_vitrage</type_vitrage><taux_vitrage gt="0" lt="30" gte="" lte="" eq="" /><u>5.5</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>pvc</materiau><type_vitrage>double_vitrage</type_vitrage><taux_vitrage gt="" lt="" gte="30" lte="60" eq="" /><u>3.3</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>bois</materiau><type_vitrage>double_vitrage</type_vitrage><taux_vitrage gt="" lt="" gte="30" lte="60" eq="" /><u>3.3</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>bois_metal</materiau><type_vitrage>double_vitrage</type_vitrage><taux_vitrage gt="" lt="" gte="30" lte="60" eq="" /><u>3.3</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>metal</materiau><type_vitrage>double_vitrage</type_vitrage><taux_vitrage gt="" lt="" gte="30" lte="60" eq="" /><u>4.8</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>pvc</materiau><type_vitrage>triple_vitrage</type_vitrage><taux_vitrage gt="" lt="30" gte="" lte="" eq="" /><u>3.3</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>bois</materiau><type_vitrage>triple_vitrage</type_vitrage><taux_vitrage gt="" lt="30" gte="" lte="" eq="" /><u>3.3</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>bois_metal</materiau><type_vitrage>triple_vitrage</type_vitrage><taux_vitrage gt="" lt="30" gte="" lte="" eq="" /><u>3.3</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>metal</materiau><type_vitrage>triple_vitrage</type_vitrage><taux_vitrage gt="" lt="30" gte="" lte="" eq="" /><u>5.5</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>pvc</materiau><type_vitrage>triple_vitrage</type_vitrage><taux_vitrage gt="" lt="" gte="30" lte="60" eq="" /><u>3.3</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>bois</materiau><type_vitrage>triple_vitrage</type_vitrage><taux_vitrage gt="" lt="" gte="30" lte="60" eq="" /><u>3.3</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>bois_metal</materiau><type_vitrage>triple_vitrage</type_vitrage><taux_vitrage gt="" lt="" gte="30" lte="60" eq="" /><u>3.3</u></row><row><presence_sas>0</presence_sas><isolation>0</isolation><materiau>metal</materiau><type_vitrage>triple_vitrage</type_vitrage><taux_vitrage gt="" lt="" gte="30" lte="60" eq="" /><u>4.8</u></row><row><presence_sas>0</presence_sas><isolation>1</isolation><materiau></materiau><type_vitrage></type_vitrage><taux_vitrage gt="" lt="" gte="" lte="" eq="" /><u>1.5</u></row><row><presence_sas>0</presence_sas><isolation>1</isolation><materiau>pvc</materiau><type_vitrage>simple_vitrage</type_vitrage><taux_vitrage gt="0" lt="30" gte="" lte="" eq="" /><u>4</u></row><row><presence_sas>0</presence_sas><isolation>1</isolation><materiau>bois</materiau><type_vitrage>simple_vitrage</type_vitrage><taux_vitrage gt="0" lt="30" gte="" lte="" eq="" /><u>4</u></row><row><presence_sas>0</presence_sas><isolation>1</isolation><materiau>bois_metal</materiau><type_vitrage>simple_vitrage</type_vitrage><taux_vitrage gt="0" lt="30" gte="" lte="" eq="" /><u>4</u></row><row><presence_sas>0</presence_sas><isolation>1</isolation><materiau>metal</materiau><type_vitrage>simple_vitrage</type_vitrage><taux_vitrage gt="0" lt="30" gte="" lte="" eq="" /><u>5.8</u></row><row><presence_sas>0</presence_sas><isolation>1</isolation><materiau>pvc</materiau><type_vitrage>simple_vitrage</type_vitrage><taux_vitrage gt="" lt="" gte="30" lte="60" eq="" /><u>4.5</u></row><row><presence_sas>0</presence_sas><isolation>1</isolation><materiau>bois</materiau><type_vitrage>simple_vitrage</type_vitrage><taux_vitrage gt="" lt="" gte="30" lte="60" eq="" /><u>4.5</u></row><row><presence_sas>0</presence_sas><isolation>1</isolation><materiau>bois_metal</materiau><type_vitrage>simple_vitrage</type_vitrage><taux_vitrage gt="" lt="" gte="30" lte="60" eq="" /><u>4.5</u></row><row><presence_sas>0</presence_sas><isolation>1</isolation><materiau>metal</materiau><type_vitrage>simple_vitrage</type_vitrage><taux_vitrage gt="" lt="" gte="30" lte="60" eq="" /><u>5.8</u></row><row><presence_sas>0</presence_sas><isolation>1</isolation><materiau></materiau><type_vitrage>double_vitrage</type_vitrage><taux_vitrage gt="" lt="" gte="" lte="" eq="" /><u>1.5</u></row><row><presence_sas>0</presence_sas><isolation>1</isolation><materiau></materiau><type_vitrage>triple_vitrage</type_vitrage><taux_vitrage gt="" lt="" gte="" lte="" eq="" /><u>1.5</u></row></table>
+<?xml version="1.0" encoding="UTF-8"?>
+<table name="porte.u">
+    <row>
+        <presence_sas>1</presence_sas>
+        <materiau></materiau>
+        <isolation></isolation>
+        <type_vitrage></type_vitrage>
+        <taux_vitrage gt="" lt="" gte="" eq="" />
+        <u>1.5</u>
+        <tv_uporte_id>10</tv_uporte_id>
+    </row>
+    <row>
+        <presence_sas>0</presence_sas>
+        <materiau></materiau>
+        <isolation>1</isolation>
+        <type_vitrage></type_vitrage>
+        <taux_vitrage gt="" lt="" gte="" eq="0" />
+        <u>1.5</u>
+        <tv_uporte_id>9</tv_uporte_id>
+    </row>
+    <row>
+        <presence_sas>0</presence_sas>
+        <materiau></materiau>
+        <isolation>1</isolation>
+        <type_vitrage>double_vitrage|triple_vitrage</type_vitrage>
+        <taux_vitrage gt="0" lt="" gte="" eq="" />
+        <u>1.5</u>
+        <tv_uporte_id>11</tv_uporte_id>
+    </row>
+    <row>
+        <presence_sas>0</presence_sas>
+        <materiau>pvc|bois</materiau>
+        <isolation></isolation>
+        <type_vitrage></type_vitrage>
+        <taux_vitrage gt="" lt="" gte="" eq="0" />
+        <u>3.5</u>
+        <tv_uporte_id>1</tv_uporte_id>
+    </row>
+    <row>
+        <presence_sas>0</presence_sas>
+        <materiau>pvc|bois</materiau>
+        <isolation></isolation>
+        <type_vitrage>simple_vitrage</type_vitrage>
+        <taux_vitrage gt="" lt="30" gte="" eq="" />
+        <u>4</u>
+        <tv_uporte_id>2</tv_uporte_id>
+    </row>
+    <row>
+        <presence_sas>0</presence_sas>
+        <materiau>pvc|bois</materiau>
+        <isolation></isolation>
+        <type_vitrage>simple_vitrage</type_vitrage>
+        <taux_vitrage gt="" lt="" gte="30" eq="" />
+        <u>4.5</u>
+        <tv_uporte_id>3</tv_uporte_id>
+    </row>
+    <row>
+        <presence_sas>0</presence_sas>
+        <materiau>pvc|bois</materiau>
+        <isolation></isolation>
+        <type_vitrage>double_vitrage|triple_vitrage</type_vitrage>
+        <taux_vitrage gt="0" lt="" gte="" eq="" />
+        <u>3.3</u>
+        <tv_uporte_id>4</tv_uporte_id>
+    </row>
+    <row>
+        <presence_sas>0</presence_sas>
+        <materiau>metal</materiau>
+        <isolation></isolation>
+        <type_vitrage></type_vitrage>
+        <taux_vitrage gt="" lt="" gte="" eq="0" />
+        <u>5.8</u>
+        <tv_uporte_id>5</tv_uporte_id>
+    </row>
+    <row>
+        <presence_sas>0</presence_sas>
+        <materiau>metal</materiau>
+        <isolation></isolation>
+        <type_vitrage>simple_vitrage</type_vitrage>
+        <taux_vitrage gt="0" lt="" gte="" eq="" />
+        <u>5.8</u>
+        <tv_uporte_id>6</tv_uporte_id>
+    </row>
+    <row>
+        <presence_sas>0</presence_sas>
+        <materiau>metal</materiau>
+        <isolation></isolation>
+        <type_vitrage>double_vitrage|triple_vitrage</type_vitrage>
+        <taux_vitrage gt="" lt="30" gte="" eq="" />
+        <u>5.5</u>
+        <tv_uporte_id>7</tv_uporte_id>
+    </row>
+    <row>
+        <presence_sas>0</presence_sas>
+        <materiau>metal</materiau>
+        <isolation></isolation>
+        <type_vitrage>double_vitrage|triple_vitrage</type_vitrage>
+        <taux_vitrage gt="" lt="" gte="30" eq="" />
+        <u>4.8</u>
+        <tv_uporte_id>8</tv_uporte_id>
+    </row>
+</table>

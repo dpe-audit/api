@@ -3,10 +3,10 @@
 namespace App\Database\Local\Table;
 
 use App\Domain\Batiment\ZoneClimatique;
-use App\Domain\Enveloppe\PlancherBas\Position\Mitoyennete;
+use App\Domain\Enveloppe\Paroi\Mitoyennete;
 use App\Domain\Enveloppe\PlancherBas\TypePlancherBas;
 use App\Engine\Table\PlancherBasTableValeurRepository;
-use App\Utils\Math;
+use App\Utils\Interpolation;
 
 final class XMLPlancherBasTableValeurRepository extends XMLParoiTableValeurRepository implements PlancherBasTableValeurRepository
 {
@@ -40,28 +40,15 @@ final class XMLPlancherBasTableValeurRepository extends XMLParoiTableValeurRepos
         float $surface,
         float $u,
     ): ?float {
-        $_2sp = \round(2 * $surface / $perimetre);
-
-        $records = $this->db->repository('plancher_bas.ue')
+        $points = $this->db->repository('plancher_bas.ue')
             ->createQuery()
             ->and('mitoyennete', $mitoyennete)
             ->andCompareTo('annee_construction', $annee_construction)
             ->getMany()
-            ->usort(name: '_2sp', value: $_2sp)
-            ->slice(0, 2);
+            ->points('u', '_2s_p', 'ue');
 
-        if (0 === $records->count()) {
-            return null;
-        }
-        if (1 === $records->count()) {
-            return $records->first()->floatval('ue');
-        }
-        return Math::interpolation_lineaire(
-            x: $u,
-            x1: $records->first()->floatval('u'),
-            x2: $records->last()->floatval('u'),
-            y1: $records->first()->floatval('ue'),
-            y2: $records->last()->floatval('ue'),
-        );
+        $_2s_p = \round(2 * $surface / $perimetre);
+        $f = new Interpolation($points, Interpolation::METHOD_BILENAIRE);
+        return $f->interpolationBilenaire($u, $_2s_p);
     }
 }

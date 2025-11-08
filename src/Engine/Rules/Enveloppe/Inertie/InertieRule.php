@@ -7,8 +7,6 @@ use App\Engine\{Context, Rule};
 
 final class InertieRule extends Rule
 {
-    // * Données intermédiaires
-
     /**
      * @return array<int, array{surface: float, inertie: Inertie}>
      */
@@ -20,8 +18,6 @@ final class InertieRule extends Rule
                 'inertie' => $this->requireIterator(InertieNiveauRule::class, $item)->inertie(),
             ])->values();
     }
-
-    // * Données calculées
 
     /**
      * Etat d'inertie de l'enveloppe
@@ -38,7 +34,8 @@ final class InertieRule extends Rule
                     $niveaux
                 ));
             }
-            $inerties = max($inerties);
+            $max = max($inerties);
+            $inerties = array_filter($inerties, fn($item) => $item === $max);
             $inerties = array_map(fn($item) => Inertie::from($item), array_keys($inerties));
 
             if (count($inerties) === 1) {

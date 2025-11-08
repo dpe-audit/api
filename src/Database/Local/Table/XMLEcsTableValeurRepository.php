@@ -6,6 +6,7 @@ use App\Database\Local\{XMLTableElement, XMLTableDatabase};
 use App\Domain\Batiment\ZoneClimatique;
 use App\Domain\Batiment\TypeBatiment;
 use App\Domain\Ecs\Generateur\EnergieGenerateur;
+use App\Domain\Ecs\Generateur\Position\PositionChauffeEau;
 use App\Domain\Ecs\Generateur\Signaletique\LabelGenerateur;
 use App\Domain\Ecs\Generateur\Signaletique\ModeCombustion;
 use App\Domain\Ecs\Generateur\TypeGenerateur;
@@ -67,13 +68,13 @@ final class XMLEcsTableValeurRepository implements EcsTableValeurRepository
     }
 
     public function cr(
-        TypeGenerateur $type_generateur,
+        PositionChauffeEau $position_chauffe_eau,
         float $volume_stockage,
         ?LabelGenerateur $label_generateur
     ): ?float {
         return $this->db->repository('ecs.cr')
             ->createQuery()
-            ->and('type_generateur', $type_generateur)
+            ->and('position_chauffe_eau', $position_chauffe_eau)
             ->and('label_generateur', $label_generateur)
             ->andCompareTo('volume_stockage', $volume_stockage)
             ->getOne()

@@ -5,7 +5,7 @@ namespace App\Database\Local\Table;
 use App\Database\Local\{XMLTableDatabase, XMLTableElement};
 use App\Domain\Batiment\ZoneClimatique;
 use App\Domain\Common\Enum\{Mois, Orientation};
-use App\Engine\Rules\SollicitationsClimatiques\SollicitationsExterieures;
+use App\Engine\Rules\Batiment\SollicitationsExterieures;
 use App\Engine\Table\SollicitationsClimatiquesTableValeurRepository;
 
 final class XMLSollicitationsClimatiquesTableValeurRepository implements SollicitationsClimatiquesTableValeurRepository

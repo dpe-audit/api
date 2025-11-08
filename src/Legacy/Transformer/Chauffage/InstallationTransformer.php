@@ -138,7 +138,7 @@ final class InstallationTransformer
         $this->installation_chauffage = $installation_chauffage;
 
         return new InstallationDto(
-            id: $installation_chauffage->installation_sdb_id(),
+            id: $installation_chauffage->id(),
             description: $installation_chauffage->description(),
             surface: $this->surface(),
             comptage_individuel: $this->comptage_individuel(),

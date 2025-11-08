@@ -5,6 +5,7 @@ namespace App\Dto\Batiment;
 use App\Domain\Batiment\Batiment;
 use App\Domain\Batiment\TypeBatiment;
 use App\Dto\Adresse\AdresseDto;
+use App\Validation;
 
 /**
  * @see https://github.com/dpe-audit/schemas/blob/main/schemas/batiment/batiment.yaml
@@ -13,6 +14,7 @@ final class BatimentDto
 {
     public function __construct(
         public readonly TypeBatiment $type,
+        #[Validation\Annee\AnneeValid]
         public readonly int $annee_construction,
         public readonly float $altitude,
         public readonly int $logements,

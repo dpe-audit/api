@@ -13,14 +13,14 @@ final class CreateProductionHandler
 
     public function __invoke(ProductionDto $payload): Production
     {
-        $entity = Production::create();
+        $aggregate = Production::create();
 
         foreach ($payload->panneaux_photovoltaiques as $panneau_photovoltaique) {
-            $entity->add_panneau_photovoltaique(
-                $this->panneau_photovoltaique_handler->__invoke(payload: $panneau_photovoltaique, production: $entity)
+            $aggregate->add_panneau_photovoltaique(
+                $this->panneau_photovoltaique_handler->__invoke(payload: $panneau_photovoltaique, aggregate: $aggregate)
             );
         }
 
-        return $entity;
+        return $aggregate;
     }
 }

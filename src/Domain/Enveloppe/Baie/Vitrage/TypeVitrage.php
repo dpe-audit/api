@@ -22,6 +22,15 @@ enum TypeVitrage: string
         };
     }
 
+    public function with_vitrage_fe(): self
+    {
+        return match ($this) {
+            self::DOUBLE_VITRAGE => self::DOUBLE_VITRAGE_FE,
+            self::TRIPLE_VITRAGE => self::TRIPLE_VITRAGE_FE,
+            default => $this,
+        };
+    }
+
     public function isolation(): bool
     {
         return match ($this) {

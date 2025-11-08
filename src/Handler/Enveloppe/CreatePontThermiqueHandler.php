@@ -20,7 +20,9 @@ final class CreatePontThermiqueHandler
             Assert::notNull($aggregate->parois()->find(Id::fromString($payload->liaison->plancher_id)));
         }
         if ($payload->liaison->ouverture_id) {
-            Assert::notNull($aggregate->baies()->find(Id::fromString($payload->liaison->ouverture_id)));
+            $entity = $aggregate->baies()->find(Id::fromString($payload->liaison->ouverture_id));
+            $entity = $entity ?? $aggregate->portes()->find(Id::fromString($payload->liaison->ouverture_id));
+            Assert::notNull($entity);
         }
         return PontThermique::create(
             id: Id::fromString($payload->id),

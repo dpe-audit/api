@@ -31,8 +31,8 @@ final class PontThermique
         Liaison $liaison,
     ): self {
         Assert::same($liaison->mur->enveloppe(), $enveloppe);
-        Assert::nullOrSame($liaison->plancher->enveloppe(), $enveloppe);
-        Assert::nullOrSame($liaison->ouverture->enveloppe(), $enveloppe);
+        Assert::nullOrSame($liaison->plancher?->enveloppe(), $enveloppe);
+        Assert::nullOrSame($liaison->ouverture?->enveloppe(), $enveloppe);
 
         return new self(
             id: $id,

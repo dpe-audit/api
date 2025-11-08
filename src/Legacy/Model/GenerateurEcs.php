@@ -88,6 +88,11 @@ final class GenerateurEcs
         );
     }
 
+    public function match(string $reference): bool
+    {
+        return $this->reference === $reference || str_contains($this->reference, $reference);
+    }
+
     public function match_generateur_chauffage(GenerateurChauffage $generateur_chauffage): bool
     {
         return $generateur_chauffage->enum_type_generateur_ecs_id() === $this->enum_type_generateur_ecs_id

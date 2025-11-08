@@ -21,9 +21,10 @@ final class DeperditionMurRule extends DeperditionParoiRule
     // Résistance additionnelle dûe à la présence d'un enduit sur une paroi ancienne
     final public const RESISTANCE_ENDUIT_PAROI_ANCIENNE = 0.7;
 
-    public function __construct(
-        private MurTableValeurRepository $repository,
-    ) {}
+    public function __construct(private MurTableValeurRepository $repository)
+    {
+        parent::__construct($repository);
+    }
 
     /**
      * @inheritDoc
@@ -48,9 +49,9 @@ final class DeperditionMurRule extends DeperditionParoiRule
         return $this->item()->type_structure();
     }
 
-    public function epaisseur_structure(): ?float
+    public function epaisseur_structure(): float
     {
-        return $this->item()->epaisseur_structure();
+        return $this->item()->epaisseur_structure() ?? 0;
     }
 
     public function type_doublage(): ?TypeDoublage
@@ -142,7 +143,7 @@ final class DeperditionMurRule extends DeperditionParoiRule
                     epaisseur_structure: $this->epaisseur_structure(),
                     annee_construction: $this->annee_construction(),
                 )
-                ?? throw new \DomainException('Valeur forfaitaire Umur non trouvée');
+                ?? throw new \DomainException('Valeur forfaitaire Umur0 non trouvée');
 
             $u0 += $this->u0_doublage();
             $u0 += $this->u0_enduit_isolant();

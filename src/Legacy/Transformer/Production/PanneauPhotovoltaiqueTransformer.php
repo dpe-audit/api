@@ -70,7 +70,7 @@ final class PanneauPhotovoltaiqueTransformer
         }
         return new PanneauPhotovoltaiqueDto(
             id: $panneau_pv->id(),
-            description: $panneau_pv->description(),
+            description: "Non renseigné",
             orientation: $orientation,
             inclinaison: $inclinaison,
             modules: $modules,

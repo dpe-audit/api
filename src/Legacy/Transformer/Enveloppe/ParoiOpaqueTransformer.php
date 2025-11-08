@@ -2,6 +2,7 @@
 
 namespace App\Legacy\Transformer\Enveloppe;
 
+use App\Domain\Enveloppe\Paroi\Inertie;
 use App\Domain\Enveloppe\Paroi\Isolation\{EtatIsolation, TypeIsolation};
 use App\Legacy\Model\{Paroi, ParoiOpaque};
 
@@ -16,6 +17,14 @@ abstract class ParoiOpaqueTransformer extends ParoiTransformer
      * @var T
      */
     protected Paroi $paroi;
+
+    public function inertie(): ?Inertie
+    {
+        if (null === $this->paroi->paroi_lourde) {
+            return null;
+        }
+        return $this->paroi->paroi_lourde ? Inertie::LOURDE : Inertie::LEGERE;
+    }
 
     public function epaisseur_isolation(): ?float
     {

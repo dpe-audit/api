@@ -9,11 +9,11 @@ use App\Dto\Production\PanneauPhotovoltaiqueDto;
 
 final class CreatePanneauPhotovoltaiqueHandler
 {
-    public function __invoke(PanneauPhotovoltaiqueDto $payload, Production $production): PanneauPhotovoltaique
+    public function __invoke(PanneauPhotovoltaiqueDto $payload, Production $aggregate): PanneauPhotovoltaique
     {
         return PanneauPhotovoltaique::create(
             id: Id::fromString($payload->id),
-            production: $production,
+            production: $aggregate,
             description: $payload->description,
             orientation: $payload->orientation,
             inclinaison: $payload->inclinaison,

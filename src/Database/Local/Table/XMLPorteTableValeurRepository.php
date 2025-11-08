@@ -19,8 +19,8 @@ final class XMLPorteTableValeurRepository extends XMLParoiTableValeurRepository 
             ->createQuery()
             ->and('presence_sas', $presence_sas)
             ->and('isolation', $isolation)
-            ->and('materiau', $materiau)
-            ->and('type_vitrage', $type_vitrage)
+            ->and('materiau', $materiau, false)
+            ->and('type_vitrage', $type_vitrage, false)
             ->andCompareTo('taux_vitrage', $taux_vitrage)
             ->getOne()
             ?->floatval('u');

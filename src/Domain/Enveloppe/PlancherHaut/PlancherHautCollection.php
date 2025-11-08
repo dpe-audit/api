@@ -17,7 +17,7 @@ final class PlancherHautCollection extends ParoiCollection
 
     public function find(Id $id): ?PlancherHaut
     {
-        return array_find($this->elements, fn(PlancherHaut $item): bool => $item->id() === $id);
+        return array_find($this->elements, fn(PlancherHaut $item): bool => $item->id()->equals($id));
     }
 
     public function surface(): float

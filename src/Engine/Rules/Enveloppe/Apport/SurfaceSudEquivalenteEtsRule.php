@@ -39,16 +39,17 @@ final class SurfaceSudEquivalenteEtsRule extends RuleIterator
 
     // * Données intermédiaires
 
-    public function sst_j(Mois $mois): float
+    public function sst(?Mois $mois = null): float
     {
-        return $this->get("sst::{$mois->value}", function () use ($mois): float {
+        $key = $mois ? "sst::{$mois->value}" : 'sst';
+        return $this->get($key, function () use ($mois): float {
             return $this->item()->baies()
-                ->map(fn($item) => $this->requireIterator(SurfaceSudEquivalenteEtsBaieRule::class, $item)->sst_j($mois))
+                ->map(fn($item) => $this->requireIterator(SurfaceSudEquivalenteEtsBaieRule::class, $item)->sst($mois))
                 ->reduce(fn($carry, $item) => $carry + $item);
         });
     }
 
-    public function sse_baies_j(Mois $mois): float
+    public function sse_baies(Mois $mois): float
     {
         return $this->get("sse_baies::{$mois->value}", function () use ($mois): float {
             return $this->input()->enveloppe->baies()
@@ -94,15 +95,15 @@ final class SurfaceSudEquivalenteEtsRule extends RuleIterator
     // * Données calculées
 
     /**
-     * Surface sud équivalente représentant les apports solaires indirects dans le logement pour le mois j
+     * Surface sud équivalente représentant les apports solaires indirects dans le logement
      */
-    public function ssind_j(Mois $mois): float
+    public function ssind(Mois $mois): float
     {
         return $this->get("ssind::{$mois->value}", function () use ($mois): float {
             if ($this->type_lnc() !== TypeLnc::ESPACE_TAMPON_SOLARISE) {
                 return 0;
             }
-            return $this->sst_j($mois) - $this->ssd_j($mois) * $this->bver();
+            return $this->sst($mois) - $this->ssd($mois) * $this->bver();
         });
     }
 
@@ -111,13 +112,13 @@ final class SurfaceSudEquivalenteEtsRule extends RuleIterator
      * rayonnement solaire traversant directement l’espace tampon pour arriver dans la partie
      * habitable du logement
      */
-    public function ssd_j(Mois $mois): float
+    public function ssd(Mois $mois): float
     {
         return $this->get("ssd::{$mois->value}", function () use ($mois): float {
             if ($this->type_lnc() !== TypeLnc::ESPACE_TAMPON_SOLARISE) {
                 return 0;
             }
-            return $this->sse_baies_j($mois) * $this->t();
+            return $this->sse_baies($mois) * $this->t();
         });
     }
 

@@ -15,9 +15,10 @@ use App\Engine\Table\BaieTableValeurRepository;
  */
 final class DeperditionBaieRule extends DeperditionParoiRule
 {
-    public function __construct(
-        private BaieTableValeurRepository $repository,
-    ) {}
+    public function __construct(private BaieTableValeurRepository $repository)
+    {
+        parent::__construct($repository);
+    }
 
     /**
      * @inheritDoc
@@ -59,15 +60,15 @@ final class DeperditionBaieRule extends DeperditionParoiRule
 
     public function type_vitrage(): TypeVitrage
     {
+        if ($this->survitrage() && false === $this->item()->vitrage()->type->vitrage_complexe()) {
+            return TypeVitrage::DOUBLE_VITRAGE;
+        }
         return $this->item()->vitrage()->type;
     }
 
-    public function type_survitrage(): ?TypeSurvitrage
+    public function survitrage(): bool
     {
-        if (null === $this->item()->survitrage()) {
-            return null;
-        }
-        return $this->item()->survitrage()->type ?? TypeSurvitrage::SURVITRAGE_SIMPLE;
+        return null !== $this->item()->survitrage();
     }
 
     public function type_fermeture(): TypeFermeture
@@ -105,18 +106,24 @@ final class DeperditionBaieRule extends DeperditionParoiRule
         if ($this->item()->vitrage()->epaisseur_lame) {
             return $this->item()->vitrage()->epaisseur_lame;
         }
-        if ($this->item()->vitrage()->type === TypeVitrage::SIMPLE_VITRAGE) {
-            return $this->item()->survitrage() !== null
-                ? $this->item()->survitrage()->epaisseur_lame ?? 6
-                : 0;
+        if ($this->item()->vitrage()->type->vitrage_complexe()) {
+            return 6;
         }
-        return $this->item()->vitrage()->type->vitrage_complexe() ? 6 : 0;
+        if ($this->survitrage()) {
+            return $this->item()->survitrage()->epaisseur_lame ?? 6;
+        }
+        return 0;
     }
 
     public function nature_lame(): ?NatureGazLame
     {
-        return $this->item()->vitrage()->nature_lame
-            ?? $this->item()->vitrage()->type->vitrage_complexe() ? NatureGazLame::AIR : null;
+        if ($this->item()->vitrage()->nature_lame) {
+            return $this->item()->vitrage()->nature_lame;
+        }
+        if ($this->item()->vitrage()->type->vitrage_complexe()) {
+            return NatureGazLame::AIR;
+        }
+        return $this->survitrage() ? NatureGazLame::AIR : null;
     }
 
     // * Données intermédiaires
@@ -171,13 +178,15 @@ final class DeperditionBaieRule extends DeperditionParoiRule
     public function ug1(): float
     {
         return $this->get('ug1', function (): float {
-            return $this->ug_saisi() ?? $this->repository->ug(
-                type_baie: $this->type_baie(),
+            $value = $this->ug_saisi() ?? $this->repository->ug(
                 type_vitrage: $this->type_vitrage(),
+                type_baie: $this->type_baie(),
                 nature_gaz_lame: $this->nature_lame(),
                 inclinaison_vitrage: $this->inclinaison(),
                 epaisseur_lame_air: $this->epaisseur_lame(),
             ) ?? throw new \DomainException('Valeur forfaitaire ug non trouvée');
+
+            return $this->survitrage() ? $value + 0.1 : $value;
         });
     }
 

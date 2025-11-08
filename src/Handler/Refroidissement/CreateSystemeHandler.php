@@ -9,14 +9,14 @@ use App\Dto\Refroidissement\SystemeDto;
 
 final class CreateSystemeHandler
 {
-    public function __invoke(SystemeDto $payload, Refroidissement $entity): Systeme
+    public function __invoke(SystemeDto $payload, Refroidissement $aggregate): Systeme
     {
         return Systeme::create(
             id: Id::fromString($payload->id),
-            refroidissement: $entity,
+            refroidissement: $aggregate,
             description: $payload->description,
-            installation: $entity->installations()->find(Id::fromString($payload->installation_id)),
-            generateur: $entity->generateurs()->find(Id::fromString($payload->generateur_id)),
+            installation: $aggregate->installations()->find(Id::fromString($payload->installation_id)),
+            generateur: $aggregate->generateurs()->find(Id::fromString($payload->generateur_id)),
         );
     }
 }

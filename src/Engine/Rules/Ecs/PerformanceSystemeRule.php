@@ -4,76 +4,12 @@ namespace App\Engine\Rules\Ecs;
 
 use App\Domain\Common\Enum\{Mois, Usage};
 use App\Domain\Ecs\Generateur\EnergieGenerateur;
-use App\Domain\Ecs\Systeme\Systeme;
 use App\Engine\Context;
 use App\Engine\Rules\Batiment\WithBatimentRule;
 
 abstract class PerformanceSystemeRule extends PerformanceAuxiliaireRule
 {
     use WithBatimentRule;
-
-    abstract public static function supports(Systeme $entity): bool;
-
-    /**
-     * @inheritDoc
-     */
-    public function collection(): array
-    {
-        return $this->input()->ecs->systemes()
-            ->filter(fn(Systeme $item) => static::supports($item))
-            ->values();
-    }
-
-    // * Données d'entrée
-
-    public function generateur_collectif(): bool
-    {
-        return $this->item()->generateur()->position()->generateur_collectif;
-    }
-
-    public function volume_stockage(): float
-    {
-        return $this->item()->stockage()->volume ?? 0;
-    }
-
-    public function position_volume_chauffe(): bool
-    {
-        return $this->item()->generateur()->position()->position_volume_chauffe ?? false;
-    }
-
-    public function position_volume_chauffe_stockage(): bool
-    {
-        return $this->item()->stockage()->position_volume_chauffe ?? false;
-    }
-
-    public function alimentation_contigue(): bool
-    {
-        return $this->item()->reseau()->alimentation_contigue;
-    }
-
-    public function contenu_co2_reseau_chaleur(): ?float
-    {
-        return $this->item()->generateur()->position()->reseau_chaleur?->contenu_co2();
-    }
-
-    // * Données intermédiaires
-
-    public function fecs(): float
-    {
-        return $this->requireIterator(PerformanceInstallationRule::class, $this->item()->installation())->fecs();
-    }
-
-    public function pertes_generation_generateur(?Mois $mois = null): float
-    {
-        $entity = $this->item()->generateur();
-        return $this->requireIterator(PerformanceGenerateurRule::class, $entity)->pertes_generation($mois);
-    }
-
-    public function pertes_generation_generateur_recuperables(?Mois $mois = null): float
-    {
-        $entity = $this->item()->generateur();
-        return $this->requireIterator(PerformanceGenerateurRule::class, $entity)->pertes_generation_recuperables($mois);
-    }
 
     public function pertes_stockage_integre(?Mois $mois = null): float
     {
@@ -86,8 +22,6 @@ abstract class PerformanceSystemeRule extends PerformanceAuxiliaireRule
         $rule = $this->requireIterator(PerformanceGenerateurRule::class, $this->item()->generateur());
         return $rule->pertes_stockage_recuperables($mois) * ($this->rdim() / $rule->rdim());
     }
-
-    // * Données de sortie
 
     /**
      * Consommation finale d'eau chaude sanitaire en kWh/an
@@ -183,9 +117,7 @@ abstract class PerformanceSystemeRule extends PerformanceAuxiliaireRule
     {
         $key = $mois ? "pertes_stockage::{$mois->value}" : "pertes_stockage";
         return $this->get($key, function () use ($mois): float {
-            $value = $this->pertes_stockage_integre($mois) * $this->rdim();
-            $value += $this->pertes_stockage_independant($mois);
-            return $value;
+            return $this->pertes_stockage_integre($mois) + $this->pertes_stockage_independant($mois);
         });
     }
 
@@ -196,9 +128,7 @@ abstract class PerformanceSystemeRule extends PerformanceAuxiliaireRule
     {
         $key = $mois ? "pertes_stockage_recuperables::{$mois->value}" : "pertes_stockage_recuperables";
         return $this->get($key, function () use ($mois): float {
-            $value = $this->pertes_stockage_integre_recuperables($mois) * ($this->rdim());
-            $value += $this->pertes_stockage_independant_recuperables($mois);
-            return $value;
+            return $this->pertes_stockage_integre_recuperables($mois) + $this->pertes_stockage_independant_recuperables($mois);
         });
     }
 

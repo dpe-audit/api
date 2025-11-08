@@ -3,6 +3,7 @@
 namespace App\Dto\Enveloppe\Porte;
 
 use App\Domain\Enveloppe\Porte\{Isolation, Materiau, Porte};
+use App\Validation;
 
 /**
  * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/porte.yaml
@@ -14,6 +15,7 @@ final class PorteDto
         public readonly string $description,
         public readonly ?Isolation $isolation,
         public readonly ?Materiau $materiau,
+        #[Validation\Annee\AnneeValid]
         public readonly ?int $annee_installation,
         public readonly ?float $u,
         public readonly PositionDto $position,

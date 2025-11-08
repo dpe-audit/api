@@ -25,7 +25,7 @@ final class PontThermiqueTransformer
 
     public function pont_thermique_partiel(): bool
     {
-        return $this->pont_thermique->pourcentage_valeur_pont_thermique > 0;
+        return $this->pont_thermique->pourcentage_valeur_pont_thermique < 1;
     }
 
     public function kpt(): ?float
@@ -44,9 +44,15 @@ final class PontThermiqueTransformer
 
     public function mur_id(): string
     {
-        return $this->context->logement()->enveloppe->match_mur($this->pont_thermique->reference_1)?->id()
-            ?? $this->context->logement()->enveloppe->match_mur($this->pont_thermique->reference_2)?->id()
-            ?? current($this->context->logement()->enveloppe->mur_collection)->id();
+        $id = null;
+
+        if ($this->pont_thermique->reference_1) {
+            $id = $this->context->logement()->enveloppe->match_mur($this->pont_thermique->reference_1)?->id();
+        }
+        if ($this->pont_thermique->reference_2) {
+            $id = $id ?? $this->context->logement()->enveloppe->match_mur($this->pont_thermique->reference_2)?->id();
+        }
+        return $id ?? current($this->context->logement()->enveloppe->mur_collection)->id();
     }
 
     public function plancher_id(bool $default = false): ?string
@@ -54,10 +60,17 @@ final class PontThermiqueTransformer
         if (!in_array($this->type_liaison(), [TypeLiaison::PLANCHER_BAS_MUR, TypeLiaison::PLANCHER_HAUT_MUR,])) {
             return null;
         }
-        $id = $this->context->logement()->enveloppe->match_plancher_bas($this->pont_thermique->reference_1)?->id()
-            ?? $this->context->logement()->enveloppe->match_plancher_bas($this->pont_thermique->reference_2)?->id()
-            ?? $this->context->logement()->enveloppe->match_plancher_haut($this->pont_thermique->reference_1)?->id()
-            ?? $this->context->logement()->enveloppe->match_plancher_haut($this->pont_thermique->reference_2)?->id();
+        $id = null;
+
+        if ($this->pont_thermique->reference_1) {
+            $id = $this->context->logement()->enveloppe->match_plancher_bas($this->pont_thermique->reference_1)?->id()
+                ?? $this->context->logement()->enveloppe->match_plancher_haut($this->pont_thermique->reference_1)?->id();
+        }
+
+        if ($this->pont_thermique->reference_2) {
+            $id = $id ?? $this->context->logement()->enveloppe->match_plancher_bas($this->pont_thermique->reference_2)?->id()
+                ?? $this->context->logement()->enveloppe->match_plancher_haut($this->pont_thermique->reference_2)?->id();
+        }
 
         if ($default) {
             $id = $id ?? current($this->context->logement()->enveloppe->plancher_bas_collection)?->id();
@@ -71,11 +84,16 @@ final class PontThermiqueTransformer
         if ($this->type_liaison() !== TypeLiaison::MENUISERIE_MUR) {
             return null;
         }
-        $id = $this->context->logement()->enveloppe->match_baie_vitree($this->pont_thermique->reference_1)?->id()
-            ?? $this->context->logement()->enveloppe->match_baie_vitree($this->pont_thermique->reference_2)?->id()
-            ?? $this->context->logement()->enveloppe->match_porte($this->pont_thermique->reference_1)?->id()
-            ?? $this->context->logement()->enveloppe->match_porte($this->pont_thermique->reference_2)?->id();
+        $id = null;
 
+        if ($this->pont_thermique->reference_1) {
+            $id = $this->context->logement()->enveloppe->match_baie_vitree($this->pont_thermique->reference_1)?->id()
+                ?? $this->context->logement()->enveloppe->match_porte($this->pont_thermique->reference_1)?->id();
+        }
+        if ($this->pont_thermique->reference_2) {
+            $id = $id ?? $this->context->logement()->enveloppe->match_baie_vitree($this->pont_thermique->reference_2)?->id()
+                ?? $this->context->logement()->enveloppe->match_porte($this->pont_thermique->reference_2)?->id();
+        }
         if ($default) {
             $id = $id ?? current($this->context->logement()->enveloppe->baie_vitree_collection)?->id();
             $id = $id ?? current($this->context->logement()->enveloppe->porte_collection)?->id();

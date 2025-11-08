@@ -1,4 +1,4 @@
-﻿type_generateur;label_generateur;volume_stockage/gt;volume_stockage/lte;cr
+﻿position_chauffe_eau;label_generateur;volume_stockage/gt;volume_stockage/lte;cr
 chauffe_eau_horizontal;;0;100;0.39
 chauffe_eau_horizontal;;100;200;0.33
 chauffe_eau_horizontal;;200;300;0.3

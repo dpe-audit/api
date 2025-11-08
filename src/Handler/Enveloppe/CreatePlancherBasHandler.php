@@ -4,7 +4,7 @@ namespace App\Handler\Enveloppe;
 
 use App\Domain\Common\ValueObject\Id;
 use App\Domain\Enveloppe\Enveloppe;
-use App\Domain\Enveloppe\PlancherBas\Isolation\Isolation;
+use App\Domain\Enveloppe\Paroi\Isolation\Isolation;
 use App\Domain\Enveloppe\PlancherBas\PlancherBas;
 use App\Domain\Enveloppe\PlancherBas\Position\Position;
 use App\Dto\Enveloppe\PlancherBas\PlancherBasDto;

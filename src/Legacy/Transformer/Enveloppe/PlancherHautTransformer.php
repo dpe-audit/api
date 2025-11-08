@@ -14,7 +14,6 @@ use App\Legacy\Transformer\Context;
  */
 final class PlancherHautTransformer extends ParoiOpaqueTransformer
 {
-
     public function configuration(): Configuration
     {
         return match ($this->paroi->enum_type_plancher_haut_id) {
@@ -46,13 +45,6 @@ final class PlancherHautTransformer extends ParoiOpaqueTransformer
             15 => TypePlancherHaut::BAC_ACIER,
             default => null,
         };
-    }
-
-    public function inertie(): Inertie
-    {
-        return $this->context->logement()->enveloppe->inertie_plancher_haut_lourd
-            ? Inertie::LOURDE
-            : Inertie::LEGERE;
     }
 
     public function __invoke(PlancherHaut $plancher_haut, Context $context): PlancherHautDto

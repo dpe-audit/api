@@ -13,6 +13,7 @@ use App\Dto\Enveloppe\PlancherBas\PlancherBasDto;
 use App\Dto\Enveloppe\PlancherHaut\PlancherHautDto;
 use App\Dto\Enveloppe\PontThermique\PontThermiqueDto;
 use App\Dto\Enveloppe\Porte\PorteDto;
+use App\Validation;
 use Symfony\Component\Validator\Constraints;
 
 /**
@@ -29,6 +30,7 @@ use Symfony\Component\Validator\Constraints;
  * @property array<PorteDto> $portes
  * @property array<PontThermiqueDto> $ponts_thermiques
  */
+#[Validation\Enveloppe\EnveloppeValid]
 final class EnveloppeDto
 {
     public function __construct(
@@ -86,148 +88,44 @@ final class EnveloppeDto
         );
     }
 
-    #[Constraints\IsTrue]
-    public function is_reference_masque_exists(): bool
+    public function find_baie(string $id): ?BaieDto
     {
-        foreach ($this->baies as $baie) {
-            foreach ($baie->masques as $id) {
-                if (null === array_find($this->masques, fn(MasqueDto $masque) => $masque->id === $id)) {
-                    return false;
-                }
-            }
-        }
-        return true;
+        return array_find($this->baies, fn($item) => $item->id === $id);
     }
 
-    #[Constraints\IsTrue]
-    public function is_reference_double_fenetre_exists(): bool
+    public function find_mur(string $id): ?MurDto
     {
-        foreach ($this->baies as $baie) {
-            if (null === $baie->position->double_fenetre_id) {
-                continue;
-            }
-            if (null === array_find($this->doubles_fenetres, fn(DoubleFenetreDto $double_fenetre) => $double_fenetre->id === $baie->position->double_fenetre_id)) {
-                return false;
-            }
-        }
-        return true;
+        return array_find($this->murs, fn($item) => $item->id === $id);
     }
 
-    #[Constraints\IsTrue]
-    public function is_reference_pont_thermique_exists(): bool
+    public function find_plancher_bas(string $id): ?PlancherBasDto
     {
-        foreach ($this->ponts_thermiques as $item) {
-            if (null === array_find($this->murs, fn(MurDto $paroi) => $paroi->id === $item->liaison->mur_id)) {
-                return false;
-            }
-            if ($item->liaison->plancher_id) {
-                if (array_find($this->planchers_bas, fn(PlancherBasDto $paroi) => $paroi->id === $item->liaison->plancher_id)) {
-                    return true;
-                }
-                if (array_find($this->planchers_hauts, fn(PlancherHautDto $paroi) => $paroi->id === $item->liaison->plancher_id)) {
-                    return true;
-                }
-                return false;
-            }
-            if ($item->liaison->ouverture_id) {
-                if (array_find($this->baies, fn(BaieDto $paroi) => $paroi->id === $item->liaison->ouverture_id)) {
-                    return true;
-                }
-                if (array_find($this->portes, fn(PorteDto $paroi) => $paroi->id === $item->liaison->ouverture_id)) {
-                    return true;
-                }
-                return false;
-            }
-        }
-        return true;
+        return array_find($this->planchers_bas, fn($item) => $item->id === $id);
     }
 
-    #[Constraints\IsTrue]
-    public function is_reference_baie_exists(): bool
+    public function find_plancher_haut(string $id): ?PlancherHautDto
     {
-        foreach ($this->baies as $baie) {
-            if (null === $baie->position->paroi_id) {
-                continue;
-            }
-            if (array_find($this->murs, fn(MurDto $paroi) => $paroi->id === $baie->position->paroi_id)) {
-                return true;
-            }
-            if (array_find($this->planchers_bas, fn(PlancherBasDto $paroi) => $paroi->id === $baie->position->paroi_id)) {
-                return true;
-            }
-            if (array_find($this->planchers_hauts, fn(PlancherHautDto $paroi) => $paroi->id === $baie->position->paroi_id)) {
-                return true;
-            }
-            return false;
-        }
-        return true;
+        return array_find($this->planchers_hauts, fn($item) => $item->id === $id);
     }
 
-    #[Constraints\IsTrue]
-    public function is_reference_porte_exists(): bool
+    public function find_porte(string $id): ?PorteDto
     {
-        foreach ($this->portes as $porte) {
-            if (null === $porte->position->paroi_id) {
-                continue;
-            }
-            if (array_find($this->murs, fn(MurDto $paroi) => $paroi->id === $porte->position->paroi_id)) {
-                return true;
-            }
-            if (array_find($this->planchers_bas, fn(PlancherBasDto $paroi) => $paroi->id === $porte->position->paroi_id)) {
-                return true;
-            }
-            if (array_find($this->planchers_hauts, fn(PlancherHautDto $paroi) => $paroi->id === $porte->position->paroi_id)) {
-                return true;
-            }
-            return false;
-        }
-        return true;
+        return array_find($this->portes, fn($item) => $item->id === $id);
     }
 
-    #[Constraints\IsTrue]
-    public function is_reference_local_non_chauffe_exists(): bool
+    public function find_masque(string $id): ?MasqueDto
     {
-        foreach ($this->murs as $paroi) {
-            if (null === $id = $paroi->position->local_non_chauffe_id) {
-                continue;
-            }
-            if (null === array_find($this->locaux_non_chauffes, fn(LncDto $dto) => $dto->id === $id)) {
-                return false;
-            }
-        }
-        foreach ($this->planchers_bas as $paroi) {
-            if (null === $id = $paroi->position->local_non_chauffe_id) {
-                continue;
-            }
-            if (null === array_find($this->locaux_non_chauffes, fn(LncDto $dto) => $dto->id === $id)) {
-                return false;
-            }
-        }
-        foreach ($this->planchers_hauts as $paroi) {
-            if (null === $id = $paroi->position->local_non_chauffe_id) {
-                continue;
-            }
-            if (null === array_find($this->locaux_non_chauffes, fn(LncDto $dto) => $dto->id === $id)) {
-                return false;
-            }
-        }
-        foreach ($this->baies as $paroi) {
-            if (null === $id = $paroi->position->local_non_chauffe_id) {
-                continue;
-            }
-            if (null === array_find($this->locaux_non_chauffes, fn(LncDto $dto) => $dto->id === $id)) {
-                return false;
-            }
-        }
-        foreach ($this->portes as $paroi) {
-            if (null === $id = $paroi->position->local_non_chauffe_id) {
-                continue;
-            }
-            if (null === array_find($this->locaux_non_chauffes, fn(LncDto $dto) => $dto->id === $id)) {
-                return false;
-            }
-        }
-        return true;
+        return array_find($this->masques, fn($item) => $item->id === $id);
+    }
+
+    public function find_local_non_chauffe(string $id): ?LncDto
+    {
+        return array_find($this->locaux_non_chauffes, fn($item) => $item->id === $id);
+    }
+
+    public function find_double_fenetre(string $id): ?DoubleFenetreDto
+    {
+        return array_find($this->doubles_fenetres, fn($item) => $item->id === $id);
     }
 
     public function __normalize(): array

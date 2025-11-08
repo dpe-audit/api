@@ -14,7 +14,12 @@ final class BaieVitree extends Paroi
     private ?string $masque_lointain_id = null;
 
     public function __construct(
+        public readonly string $reference,
         public readonly ?string $reference_paroi,
+        public readonly ?string $reference_lnc,
+        public readonly ?string $description,
+        public readonly ?float $surface_aiu,
+        public readonly ?float $surface_aue,
         public readonly float $surface_totale_baie,
         public readonly int $nb_baie,
         public readonly bool $double_fenetre,
@@ -37,6 +42,8 @@ final class BaieVitree extends Paroi
         public readonly int $enum_type_materiaux_menuiserie_id,
         public readonly int $enum_type_fermeture_id,
         public readonly int $enum_methode_saisie_perf_vitrage_id,
+        public readonly int $enum_type_adjacence_id,
+        public readonly ?int $enum_cfg_isolation_lnc_id,
         public readonly ?int $enum_type_gaz_lame_id,
 
         public readonly int $tv_coef_masque_proche_id,
@@ -46,7 +53,9 @@ final class BaieVitree extends Paroi
         public readonly ?int $tv_deltar_id,
         public readonly ?int $tv_ujn_id,
         public readonly ?int $tv_coef_masque_lointain_homogene_id,
+        public readonly ?int $tv_coef_reduction_deperdition_id,
 
+        public readonly float $b,
         public readonly ?float $uw_1,
         public readonly ?float $uw_2,
         public readonly ?float $sw_1,
@@ -73,8 +82,13 @@ final class BaieVitree extends Paroi
             $masque_lointain_non_homogene_collection[] = MasqueLointainNonHomogene::from($item);
         }
 
-        return (new self(
+        return new self(
+            reference: Normalizer::referenceval((string) $xml->donnee_entree->reference),
             reference_paroi: Normalizer::referenceval((string) $xml->donnee_entree->reference_paroi),
+            reference_lnc: Normalizer::referenceval((string) $xml->donnee_entree->reference_lnc),
+            description: (string) $xml->donnee_entree->description ?: null,
+            surface_aiu: (float) $xml->donnee_entree->surface_aiu ?: null,
+            surface_aue: (float) $xml->donnee_entree->surface_aue ?: null,
             surface_totale_baie: (float) $xml->donnee_entree->surface_totale_baie,
             nb_baie: (int) $xml->donnee_entree->nb_baie,
             double_fenetre: (bool)(int) $xml->donnee_entree->double_fenetre,
@@ -97,6 +111,8 @@ final class BaieVitree extends Paroi
             enum_type_pose_id: (int) $xml->donnee_entree->enum_type_pose_id,
             enum_type_vitrage_id: (int) $xml->donnee_entree->enum_type_vitrage_id,
             enum_inclinaison_vitrage_id: (int) $xml->donnee_entree->enum_inclinaison_vitrage_id,
+            enum_type_adjacence_id: (int) $xml->donnee_entree->enum_type_adjacence_id,
+            enum_cfg_isolation_lnc_id: (int) $xml->donnee_entree->enum_cfg_isolation_lnc_id ?: null,
             enum_type_gaz_lame_id: (int) $xml->donnee_entree->enum_type_gaz_lame_id ?: null,
 
             tv_ug_id: (int) $xml->donnee_entree->tv_ug_id ?: null,
@@ -106,7 +122,9 @@ final class BaieVitree extends Paroi
             tv_ujn_id: (int) $xml->donnee_entree->tv_ujn_id ?: null,
             tv_coef_masque_proche_id: (int) $xml->donnee_entree->tv_coef_masque_proche_id,
             tv_coef_masque_lointain_homogene_id: (int) $xml->donnee_entree->tv_coef_masque_lointain_homogene_id ?: null,
+            tv_coef_reduction_deperdition_id: (int) $xml->donnee_entree->tv_coef_reduction_deperdition_id ?: null,
 
+            b: (float) $xml->donnee_intermediaire->b,
             uw_1: (float) $xml->donnee_entree->uw_1 ?: null,
             uw_2: (float) $xml->donnee_entree->uw_2 ?: null,
             sw_1: (float) $xml->donnee_entree->sw_1 ?: null,
@@ -120,13 +138,21 @@ final class BaieVitree extends Paroi
             fe2: (float) $xml->donnee_intermediaire->fe2,
 
             masque_lointain_non_homogene_collection: $masque_lointain_non_homogene_collection,
-            baie_vitree_double_fenetre: $xml->donnee_entree->double_fenetre ? DoubleFenetre::from($xml->donnee_entree->double_fenetre) : null,
-        ))->set($xml);
+            baie_vitree_double_fenetre: $xml->donnee_entree->baie_vitree_double_fenetre
+                ? DoubleFenetre::from($xml->donnee_entree->baie_vitree_double_fenetre)
+                : null,
+        );
     }
 
     public function masque_proche_id(): ?string
     {
-        if (null === $this->masque_proche_id && null !== $this->tv_coef_masque_proche_id) {
+        if (null === $this->masque_proche_id) {
+            if (null === $this->tv_coef_masque_proche_id) {
+                return $this->masque_proche_id = null;
+            }
+            if (19 === $this->tv_coef_masque_proche_id) {
+                return $this->masque_proche_id = null;
+            }
             $this->masque_proche_id = (string) Id::create();
         }
         return $this->masque_proche_id;
@@ -143,5 +169,10 @@ final class BaieVitree extends Paroi
     public function surface(): float
     {
         return $this->surface_totale_baie;
+    }
+
+    public function u(): float
+    {
+        return $this->ujn ?? $this->uw;
     }
 }

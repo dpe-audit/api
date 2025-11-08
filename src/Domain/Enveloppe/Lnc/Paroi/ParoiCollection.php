@@ -29,8 +29,6 @@ final class ParoiCollection extends ArrayCollection
 
     public function surface(): float
     {
-        return $this->reduce(
-            fn(float $surface, Paroi $item): float => $surface + $item->position()->surface
-        );
+        return $this->reduce(fn(float $surface, Paroi $item): float => $surface + $item->position()->surface);
     }
 }

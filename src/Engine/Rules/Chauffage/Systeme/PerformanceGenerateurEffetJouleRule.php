@@ -2,16 +2,15 @@
 
 namespace App\Engine\Rules\Chauffage\Systeme;
 
-use App\Domain\Chauffage\Systeme\Systeme;
 use App\Engine\Rules\Chauffage\PerformanceSystemeRule;
 
 final class PerformanceGenerateurEffetJouleRule extends PerformanceSystemeRule
 {
-    public static function supports(Systeme $entity): bool
+    public  function supports(): bool
     {
-        return $entity->generateur()->energie()?->is_electricite()
-            && false === $entity->generateur()->type()?->is_pac()
-            && false === $entity->generateur()->position()->generateur_multi_batiment;
+        return $this->energie_generateur()->is_electricite()
+            && false === $this->type_generateur()->is_pac()
+            && false === $this->generateur_multi_batiment();
     }
 
     /**

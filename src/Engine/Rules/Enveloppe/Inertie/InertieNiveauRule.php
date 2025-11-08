@@ -30,6 +30,11 @@ final class InertieNiveauRule extends RuleIterator
 
     // * Données d'entrée
 
+    public function surface(): float
+    {
+        return $this->item()->surface();
+    }
+
     public function inertie_paroi_verticale(): InertieParoi
     {
         return $this->item()->inertie_paroi_verticale();

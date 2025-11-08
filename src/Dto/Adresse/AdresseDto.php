@@ -3,10 +3,12 @@
 namespace App\Dto\Adresse;
 
 use App\Domain\Adresse\Adresse;
+use App\Validation;
 
 /**
  * @see https://github.com/dpe-audit/schemas/blob/main/schemas/adresse/adresse.yaml
  */
+#[Validation\Adresse\AdresseExists]
 final class AdresseDto
 {
     public function __construct(

@@ -17,10 +17,12 @@ final class CreateSystemeHandler
             chauffage: $aggregate,
             description: $payload->description,
             type: $payload->type,
+            cascade: $payload->cascade,
             installation: $aggregate->installations()->find(Id::fromString($payload->installation_id)),
             generateur: $aggregate->generateurs()->find(Id::fromString($payload->generateur_id)),
             reseau: $payload->reseau ? Reseau::create(
                 type_distribution: $payload->reseau->type_distribution,
+                presence_fluide_frigorigene: $payload->reseau->presence_fluide_frigorigene,
                 presence_circulateur_externe: $payload->reseau->presence_circulateur_externe,
                 niveaux_desservis: $payload->reseau->niveaux_desservis,
                 isolation: $payload->reseau->isolation,

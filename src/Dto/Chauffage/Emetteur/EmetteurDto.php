@@ -3,6 +3,7 @@
 namespace App\Dto\Chauffage\Emetteur;
 
 use App\Domain\Chauffage\Emetteur\{Emetteur, TemperatureDistribution, TypeEmetteur};
+use App\Validation;
 
 /**
  * @see https://github.com/dpe-audit/schemas/blob/main/schemas/chauffage/emetteur.yaml
@@ -15,6 +16,7 @@ final class EmetteurDto
         public readonly TypeEmetteur $type,
         public readonly TemperatureDistribution $temperature_distribution,
         public readonly bool $presence_robinet_thermostatique,
+        #[Validation\Annee\AnneeValid]
         public readonly ?int $annee_installation,
     ) {}
 

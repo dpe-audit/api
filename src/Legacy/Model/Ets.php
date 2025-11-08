@@ -43,4 +43,9 @@ final class Ets
             bver: (float) $xml->donnee_intermediaire->bver
         );
     }
+
+    public function match_reference(string $reference): bool
+    {
+        return $this->reference === $reference || str_contains($this->reference, $reference);
+    }
 }

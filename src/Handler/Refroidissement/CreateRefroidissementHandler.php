@@ -15,23 +15,23 @@ final class CreateRefroidissementHandler
 
     public function __invoke(RefroidissementDto $payload): Refroidissement
     {
-        $entity = Refroidissement::create();
+        $aggregate = Refroidissement::create();
 
         foreach ($payload->generateurs as $generateur) {
-            $entity->add_generateur(
-                $this->generateur_handler->__invoke(payload: $generateur, entity: $entity)
+            $aggregate->add_generateur(
+                $this->generateur_handler->__invoke(payload: $generateur, aggregate: $aggregate)
             );
         }
         foreach ($payload->installations as $installation) {
-            $entity->add_installation(
-                $this->installation_handler->__invoke(payload: $installation, entity: $entity)
+            $aggregate->add_installation(
+                $this->installation_handler->__invoke(payload: $installation, aggregate: $aggregate)
             );
         }
         foreach ($payload->systemes as $systeme) {
-            $entity->add_systeme(
-                $this->systeme_handler->__invoke(payload: $systeme, entity: $entity)
+            $aggregate->add_systeme(
+                $this->systeme_handler->__invoke(payload: $systeme, aggregate: $aggregate)
             );
         }
-        return $entity;
+        return $aggregate;
     }
 }

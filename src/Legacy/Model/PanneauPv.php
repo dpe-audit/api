@@ -4,7 +4,7 @@ namespace App\Legacy\Model;
 
 final class PanneauPv
 {
-    use WithId, WithDescription;
+    use WithId;
 
     public function __construct(
         public readonly ?float $surface_totale_capteurs,

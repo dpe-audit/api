@@ -9,7 +9,7 @@ use App\Domain\Enveloppe\Baie\Position\TypePose;
 use App\Domain\Enveloppe\Baie\Survitrage\TypeSurvitrage;
 use App\Domain\Enveloppe\Baie\Vitrage\{NatureGazLame, TypeVitrage};
 use App\Engine\Table\BaieTableValeurRepository;
-use App\Utils\Math;
+use App\Utils\Interpolation;
 
 final class XMLBaieTableValeurRepository extends XMLParoiTableValeurRepository implements BaieTableValeurRepository
 {
@@ -17,34 +17,20 @@ final class XMLBaieTableValeurRepository extends XMLParoiTableValeurRepository i
 
     public function ug(
         TypeBaie $type_baie,
-        ?TypeVitrage $type_vitrage,
+        TypeVitrage $type_vitrage,
         ?NatureGazLame $nature_gaz_lame,
         ?float $inclinaison_vitrage,
         ?float $epaisseur_lame_air,
     ): ?float {
-        $records = $this->db->repository('baie.ug')
+        return $this->db->repository('baie.ug')
             ->createQuery()
             ->and('type_baie', $type_baie)
             ->and('type_vitrage', $type_vitrage)
-            ->and('nature_gaz_lame', $nature_gaz_lame)
+            ->and('nature_gaz_lame', $nature_gaz_lame, false)
             ->andCompareTo('inclinaison_vitrage', $inclinaison_vitrage)
-            ->getMany()
-            ->usort('epaisseur_lame_air', $epaisseur_lame_air)
-            ->slice(0, 2);
-
-        if ($records->count() === 0) {
-            return null;
-        }
-        if ($records->count() === 1) {
-            return $records->first()->floatval('ug');
-        }
-        return Math::interpolation_lineaire(
-            x: $epaisseur_lame_air,
-            x1: $records->first()->floatval('epaisseur_lame_air'),
-            x2: $records->last()->floatval('epaisseur_lame_air'),
-            y1: $records->first()->floatval('ug'),
-            y2: $records->last()->floatval('ug')
-        );
+            ->andCompareTo('epaisseur_lame_air', $epaisseur_lame_air)
+            ->getOne()
+            ?->floatval('ug');
     }
 
     public function uw(
@@ -54,29 +40,17 @@ final class XMLBaieTableValeurRepository extends XMLParoiTableValeurRepository i
         ?Materiau $materiau,
         ?bool $presence_rupteur_pont_thermique
     ): ?float {
-        $records = $this->db->repository('baie.uw')
+        $points = $this->db->repository('baie.uw')
             ->createQuery()
             ->and('type_baie', $type_baie)
             ->and('presence_soubassement', $presence_soubassement)
-            ->and('materiau', $materiau)
+            ->and('materiau', $materiau, false)
             ->and('presence_rupteur_pont_thermique', $presence_rupteur_pont_thermique)
             ->getMany()
-            ->usort('ug', $ug)
-            ->slice(0, 2);
+            ->points('ug', 'uw');
 
-        if ($records->count() === 0) {
-            return null;
-        }
-        if ($records->count() === 1) {
-            return $records->first()->floatval('uw');
-        }
-        return Math::interpolation_lineaire(
-            x: $ug,
-            x1: $records->first()->floatval('ug'),
-            x2: $records->last()->floatval('ug'),
-            y1: $records->first()->floatval('uw'),
-            y2: $records->last()->floatval('uw')
-        );
+        $f = new Interpolation($points, Interpolation::METHOD_LINEAIRE);
+        return $f->interpolationLineaire($ug);
     }
 
     public function deltar(TypeFermeture $type_fermeture): ?float
@@ -90,26 +64,14 @@ final class XMLBaieTableValeurRepository extends XMLParoiTableValeurRepository i
 
     public function ujn(float $deltar, float $uw): ?float
     {
-        $records = $this->db->repository('baie.ujn')
+        $points = $this->db->repository('baie.ujn')
             ->createQuery()
             ->and('deltar', $deltar)
             ->getMany()
-            ->usort('uw', $uw)
-            ->slice(0, 2);
+            ->points('uw', 'deltar', 'ujn');
 
-        if ($records->count() === 0) {
-            return null;
-        }
-        if ($records->count() === 1) {
-            return $records->first()->floatval('ujn');
-        }
-        return Math::interpolation_lineaire(
-            x: $uw,
-            x1: $records->first()->floatval('uw'),
-            x2: $records->last()->floatval('uw'),
-            y1: $records->first()->floatval('ujn'),
-            y2: $records->last()->floatval('ujn')
-        );
+        $f = new Interpolation($points, Interpolation::METHOD_BILENAIRE);
+        return $f->interpolationBilenaire($uw, $deltar);
     }
 
     public function sw(

@@ -15,28 +15,18 @@ trait WithApportRule
         return $this->require(ApportEnveloppeRule::class);
     }
 
-    public function f(Mois $mois): float
+    public function f(?Mois $mois = null): float
     {
         return $this->apport_rule()->f($mois);
     }
 
-    public function apport(): float
+    public function apport(?Mois $mois = null): float
     {
-        return $this->apport_rule()->apport();
+        return $this->apport_rule()->apport($mois);
     }
 
-    public function apport_fr(): float
+    public function apport_fr(?Mois $mois = null): float
     {
-        return $this->apport_rule()->apport_fr();
-    }
-
-    public function apport_j(Mois $mois): float
-    {
-        return $this->apport_rule()->apport_j($mois);
-    }
-
-    public function apport_fr_j(Mois $mois): float
-    {
-        return $this->apport_rule()->apport_fr_j($mois);
+        return $this->apport_rule()->apport_fr($mois);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Dto\Ecs\Installation;
 
 use App\Domain\Ecs\Installation\Solaire\{Solaire, Usage};
+use App\Validation;
 
 /**
  * @see https://github.com/dpe-audit/schemas/blob/main/schemas/ecs/installation.yaml
@@ -11,6 +12,7 @@ final class SolaireThermiqueDto
 {
     public function __construct(
         public readonly Usage $usage,
+        #[Validation\Annee\AnneeValid]
         public readonly ?int $annee_installation,
         public readonly ?float $fecs,
     ) {}

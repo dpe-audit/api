@@ -17,6 +17,6 @@ final class DoubleFenetreCollection extends ArrayCollection
 
     public function find(Id $id): ?DoubleFenetre
     {
-        return array_find($this->elements, fn(DoubleFenetre $item): bool => $item->id() === $id);
+        return array_find($this->elements, fn(DoubleFenetre $item): bool => $item->id()->equals($id));
     }
 }

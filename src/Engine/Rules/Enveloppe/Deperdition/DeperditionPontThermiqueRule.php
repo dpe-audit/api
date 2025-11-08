@@ -68,13 +68,13 @@ final class DeperditionPontThermiqueRule extends RuleIterator
         if ($this->item()->liaison()->plancher_haut()?->type_structure()?->pont_thermique_negligeable()) {
             return true;
         }
-        if (false === $this->item()->liaison()->mur->inertie()->toBoolean()) {
+        if (false === $this->item()->liaison()->mur->inertie()?->toBoolean()) {
             return true;
         }
-        if (false === $this->item()->liaison()->plancher_haut()?->inertie()->toBoolean()) {
+        if (false === $this->item()->liaison()->plancher_haut()?->inertie()?->toBoolean()) {
             return true;
         }
-        if (false === $this->item()->liaison()->plancher_bas()?->inertie()->toBoolean()) {
+        if (false === $this->item()->liaison()->plancher_bas()?->inertie()?->toBoolean()) {
             return true;
         }
         return false;
@@ -162,8 +162,8 @@ final class DeperditionPontThermiqueRule extends RuleIterator
 
     public function presence_retour_isolation(): bool
     {
-        return $this->item()->liaison()->baie()->menuiserie()?->presence_retour_isolation
-            ?? $this->item()->liaison()->porte()->menuiserie()?->presence_retour_isolation
+        return $this->item()->liaison()->baie()?->menuiserie()?->presence_retour_isolation
+            ?? $this->item()->liaison()->porte()?->menuiserie()?->presence_retour_isolation
             ?? false;
     }
 

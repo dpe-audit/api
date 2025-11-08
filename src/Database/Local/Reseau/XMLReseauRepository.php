@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Database\Local\Chauffage;
+namespace App\Database\Local\Reseau;
 
 use App\Database\Local\XMLTableDatabase;
 use App\Domain\Reseau\{Reseau, ReseauRepository};

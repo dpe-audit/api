@@ -35,4 +35,28 @@ final class Deperdition
             deperdition_enveloppe: (float) $xml->deperdition_enveloppe
         );
     }
+
+    public function gv(): float
+    {
+        return $this->deperdition_enveloppe;
+    }
+
+    public function dp(): float
+    {
+        return $this->deperdition_mur
+            + $this->deperdition_plancher_bas
+            + $this->deperdition_plancher_haut
+            + $this->deperdition_baie_vitree
+            + $this->deperdition_porte;
+    }
+
+    public function pt(): float
+    {
+        return $this->deperdition_pont_thermique;
+    }
+
+    public function dr(): float
+    {
+        return $this->deperdition_renouvellement_air;
+    }
 }

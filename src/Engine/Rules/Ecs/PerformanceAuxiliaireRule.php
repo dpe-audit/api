@@ -3,65 +3,12 @@
 namespace App\Engine\Rules\Ecs;
 
 use App\Domain\Common\Enum\{Energie, Mois, Usage};
-use App\Domain\Ecs\Generateur\{EnergieGenerateur, TypeGenerateur};
 use App\Domain\Ecs\Systeme\Reseau\BouclageReseau;
 use App\Engine\Table\EcsTableValeurRepository;
 
 abstract class PerformanceAuxiliaireRule extends DimensionnementSystemeRule
 {
     public function __construct(protected EcsTableValeurRepository $repository) {}
-
-    // * Données d'entrée
-
-    public function surface(): float
-    {
-        return $this->item()->installation()->surface();
-    }
-
-    public function type_generateur(): TypeGenerateur
-    {
-        return $this->item()->generateur()->type() ?? TypeGenerateur::CHAUDIERE;
-    }
-
-    public function energie_generateur(): EnergieGenerateur
-    {
-        return $this->item()->generateur()->energie() ?? EnergieGenerateur::FIOUL;
-    }
-
-    public function generateur_multi_batiment(): bool
-    {
-        return $this->item()->generateur()->position()->generateur_multi_batiment;
-    }
-
-    public function presence_ventouse(): bool
-    {
-        return $this->item()->generateur()->signaletique()->presence_ventouse ?? false;
-    }
-
-    public function bouclage_reseau(): BouclageReseau
-    {
-        return $this->item()->reseau()->bouclage ?? BouclageReseau::RESEAU_BOUCLE;
-    }
-
-    public function niveaux_desservis(): int
-    {
-        return $this->item()->reseau()->niveaux_desservis;
-    }
-
-    // * Données intermédiaires
-
-    public function becs(?Mois $mois = null): float
-    {
-        return $this->require(PerformanceEcsRule::class)->becs($mois);
-    }
-
-    public function pn(): float
-    {
-        $entity = $this->item()->generateur();
-        return $this->requireIterator(PerformanceGenerateurRule::class, $entity)->pn();
-    }
-
-    // * Données de sortie
 
     abstract public function pertes_distribution(): float;
 

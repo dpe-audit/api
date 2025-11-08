@@ -2,112 +2,27 @@
 
 namespace App\Engine\Rules\Ecs;
 
-use App\Domain\Ecs\Installation\Solaire\Usage as UsageSolaire;
 use App\Engine\Context;
-use App\Engine\Rules\Batiment\{WithBatiment, WithBatimentRule};
+use App\Engine\Rules\Batiment\WithBatimentRule;
 use App\Engine\Table\EcsTableValeurRepository;
 
-final class PerformanceInstallationRule extends DimensionnementInstallationRule
+final class PerformanceInstallationRule extends CommonInstallationRule
 {
-    use WithBatiment, WithBatimentRule;
+    use WithBatimentRule;
 
     public function __construct(
         private EcsTableValeurRepository $repository
     ) {}
 
     /**
-     * @inheritDoc
+     * Ratio de dimensionnement de l'installation d'eau chaude sanitaire
      */
-    public function collection(): array
+    public function rdim(): float
     {
-        return $this->input()->ecs->installations()->values();
-    }
-
-    // * Données d'entrée
-
-    public function fecs_saisi(): ?float
-    {
-        return $this->item()->solaire_thermique()->fecs;
-    }
-
-    public function solaire_thermique(): bool
-    {
-        return null !== $this->item()->solaire_thermique();
-    }
-
-    public function usage_solaire_thermique(): ?UsageSolaire
-    {
-        return $this->item()->solaire_thermique()->usage;
-    }
-
-    public function annee_installation_solaire_thermique(): int
-    {
-        return $this->item()->solaire_thermique()->annee_installation ?? $this->input()->batiment->annee_construction;
-    }
-
-    // * Données intermédiaires
-
-    public function pertes_generation(): float
-    {
-        return $this->get('pertes_generation', function (): float {
-            return $this->item()->systemes()
-                ->with_installation($this->item()->id())
-                ->map(fn($entity) => $this->requireIterator(PerformanceSystemeRule::class, $entity)->pertes_generation())
-                ->reduce(fn($carry, $item) => $carry + $item);
+        return $this->get('rdim', function (): float {
+            return $this->surface() / $this->surface_totale();
         });
     }
-
-    public function pertes_generation_recuperables(): float
-    {
-        return $this->get('pertes_generation_recuperables', function (): float {
-            return $this->item()->systemes()
-                ->with_installation($this->item()->id())
-                ->map(fn($entity) => $this->requireIterator(PerformanceSystemeRule::class, $entity)->pertes_generation_recuperables())
-                ->reduce(fn($carry, $item) => $carry + $item);
-        });
-    }
-
-    public function pertes_stockage(): float
-    {
-        return $this->get('pertes_stockage', function (): float {
-            return $this->item()->systemes()
-                ->with_installation($this->item()->id())
-                ->map(fn($entity) => $this->requireIterator(PerformanceSystemeRule::class, $entity)->pertes_stockage())
-                ->reduce(fn($carry, $item) => $carry + $item);
-        });
-    }
-
-    public function pertes_stockage_recuperables(): float
-    {
-        return $this->get('pertes_stockage_recuperables', function (): float {
-            return $this->item()->systemes()
-                ->with_installation($this->item()->id())
-                ->map(fn($entity) => $this->requireIterator(PerformanceSystemeRule::class, $entity)->pertes_stockage_recuperables())
-                ->reduce(fn($carry, $item) => $carry + $item);
-        });
-    }
-
-    public function pertes_distribution(): float
-    {
-        return $this->get('pertes_distribution', function (): float {
-            return $this->item()->systemes()
-                ->with_installation($this->item()->id())
-                ->map(fn($entity) => $this->requireIterator(PerformanceSystemeRule::class, $entity)->pertes_distribution())
-                ->reduce(fn($carry, $item) => $carry + $item);
-        });
-    }
-
-    public function pertes_distribution_recuperables(): float
-    {
-        return $this->get('pertes_distribution_recuperables', function (): float {
-            return $this->item()->systemes()
-                ->with_installation($this->item()->id())
-                ->map(fn($entity) => $this->requireIterator(PerformanceSystemeRule::class, $entity)->pertes_distribution_recuperables())
-                ->reduce(fn($carry, $item) => $carry + $item);
-        });
-    }
-
-    // * Données de sortie
 
     /**
      * Facteur de couverture solaire

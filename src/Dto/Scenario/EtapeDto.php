@@ -9,11 +9,13 @@ use App\Dto\Enveloppe\EnveloppeDto;
 use App\Dto\Production\ProductionDto;
 use App\Dto\Refroidissement\RefroidissementDto;
 use App\Dto\Ventilation\VentilationDto;
+use App\Validation;
 use Symfony\Component\Validator\Constraints;
 
 /**
  * @see https://github.com/dpe-audit/schemas/blob/main/schemas/scenario/etape.yaml
  */
+#[Validation\Scenario\EtapeValid]
 final class EtapeDto
 {
     public function __construct(
@@ -47,26 +49,6 @@ final class EtapeDto
             refroidissement: RefroidissementDto::from($entity->refroidissement()),
             production: ProductionDto::from($entity->production()),
         );
-    }
-
-    #[Constraints\IsTrue]
-    public function is_generateur_mixte_exists(): bool
-    {
-        foreach ($this->chauffage->generateurs as $generateur) {
-            if ($generateur->position->generateur_mixte_id) {
-                if (null === array_find($this->ecs->generateurs, fn($item) => $item->id === $generateur->position->generateur_mixte_id)) {
-                    return false;
-                }
-            }
-        }
-        foreach ($this->ecs->generateurs as $generateur) {
-            if ($generateur->position->generateur_mixte_id) {
-                if (null === array_find($this->chauffage->generateurs, fn($item) => $item->id === $generateur->position->generateur_mixte_id)) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
     public function __normalize(): array

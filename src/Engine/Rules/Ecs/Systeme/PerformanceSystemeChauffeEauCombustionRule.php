@@ -4,30 +4,16 @@ namespace App\Engine\Rules\Ecs\Systeme;
 
 use App\Domain\Ecs\Generateur\Position\PositionChauffeEau;
 use App\Domain\Ecs\Generateur\Signaletique\LabelGenerateur;
-use App\Domain\Ecs\Systeme\Systeme;
 use App\Engine\Rules\Ecs\{PerformanceGenerateurRule, PerformanceSystemeRule};
 
 final class PerformanceSystemeChauffeEauCombustionRule extends PerformanceSystemeRule
 {
-    public static function supports(Systeme $entity): bool
+    public function supports(): bool
     {
-        $xor = [];
-
-        // Générateur inconnu or multi bâtiment
-        $xor[] = null === $entity->generateur()->type()
-            && false === $entity->generateur()->position()->generateur_multi_batiment;
-
-        // Chaudère à combustion or multi bâtiment
-        $xor[] = $entity->generateur()->type()?->is_chaudiere()
-            && $entity->generateur()->energie()?->is_combustible()
-            && false === $entity->generateur()->position()->generateur_multi_batiment;
-
-        // Chauffe-eau à combustion or multi bâtiment
-        $xor[] = $entity->generateur()->type()?->is_chauffe_eau()
-            && $entity->generateur()->energie()?->is_combustible()
-            && false === $entity->generateur()->position()->generateur_multi_batiment;
-
-        return in_array(true, $xor, true);
+        return $this->type_generateur()->is_chaudiere()
+            || $this->type_generateur()->is_chauffe_eau()
+            && $this->energie_generateur()->is_combustible()
+            && false === $this->generateur_multi_batiment();
     }
 
     // * Données d'entrée

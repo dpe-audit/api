@@ -19,6 +19,16 @@ final class GenerateurTransformer
 
     public function generateur_mixte_id(): ?string
     {
+        foreach ($this->context->logement()->installation_ecs_collection as $installation_ecs) {
+            foreach ($installation_ecs->generateur_ecs_collection as $generateur_ecs) {
+                if (null === $generateur_ecs->reference_generateur_mixte) {
+                    continue;
+                }
+                if ($this->generateur_chauffage->match($generateur_ecs->reference_generateur_mixte)) {
+                    return $generateur_ecs->id();
+                }
+            }
+        }
         if (null === $reference = $this->generateur_chauffage->reference_generateur_mixte) {
             return null;
         }
@@ -77,7 +87,7 @@ final class GenerateurTransformer
     /**
      * Cas des PAC hybrides : on retourne l'énergie de la partie chaudière
      */
-    public function bienergie(): EnergieGenerateur
+    public function bienergie(): ?EnergieGenerateur
     {
         return match ($this->generateur_chauffage->enum_type_generateur_ch_id) {
             148, 149 => EnergieGenerateur::GAZ_NATUREL,

@@ -14,18 +14,18 @@ final class CreateVentilationHandler
 
     public function __invoke(VentilationDto $payload): Ventilation
     {
-        $entity = Ventilation::create();
+        $aggregate = Ventilation::create();
 
         foreach ($payload->generateurs as $generateur) {
-            $entity->add_generateur(
-                $this->generateur_handler->__invoke(payload: $generateur, entity: $entity)
+            $aggregate->add_generateur(
+                $this->generateur_handler->__invoke(payload: $generateur, aggregate: $aggregate)
             );
         }
         foreach ($payload->installations as $installation) {
-            $entity->add_installation(
-                $this->installation_handler->__invoke(payload: $installation, entity: $entity)
+            $aggregate->add_installation(
+                $this->installation_handler->__invoke(payload: $installation, aggregate: $aggregate)
             );
         }
-        return $entity;
+        return $aggregate;
     }
 }

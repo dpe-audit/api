@@ -1,4 +1,4 @@
-﻿zone_climatique;annee_construction_isolation/gte;annee_construction_isolation/lte;effet_joule;umur;tv_umur_id
+﻿zone_climatique;annee_construction_isolation/gte;annee_construction_isolation/lte;effet_joule;u;tv_umur_id
 H1;;1974;1;2.5;1
 H1;;1974;0;2.5;2
 H2;;1974;1;2.5;3

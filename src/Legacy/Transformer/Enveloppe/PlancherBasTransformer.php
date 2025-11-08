@@ -32,13 +32,6 @@ final class PlancherBasTransformer extends ParoiOpaqueTransformer
         };
     }
 
-    public function inertie(): Inertie
-    {
-        return $this->context->logement()->enveloppe->inertie_plancher_bas_lourd
-            ? Inertie::LOURDE
-            : Inertie::LEGERE;
-    }
-
     public function __invoke(PlancherBas $paroi, Context $context): PlancherBasDto
     {
         $this->context = $context;

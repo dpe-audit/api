@@ -3,15 +3,13 @@
 namespace App\Engine\Rules\Ecs\Systeme;
 
 use App\Domain\Ecs\Systeme\Reseau\IsolationReseau;
-use App\Domain\Ecs\Systeme\Systeme;
 use App\Engine\Rules\Ecs\PerformanceSystemeRule;
 
 final class PerformanceSystemeReseauChaleurRule extends PerformanceSystemeRule
 {
-    public static function supports(Systeme $entity): bool
+    public function supports(): bool
     {
-        return $entity->generateur()->type()?->is_reseau_chaleur()
-            || $entity->generateur()->position()->generateur_multi_batiment;
+        return $this->type_generateur()->is_reseau_chaleur() || $this->generateur_multi_batiment();
     }
 
     // * Données d'entrée

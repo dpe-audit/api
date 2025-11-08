@@ -8,6 +8,7 @@ namespace App\Engine;
 abstract class RuleIterator extends Rule implements \Iterator
 {
     private int $position = 0;
+    private ?array $cache = null;
 
     /**
      * @return array<T>
@@ -24,9 +25,16 @@ abstract class RuleIterator extends Rule implements \Iterator
         return $this->collection()[$this->position()];
     }
 
+    public function supports(): bool
+    {
+        return true;
+    }
+
     public function rewind(): void
     {
         $this->position = 0;
+        $this->cache = null;
+        $this->skip();
     }
 
     public function current(): static
@@ -42,6 +50,7 @@ abstract class RuleIterator extends Rule implements \Iterator
     public function next(): void
     {
         ++$this->position;
+        $this->skip();
     }
 
     public function position(): int
@@ -51,7 +60,20 @@ abstract class RuleIterator extends Rule implements \Iterator
 
     public function valid(): bool
     {
-        return array_key_exists($this->position(), $this->collection());
+        if ($this->cache === null) {
+            $this->cache = $this->collection();
+        }
+        return isset($this->cache[$this->position]);
+    }
+
+    private function skip(): void
+    {
+        if ($this->cache === null) {
+            $this->cache = $this->collection();
+        }
+        while (isset($this->cache[$this->position]) && !$this->supports()) {
+            ++$this->position;
+        }
     }
 
     public function __invoke(mixed $data, Context $context): void

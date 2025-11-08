@@ -2,14 +2,13 @@
 
 namespace App\Engine\Rules\Chauffage\Generateur;
 
-use App\Domain\Chauffage\Generateur\Generateur;
 use App\Engine\Rules\Chauffage\PerformanceGenerateurRule;
 
 final class PerformancePoeleInsertRule extends PerformanceGenerateurRule
 {
-    public static function supports(Generateur $entity): bool
+    public function supports(): bool
     {
-        return $entity->type()?->is_poele_insert() && false === $entity->position()->generateur_multi_batiment;
+        return $this->type_generateur()->is_poele_insert() && false === $this->generateur_multi_batiment();
     }
 
     /** @inheritDoc */

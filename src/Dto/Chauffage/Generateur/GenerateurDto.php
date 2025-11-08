@@ -3,6 +3,7 @@
 namespace App\Dto\Chauffage\Generateur;
 
 use App\Domain\Chauffage\Generateur\{Generateur, EnergieGenerateur, TypeGenerateur};
+use App\Validation;
 
 /**
  * @see https://github.com/dpe-audit/schemas/blob/main/schemas/chauffage/generateur.yaml
@@ -15,6 +16,7 @@ final class GenerateurDto
         public readonly ?TypeGenerateur $type,
         public readonly ?EnergieGenerateur $energie,
         public readonly ?EnergieGenerateur $bienergie,
+        #[Validation\Annee\AnneeValid]
         public readonly ?int $annee_installation,
         public readonly PositionDto $position,
         public readonly SignaletiqueDto $signaletique,

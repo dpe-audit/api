@@ -3,46 +3,11 @@
 namespace App\Engine\Rules\Chauffage;
 
 use App\Engine\Context;
-use App\Engine\Rules\Batiment\{WithBatiment, WithBatimentRule};
-use App\Engine\Tables\ChauffageTableValeurRepository;
+use App\Engine\Table\ChauffageTableValeurRepository;
 
-abstract class PerformanceInstallationRule extends DimensionnementInstallationRule
+final class PerformanceInstallationRule extends DimensionnementInstallationRule
 {
-    use WithBatiment, WithBatimentRule;
-
-    public function __construct(
-        private ChauffageTableValeurRepository $repository
-    ) {}
-
-    /**
-     * @inheritDoc
-     */
-    public function collection(): array
-    {
-        return $this->input()->chauffage->installations()->values();
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function namespace(): string
-    {
-        return static::class . '\\' . (string) $this->item()->id();
-    }
-
-    // * Données d'entrée
-
-    public function solaire_thermique(): bool
-    {
-        return $this->item()->solaire_thermique() !== null;
-    }
-
-    public function fch_saisi(): ?float
-    {
-        return $this->item()->solaire_thermique()?->fch;
-    }
-
-    // * Données de sortie
+    public function __construct(private ChauffageTableValeurRepository $repository) {}
 
     /**
      * Facteur de couverture solaire

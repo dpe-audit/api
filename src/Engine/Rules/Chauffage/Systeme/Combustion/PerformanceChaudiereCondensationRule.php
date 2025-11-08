@@ -3,17 +3,14 @@
 namespace App\Engine\Rules\Chauffage\Systeme\Combustion;
 
 use App\Domain\Chauffage\Generateur\Signaletique\ModeCombustion;
-use App\Domain\Chauffage\Systeme\Systeme;
 
 final class PerformanceChaudiereCondensationRule extends PerformanceChaudiereRule
 {
-    public static function supports(Systeme $entity): bool
+    public function supports(): bool
     {
-        $match = parent::supports($entity);
-        $match = $match && $entity->generateur()->energie()?->is_combustible();
-        $match = $match && false === $entity->generateur()->energie()?->is_bois();
-        $match = $match && ModeCombustion::CONDENSATION === $entity->generateur()->signaletique()->mode_combustion;
-        return $match;
+        return parent::supports()
+            && false === $this->energie_generateur()->is_bois()
+            && ModeCombustion::CONDENSATION === $this->mode_combustion();
     }
 
     /**

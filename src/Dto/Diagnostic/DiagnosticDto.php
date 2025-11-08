@@ -11,6 +11,7 @@ use App\Dto\Logement\LogementDto;
 use App\Dto\Production\ProductionDto;
 use App\Dto\Refroidissement\RefroidissementDto;
 use App\Dto\Ventilation\VentilationDto;
+use App\Validation;
 use Symfony\Component\Validator\Constraints;
 
 /**
@@ -18,6 +19,7 @@ use Symfony\Component\Validator\Constraints;
  * 
  * @property array<LogementDto> $logements
  */
+#[Validation\Diagnostic\DiagnosticValid]
 final class DiagnosticDto
 {
     public function __construct(
@@ -58,26 +60,6 @@ final class DiagnosticDto
             production: ProductionDto::from($entity->production()),
             logements: $entity->logements()->map(fn($logement) => LogementDto::from($logement))->values(),
         );
-    }
-
-    #[Constraints\IsTrue]
-    public function is_generateur_mixte_exists(): bool
-    {
-        foreach ($this->chauffage->generateurs as $generateur) {
-            if ($generateur->position->generateur_mixte_id) {
-                if (null === array_find($this->ecs->generateurs, fn($item) => $item->id === $generateur->position->generateur_mixte_id)) {
-                    return false;
-                }
-            }
-        }
-        foreach ($this->ecs->generateurs as $generateur) {
-            if ($generateur->position->generateur_mixte_id) {
-                if (null === array_find($this->chauffage->generateurs, fn($item) => $item->id === $generateur->position->generateur_mixte_id)) {
-                    return false;
-                }
-            }
-        }
-        return true;
     }
 
     public function __normalize(): array

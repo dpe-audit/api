@@ -3,6 +3,7 @@
 namespace App\Dto\Refroidissement;
 
 use App\Domain\Refroidissement\Refroidissement;
+use App\Validation;
 use Symfony\Component\Validator\Constraints;
 
 /**
@@ -12,6 +13,7 @@ use Symfony\Component\Validator\Constraints;
  * @property array<InstallationDto> $installations
  * @property array<SystemeDto> $systemes
  */
+#[Validation\Refroidissement\RefroidissementValid]
 final class RefroidissementDto
 {
     public function __construct(
@@ -37,32 +39,14 @@ final class RefroidissementDto
         );
     }
 
-    #[Constraints\IsTrue]
-    public function is_generateur_exists(): bool
+    public function find_generateur(string $id): ?GenerateurDto
     {
-        foreach ($this->systemes as $systeme) {
-            foreach ($this->generateurs as $generateur) {
-                if ($generateur->id === $systeme->generateur_id) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        return true;
+        return array_find($this->generateurs, fn($item) => $item->id === $id);
     }
 
-    #[Constraints\IsTrue]
-    public function is_installation_exists(): bool
+    public function find_installation(string $id): ?InstallationDto
     {
-        foreach ($this->systemes as $systeme) {
-            foreach ($this->installations as $installation) {
-                if ($installation->id === $systeme->installation_id) {
-                    return true;
-                }
-            }
-            return false;
-        }
-        return true;
+        return array_find($this->installations, fn($item) => $item->id === $id);
     }
 
     public function __normalize(): array

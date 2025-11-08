@@ -2,17 +2,15 @@
 
 namespace App\Engine\Rules\Chauffage\Systeme\Combustion;
 
-use App\Domain\Chauffage\Systeme\Systeme;
+use App\Domain\Chauffage\Generateur\Signaletique\ModeCombustion;
 
 final class PerformanceChaudiereStandardRule extends PerformanceChaudiereRule
 {
-    public static function supports(Systeme $entity): bool
+    public function supports(): bool
     {
-        $match = parent::supports($entity);
-        $match = $match && false === PerformanceChaudiereBoisRule::supports($entity);
-        $match = $match && false === PerformanceChaudiereBasseTemperatureRule::supports($entity);
-        $match = $match && false === PerformanceChaudiereCondensationRule::supports($entity);
-        return $match;
+        return parent::supports()
+            && false === $this->energie_generateur()->is_bois()
+            && ModeCombustion::STANDARD === $this->mode_combustion();
     }
 
     /**

@@ -42,6 +42,6 @@ final class SystemeCollection extends ArrayCollection
 
     public function volume_stockage(): float
     {
-        return $this->reduce(fn(Systeme $item) => $item->stockage()->volume);
+        return $this->reduce(fn(float $vs, Systeme $item) => $vs + $item->stockage()->volume);
     }
 }

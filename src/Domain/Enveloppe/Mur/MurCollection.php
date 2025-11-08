@@ -17,7 +17,7 @@ final class MurCollection extends ParoiCollection
 
     public function find(Id $id): ?Mur
     {
-        return array_find($this->elements, fn(Mur $item): bool => $item->id() === $id);
+        return array_find($this->elements, fn(Mur $item): bool => $item->id()->equals($id));
     }
 
     public function with_paroi_ancienne(bool $paroi_ancienne): static

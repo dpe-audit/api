@@ -12,7 +12,7 @@ final class CreateGenerateurHandler
 {
     public function __construct(private ReseauRepository $reseau_repository) {}
 
-    public function __invoke(GenerateurDto $payload, Refroidissement $entity): Generateur
+    public function __invoke(GenerateurDto $payload, Refroidissement $aggregate): Generateur
     {
         $reseau = $payload->reseau_froid_id
             ? $this->reseau_repository->find($payload->reseau_froid_id)
@@ -20,7 +20,7 @@ final class CreateGenerateurHandler
 
         return Generateur::create(
             id: Id::fromString($payload->id),
-            refroidissement: $entity,
+            refroidissement: $aggregate,
             description: $payload->description,
             type: $payload->type,
             energie: $payload->energie,
