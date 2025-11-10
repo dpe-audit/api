@@ -2,7 +2,7 @@
 
 namespace App\Dto\Ecs\Systeme;
 
-use App\Domain\Ecs\Systeme\Systeme;
+use App\Domain\Ecs\Systeme\{Systeme, SystemeData};
 
 /**
  * @see https://github.com/dpe-audit/schemas/blob/main/schemas/ecs/systeme.yaml
@@ -16,23 +16,25 @@ final class SystemeDto
         public readonly string $installation_id,
         public readonly ReseauDto $reseau,
         public readonly StockageDto $stockage,
+        public readonly ?SystemeData $data = null,
     ) {}
 
-    public static function from(Systeme $data): self
+    public static function from(Systeme $entity): self
     {
         return new self(
-            id: (string) $data->id(),
-            description: $data->description(),
-            generateur_id: (string) $data->generateur()->id(),
-            installation_id: (string) $data->installation()->id(),
-            reseau: ReseauDto::from($data->reseau()),
-            stockage: StockageDto::from($data->stockage()),
+            id: (string) $entity->id(),
+            description: $entity->description(),
+            generateur_id: (string) $entity->generateur()->id(),
+            installation_id: (string) $entity->installation()->id(),
+            reseau: ReseauDto::from($entity->reseau()),
+            stockage: StockageDto::from($entity->stockage()),
+            data: $entity->data(),
         );
     }
 
     public function __normalize(): array
     {
-        return [
+        $data = [
             'id' => $this->id,
             'description' => $this->description,
             'generateur_id' => $this->generateur_id,
@@ -40,5 +42,26 @@ final class SystemeDto
             'reseau' => $this->reseau->__normalize(),
             'stockage' => $this->stockage->__normalize(),
         ];
+        if ($this->data) {
+            $data['data'] = [
+                'rdim' => $this->data->rdim,
+                'iecs' => $this->data->iecs,
+                'rd' => $this->data->rd,
+                'rs' => $this->data->rs,
+                'rg' => $this->data->rg,
+                'rgs' => $this->data->rgs,
+                'cef_ecs' => $this->data->cef_ecs,
+                'cep_ecs' => $this->data->cep_ecs,
+                'eges_ecs' => $this->data->eges_ecs,
+                'cef_aux' => $this->data->cef_aux,
+                'cep_aux' => $this->data->cep_aux,
+                'eges_aux' => $this->data->eges_aux,
+                'pertes_stockage' => $this->data->pertes_stockage,
+                'pertes_stockage_recuperables' => $this->data->pertes_stockage_recuperables,
+                'pertes_distribution' => $this->data->pertes_distribution,
+                'pertes_distribution_recuperables' => $this->data->pertes_distribution_recuperables,
+            ];
+        }
+        return $data;
     }
 }

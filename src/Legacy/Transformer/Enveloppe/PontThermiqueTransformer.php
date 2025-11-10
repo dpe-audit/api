@@ -30,7 +30,7 @@ final class PontThermiqueTransformer
 
     public function kpt(): ?float
     {
-        if ($this->pont_thermique->k_saisi) {
+        if ($this->pont_thermique->k_saisi > 0) {
             return $this->pont_thermique->k_saisi;
         }
         if (in_array($this->type_liaison(), [TypeLiaison::PLANCHER_BAS_MUR, TypeLiaison::PLANCHER_HAUT_MUR,])) {

@@ -72,11 +72,14 @@ final class FacteurEnsoleillementMasqueRule extends RuleIterator
     public function fe1(): float
     {
         return $this->get('fe1', function (): float {
+            if ($this->type() !== TypeMasque::PROCHE) {
+                return 1;
+            }
             return $this->repository->fe1(
                 configuration_masque: $this->configuration(),
                 orientation_facade: $this->orientation(),
                 avancee_masque: $this->profondeur(),
-            ) ?? throw new \DomainException('Valeur forfaitaire FE1 non trouvée');
+            ) ?? throw new \DomainException('Valeur forfaitaire fe1 non trouvée');
         });
     }
 
@@ -86,11 +89,17 @@ final class FacteurEnsoleillementMasqueRule extends RuleIterator
     public function fe2(): float
     {
         return $this->get('fe2', function (): float {
+            if ($this->type() !== TypeMasque::LOINTAIN) {
+                return 1;
+            }
+            if ($this->configuration() !== ConfigurationMasque::HOMOGENE) {
+                return 1;
+            }
             return $this->repository->fe2(
                 configuration_masque: $this->configuration(),
                 orientation_facade: $this->orientation(),
                 hauteur_masque_alpha: $this->hauteur(),
-            ) ?? throw new \DomainException('Valeur forfaitaire FE2 non trouvée');
+            ) ?? throw new \DomainException('Valeur forfaitaire fe2 non trouvée');
         });
     }
 
@@ -100,12 +109,18 @@ final class FacteurEnsoleillementMasqueRule extends RuleIterator
     public function omb(): float
     {
         return $this->get('omb', function (): float {
+            if ($this->type() !== TypeMasque::LOINTAIN) {
+                return 0;
+            }
+            if ($this->configuration() !== ConfigurationMasque::NON_HOMOGENE) {
+                return 0;
+            }
             return $this->repository->omb(
                 configuration_masque: $this->configuration(),
                 orientation_facade: $this->orientation(),
                 secteur: $this->secteur(),
                 hauteur_masque_alpha: $this->hauteur(),
-            ) ?? throw new \DomainException('Valeur forfaitaire OMB non trouvée');
+            ) ?? throw new \DomainException('Valeur forfaitaire omb non trouvée');
         });
     }
 

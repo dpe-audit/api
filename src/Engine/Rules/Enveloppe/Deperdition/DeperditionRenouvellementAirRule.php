@@ -7,13 +7,13 @@ use App\Domain\Enveloppe\Paroi\Paroi;
 use App\Domain\Enveloppe\Paroi\TypeParoi;
 use App\Domain\Enveloppe\Permeabilite\Permeabilite;
 use App\Engine\{Context, Rule};
-use App\Engine\Rules\Batiment\{WithBatiment, WithBatimentRUle};
+use App\Engine\Rules\Batiment\{WithBatiment, WithBatimentRule};
 use App\Engine\Rules\Ventilation\PerformanceVentilationRule;
 use App\Engine\Table\EnveloppeTableValeurRepository;
 
 final class DeperditionRenouvellementAirRule extends Rule
 {
-    use WithBatiment, WithBatimentRUle;
+    use WithBatiment, WithBatimentRule;
 
     public function __construct(
         private EnveloppeTableValeurRepository $repository,
@@ -106,12 +106,12 @@ final class DeperditionRenouvellementAirRule extends Rule
             foreach ($this->input()->enveloppe->baies() as $item) {
                 $rule = $this->requireIterator(DeperditionBaieRule::class, $item);
                 $sdep += $rule->sdep();
-                $sdep_joints += $item->menuiserie()->presence_joint ? $rule->sdep() : 0;
+                $sdep_joints += $item->menuiserie()?->presence_joint ? $rule->sdep() : 0;
             }
             foreach ($this->input()->enveloppe->portes() as $item) {
                 $rule = $this->requireIterator(DeperditionPorteRule::class, $item);
                 $sdep += $rule->sdep();
-                $sdep_joints += $item->menuiserie()->presence_joint ? $rule->sdep() : 0;
+                $sdep_joints += $item->menuiserie()?->presence_joint ? $rule->sdep() : 0;
             }
             return $sdep_joints > $sdep / 2;
         });

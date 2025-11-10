@@ -111,8 +111,17 @@ abstract class CommonGenerateurRule extends RuleIterator
 
     public function volume_stockage(): float
     {
-        return $this->item()->signaletique()->volume_stockage
-            + $this->input()->ecs->systemes()->with_generateur($this->item()->id())->volume_stockage();
+        return $this->volume_stockage_integre() + $this->volume_stockage_independant();
+    }
+
+    public function volume_stockage_integre(): float
+    {
+        return $this->item()->signaletique()->volume_stockage;
+    }
+
+    public function volume_stockage_independant(): float
+    {
+        return $this->input()->ecs->systemes()->with_generateur($this->item()->id())->volume_stockage();
     }
 
     /**

@@ -20,15 +20,15 @@ final class EmetteurDto
         public readonly ?int $annee_installation,
     ) {}
 
-    public static function from(Emetteur $data): self
+    public static function from(Emetteur $entity): self
     {
         return new self(
-            id: (string) $data->id(),
-            description: $data->description(),
-            type: $data->type(),
-            temperature_distribution: $data->temperature_distribution(),
-            presence_robinet_thermostatique: $data->presence_robinet_thermostatique(),
-            annee_installation: $data->annee_installation(),
+            id: (string) $entity->id(),
+            description: $entity->description(),
+            type: $entity->type(),
+            temperature_distribution: $entity->temperature_distribution(),
+            presence_robinet_thermostatique: $entity->presence_robinet_thermostatique(),
+            annee_installation: $entity->annee_installation(),
         );
     }
 

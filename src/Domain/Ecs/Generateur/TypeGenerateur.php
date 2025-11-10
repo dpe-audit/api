@@ -4,7 +4,7 @@ namespace App\Domain\Ecs\Generateur;
 
 enum TypeGenerateur: string
 {
-    case CHAUFFE_EAU = 'chauffe_eau_instantane';
+    case CHAUFFE_EAU = 'chauffe_eau';
     case CHAUDIERE = 'chaudiere';
     case CET_AIR_AMBIANT = 'cet_air_ambiant';
     case CET_AIR_EXTERIEUR = 'cet_air_exterieur';

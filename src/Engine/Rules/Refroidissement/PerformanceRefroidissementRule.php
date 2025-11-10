@@ -137,9 +137,13 @@ final class PerformanceRefroidissementRule extends Rule
             $rbth = $this->rbth($mois);
             $a = 1 + ($t / 15);
 
-            return $rbth > 0 && $rbth !== 1
-                ?  (1 - \pow($rbth, -$a)) / (1 - \pow($rbth, -$a - 1))
-                : $a / ($a + 1);
+            if ($rbth == 1) {
+                return $a / ($a + 1);
+            }
+            if ($rbth > 0) {
+                return (1 - \pow($rbth, -$a)) / (1 - \pow($rbth, -$a - 1));
+            }
+            return 0;
         });
     }
 

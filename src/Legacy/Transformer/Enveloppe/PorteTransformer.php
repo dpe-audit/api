@@ -80,7 +80,12 @@ final class PorteTransformer extends ParoiTransformer
 
     public function largeur_dormant(): ?int
     {
-        return $this->paroi->largeur_dormant ? $this->paroi->largeur_dormant * 10 : null;
+        return $this->paroi->largeur_dormant > 0 ? $this->paroi->largeur_dormant * 10 : null;
+    }
+
+    public function u(): ?float
+    {
+        return $this->paroi->uporte_saisi > 0 ? $this->paroi->uporte_saisi : null;
     }
 
     public function __invoke(Porte $porte, Context $context): PorteDto
@@ -94,7 +99,7 @@ final class PorteTransformer extends ParoiTransformer
             isolation: $this->isolation(),
             materiau: $this->materiau(),
             annee_installation: null,
-            u: $porte->uporte_saisi,
+            u: $this->u(),
             position: new PositionDto(
                 type_pose: $this->type_pose(),
                 surface: $porte->surface(),

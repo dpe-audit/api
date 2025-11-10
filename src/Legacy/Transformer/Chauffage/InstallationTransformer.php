@@ -133,6 +133,11 @@ final class InstallationTransformer
         return false;
     }
 
+    public function fch(): ?float
+    {
+        return $this->installation_chauffage->fch_saisi > 0 ? $this->installation_chauffage->fch_saisi : null;
+    }
+
     public function __invoke(InstallationChauffage $installation_chauffage, Context $context): InstallationDto
     {
         $this->installation_chauffage = $installation_chauffage;
@@ -145,7 +150,7 @@ final class InstallationTransformer
             solaire_thermique: $this->usage_solaire() ? new SolaireThermiqueDto(
                 usage: $this->usage_solaire(),
                 annee_installation: null,
-                fch: $installation_chauffage->fch_saisi,
+                fch: $this->fch(),
             ) : null,
             regulation_centrale: new RegulationDto(
                 presence_regulation: $this->presence_regulation_centrale(),

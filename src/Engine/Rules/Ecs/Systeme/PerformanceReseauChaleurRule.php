@@ -5,7 +5,7 @@ namespace App\Engine\Rules\Ecs\Systeme;
 use App\Domain\Ecs\Systeme\Reseau\IsolationReseau;
 use App\Engine\Rules\Ecs\PerformanceSystemeRule;
 
-final class PerformanceSystemeReseauChaleurRule extends PerformanceSystemeRule
+final class PerformanceReseauChaleurRule extends PerformanceSystemeRule
 {
     public function supports(): bool
     {

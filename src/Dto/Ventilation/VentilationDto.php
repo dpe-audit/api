@@ -2,7 +2,7 @@
 
 namespace App\Dto\Ventilation;
 
-use App\Domain\Ventilation\Ventilation;
+use App\Domain\Ventilation\{Ventilation, VentilationData};
 use App\Validation;
 use Symfony\Component\Validator\Constraints;
 
@@ -23,13 +23,16 @@ final class VentilationDto
         #[Constraints\All([new Constraints\Type(InstallationDto::class)])]
         #[Constraints\Valid]
         public readonly array $installations,
+
+        public readonly ?VentilationData $data = null,
     ) {}
 
-    public static function from(Ventilation $data): self
+    public static function from(Ventilation $entity): self
     {
         return new self(
-            generateurs: $data->generateurs()->map(fn($item) => GenerateurDto::from($item))->values(),
-            installations: $data->installations()->map(fn($item) => InstallationDto::from($item))->values(),
+            generateurs: $entity->generateurs()->map(fn($item) => GenerateurDto::from($item))->values(),
+            installations: $entity->installations()->map(fn($item) => InstallationDto::from($item))->values(),
+            data: $entity->data(),
         );
     }
 
@@ -45,9 +48,18 @@ final class VentilationDto
 
     public function __normalize(): array
     {
-        return [
-            'generateurs' => array_map(fn($dto) => $dto->__normalize(), $this->generateurs),
-            'installations' => array_map(fn($dto) => $dto->__normalize(), $this->installations),
+        $data = [
+            'generateurs' => array_values(array_map(fn($dto) => $dto->__normalize(), $this->generateurs)),
+            'installations' => array_values(array_map(fn($dto) => $dto->__normalize(), $this->installations)),
         ];
+
+        if ($this->data) {
+            $data['data'] = [
+                'cef_aux' => $this->data->cef_aux,
+                'cep_aux' => $this->data->cep_aux,
+                'eges_aux' => $this->data->eges_aux,
+            ];
+        }
+        return $data;
     }
 }

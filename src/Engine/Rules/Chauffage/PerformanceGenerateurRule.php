@@ -14,7 +14,7 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
         if (0 === count($emissions)) {
             $emissions[] = TypeEmission::from_type_generateur($this->type_generateur());
         }
-        return array_unique($emissions);
+        return array_unique($emissions, SORT_REGULAR);
     }
 
     /**
@@ -47,7 +47,7 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
         return $this->get("rpn", function (): float {
             return $this->rpn_saisi() ?? $this->repository->rpn(
                 type_generateur: $this->type_generateur(),
-                energie_generateur: $this->energie_generateur(),
+                energie_generateur: $this->bienergie_generateur() ?? $this->energie_generateur(),
                 mode_combustion: $this->mode_combustion(),
                 annee_installation_generateur: $this->annee_installation(),
                 pn: $this->pn(),
@@ -63,7 +63,7 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
         return $this->get("rpint", function (): float {
             return $this->rpint_saisi() ?? $this->repository->rpint(
                 type_generateur: $this->type_generateur(),
-                energie_generateur: $this->energie_generateur(),
+                energie_generateur: $this->bienergie_generateur() ?? $this->energie_generateur(),
                 mode_combustion: $this->mode_combustion(),
                 annee_installation_generateur: $this->annee_installation(),
                 pn: $this->pn(),
@@ -85,15 +85,14 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
 
             if (null === $qp0 = $this->repository->qp0(
                 type_generateur: $this->type_generateur(),
-                energie_generateur: $this->energie_generateur(),
+                energie_generateur: $this->bienergie_generateur() ?? $this->energie_generateur(),
                 mode_combustion: $this->mode_combustion(),
                 annee_installation_generateur: $this->annee_installation(),
                 pn: $this->pn(),
                 e: $e,
                 f: $f,
-            )) {
-                throw new \DomainException('Valeur forfaitaire QP0 non trouvée');
-            }
+            )) throw new \DomainException('Valeur forfaitaire QP0 non trouvée');
+
             return $qp0 * 1000;
         });
     }
@@ -106,7 +105,7 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
         return $this->get("pveilleuse", function (): float {
             return $this->pveilleuse_saisi() ?? $this->repository->pveilleuse(
                 type_generateur: $this->type_generateur(),
-                energie_generateur: $this->energie_generateur(),
+                energie_generateur: $this->bienergie_generateur() ?? $this->energie_generateur(),
                 mode_combustion: $this->mode_combustion(),
                 annee_installation_generateur: $this->annee_installation(),
                 pn: $this->pn(),
@@ -130,7 +129,6 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
             $tfonc30 = [];
             foreach ($this->emetteurs() as $emetteur) {
                 $tfonc30[] = $this->repository->tfonc30(
-                    type_generateur: $this->type_generateur(),
                     mode_combustion: $this->mode_combustion(),
                     temperature_distribution: $emetteur['temperature_distribution'],
                     annee_installation_generateur: $this->annee_installation(),

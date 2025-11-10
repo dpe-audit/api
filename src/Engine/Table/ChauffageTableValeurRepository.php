@@ -115,7 +115,6 @@ interface ChauffageTableValeurRepository
     ): ?float;
 
     public function tfonc30(
-        TypeGenerateur $type_generateur,
         ModeCombustion $mode_combustion,
         TemperatureDistribution $temperature_distribution,
         int $annee_installation_emetteur,

@@ -26,22 +26,20 @@ abstract class ParoiOpaqueTransformer extends ParoiTransformer
         return $this->paroi->paroi_lourde ? Inertie::LOURDE : Inertie::LEGERE;
     }
 
-    public function epaisseur_isolation(): ?float
-    {
-        return $this->paroi->epaisseur_isolation ? $this->paroi->epaisseur_isolation * 10 : null;
-    }
-
     public function etat_isolation(): ?EtatIsolation
     {
         return match ($this->paroi->enum_type_isolation_id) {
             2 => EtatIsolation::NON_ISOLE,
-            3, 4, 5, 6, 7, 8 => EtatIsolation::ISOLE,
+            3, 4, 5, 6, 7, 8, 9 => EtatIsolation::ISOLE,
             default => null,
         };
     }
 
     public function type_isolation(): ?TypeIsolation
     {
+        if ($this->etat_isolation() !== EtatIsolation::ISOLE) {
+            return null;
+        }
         return match ($this->paroi->enum_type_isolation_id) {
             3 => TypeIsolation::ITI,
             4 => TypeIsolation::ITE,
@@ -55,6 +53,9 @@ abstract class ParoiOpaqueTransformer extends ParoiTransformer
 
     public function annee_isolation(): ?int
     {
+        if ($this->etat_isolation() !== EtatIsolation::ISOLE) {
+            return null;
+        }
         return match ($this->paroi->enum_periode_isolation_id) {
             1 => 1947,
             2 => 1974,
@@ -68,5 +69,21 @@ abstract class ParoiOpaqueTransformer extends ParoiTransformer
             10 => $this->context->ressource()->administratif()->annee_etablissement(),
             default => null,
         };
+    }
+
+    public function epaisseur_isolation(): ?float
+    {
+        if ($this->etat_isolation() !== EtatIsolation::ISOLE) {
+            return null;
+        }
+        return $this->paroi->epaisseur_isolation > 0 ? $this->paroi->epaisseur_isolation * 10 : null;
+    }
+
+    public function resistance_isolation(): ?float
+    {
+        if ($this->etat_isolation() !== EtatIsolation::ISOLE) {
+            return null;
+        }
+        return $this->paroi->resistance_isolation > 0 ? $this->paroi->resistance_isolation : null;
     }
 }

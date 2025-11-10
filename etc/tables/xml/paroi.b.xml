@@ -3,33 +3,41 @@
     <row>
         <mitoyennete>exterieur</mitoyennete>
         <b>1</b>
+        <tv_coef_reduction_deperdition_id>1</tv_coef_reduction_deperdition_id>
     </row>
     <row>
         <mitoyennete>enterre</mitoyennete>
         <b>1</b>
+        <tv_coef_reduction_deperdition_id>2</tv_coef_reduction_deperdition_id>
     </row>
     <row>
         <mitoyennete>vide_sanitaire</mitoyennete>
         <b>1</b>
+        <tv_coef_reduction_deperdition_id>3</tv_coef_reduction_deperdition_id>
     </row>
     <row>
         <mitoyennete>terre_plein</mitoyennete>
         <b>1</b>
+        <tv_coef_reduction_deperdition_id>5</tv_coef_reduction_deperdition_id>
     </row>
     <row>
         <mitoyennete>sous_sol_non_chauffe</mitoyennete>
         <b>1</b>
+        <tv_coef_reduction_deperdition_id>6</tv_coef_reduction_deperdition_id>
     </row>
     <row>
         <mitoyennete>local_non_residentiel</mitoyennete>
         <b>0.2</b>
+        <tv_coef_reduction_deperdition_id>4</tv_coef_reduction_deperdition_id>
     </row>
     <row>
         <mitoyennete>local_residentiel</mitoyennete>
         <b>0</b>
+        <tv_coef_reduction_deperdition_id>283</tv_coef_reduction_deperdition_id>
     </row>
     <row>
         <mitoyennete>local_non_accessible</mitoyennete>
         <b>0.95</b>
+        <tv_coef_reduction_deperdition_id>7</tv_coef_reduction_deperdition_id>
     </row>
 </table>

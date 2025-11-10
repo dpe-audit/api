@@ -26,7 +26,7 @@ final class XMLPlancherHautTableValeurRepository extends XMLParoiTableValeurRepo
         return $this->db->repository('plancher_haut.u')
             ->createQuery()
             ->and('zone_climatique', $zone_climatique->code())
-            ->and('configuration', $configuration)
+            ->and('configuration', $configuration, false)
             ->and('effet_joule', $effet_joule)
             ->andCompareTo('annee_construction_isolation', $annee_construction_isolation)
             ->getOne()

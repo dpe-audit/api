@@ -3,7 +3,7 @@
 namespace App\Dto\Enveloppe\Masque;
 
 use App\Domain\Common\Enum\Orientation;
-use App\Domain\Enveloppe\Masque\{ConfigurationMasque, Masque, SecteurMasque, TypeMasque};
+use App\Domain\Enveloppe\Masque\{ConfigurationMasque, Masque, MasqueData, SecteurMasque, TypeMasque};
 
 /**
  * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/masque.yaml
@@ -19,25 +19,27 @@ final class MasqueDto
         public readonly ?float $hauteur,
         public readonly ?float $profondeur,
         public readonly ?SecteurMasque $secteur,
+        public readonly ?MasqueData $data = null,
     ) {}
 
-    public static function from(Masque $data): self
+    public static function from(Masque $entity): self
     {
         return new self(
-            id: (string) $data->id(),
-            description: $data->description(),
-            type: $data->type(),
-            configuration: $data->configuration(),
-            orientation: $data->orientation(),
-            hauteur: $data->hauteur(),
-            profondeur: $data->profondeur(),
-            secteur: $data->secteur(),
+            id: (string) $entity->id(),
+            description: $entity->description(),
+            type: $entity->type(),
+            configuration: $entity->configuration(),
+            orientation: $entity->orientation(),
+            hauteur: $entity->hauteur(),
+            profondeur: $entity->profondeur(),
+            secteur: $entity->secteur(),
+            data: $entity->data(),
         );
     }
 
     public function __normalize(): array
     {
-        return [
+        $data = [
             'id' => $this->id,
             'description' => $this->description,
             'type' => $this->type->value,
@@ -47,5 +49,13 @@ final class MasqueDto
             'profondeur' => $this->profondeur,
             'secteur' => $this->secteur?->value,
         ];
+        if ($this->data) {
+            $data['data'] = [
+                'fe1' => $this->data->fe1,
+                'fe2' => $this->data->fe2,
+                'omb' => $this->data->omb,
+            ];
+        }
+        return $data;
     }
 }

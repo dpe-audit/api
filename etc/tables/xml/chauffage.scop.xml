@@ -1,1 +1,633 @@
-<?xml version="1.0" encoding="UTF-8"?><table name="chauffage.scop"><row><zone_climatique>H1</zone_climatique><type_generateur>pac_air_air</type_generateur><type_emission>air_souffle</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.2</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_air_air</type_generateur><type_emission>air_souffle</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_air_air</type_generateur><type_emission>air_souffle</type_emission><annee_installation_generateur lte="" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.2</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.2</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.2</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>2.8</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.2</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.2</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.2</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>2.8</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>3.1</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3.5</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.8</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>3.1</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3.5</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.8</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.5</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.8</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.2</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.2</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.7</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_air_air</type_generateur><type_emission>air_souffle</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.2</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_air_air</type_generateur><type_emission>air_souffle</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_air_air</type_generateur><type_emission>air_souffle</type_emission><annee_installation_generateur lte="" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.2</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.7</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>3.1</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3.6</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>4</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>3.1</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3.6</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>4</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.5</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.8</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3.1</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.5</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.2</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.7</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.2</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.7</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_air_air</type_generateur><type_emission>air_souffle</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_air_air</type_generateur><type_emission>air_souffle</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_air_air</type_generateur><type_emission>air_souffle</type_emission><annee_installation_generateur lte="" lt="" gte="2015" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>3.1</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3.6</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>4</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>3.1</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3.6</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>4</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.5</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.8</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3.1</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.5</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.2</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.7</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.2</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.7</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>3.1</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3.6</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>4</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>3.1</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3.6</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>4</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.5</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.8</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3.1</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.5</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.2</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.2</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.2</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>2.8</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.2</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.2</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.2</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>2.8</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>3.1</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3.5</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.8</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>3.1</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3.5</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.8</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.5</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.8</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_air_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.2</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.2</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.7</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.2</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.7</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>3.1</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3.6</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>4</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>3.1</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3.6</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>4</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.5</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.8</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3.1</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.5</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.2</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.7</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.2</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.7</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>3.1</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3.6</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>4</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>3.1</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3.6</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>4</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.5</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.8</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3.1</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_eau_glycolee_eau</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.5</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.2</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.7</scop></row><row><zone_climatique>H1</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.6</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.3</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.2</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.4</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>2.7</scop></row><row><zone_climatique>H2</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>3.1</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3.6</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plafond_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>4</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.9</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>3.1</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3.6</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>plancher_chauffant</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>4</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2007" lt="" gte="" gt="" eq="" /><scop>2.5</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2014" lt="" gte="2008" gt="" eq="" /><scop>2.8</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="2016" lt="" gte="2015" gt="" eq="" /><scop>3.1</scop></row><row><zone_climatique>H3</zone_climatique><type_generateur>pac_hybride_geothermique</type_generateur><type_emission>radiateur</type_emission><annee_installation_generateur lte="" lt="" gte="2017" gt="" eq="" /><scop>3.5</scop></row></table>
+<?xml version="1.0" encoding="UTF-8"?>
+<table name="chauffage.scop">
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_air_air</type_generateur>
+        <type_emission></type_emission>
+        <annee_installation_generateur lte="2007" gte="" />
+        <scop_cop>cop</scop_cop>
+        <scop>2.2</scop>
+        <tv_scop_id>1</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_air_air</type_generateur>
+        <type_emission></type_emission>
+        <annee_installation_generateur lte="2014" gte="2008" />
+        <scop_cop>scop</scop_cop>
+        <scop>2.3</scop>
+        <tv_scop_id>2</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_air_air</type_generateur>
+        <type_emission></type_emission>
+        <annee_installation_generateur lte="" gte="2015" />
+        <scop_cop>scop</scop_cop>
+        <scop>3</scop>
+        <tv_scop_id>3</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_air_air</type_generateur>
+        <type_emission></type_emission>
+        <annee_installation_generateur lte="2007" gte="" />
+        <scop_cop>cop</scop_cop>
+        <scop>2.4</scop>
+        <tv_scop_id>4</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_air_air</type_generateur>
+        <type_emission></type_emission>
+        <annee_installation_generateur lte="2014" gte="2008" />
+        <scop_cop>scop</scop_cop>
+        <scop>2.6</scop>
+        <tv_scop_id>5</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_air_air</type_generateur>
+        <type_emission></type_emission>
+        <annee_installation_generateur lte="" gte="2015" />
+        <scop_cop>scop</scop_cop>
+        <scop>3.3</scop>
+        <tv_scop_id>6</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_air_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2007" gte="" />
+        <scop_cop>cop</scop_cop>
+        <scop>2.2</scop>
+        <tv_scop_id>7</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_air_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2014" gte="2008" />
+        <scop_cop>scop</scop_cop>
+        <scop>2.4</scop>
+        <tv_scop_id>8</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_air_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2016" gte="2015" />
+        <scop_cop>scop</scop_cop>
+        <scop>2.6</scop>
+        <tv_scop_id>9</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_air_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="" gte="2017" />
+        <scop_cop>scop</scop_cop>
+        <scop>2.8</scop>
+        <tv_scop_id>10</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_air_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2007" gte="" />
+        <scop_cop>cop</scop_cop>
+        <scop>2.4</scop>
+        <tv_scop_id>11</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_air_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2014" gte="2008" />
+        <scop_cop>scop</scop_cop>
+        <scop>2.6</scop>
+        <tv_scop_id>12</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_air_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2016" gte="2015" />
+        <scop_cop>scop</scop_cop>
+        <scop>2.9</scop>
+        <tv_scop_id>13</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_air_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="" gte="2017" />
+        <scop_cop>scop</scop_cop>
+        <scop>3.2</scop>
+        <tv_scop_id>14</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_air_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2007" gte="" />
+        <scop_cop>cop</scop_cop>
+        <scop>2.5</scop>
+        <tv_scop_id>15</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_air_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2014" gte="2008" />
+        <scop_cop>scop</scop_cop>
+        <scop>2.8</scop>
+        <tv_scop_id>16</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_air_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2016" gte="2015" />
+        <scop_cop>scop</scop_cop>
+        <scop>3</scop>
+        <tv_scop_id>17</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_air_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="" gte="2017" />
+        <scop_cop>scop</scop_cop>
+        <scop>3.2</scop>
+        <tv_scop_id>18</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_air_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2007" gte="" />
+        <scop_cop>cop</scop_cop>
+        <scop>2.9</scop>
+        <tv_scop_id>19</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_air_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2014" gte="2008" />
+        <scop_cop>scop</scop_cop>
+        <scop>3.1</scop>
+        <tv_scop_id>20</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_air_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2016" gte="2015" />
+        <scop_cop>scop</scop_cop>
+        <scop>3.5</scop>
+        <tv_scop_id>21</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_air_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="" gte="2017" />
+        <scop_cop>scop</scop_cop>
+        <scop>3.8</scop>
+        <tv_scop_id>22</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_eau_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2007" gte="" />
+        <scop_cop>cop</scop_cop>
+        <scop>2.2</scop>
+        <tv_scop_id>23</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_eau_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2014" gte="2008" />
+        <scop_cop>scop</scop_cop>
+        <scop>2.4</scop>
+        <tv_scop_id>24</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_eau_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2016" gte="2015" />
+        <scop_cop>scop</scop_cop>
+        <scop>2.7</scop>
+        <tv_scop_id>25</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_eau_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="" gte="2017" />
+        <scop_cop>scop</scop_cop>
+        <scop>3</scop>
+        <tv_scop_id>26</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_eau_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2007" gte="" />
+        <scop_cop>cop</scop_cop>
+        <scop>2.4</scop>
+        <tv_scop_id>27</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_eau_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2014" gte="2008" />
+        <scop_cop>scop</scop_cop>
+        <scop>2.6</scop>
+        <tv_scop_id>28</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_eau_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2016" gte="2015" />
+        <scop_cop>scop</scop_cop>
+        <scop>3</scop>
+        <tv_scop_id>29</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_eau_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="" gte="2017" />
+        <scop_cop>scop</scop_cop>
+        <scop>3.3</scop>
+        <tv_scop_id>30</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_eau_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2007" gte="" />
+        <scop_cop>cop</scop_cop>
+        <scop>2.5</scop>
+        <tv_scop_id>31</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_eau_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2014" gte="2008" />
+        <scop_cop>scop</scop_cop>
+        <scop>2.8</scop>
+        <tv_scop_id>32</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_eau_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2016" gte="2015" />
+        <scop_cop>scop</scop_cop>
+        <scop>3.1</scop>
+        <tv_scop_id>33</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_eau_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="" gte="2017" />
+        <scop_cop>scop</scop_cop>
+        <scop>3.5</scop>
+        <tv_scop_id>34</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_eau_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2007" gte="" />
+        <scop_cop>cop</scop_cop>
+        <scop>2.9</scop>
+        <tv_scop_id>35</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_eau_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2014" gte="2008" />
+        <scop_cop>scop</scop_cop>
+        <scop>3.1</scop>
+        <tv_scop_id>36</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_eau_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2016" gte="2015" />
+        <scop_cop>scop</scop_cop>
+        <scop>3.6</scop>
+        <tv_scop_id>37</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_eau_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="" gte="2017" />
+        <scop_cop>scop</scop_cop>
+        <scop>4</scop>
+        <tv_scop_id>38</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_eau_glycolee_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2007" gte="" />
+        <scop_cop>cop</scop_cop>
+        <scop>2.2</scop>
+        <tv_scop_id>39</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_eau_glycolee_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2014" gte="2008" />
+        <scop_cop>scop</scop_cop>
+        <scop>2.4</scop>
+        <tv_scop_id>40</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_eau_glycolee_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2016" gte="2015" />
+        <scop_cop>scop</scop_cop>
+        <scop>2.7</scop>
+        <tv_scop_id>41</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_eau_glycolee_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="" gte="2017" />
+        <scop_cop>scop</scop_cop>
+        <scop>3</scop>
+        <tv_scop_id>42</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_eau_glycolee_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2007" gte="" />
+        <scop_cop>cop</scop_cop>
+        <scop>2.4</scop>
+        <tv_scop_id>43</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_eau_glycolee_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2014" gte="2008" />
+        <scop_cop>scop</scop_cop>
+        <scop>2.6</scop>
+        <tv_scop_id>44</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_eau_glycolee_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2016" gte="2015" />
+        <scop_cop>scop</scop_cop>
+        <scop>3</scop>
+        <tv_scop_id>45</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_eau_glycolee_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="" gte="2017" />
+        <scop_cop>scop</scop_cop>
+        <scop>3.3</scop>
+        <tv_scop_id>46</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_eau_glycolee_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2007" gte="" />
+        <scop_cop>cop</scop_cop>
+        <scop>2.5</scop>
+        <tv_scop_id>47</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_eau_glycolee_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2014" gte="2008" />
+        <scop_cop>scop</scop_cop>
+        <scop>2.8</scop>
+        <tv_scop_id>48</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_eau_glycolee_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2016" gte="2015" />
+        <scop_cop>scop</scop_cop>
+        <scop>3.1</scop>
+        <tv_scop_id>49</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_eau_glycolee_eau</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="" gte="2017" />
+        <scop_cop>scop</scop_cop>
+        <scop>3.5</scop>
+        <tv_scop_id>50</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_eau_glycolee_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2007" gte="" />
+        <scop_cop>cop</scop_cop>
+        <scop>2.9</scop>
+        <tv_scop_id>51</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_eau_glycolee_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2014" gte="2008" />
+        <scop_cop>scop</scop_cop>
+        <scop>3.1</scop>
+        <tv_scop_id>52</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_eau_glycolee_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2016" gte="2015" />
+        <scop_cop>scop</scop_cop>
+        <scop>3.6</scop>
+        <tv_scop_id>53</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_eau_glycolee_eau</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="" gte="2017" />
+        <scop_cop>scop</scop_cop>
+        <scop>4</scop>
+        <tv_scop_id>54</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_geothermique</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2007" gte="" />
+        <scop_cop>cop</scop_cop>
+        <scop>2.2</scop>
+        <tv_scop_id>55</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_geothermique</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2014" gte="2008" />
+        <scop_cop>scop</scop_cop>
+        <scop>2.4</scop>
+        <tv_scop_id>56</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_geothermique</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2016" gte="2015" />
+        <scop_cop>scop</scop_cop>
+        <scop>2.7</scop>
+        <tv_scop_id>57</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_geothermique</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="" gte="2017" />
+        <scop_cop>scop</scop_cop>
+        <scop>3</scop>
+        <tv_scop_id>58</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_geothermique</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2007" gte="" />
+        <scop_cop>cop</scop_cop>
+        <scop>2.4</scop>
+        <tv_scop_id>59</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_geothermique</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2014" gte="2008" />
+        <scop_cop>scop</scop_cop>
+        <scop>2.6</scop>
+        <tv_scop_id>60</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_geothermique</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2016" gte="2015" />
+        <scop_cop>scop</scop_cop>
+        <scop>3</scop>
+        <tv_scop_id>61</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H1|H2</zone_climatique>
+        <type_generateur>pac_geothermique</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="" gte="2017" />
+        <scop_cop>scop</scop_cop>
+        <scop>3.3</scop>
+        <tv_scop_id>62</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_geothermique</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2007" gte="" />
+        <scop_cop>cop</scop_cop>
+        <scop>2.5</scop>
+        <tv_scop_id>63</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_geothermique</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2014" gte="2008" />
+        <scop_cop>scop</scop_cop>
+        <scop>2.8</scop>
+        <tv_scop_id>64</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_geothermique</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="2016" gte="2015" />
+        <scop_cop>scop</scop_cop>
+        <scop>3.1</scop>
+        <tv_scop_id>65</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_geothermique</type_generateur>
+        <type_emission>radiateur</type_emission>
+        <annee_installation_generateur lte="" gte="2017" />
+        <scop_cop>scop</scop_cop>
+        <scop>3.5</scop>
+        <tv_scop_id>66</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_geothermique</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2007" gte="" />
+        <scop_cop>cop</scop_cop>
+        <scop>2.9</scop>
+        <tv_scop_id>67</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_geothermique</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2014" gte="2008" />
+        <scop_cop>scop</scop_cop>
+        <scop>3.1</scop>
+        <tv_scop_id>68</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_geothermique</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="2016" gte="2015" />
+        <scop_cop>scop</scop_cop>
+        <scop>3.6</scop>
+        <tv_scop_id>69</tv_scop_id>
+    </row>
+    <row>
+        <zone_climatique>H3</zone_climatique>
+        <type_generateur>pac_geothermique</type_generateur>
+        <type_emission>plafond_chauffant|plancher_chauffant</type_emission>
+        <annee_installation_generateur lte="" gte="2017" />
+        <scop_cop>scop</scop_cop>
+        <scop>4</scop>
+        <tv_scop_id>70</tv_scop_id>
+    </row>
+</table>

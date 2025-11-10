@@ -2,7 +2,7 @@
 
 namespace App\Dto\Ventilation;
 
-use App\Domain\Ventilation\Generateur\{Generateur, TypeGenerateur, TypeVmc};
+use App\Domain\Ventilation\Generateur\{Generateur, GenerateurData, TypeGenerateur, TypeVmc};
 use App\Validation;
 
 /**
@@ -19,24 +19,26 @@ final class GenerateurDto
         public readonly ?bool $presence_echangeur_thermique,
         #[Validation\Annee\AnneeValid]
         public readonly ?int $annee_installation,
+        public readonly ?GenerateurData $data = null,
     ) {}
 
-    public static function from(Generateur $data): self
+    public static function from(Generateur $entity): self
     {
         return new self(
-            id: (string) $data->id(),
-            description: (string) $data->description(),
-            type: $data->type(),
-            type_vmc: $data->type_vmc(),
-            generateur_collectif: $data->generateur_collectif(),
-            presence_echangeur_thermique: $data->presence_echangeur_thermique(),
-            annee_installation: $data->annee_installation(),
+            id: (string) $entity->id(),
+            description: (string) $entity->description(),
+            type: $entity->type(),
+            type_vmc: $entity->type_vmc(),
+            generateur_collectif: $entity->generateur_collectif(),
+            presence_echangeur_thermique: $entity->presence_echangeur_thermique(),
+            annee_installation: $entity->annee_installation(),
+            data: $entity->data(),
         );
     }
 
     public function __normalize(): array
     {
-        return [
+        $data =  [
             'id' => $this->id,
             'description' => $this->description,
             'type' => $this->type->value,
@@ -45,5 +47,16 @@ final class GenerateurDto
             'presence_echangeur_thermique' => $this->presence_echangeur_thermique,
             'annee_installation' => $this->annee_installation,
         ];
+        if ($this->data) {
+            $data['data'] = [
+                'rdim' => $this->data->rdim,
+                'ratio_utilisation' => $this->data->ratio_utilisation,
+                'pvent_moy' => $this->data->pvent_moy,
+                'cef_aux' => $this->data->cef_aux,
+                'cep_aux' => $this->data->cep_aux,
+                'eges_aux' => $this->data->eges_aux,
+            ];
+        }
+        return $data;
     }
 }

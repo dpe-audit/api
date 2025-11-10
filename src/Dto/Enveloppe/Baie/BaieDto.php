@@ -2,7 +2,7 @@
 
 namespace App\Dto\Enveloppe\Baie;
 
-use App\Domain\Enveloppe\Baie\{Baie, TypeBaie, TypeFermeture};
+use App\Domain\Enveloppe\Baie\{Baie, BaieData, TypeBaie, TypeFermeture};
 use App\Validation;
 
 /**
@@ -29,32 +29,35 @@ final class BaieDto
         public readonly ?SurvitrageDto $survitrage,
         public readonly ?MenuiserieDto $menuiserie,
         public readonly array $masques,
+
+        public readonly ?BaieData $data = null,
     ) {}
 
-    public static function from(Baie $data): self
+    public static function from(Baie $entity): self
     {
         return new self(
-            id: (string) $data->id(),
-            description: $data->description(),
-            type: $data->type(),
-            presence_protection_solaire: $data->presence_protection_solaire(),
-            type_fermeture: $data->type_fermeture(),
-            annee_installation: $data->annee_installation(),
-            ug: $data->ug(),
-            uw: $data->uw(),
-            ujn: $data->ujn(),
-            sw: $data->sw(),
-            position: PositionDto::from($data->position()),
-            vitrage: VitrageDto::from($data->vitrage()),
-            survitrage: $data->survitrage() ? SurvitrageDto::from($data->survitrage()) : null,
-            menuiserie: $data->menuiserie() ? MenuiserieDto::from($data->menuiserie()) : null,
-            masques: $data->masques()->map(fn($item) => (string) $item->id())->values(),
+            id: (string) $entity->id(),
+            description: $entity->description(),
+            type: $entity->type(),
+            presence_protection_solaire: $entity->presence_protection_solaire(),
+            type_fermeture: $entity->type_fermeture(),
+            annee_installation: $entity->annee_installation(),
+            ug: $entity->ug(),
+            uw: $entity->uw(),
+            ujn: $entity->ujn(),
+            sw: $entity->sw(),
+            position: PositionDto::from($entity->position()),
+            vitrage: VitrageDto::from($entity->vitrage()),
+            survitrage: $entity->survitrage() ? SurvitrageDto::from($entity->survitrage()) : null,
+            menuiserie: $entity->menuiserie() ? MenuiserieDto::from($entity->menuiserie()) : null,
+            masques: $entity->masques()->map(fn($item) => (string) $item->id())->values(),
+            data: $entity->data(),
         );
     }
 
     public function __normalize(): array
     {
-        return [
+        $data = [
             'id' => $this->id,
             'description' => $this->description,
             'type' => $this->type->value,
@@ -69,7 +72,23 @@ final class BaieDto
             'vitrage' => $this->vitrage->__normalize(),
             'survitrage' => $this->survitrage?->__normalize(),
             'menuiserie' => $this->menuiserie?->__normalize(),
-            'masques' => $this->masques,
+            'masques' => array_values($this->masques),
         ];
+        if ($this->data) {
+            $data['data'] = [
+                'sdep' => $this->data->sdep,
+                'ug' => $this->data->ug,
+                'uw' => $this->data->uw,
+                'deltar' => $this->data->deltar,
+                'b' => $this->data->b,
+                'u' => $this->data->u,
+                'dp' => $this->data->dp,
+                'performance' => $this->data->performance?->value,
+                'fe' => $this->data->fe,
+                'sw' => $this->data->sw,
+                'sse' => $this->data->sse,
+            ];
+        }
+        return $data;
     }
 }

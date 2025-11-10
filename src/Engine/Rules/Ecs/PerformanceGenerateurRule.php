@@ -70,7 +70,7 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
     {
         $key = $mois ? "pertes_stockage::{$mois->value}" : "pertes_stockage";
         return $this->get($key, function () use ($mois): float {
-            if (0 === $vs = $this->volume_stockage()) {
+            if (0 == $vs = $this->volume_stockage()) {
                 return 0;
             }
             if (null === $this->position_chauff_eau()) {

@@ -1,1 +1,81 @@
-<?xml version="1.0" encoding="UTF-8"?><table name="audit.etiquette_climat"><row><zone_climatique>H1a</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="" gt="" lte="" lt="6" eq="" /><etiquette>A</etiquette></row><row><zone_climatique>H1a</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="6" gt="" lte="" lt="11" eq="" /><etiquette>B</etiquette></row><row><zone_climatique>H1a</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="11" gt="" lte="" lt="30" eq="" /><etiquette>C</etiquette></row><row><zone_climatique>H1a</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="30" gt="" lte="" lt="50" eq="" /><etiquette>D</etiquette></row><row><zone_climatique>H1a</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="50" gt="" lte="" lt="70" eq="" /><etiquette>E</etiquette></row><row><zone_climatique>H1a</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="70" gt="" lte="" lt="100" eq="" /><etiquette>F</etiquette></row><row><zone_climatique>H1a</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="110" gt="" lte="" lt="" eq="" /><etiquette>G</etiquette></row><row><zone_climatique>H1b</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="" gt="" lte="" lt="6" eq="" /><etiquette>A</etiquette></row><row><zone_climatique>H1b</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="6" gt="" lte="" lt="11" eq="" /><etiquette>B</etiquette></row><row><zone_climatique>H1b</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="11" gt="" lte="" lt="30" eq="" /><etiquette>C</etiquette></row><row><zone_climatique>H1b</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="30" gt="" lte="" lt="50" eq="" /><etiquette>D</etiquette></row><row><zone_climatique>H1b</zone_climatique><altitude gte="" gt="" lte="800" lt="" eq="" /><eges gte="50" gt="" lte="" lt="70" eq="" /><etiquette>E</etiquette></row><row><zone_climatique>H1b</zone_climatique><altitude gte="" gt="" lte="800" lt="" eq="" /><eges gte="70" gt="" lte="" lt="100" eq="" /><etiquette>F</etiquette></row><row><zone_climatique>H1b</zone_climatique><altitude gte="" gt="" lte="800" lt="" eq="" /><eges gte="110" gt="" lte="" lt="" eq="" /><etiquette>G</etiquette></row><row><zone_climatique>H1b</zone_climatique><altitude gte="" gt="800" lte="" lt="" eq="" /><eges gte="50" gt="" lte="" lt="80" eq="" /><etiquette>E</etiquette></row><row><zone_climatique>H1b</zone_climatique><altitude gte="" gt="800" lte="" lt="" eq="" /><eges gte="80" gt="" lte="" lt="110" eq="" /><etiquette>F</etiquette></row><row><zone_climatique>H1b</zone_climatique><altitude gte="" gt="800" lte="" lt="" eq="" /><eges gte="110" gt="" lte="" lt="" eq="" /><etiquette>G</etiquette></row><row><zone_climatique>H1c</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="" gt="" lte="" lt="6" eq="" /><etiquette>A</etiquette></row><row><zone_climatique>H1c</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="6" gt="" lte="" lt="11" eq="" /><etiquette>B</etiquette></row><row><zone_climatique>H1c</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="11" gt="" lte="" lt="30" eq="" /><etiquette>C</etiquette></row><row><zone_climatique>H1c</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="30" gt="" lte="" lt="50" eq="" /><etiquette>D</etiquette></row><row><zone_climatique>H1c</zone_climatique><altitude gte="" gt="" lte="800" lt="" eq="" /><eges gte="50" gt="" lte="" lt="70" eq="" /><etiquette>E</etiquette></row><row><zone_climatique>H1c</zone_climatique><altitude gte="" gt="" lte="800" lt="" eq="" /><eges gte="70" gt="" lte="" lt="100" eq="" /><etiquette>F</etiquette></row><row><zone_climatique>H1c</zone_climatique><altitude gte="" gt="" lte="800" lt="" eq="" /><eges gte="110" gt="" lte="" lt="" eq="" /><etiquette>G</etiquette></row><row><zone_climatique>H1c</zone_climatique><altitude gte="" gt="800" lte="" lt="" eq="" /><eges gte="50" gt="" lte="" lt="80" eq="" /><etiquette>E</etiquette></row><row><zone_climatique>H1c</zone_climatique><altitude gte="" gt="800" lte="" lt="" eq="" /><eges gte="80" gt="" lte="" lt="110" eq="" /><etiquette>F</etiquette></row><row><zone_climatique>H1c</zone_climatique><altitude gte="" gt="800" lte="" lt="" eq="" /><eges gte="110" gt="" lte="" lt="" eq="" /><etiquette>G</etiquette></row><row><zone_climatique>H2a</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="" gt="" lte="" lt="6" eq="" /><etiquette>A</etiquette></row><row><zone_climatique>H2a</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="6" gt="" lte="" lt="11" eq="" /><etiquette>B</etiquette></row><row><zone_climatique>H2a</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="11" gt="" lte="" lt="30" eq="" /><etiquette>C</etiquette></row><row><zone_climatique>H2a</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="30" gt="" lte="" lt="50" eq="" /><etiquette>D</etiquette></row><row><zone_climatique>H2a</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="50" gt="" lte="" lt="70" eq="" /><etiquette>E</etiquette></row><row><zone_climatique>H2a</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="70" gt="" lte="" lt="100" eq="" /><etiquette>F</etiquette></row><row><zone_climatique>H2a</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="110" gt="" lte="" lt="" eq="" /><etiquette>G</etiquette></row><row><zone_climatique>H2b</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="" gt="" lte="" lt="6" eq="" /><etiquette>A</etiquette></row><row><zone_climatique>H2b</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="6" gt="" lte="" lt="11" eq="" /><etiquette>B</etiquette></row><row><zone_climatique>H2b</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="11" gt="" lte="" lt="30" eq="" /><etiquette>C</etiquette></row><row><zone_climatique>H2b</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="30" gt="" lte="" lt="50" eq="" /><etiquette>D</etiquette></row><row><zone_climatique>H2b</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="50" gt="" lte="" lt="70" eq="" /><etiquette>E</etiquette></row><row><zone_climatique>H2b</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="70" gt="" lte="" lt="100" eq="" /><etiquette>F</etiquette></row><row><zone_climatique>H2b</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="110" gt="" lte="" lt="" eq="" /><etiquette>G</etiquette></row><row><zone_climatique>H2c</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="" gt="" lte="" lt="6" eq="" /><etiquette>A</etiquette></row><row><zone_climatique>H2c</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="6" gt="" lte="" lt="11" eq="" /><etiquette>B</etiquette></row><row><zone_climatique>H2c</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="11" gt="" lte="" lt="30" eq="" /><etiquette>C</etiquette></row><row><zone_climatique>H2c</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="30" gt="" lte="" lt="50" eq="" /><etiquette>D</etiquette></row><row><zone_climatique>H2c</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="50" gt="" lte="" lt="70" eq="" /><etiquette>E</etiquette></row><row><zone_climatique>H2c</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="70" gt="" lte="" lt="100" eq="" /><etiquette>F</etiquette></row><row><zone_climatique>H2c</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="110" gt="" lte="" lt="" eq="" /><etiquette>G</etiquette></row><row><zone_climatique>H2d</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="" gt="" lte="" lt="6" eq="" /><etiquette>A</etiquette></row><row><zone_climatique>H2d</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="6" gt="" lte="" lt="11" eq="" /><etiquette>B</etiquette></row><row><zone_climatique>H2d</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="11" gt="" lte="" lt="30" eq="" /><etiquette>C</etiquette></row><row><zone_climatique>H2d</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="30" gt="" lte="" lt="50" eq="" /><etiquette>D</etiquette></row><row><zone_climatique>H2d</zone_climatique><altitude gte="" gt="" lte="800" lt="" eq="" /><eges gte="50" gt="" lte="" lt="70" eq="" /><etiquette>E</etiquette></row><row><zone_climatique>H2d</zone_climatique><altitude gte="" gt="" lte="800" lt="" eq="" /><eges gte="70" gt="" lte="" lt="100" eq="" /><etiquette>F</etiquette></row><row><zone_climatique>H2d</zone_climatique><altitude gte="" gt="" lte="800" lt="" eq="" /><eges gte="110" gt="" lte="" lt="" eq="" /><etiquette>G</etiquette></row><row><zone_climatique>H2d</zone_climatique><altitude gte="" gt="800" lte="" lt="" eq="" /><eges gte="50" gt="" lte="" lt="80" eq="" /><etiquette>E</etiquette></row><row><zone_climatique>H2d</zone_climatique><altitude gte="" gt="800" lte="" lt="" eq="" /><eges gte="80" gt="" lte="" lt="110" eq="" /><etiquette>F</etiquette></row><row><zone_climatique>H2d</zone_climatique><altitude gte="" gt="800" lte="" lt="" eq="" /><eges gte="110" gt="" lte="" lt="" eq="" /><etiquette>G</etiquette></row><row><zone_climatique>H3</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="" gt="" lte="" lt="6" eq="" /><etiquette>A</etiquette></row><row><zone_climatique>H3</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="6" gt="" lte="" lt="11" eq="" /><etiquette>B</etiquette></row><row><zone_climatique>H3</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="11" gt="" lte="" lt="30" eq="" /><etiquette>C</etiquette></row><row><zone_climatique>H3</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="30" gt="" lte="" lt="50" eq="" /><etiquette>D</etiquette></row><row><zone_climatique>H3</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="50" gt="" lte="" lt="70" eq="" /><etiquette>E</etiquette></row><row><zone_climatique>H3</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="70" gt="" lte="" lt="100" eq="" /><etiquette>F</etiquette></row><row><zone_climatique>H3</zone_climatique><altitude gte="" gt="" lte="" lt="" eq="" /><eges gte="110" gt="" lte="" lt="" eq="" /><etiquette>G</etiquette></row></table>
+<?xml version="1.0" encoding="UTF-8"?>
+<table name="audit.etiquette_climat">
+    <row>
+        <zone_climatique>H1a|H1b|H1c|H2a|H2b|H2c|H2d|H3</zone_climatique>
+        <altitude lte="" gt="" />
+        <eges lt="6" gte="" />
+        <etiquette>A</etiquette>
+    </row>
+    <row>
+        <zone_climatique>H1a|H1b|H1c|H2a|H2b|H2c|H2d|H3</zone_climatique>
+        <altitude lte="" gt="" />
+        <eges lt="11" gte="6" />
+        <etiquette>B</etiquette>
+    </row>
+    <row>
+        <zone_climatique>H1a|H1b|H1c|H2a|H2b|H2c|H2d|H3</zone_climatique>
+        <altitude lte="" gt="" />
+        <eges lt="30" gte="11" />
+        <etiquette>C</etiquette>
+    </row>
+    <row>
+        <zone_climatique>H1a|H1b|H1c|H2a|H2b|H2c|H2d|H3</zone_climatique>
+        <altitude lte="" gt="" />
+        <eges lt="50" gte="30" />
+        <etiquette>D</etiquette>
+    </row>
+    <row>
+        <zone_climatique>H1a|H2a|H2b|H2c|H3</zone_climatique>
+        <altitude lte="" gt="" />
+        <eges lt="70" gte="50" />
+        <etiquette>E</etiquette>
+    </row>
+    <row>
+        <zone_climatique>H1a|H2a|H2b|H2c|H3</zone_climatique>
+        <altitude lte="" gt="" />
+        <eges lt="100" gte="70" />
+        <etiquette>F</etiquette>
+    </row>
+    <row>
+        <zone_climatique>H1a|H2a|H2b|H2c|H3</zone_climatique>
+        <altitude lte="" gt="" />
+        <eges lt="" gte="100" />
+        <etiquette>G</etiquette>
+    </row>
+    <row>
+        <zone_climatique>H1b|H1c|H2d</zone_climatique>
+        <altitude lte="800" gt="" />
+        <eges lt="70" gte="50" />
+        <etiquette>E</etiquette>
+    </row>
+    <row>
+        <zone_climatique>H1b|H1c|H2d</zone_climatique>
+        <altitude lte="800" gt="" />
+        <eges lt="100" gte="70" />
+        <etiquette>F</etiquette>
+    </row>
+    <row>
+        <zone_climatique>H1b|H1c|H2d</zone_climatique>
+        <altitude lte="800" gt="" />
+        <eges lt="" gte="100" />
+        <etiquette>G</etiquette>
+    </row>
+    <row>
+        <zone_climatique>H1b|H1c|H2d</zone_climatique>
+        <altitude lte="" gt="800" />
+        <eges lt="80" gte="50" />
+        <etiquette>E</etiquette>
+    </row>
+    <row>
+        <zone_climatique>H1b|H1c|H2d</zone_climatique>
+        <altitude lte="" gt="800" />
+        <eges lt="110" gte="80" />
+        <etiquette>F</etiquette>
+    </row>
+    <row>
+        <zone_climatique>H1b|H1c|H2d</zone_climatique>
+        <altitude lte="" gt="800" />
+        <eges lt="" gte="110" />
+        <etiquette>G</etiquette>
+    </row>
+</table>

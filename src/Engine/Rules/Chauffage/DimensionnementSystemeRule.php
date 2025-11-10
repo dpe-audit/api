@@ -12,7 +12,7 @@ abstract class DimensionnementSystemeRule extends CommonSystemeRule
     {
         return $this->item()->installation()->systemes()
             ->filter_by_systeme_collectif($systeme_collectif)
-            ->map(fn($entity) => $this->requireIterator(static::class, $entity))
+            ->map(fn($entity) => $this->requireIterator(self::class, $entity))
             ->filter(fn(self $rule) => $rule->configuration() === Configuration::BASE)
             ->count();
     }
@@ -21,7 +21,7 @@ abstract class DimensionnementSystemeRule extends CommonSystemeRule
     {
         return $this->item()->installation()->systemes()
             ->filter_by_systeme_collectif($systeme_collectif)
-            ->map(fn($entity) => $this->requireIterator(static::class, $entity))
+            ->map(fn($entity) => $this->requireIterator(self::class, $entity))
             ->filter(fn(self $rule) => $rule->configuration() === Configuration::RELEVE)
             ->count();
     }
@@ -30,7 +30,7 @@ abstract class DimensionnementSystemeRule extends CommonSystemeRule
     {
         return $this->item()->installation()->systemes()
             ->filter_by_systeme_collectif($systeme_collectif)
-            ->map(fn($entity) => $this->requireIterator(static::class, $entity))
+            ->map(fn($entity) => $this->requireIterator(self::class, $entity))
             ->filter(fn(self $rule) => $rule->configuration() === Configuration::APPOINT)
             ->count();
     }
@@ -50,7 +50,7 @@ abstract class DimensionnementSystemeRule extends CommonSystemeRule
     {
         $pn = 0;
         foreach ($this->item()->installation()->systemes() as $item) {
-            $rule = $this->requireIterator(static::class, $item);
+            $rule = $this->requireIterator(self::class, $item);
             if ($rule->configuration() !== $configuration) {
                 continue;
             }

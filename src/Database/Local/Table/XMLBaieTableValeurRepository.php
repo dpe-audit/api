@@ -40,15 +40,21 @@ final class XMLBaieTableValeurRepository extends XMLParoiTableValeurRepository i
         ?Materiau $materiau,
         ?bool $presence_rupteur_pont_thermique
     ): ?float {
-        $points = $this->db->repository('baie.uw')
+        $records = $this->db->repository('baie.uw')
             ->createQuery()
             ->and('type_baie', $type_baie)
             ->and('presence_soubassement', $presence_soubassement)
             ->and('materiau', $materiau, false)
             ->and('presence_rupteur_pont_thermique', $presence_rupteur_pont_thermique)
-            ->getMany()
-            ->points('ug', 'uw');
+            ->getMany();
 
+        if (0 === $records->count()) {
+            return null;
+        }
+        if (1 === $records->count()) {
+            return $records->first()->floatval('uw');
+        }
+        $points = $records->points('ug', 'uw');
         $f = new Interpolation($points, Interpolation::METHOD_LINEAIRE);
         return $f->interpolationLineaire($ug);
     }
@@ -64,14 +70,20 @@ final class XMLBaieTableValeurRepository extends XMLParoiTableValeurRepository i
 
     public function ujn(float $deltar, float $uw): ?float
     {
-        $points = $this->db->repository('baie.ujn')
+        $records = $this->db->repository('baie.ujn')
             ->createQuery()
             ->and('deltar', $deltar)
-            ->getMany()
-            ->points('uw', 'deltar', 'ujn');
+            ->getMany();
 
-        $f = new Interpolation($points, Interpolation::METHOD_BILENAIRE);
-        return $f->interpolationBilenaire($uw, $deltar);
+        if (0 === $records->count()) {
+            return null;
+        }
+        if (1 === $records->count()) {
+            return $records->first()->floatval('ujn');
+        }
+        $points = $records->points('uw', 'ujn');
+        $f = new Interpolation($points, Interpolation::METHOD_LINEAIRE);
+        return $f->interpolationLineaire($uw);
     }
 
     public function sw(

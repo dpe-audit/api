@@ -33,6 +33,14 @@ enum EnergieGenerateur: string
         };
     }
 
+    public function is_gaz(): bool
+    {
+        return match ($this) {
+            self::GAZ_NATUREL, self::GPL => true,
+            default => false,
+        };
+    }
+
     public function is_bois(): bool
     {
         return match ($this) {

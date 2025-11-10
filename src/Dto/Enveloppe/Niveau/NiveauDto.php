@@ -2,7 +2,7 @@
 
 namespace App\Dto\Enveloppe\Niveau;
 
-use App\Domain\Enveloppe\Niveau\Niveau;
+use App\Domain\Enveloppe\Niveau\{Niveau, NiveauData};
 use App\Domain\Enveloppe\Paroi\Inertie;
 
 /**
@@ -17,23 +17,25 @@ final class NiveauDto
         public readonly Inertie $inertie_paroi_verticale,
         public readonly Inertie $inertie_plancher_bas,
         public readonly Inertie $inertie_plancher_haut,
+        public readonly ?NiveauData $data = null,
     ) {}
 
-    public static function from(Niveau $data): self
+    public static function from(Niveau $entity): self
     {
         return new self(
-            id: (string) $data->id(),
-            description: $data->description(),
-            surface: $data->surface(),
-            inertie_paroi_verticale: $data->inertie_paroi_verticale(),
-            inertie_plancher_bas: $data->inertie_plancher_bas(),
-            inertie_plancher_haut: $data->inertie_plancher_haut(),
+            id: (string) $entity->id(),
+            description: $entity->description(),
+            surface: $entity->surface(),
+            inertie_paroi_verticale: $entity->inertie_paroi_verticale(),
+            inertie_plancher_bas: $entity->inertie_plancher_bas(),
+            inertie_plancher_haut: $entity->inertie_plancher_haut(),
+            data: $entity->data(),
         );
     }
 
     public function __normalize(): array
     {
-        return [
+        $data = [
             'id' => $this->id,
             'description' => $this->description,
             'surface' => $this->surface,
@@ -41,5 +43,11 @@ final class NiveauDto
             'inertie_plancher_bas' => $this->inertie_plancher_bas->value,
             'inertie_plancher_haut' => $this->inertie_plancher_haut->value,
         ];
+        if ($this->data) {
+            $data['data'] = [
+                'inertie' => $this->data->inertie?->value,
+            ];
+        }
+        return $data;
     }
 }

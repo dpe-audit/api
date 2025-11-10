@@ -71,6 +71,29 @@ final class GenerateurTransformer
 
     public function energie(): EnergieGenerateur
     {
+        $type = $this->type();
+
+        if ($type->is_pac() || $type->is_emetteur_electrique()) {
+            return EnergieGenerateur::ELECTRICITE;
+        }
+        if ($type->is_reseau_chaleur()) {
+            return EnergieGenerateur::RESEAU_CHALEUR;
+        }
+        if ($type->is_poele_insert() || $type->is_poele_bouilleur()) {
+            return match ($this->generateur_chauffage->enum_type_energie_id) {
+                4 => EnergieGenerateur::BOIS_BUCHE,
+                5 => EnergieGenerateur::BOIS_GRANULE,
+                6, 7 => EnergieGenerateur::BOIS_PLAQUETTE,
+                default => EnergieGenerateur::BOIS_GRANULE,
+            };
+        }
+        if ($type->is_radiateur_gaz()) {
+            return match ($this->generateur_chauffage->enum_type_energie_id) {
+                2 => EnergieGenerateur::GAZ_NATUREL,
+                9, 10, 13 => EnergieGenerateur::GPL,
+                default => EnergieGenerateur::GAZ_NATUREL,
+            };
+        }
         return match ($this->generateur_chauffage->enum_type_energie_id) {
             1, 12 => EnergieGenerateur::ELECTRICITE,
             2 => EnergieGenerateur::GAZ_NATUREL,
@@ -89,7 +112,10 @@ final class GenerateurTransformer
      */
     public function bienergie(): ?EnergieGenerateur
     {
-        return match ($this->generateur_chauffage->enum_type_generateur_ch_id) {
+        if (null === $this->generateur_hybride) {
+            return null;
+        }
+        return match ($this->generateur_hybride->enum_type_generateur_ch_id) {
             148, 149 => EnergieGenerateur::GAZ_NATUREL,
             150, 151 => EnergieGenerateur::FIOUL,
             152, 153 => EnergieGenerateur::BOIS_GRANULE,
@@ -100,18 +126,24 @@ final class GenerateurTransformer
         };
     }
 
-    public function generateur_collectif(): bool
-    {
-        return $this->generateur_chauffage->enum_lien_generateur_emetteur_id === 1
-            && in_array($this->installation_chauffage->enum_type_installation_id, [2, 3, 4]);
-    }
-
     public function generateur_multi_batiment(): bool
     {
         return match ($this->generateur_chauffage->enum_type_generateur_ch_id) {
             109, 110, 111, 112, 171 => true,
             default => false,
         };
+    }
+
+    public function generateur_collectif(): bool
+    {
+        if ($this->generateur_multi_batiment()) {
+            return true;
+        }
+        if ($this->type()?->is_chauffage_divise()) {
+            return false;
+        }
+        return $this->generateur_chauffage->enum_lien_generateur_emetteur_id === 1
+            && in_array($this->installation_chauffage->enum_type_installation_id, [2, 3, 4]);
     }
 
     public function position_chaudiere(): ?PositionChaudiere
@@ -153,6 +185,14 @@ final class GenerateurTransformer
         };
     }
 
+    public function position_volume_chauffe(): bool
+    {
+        if ($this->generateur_collectif()) {
+            return false;
+        }
+        return $this->type()?->is_chauffage_divise() ? true : $this->generateur_chauffage->position_volume_chauffe;
+    }
+
     public function mode_combustion(): ?ModeCombustion
     {
         $enum_type_generateur_ch_id = $this->generateur_hybride?->enum_type_generateur_ch_id
@@ -177,6 +217,63 @@ final class GenerateurTransformer
         };
     }
 
+    public function presence_ventouse(): ?bool
+    {
+        return $this->generateur_chauffage->presence_ventouse ?? $this->generateur_hybride?->presence_ventouse;
+    }
+
+    public function presence_regulation_combustion(): ?bool
+    {
+        return $this->generateur_chauffage->presence_regulation_combustion ?? $this->generateur_hybride?->presence_regulation_combustion;
+    }
+
+    public function pn(): ?float
+    {
+        $value = $this->generateur_chauffage->pn_saisi() ?? $this->generateur_hybride?->pn_saisi();
+        return $value > 0 ? $value / 1000 : null;
+    }
+
+    public function rpint(): ?float
+    {
+        $value = $this->generateur_chauffage->rpint_saisi() ?? $this->generateur_hybride?->rpint_saisi();
+        return $value > 0 ? $value : null;
+    }
+
+    public function rpn(): ?float
+    {
+        $value = $this->generateur_chauffage->rpn_saisi() ?? $this->generateur_hybride?->rpn_saisi();
+        return $value > 0 ? $value : null;
+    }
+
+    public function qp0(): ?float
+    {
+        $value = $this->generateur_chauffage->qp0_saisi() ?? $this->generateur_hybride?->qp0_saisi();
+        return $value > 0 ? $value : null;
+    }
+
+    public function pveilleuse(): ?float
+    {
+        $value = $this->generateur_chauffage->pveilleuse_saisi() ?? $this->generateur_hybride?->pveilleuse_saisi();
+        return $value > 0 ? $value : null;
+    }
+
+    public function scop(): ?float
+    {
+        return ($value = $this->generateur_chauffage->scop_saisi()) > 0 ? $value : null;
+    }
+
+    public function tfonc30(): ?float
+    {
+        $value = $this->generateur_chauffage->tfonc30_saisi() ?? $this->generateur_hybride?->tfonc30_saisi();
+        return $value > 0 ? $value : null;
+    }
+
+    public function tfonc100(): ?float
+    {
+        $value = $this->generateur_chauffage->tfonc100_saisi() ?? $this->generateur_hybride?->tfonc100_saisi();
+        return $value > 0 ? $value : null;
+    }
+
     public function __invoke(
         GenerateurChauffage $generateur_chauffage,
         InstallationChauffage $installation_chauffage,
@@ -185,6 +282,7 @@ final class GenerateurTransformer
         $this->context = $context;
         $this->installation_chauffage = $installation_chauffage;
         $this->generateur_chauffage = $generateur_chauffage;
+        $this->generateur_hybride = null;
 
         if (null === $type = $this->type()) {
             return null;
@@ -203,24 +301,24 @@ final class GenerateurTransformer
             position: new PositionDto(
                 generateur_collectif: $this->generateur_collectif(),
                 generateur_multi_batiment: $this->generateur_multi_batiment(),
-                position_volume_chauffe: $generateur_chauffage->position_volume_chauffe,
+                position_volume_chauffe: $this->position_volume_chauffe(),
                 position_chaudiere: $this->position_chaudiere(),
                 generateur_mixte_id: $this->generateur_mixte_id(),
                 reseau_chaleur_id: $this->reseau_chaleur_id(),
             ),
             signaletique: new SignaletiqueDto(
-                pn: $generateur_chauffage->pn_saisi(),
+                pn: $this->pn(),
                 label: $this->label(),
-                scop: $generateur_chauffage->scop_saisi(),
+                scop: $this->scop(),
                 mode_combustion: $this->mode_combustion(),
-                presence_ventouse: $generateur_chauffage->presence_ventouse ?? $this->generateur_hybride?->presence_ventouse,
-                presence_regulation_combustion: $generateur_chauffage->presence_regulation_combustion ?? $this->generateur_hybride?->presence_regulation_combustion,
-                pveilleuse: $generateur_chauffage->pveilleuse_saisi() ?? $this->generateur_hybride?->pveilleuse_saisi(),
-                qp0: $generateur_chauffage->qp0_saisi() ?? $this->generateur_hybride?->qp0_saisi(),
-                rpn: $generateur_chauffage->rpn_saisi() ?? $this->generateur_hybride?->rpn_saisi(),
-                rpint: $generateur_chauffage->rpint_saisi() ?? $this->generateur_hybride?->rpint_saisi(),
-                tfonc30: $generateur_chauffage->tfonc30_saisi() ?? $this->generateur_hybride?->tfonc30_saisi(),
-                tfonc100: $generateur_chauffage->tfonc100_saisi() ?? $this->generateur_hybride?->tfonc100_saisi(),
+                presence_ventouse: $this->presence_ventouse(),
+                presence_regulation_combustion: $this->presence_regulation_combustion(),
+                pveilleuse: $this->pveilleuse(),
+                qp0: $this->qp0(),
+                rpn: $this->rpn(),
+                rpint: $this->rpint(),
+                tfonc30: $this->tfonc30(),
+                tfonc100: $this->tfonc100(),
             ),
         );
     }

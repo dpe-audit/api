@@ -3,7 +3,7 @@
 namespace App\Dto\Enveloppe\PlancherBas;
 
 use App\Domain\Enveloppe\Paroi\Inertie;
-use App\Domain\Enveloppe\PlancherBas\{PlancherBas, TypePlancherBas};
+use App\Domain\Enveloppe\PlancherBas\{PlancherBas, PlancherBasData, TypePlancherBas};
 use App\Dto\Enveloppe\Paroi\IsolationDto;
 use App\Validation;
 
@@ -25,27 +25,30 @@ final class PlancherBasDto
         public readonly ?float $u,
         public readonly PositionDto $position,
         public readonly IsolationDto $isolation,
+
+        public readonly ?PlancherBasData $data = null,
     ) {}
 
-    public static function from(PlancherBas $data): self
+    public static function from(PlancherBas $entity): self
     {
         return new self(
-            id: (string) $data->id(),
-            description: $data->description(),
-            type_structure: $data->type_structure(),
-            inertie: $data->inertie(),
-            annee_construction: $data->annee_construction(),
-            annee_renovation: $data->annee_renovation(),
-            u0: $data->u0(),
-            u: $data->u(),
-            position: PositionDto::from($data->position()),
-            isolation: IsolationDto::from($data->isolation()),
+            id: (string) $entity->id(),
+            description: $entity->description(),
+            type_structure: $entity->type_structure(),
+            inertie: $entity->inertie(),
+            annee_construction: $entity->annee_construction(),
+            annee_renovation: $entity->annee_renovation(),
+            u0: $entity->u0(),
+            u: $entity->u(),
+            position: PositionDto::from($entity->position()),
+            isolation: IsolationDto::from($entity->isolation()),
+            data: $entity->data(),
         );
     }
 
     public function __normalize(): array
     {
-        return [
+        $data = [
             'id' => $this->id,
             'description' => $this->description,
             'type_structure' => $this->type_structure?->value,
@@ -57,5 +60,16 @@ final class PlancherBasDto
             'position' => $this->position->__normalize(),
             'isolation' => $this->isolation->__normalize(),
         ];
+        if ($this->data) {
+            $data['data'] = [
+                'sdep' => $this->data->sdep,
+                'u0' => $this->data->u0,
+                'u' => $this->data->u,
+                'b' => $this->data->b,
+                'dp' => $this->data->dp,
+                'performance' => $this->data->performance?->value,
+            ];
+        }
+        return $data;
     }
 }

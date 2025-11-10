@@ -19,7 +19,7 @@ final class XMLPerformanceTableValeurRepository implements PerformanceTableValeu
     ): ?EtiquetteEnergie {
         $value = $this->db->repository('performance.etiquette_energie')
             ->createQuery()
-            ->and('zone_climatique', $zone_climatique)
+            ->and('zone_climatique', $zone_climatique, false)
             ->andCompareTo('altitude', $altitude)
             ->andCompareTo('cep', $cep)
             ->andCompareTo('eges', $eges)
@@ -36,7 +36,7 @@ final class XMLPerformanceTableValeurRepository implements PerformanceTableValeu
     ): ?EtiquetteClimat {
         $value = $this->db->repository('performance.etiquette_climat')
             ->createQuery()
-            ->and('zone_climatique', $zone_climatique)
+            ->and('zone_climatique', $zone_climatique, false)
             ->andCompareTo('altitude', $altitude)
             ->andCompareTo('eges', $eges)
             ->getOne()

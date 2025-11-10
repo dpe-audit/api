@@ -3,7 +3,6 @@
 namespace App\Legacy\Transformer\Enveloppe;
 
 use App\Domain\Enveloppe\Mur\{TypeDoublage, TypeMur};
-use App\Domain\Enveloppe\Paroi\Inertie;
 use App\Dto\Enveloppe\Mur\{MurDto, PositionDto};
 use App\Dto\Enveloppe\Paroi\IsolationDto;
 use App\Legacy\Model\Mur;
@@ -55,6 +54,21 @@ final class MurTransformer extends ParoiOpaqueTransformer
         };
     }
 
+    public function epaisseur_structure(): ?float
+    {
+        return $this->paroi->epaisseur_structure > 0 ? $this->paroi->epaisseur_structure : null;
+    }
+
+    public function u0(): ?float
+    {
+        return $this->paroi->umur0_saisi > 0 ? $this->paroi->umur0_saisi : null;
+    }
+
+    public function u(): ?float
+    {
+        return $this->paroi->umur_saisi > 0 ? $this->paroi->umur_saisi : null;
+    }
+
     public function __invoke(Mur $paroi, Context $context): MurDto
     {
         $this->context = $context;
@@ -64,21 +78,21 @@ final class MurTransformer extends ParoiOpaqueTransformer
             id: $paroi->id(),
             description: $paroi->description(),
             type_structure: $this->type_structure(),
-            epaisseur_structure: $paroi->epaisseur_structure,
+            epaisseur_structure: $this->epaisseur_structure(),
             type_doublage: $this->type_doublage(),
             presence_enduit_isolant: $paroi->enduit_isolant_paroi_ancienne,
             paroi_ancienne: $paroi->enduit_isolant_paroi_ancienne,
             inertie: $this->inertie(),
             annee_construction: null,
             annee_renovation: null,
-            u0: $paroi->umur0_saisi,
-            u: $paroi->umur_saisi,
+            u0: $this->u0(),
+            u: $this->u(),
             isolation: new IsolationDto(
                 etat: $this->etat_isolation(),
                 type: $this->type_isolation(),
                 annee_installation: $this->annee_isolation(),
                 epaisseur: $this->epaisseur_isolation(),
-                resistance_thermique: $paroi->resistance_isolation
+                resistance_thermique: $this->resistance_isolation(),
             ),
             position: new PositionDto(
                 surface: $paroi->surface(),

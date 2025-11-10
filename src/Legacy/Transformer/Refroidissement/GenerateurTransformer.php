@@ -59,6 +59,11 @@ final class GenerateurTransformer
         };
     }
 
+    public function seer(): ?float
+    {
+        return $this->climatisation->seer_saisi() > 0 ? $this->climatisation->seer_saisi() : null;
+    }
+
     public function __invoke(Climatisation $climatisation, Context $context): GenerateurDto
     {
         $this->context = $context;
@@ -71,7 +76,7 @@ final class GenerateurTransformer
             type: $this->type_generateur(),
             energie: $this->energie_generateur(),
             annee_installation: $this->annee_installation(),
-            seer: $climatisation->seer_saisi(),
+            seer: $this->seer(),
         );
     }
 }

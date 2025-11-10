@@ -8,8 +8,10 @@ final class PerformanceChaudiereStandardRule extends PerformanceChaudiereRule
 {
     public function supports(): bool
     {
-        return parent::supports()
-            && false === $this->energie_generateur()->is_bois()
+        if (false === parent::supports()) {
+            return false;
+        }
+        return false === $this->energie_generateur()->is_bois()
             && ModeCombustion::STANDARD === $this->mode_combustion();
     }
 

@@ -51,4 +51,19 @@ final class EPConso
             ep_conso_5_usages_m2: (float) $xml->ep_conso_5_usages_m2
         );
     }
+
+    public function ep_conso_auxiliaire_ch(): float
+    {
+        return $this->ep_conso_auxiliaire_generation_ch + $this->ep_conso_auxiliaire_distribution_ch;
+    }
+
+    public function ep_conso_auxiliaire_ecs(): float
+    {
+        return $this->ep_conso_auxiliaire_generation_ecs + $this->ep_conso_auxiliaire_distribution_ecs;
+    }
+
+    public function ep_conso_auxiliaire_fr(): float
+    {
+        return $this->ep_conso_auxiliaire_distribution_fr;
+    }
 }

@@ -8,7 +8,10 @@ final class PerformanceRadiateurGazRule extends PerformanceCombustionRule
 {
     public function supports(): bool
     {
-        return $this->type_generateur()->is_radiateur_gaz() && $this->energie_generateur()->is_combustible();
+        if (false === parent::supports()) {
+            return false;
+        }
+        return $this->type_generateur()->is_radiateur_gaz();
     }
 
     /**

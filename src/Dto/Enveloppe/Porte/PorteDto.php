@@ -2,7 +2,7 @@
 
 namespace App\Dto\Enveloppe\Porte;
 
-use App\Domain\Enveloppe\Porte\{Isolation, Materiau, Porte};
+use App\Domain\Enveloppe\Porte\{Isolation, Materiau, Porte, PorteData};
 use App\Validation;
 
 /**
@@ -21,26 +21,29 @@ final class PorteDto
         public readonly PositionDto $position,
         public readonly MenuiserieDto $menuiserie,
         public readonly VitrageDto $vitrage,
+
+        public readonly ?PorteData $data = null,
     ) {}
 
-    public static function from(Porte $data): self
+    public static function from(Porte $entity): self
     {
         return new self(
-            id: (string) $data->id(),
-            description: $data->description(),
-            isolation: $data->isolation(),
-            materiau: $data->materiau(),
-            annee_installation: $data->annee_installation(),
-            u: $data->u(),
-            position: PositionDto::from($data->position()),
-            menuiserie: MenuiserieDto::from($data->menuiserie()),
-            vitrage: VitrageDto::from($data->vitrage()),
+            id: (string) $entity->id(),
+            description: $entity->description(),
+            isolation: $entity->isolation(),
+            materiau: $entity->materiau(),
+            annee_installation: $entity->annee_installation(),
+            u: $entity->u(),
+            position: PositionDto::from($entity->position()),
+            menuiserie: MenuiserieDto::from($entity->menuiserie()),
+            vitrage: VitrageDto::from($entity->vitrage()),
+            data: $entity->data(),
         );
     }
 
     public function __normalize(): array
     {
-        return [
+        $data = [
             'id' => $this->id,
             'description' => $this->description,
             'isolation' => $this->isolation?->value,
@@ -51,5 +54,15 @@ final class PorteDto
             'menuiserie' => $this->menuiserie->__normalize(),
             'vitrage' => $this->vitrage->__normalize(),
         ];
+        if ($this->data) {
+            $data['data'] = [
+                'sdep' => $this->data->sdep,
+                'u' => $this->data->u,
+                'b' => $this->data->b,
+                'dp' => $this->data->dp,
+                'performance' => $this->data->performance?->value,
+            ];
+        }
+        return $data;
     }
 }

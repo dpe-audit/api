@@ -17,6 +17,16 @@ enum TypeBaie: string
         return \in_array($this, [self::BRIQUE_VERRE_PLEINE, self::BRIQUE_VERRE_CREUSE, self::POLYCARBONATE]);
     }
 
+    public function is_paroi_brique_verre(): bool
+    {
+        return \in_array($this, [self::BRIQUE_VERRE_PLEINE, self::BRIQUE_VERRE_CREUSE]);
+    }
+
+    public function is_paroi_polycarbonate(): bool
+    {
+        return $this === self::POLYCARBONATE;
+    }
+
     public function is_fenetre(): bool
     {
         return \in_array($this, [self::FENETRE_BATTANTE, self::FENETRE_COULISSANTE]);

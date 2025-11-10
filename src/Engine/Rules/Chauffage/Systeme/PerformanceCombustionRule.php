@@ -3,11 +3,19 @@
 namespace App\Engine\Rules\Chauffage\Systeme;
 
 use App\Domain\Common\Enum\ScenarioUsage;
+use App\Engine\Rules\Chauffage\DimensionnementSystemeRule;
 use App\Engine\Rules\Chauffage\PerformanceSystemeRule;
 use App\Engine\Rules\Chauffage\Systeme\Combustion\TauxCharge;
 
 abstract class PerformanceCombustionRule extends PerformanceSystemeRule
 {
+    public function supports(): bool
+    {
+        return $this->energie_generateur()->is_combustible()
+            || $this->bienergie_generateur()?->is_combustible()
+            && false === $this->generateur_multi_batiment();
+    }
+
     /**
      * Sommes des puissances nominales des générateurs en cascade
      * 
@@ -15,15 +23,11 @@ abstract class PerformanceCombustionRule extends PerformanceSystemeRule
      */
     private function pn_cascade(): float
     {
-        $pn = 0;
-        foreach ($this->collection() as $entity) {
-            $rule = $this->requireIterator(self::class, $entity);
-            if (null === $rule->cascade()) {
-                continue;
-            }
-            $pn += $rule->pn();
-        }
-        return $pn;
+        return $this->item()->installation()->systemes()
+            ->with_generateur_combustion()
+            ->with_cascade()
+            ->map(fn($entity) => $this->requireIterator(DimensionnementSystemeRule::class, $entity)->pn())
+            ->reduce(fn(float $carry, float $pn): float => $carry + $pn, 0);
     }
 
     /**
@@ -31,15 +35,31 @@ abstract class PerformanceCombustionRule extends PerformanceSystemeRule
      */
     private function pn_combustion(): float
     {
-        $pn = 0;
-        foreach ($this->collection() as $entity) {
-            $rule = $this->requireIterator(self::class, $entity);
-            if (null !== $rule->cascade()) {
-                continue;
-            }
-            $pn += $rule->pn();
-        }
-        return $pn;
+        return $this->item()->installation()->systemes()
+            ->with_generateur_combustion()
+            ->without_cascade()
+            ->map(fn($entity) => $this->requireIterator(DimensionnementSystemeRule::class, $entity)->pn())
+            ->reduce(fn(float $carry, float $pn): float => $carry + $pn, 0);
+    }
+
+    public function qp0(): float
+    {
+        return parent::qp0() / 1000;
+    }
+
+    public function pveilleuse(): float
+    {
+        return parent::pveilleuse() / 1000;
+    }
+
+    public function rpn(): float
+    {
+        return parent::rpn() * 100;
+    }
+
+    public function rpint(): float
+    {
+        return parent::rpint() * 100;
     }
 
     // * Données de sortie

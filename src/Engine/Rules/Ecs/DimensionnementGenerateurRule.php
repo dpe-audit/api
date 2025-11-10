@@ -45,7 +45,7 @@ abstract class DimensionnementGenerateurRule extends CommonGenerateurRule
             }
             $volume_stockage = $this->volume_stockage();
             return match (true) {
-                $volume_stockage === 0 => 21,
+                $volume_stockage == 0 => 21,
                 $volume_stockage <= 20 => 21 - 0.8 * $volume_stockage,
                 $volume_stockage <= 150 => 5 - 1.751 * (($volume_stockage - 20) / 65),
                 $volume_stockage > 150 => (7.14 * $volume_stockage + 428) / 1000,

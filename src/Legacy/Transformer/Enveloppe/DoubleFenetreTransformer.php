@@ -71,6 +71,12 @@ final class DoubleFenetreTransformer
 
     public function type_vitrage(): TypeVitrage
     {
+        if ($this->type_baie()->is_paroi_brique_verre()) {
+            return TypeVitrage::BRIQUE_VERRE;
+        }
+        if ($this->type_baie()->is_paroi_polycarbonate()) {
+            return TypeVitrage::POLYCARBONATE;
+        }
         return match ($this->double_fenetre->enum_type_vitrage_id) {
             1, 4 => TypeVitrage::SIMPLE_VITRAGE,
             2 => $this->double_fenetre->vitrage_vir ? TypeVitrage::DOUBLE_VITRAGE_FE : TypeVitrage::DOUBLE_VITRAGE,
@@ -97,9 +103,32 @@ final class DoubleFenetreTransformer
         };
     }
 
+    public function epaisseur_lame(): ?float
+    {
+        if (false === $this->type_vitrage()->vitrage_complexe()) {
+            return null;
+        }
+        return $this->double_fenetre->epaisseur_lame > 0 ? $this->double_fenetre->epaisseur_lame : null;
+    }
+
     public function presence_rupteur_pont_thermique(): bool
     {
         return $this->double_fenetre->enum_type_materiaux_menuiserie_id === 6 ? true : false;
+    }
+
+    public function ug(): ?float
+    {
+        return $this->double_fenetre->ug_saisi > 0 ? $this->double_fenetre->ug_saisi : null;
+    }
+
+    public function uw(): ?float
+    {
+        return $this->double_fenetre->uw_saisi > 0 ? $this->double_fenetre->uw_saisi : null;
+    }
+
+    public function sw(): ?float
+    {
+        return $this->double_fenetre->sw_saisi > 0 ? $this->double_fenetre->sw_saisi : null;
     }
 
     public function __invoke(DoubleFenetre $double_fenetre): DoubleFenetreDto
@@ -110,9 +139,9 @@ final class DoubleFenetreTransformer
             id: $double_fenetre->id(),
             description: "Double fenêtre",
             type: $this->type_baie(),
-            ug: $double_fenetre->ug_saisi,
-            uw: $double_fenetre->uw_saisi,
-            sw: $double_fenetre->sw_saisi,
+            ug: $this->ug(),
+            uw: $this->uw(),
+            sw: $this->sw(),
             position: new PositionDto(
                 inclinaison: $this->inclinaison(),
                 type_pose: $this->type_pose(),
@@ -121,7 +150,7 @@ final class DoubleFenetreTransformer
             vitrage: new VitrageDto(
                 type: $this->type_vitrage(),
                 nature_lame: $this->nature_lame(),
-                epaisseur_lame: $double_fenetre->epaisseur_lame,
+                epaisseur_lame: $this->epaisseur_lame(),
             ),
             survitrage: $this->type_survitrage() ? new SurvitrageDto(
                 type: $this->type_survitrage(),

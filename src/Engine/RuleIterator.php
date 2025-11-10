@@ -15,63 +15,65 @@ abstract class RuleIterator extends Rule implements \Iterator
      */
     abstract public function collection(): array;
 
-    /**
-     * Données d'entrée
-     * 
-     * @return T
-     */
-    public function item(): mixed
-    {
-        return $this->collection()[$this->position()];
-    }
-
     public function supports(): bool
     {
         return true;
     }
 
-    public function rewind(): void
+    /**
+     * Données d'entrée
+     * 
+     * @return T
+     */
+    final public function item(): mixed
+    {
+        return $this->cache()[$this->position];
+    }
+
+    final public function rewind(): void
     {
         $this->position = 0;
         $this->cache = null;
         $this->skip();
     }
 
-    public function current(): static
+    final public function current(): static
     {
         return $this;
     }
 
-    public function key(): int
+    final public function key(): int
     {
         return $this->position;
     }
 
-    public function next(): void
+    final public function next(): void
     {
         ++$this->position;
         $this->skip();
     }
 
-    public function position(): int
+    final public function position(): int
     {
         return $this->position;
     }
 
-    public function valid(): bool
+    final public function valid(): bool
     {
-        if ($this->cache === null) {
-            $this->cache = $this->collection();
-        }
-        return isset($this->cache[$this->position]);
+        return isset($this->cache()[$this->position]);
     }
 
-    private function skip(): void
+    /**
+     * @return array<T>
+     */
+    public function cache(): array
     {
-        if ($this->cache === null) {
-            $this->cache = $this->collection();
-        }
-        while (isset($this->cache[$this->position]) && !$this->supports()) {
+        return $this->cache ??= $this->collection();
+    }
+
+    public function skip(): void
+    {
+        while (isset($this->cache()[$this->position]) && !$this->supports()) {
             ++$this->position;
         }
     }

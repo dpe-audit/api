@@ -85,9 +85,14 @@ final class SystemeCollection extends ArrayCollection
         return $this->filter(fn(Systeme $item): bool => $item->installation()->id()->equals($id));
     }
 
-    public function with_cascade(?int $cascade): self
+    public function with_cascade(): self
     {
-        return $this->filter(fn(Systeme $item): bool => $item->cascade() === $cascade);
+        return $this->filter(fn(Systeme $item): bool => $item->cascade() !== null);
+    }
+
+    public function without_cascade(): self
+    {
+        return $this->filter(fn(Systeme $item): bool => $item->cascade() === null);
     }
 
     public function has_generateur_collectif(): bool

@@ -63,11 +63,8 @@ abstract class PerformanceAuxiliaireRule extends CommonSystemeRule
             if (null === $mois) {
                 return Mois::reduce(fn(Mois $mois): float => $this->caux_distribution($mois));
             }
-            return Mois::reduce(function (Mois $mois): float {
-                $puissance_circulateur = $this->puissance_circulateur();
-                $nref = $this->nref($mois);
-                return $puissance_circulateur * $nref / 1000;
-            });
+            $nref = $this->nref($mois);
+            return $this->puissance_circulateur() * $nref / 1000;
         });
     }
 
@@ -93,6 +90,9 @@ abstract class PerformanceAuxiliaireRule extends CommonSystemeRule
     public function puissance_circulateur(): float
     {
         return $this->get('puissance_circulateur', function (): float {
+            if (false === $this->reseau_distribution()) {
+                return 0;
+            }
             $debit_circulateur = $this->debit_circultateur();
             $pertes_charge = $this->pertes_charge();
             $surface = $this->surface_installation();

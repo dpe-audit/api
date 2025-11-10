@@ -2,7 +2,7 @@
 
 namespace App\Dto\Refroidissement;
 
-use App\Domain\Refroidissement\Generateur\{Generateur, EnergieGenerateur, TypeGenerateur};
+use App\Domain\Refroidissement\Generateur\{Generateur, EnergieGenerateur, GenerateurData, TypeGenerateur};
 use App\Validation;
 
 /**
@@ -19,24 +19,26 @@ final class GenerateurDto
         public readonly ?int $annee_installation,
         public readonly ?float $seer,
         public readonly ?string $reseau_froid_id,
+        public readonly ?GenerateurData $data = null,
     ) {}
 
-    public static function from(Generateur $data): self
+    public static function from(Generateur $entity): self
     {
         return new self(
-            id: (string) $data->id(),
-            description: (string) $data->description(),
-            type: $data->type(),
-            energie: $data->energie(),
-            annee_installation: $data->annee_installation(),
-            seer: $data->seer(),
-            reseau_froid_id: $data->reseau_froid() ? (string) $data->reseau_froid()->id() : null,
+            id: (string) $entity->id(),
+            description: (string) $entity->description(),
+            type: $entity->type(),
+            energie: $entity->energie(),
+            annee_installation: $entity->annee_installation(),
+            seer: $entity->seer(),
+            reseau_froid_id: $entity->reseau_froid() ? (string) $entity->reseau_froid()->id() : null,
+            data: $entity->data(),
         );
     }
 
     public function __normalize(): array
     {
-        return [
+        $data = [
             'id' => $this->id,
             'description' => $this->description,
             'type' => $this->type->value,
@@ -45,5 +47,12 @@ final class GenerateurDto
             'seer' => $this->seer,
             'reseau_froid_id' => $this->reseau_froid_id,
         ];
+        if ($this->data) {
+            $data['data'] = [
+                'rdim' => $this->data->rdim,
+                'eer' => $this->data->eer,
+            ];
+        }
+        return $data;
     }
 }

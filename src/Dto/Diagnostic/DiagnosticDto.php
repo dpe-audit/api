@@ -2,7 +2,7 @@
 
 namespace App\Dto\Diagnostic;
 
-use App\Domain\Diagnostic\Diagnostic;
+use App\Domain\Diagnostic\{Diagnostic, DiagnosticData};
 use App\Dto\Batiment\BatimentDto;
 use App\Dto\Chauffage\ChauffageDto;
 use App\Dto\Ecs\EcsDto;
@@ -43,6 +43,8 @@ final class DiagnosticDto
         #[Constraints\All([new Constraints\Type(LogementDto::class)])]
         #[Constraints\Valid]
         public readonly array $logements,
+
+        public readonly ?DiagnosticData $data = null,
     ) {}
 
     public static function from(Diagnostic $entity): self
@@ -59,12 +61,13 @@ final class DiagnosticDto
             ventilation: VentilationDto::from($entity->ventilation()),
             production: ProductionDto::from($entity->production()),
             logements: $entity->logements()->map(fn($logement) => LogementDto::from($logement))->values(),
+            data: $entity->data(),
         );
     }
 
     public function __normalize(): array
     {
-        return [
+        $data = [
             'id' => $this->id,
             'date_visite' => $this->date_visite->format('Y-m-d'),
             'date_etablissement' => $this->date_etablissement->format('Y-m-d'),
@@ -75,7 +78,24 @@ final class DiagnosticDto
             'refroidissement' => $this->refroidissement->__normalize(),
             'ventilation' => $this->ventilation->__normalize(),
             'production' => $this->production->__normalize(),
-            'logements' => array_map(fn($logement) => $logement->__normalize(), $this->logements),
+            'logements' => array_values(array_map(fn($logement) => $logement->__normalize(), $this->logements)),
         ];
+        if ($this->data) {
+            $data['data'] = [
+                'zone_climatique' => $this->data->zone_climatique?->value,
+                'effet_joule' => $this->data->effet_joule,
+                'parois_anciennes_lourdes' => $this->data->parois_anciennes_lourdes,
+                'surface_reference' => $this->data->surface_reference,
+                'volume_reference' => $this->data->volume_reference,
+                'bilan' => [
+                    'cef' => $this->data->bilan?->cef,
+                    'cep' => $this->data->bilan?->cep,
+                    'eges' => $this->data->bilan?->eges,
+                    'etiquette_energie' => $this->data->bilan?->etiquette_energie?->value,
+                    'etiquette_climat' => $this->data->bilan?->etiquette_climat?->value,
+                ],
+            ];
+        }
+        return $data;
     }
 }

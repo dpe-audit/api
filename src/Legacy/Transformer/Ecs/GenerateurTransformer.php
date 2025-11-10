@@ -98,6 +98,9 @@ final class GenerateurTransformer
 
     public function generateur_collectif(): bool
     {
+        if ($this->generateur_multi_batiment()) {
+            return true;
+        }
         return \in_array($this->installation_ecs->enum_type_installation_id, [2, 3, 4]);
     }
 
@@ -106,7 +109,7 @@ final class GenerateurTransformer
      */
     public function type(): ?TypeGenerateur
     {
-        return match ($this->generateur_ecs->enum_type_generateur_ecs_id) {
+        $value = match ($this->generateur_ecs->enum_type_generateur_ecs_id) {
             63, 64, 65, 66, 67, 68, 69, 70, 71, 78, 79, 80, 81, 105, 106, 107, 108, 109,
             110, 111, 112, 113, 114, 117 => TypeGenerateur::CHAUFFE_EAU,
             1, 2, 3, 82 => TypeGenerateur::CET_AIR_AMBIANT,
@@ -120,10 +123,25 @@ final class GenerateurTransformer
             72, 73, 119 => TypeGenerateur::RESEAU_CHALEUR,
             84 => null,
         };
+
+        if (null === $value) {
+            return null;
+        }
+        if ($value->is_pac() && null !== $this->generateur_mixte_id()) {
+            return TypeGenerateur::PAC_DOUBLE_SERVICE;
+        }
+        return $value;
     }
 
     public function energie(): EnergieGenerateur
     {
+        $type = $this->type();
+        if ($type->is_pac()) {
+            return EnergieGenerateur::ELECTRICITE;
+        }
+        if ($type->is_reseau_chaleur()) {
+            return EnergieGenerateur::RESEAU_CHALEUR;
+        }
         return match ($this->generateur_ecs->enum_type_energie_id) {
             1 => EnergieGenerateur::ELECTRICITE,
             2 => EnergieGenerateur::GAZ_NATUREL,
@@ -162,7 +180,35 @@ final class GenerateurTransformer
 
     public function position_volume_chauffe(): bool
     {
+        if ($this->generateur_collectif()) {
+            return false;
+        }
         return $this->generateur_ecs->position_volume_chauffe;
+    }
+
+    public function pn(): ?float
+    {
+        return ($value = $this->generateur_ecs->pn_saisi()) > 0 ? $value / 1000 : null;
+    }
+
+    public function rpn(): ?float
+    {
+        return ($value = $this->generateur_ecs->rpn_saisi()) > 0 ? $value : null;
+    }
+
+    public function qp0(): ?float
+    {
+        return ($value = $this->generateur_ecs->qp0_saisi()) > 0 ? $value : null;
+    }
+
+    public function pveilleuse(): ?float
+    {
+        return ($value = $this->generateur_ecs->pveilleuse_saisi()) > 0 ? $value : null;
+    }
+
+    public function cop(): ?float
+    {
+        return ($value = $this->generateur_ecs->cop_saisi()) > 0 ? $value : null;
     }
 
     public function __invoke(
@@ -192,12 +238,12 @@ final class GenerateurTransformer
                 volume_stockage: $this->volume_stockage_integre(),
                 label: $this->label(),
                 mode_combustion: $this->mode_combustion(),
-                pn: $generateur_ecs->pn_saisi(),
-                cop: $generateur_ecs->cop_saisi(),
+                pn: $this->pn(),
+                cop: $this->cop(),
                 presence_ventouse: $this->presence_ventouse(),
-                pveilleuse: $generateur_ecs->pveilleuse_saisi(),
-                qp0: $generateur_ecs->qp0_saisi(),
-                rpn: $generateur_ecs->rpn_saisi(),
+                pveilleuse: $this->pveilleuse(),
+                qp0: $this->qp0(),
+                rpn: $this->rpn(),
             )
         );
     }

@@ -2,7 +2,7 @@
 
 namespace App\Dto\Refroidissement;
 
-use App\Domain\Refroidissement\Refroidissement;
+use App\Domain\Refroidissement\{Refroidissement, RefroidissementData};
 use App\Validation;
 use Symfony\Component\Validator\Constraints;
 
@@ -28,14 +28,17 @@ final class RefroidissementDto
         #[Constraints\All([new Constraints\Type(SystemeDto::class)])]
         #[Constraints\Valid]
         public readonly array $systemes,
+
+        public readonly ?RefroidissementData $data = null,
     ) {}
 
-    public static function from(Refroidissement $data): self
+    public static function from(Refroidissement $entity): self
     {
         return new self(
-            generateurs: $data->generateurs()->map(fn($item) => GenerateurDto::from($item))->values(),
-            installations: $data->installations()->map(fn($item) => InstallationDto::from($item))->values(),
-            systemes: $data->systemes()->map(fn($item) => SystemeDto::from($item))->values(),
+            generateurs: $entity->generateurs()->map(fn($item) => GenerateurDto::from($item))->values(),
+            installations: $entity->installations()->map(fn($item) => InstallationDto::from($item))->values(),
+            systemes: $entity->systemes()->map(fn($item) => SystemeDto::from($item))->values(),
+            data: $entity->data(),
         );
     }
 
@@ -51,10 +54,22 @@ final class RefroidissementDto
 
     public function __normalize(): array
     {
-        return [
-            'generateurs' => array_map(fn($dto) => $dto->__normalize(), $this->generateurs),
-            'installations' => array_map(fn($dto) => $dto->__normalize(), $this->installations),
-            'systemes' => array_map(fn($dto) => $dto->__normalize(), $this->systemes),
+        $data = [
+            'generateurs' => array_values(array_map(fn($dto) => $dto->__normalize(), $this->generateurs)),
+            'installations' => array_values(array_map(fn($dto) => $dto->__normalize(), $this->installations)),
+            'systemes' => array_values(array_map(fn($dto) => $dto->__normalize(), $this->systemes)),
         ];
+        if ($this->data) {
+            $data['data'] = [
+                'bfr' => $this->data->bfr,
+                'cef_fr' => $this->data->cef_fr,
+                'cep_fr' => $this->data->cep_fr,
+                'eges_fr' => $this->data->eges_fr,
+                'cef_aux' => $this->data->cef_aux,
+                'cep_aux' => $this->data->cep_aux,
+                'eges_aux' => $this->data->eges_aux,
+            ];
+        }
+        return $data;
     }
 }

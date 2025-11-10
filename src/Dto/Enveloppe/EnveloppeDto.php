@@ -2,7 +2,7 @@
 
 namespace App\Dto\Enveloppe;
 
-use App\Domain\Enveloppe\{Enveloppe, Exposition};
+use App\Domain\Enveloppe\{Enveloppe, EnveloppeData, Exposition};
 use App\Dto\Enveloppe\Baie\BaieDto;
 use App\Dto\Enveloppe\DoubleFenetre\DoubleFenetreDto;
 use App\Dto\Enveloppe\Lnc\LncDto;
@@ -67,24 +67,27 @@ final class EnveloppeDto
         #[Constraints\All([new Constraints\Type(PontThermiqueDto::class)])]
         #[Constraints\Valid]
         public array $ponts_thermiques,
+
+        public readonly ?EnveloppeData $data = null,
     ) {}
 
-    public static function from(Enveloppe $data): self
+    public static function from(Enveloppe $entity): self
     {
         return new self(
-            exposition: $data->exposition(),
-            q4pa_conv: $data->q4pa_conv(),
-            presence_brasseurs_air: $data->presence_brasseurs_air(),
-            niveaux: $data->niveaux()->map(fn($item) => NiveauDto::from($item))->values(),
-            locaux_non_chauffes: $data->locaux_non_chauffes()->map(fn($item) => LncDto::from($item))->values(),
-            doubles_fenetres: $data->doubles_fenetres()->map(fn($item) => DoubleFenetreDto::from($item))->values(),
-            masques: $data->masques()->map(fn($item) => MasqueDto::from($item))->values(),
-            baies: $data->baies()->map(fn($item) => BaieDto::from($item))->values(),
-            murs: $data->murs()->map(fn($item) => MurDto::from($item))->values(),
-            planchers_bas: $data->planchers_bas()->map(fn($item) => PlancherBasDto::from($item))->values(),
-            planchers_hauts: $data->planchers_hauts()->map(fn($item) => PlancherHautDto::from($item))->values(),
-            portes: $data->portes()->map(fn($item) => PorteDto::from($item))->values(),
-            ponts_thermiques: $data->ponts_thermiques()->map(fn($item) => PontThermiqueDto::from($item))->values(),
+            exposition: $entity->exposition(),
+            q4pa_conv: $entity->q4pa_conv(),
+            presence_brasseurs_air: $entity->presence_brasseurs_air(),
+            niveaux: $entity->niveaux()->map(fn($item) => NiveauDto::from($item))->values(),
+            locaux_non_chauffes: $entity->locaux_non_chauffes()->map(fn($item) => LncDto::from($item))->values(),
+            doubles_fenetres: $entity->doubles_fenetres()->map(fn($item) => DoubleFenetreDto::from($item))->values(),
+            masques: $entity->masques()->map(fn($item) => MasqueDto::from($item))->values(),
+            baies: $entity->baies()->map(fn($item) => BaieDto::from($item))->values(),
+            murs: $entity->murs()->map(fn($item) => MurDto::from($item))->values(),
+            planchers_bas: $entity->planchers_bas()->map(fn($item) => PlancherBasDto::from($item))->values(),
+            planchers_hauts: $entity->planchers_hauts()->map(fn($item) => PlancherHautDto::from($item))->values(),
+            portes: $entity->portes()->map(fn($item) => PorteDto::from($item))->values(),
+            ponts_thermiques: $entity->ponts_thermiques()->map(fn($item) => PontThermiqueDto::from($item))->values(),
+            data: $entity->data(),
         );
     }
 
@@ -130,20 +133,64 @@ final class EnveloppeDto
 
     public function __normalize(): array
     {
-        return [
+        $data = [
             'exposition' => $this->exposition->value,
             'q4pa_conv' => $this->q4pa_conv,
             'presence_brasseurs_air' => $this->presence_brasseurs_air,
-            'niveaux' => array_map(fn($dto) => $dto->__normalize(), $this->niveaux),
-            'locaux_non_chauffes' => array_map(fn($dto) => $dto->__normalize(), $this->locaux_non_chauffes),
-            'doubles_fenetres' => array_map(fn($dto) => $dto->__normalize(), $this->doubles_fenetres),
-            'masques' => array_map(fn($dto) => $dto->__normalize(), $this->masques),
-            'baies' => array_map(fn($dto) => $dto->__normalize(), $this->baies),
-            'murs' => array_map(fn($dto) => $dto->__normalize(), $this->murs),
-            'planchers_bas' => array_map(fn($dto) => $dto->__normalize(), $this->planchers_bas),
-            'planchers_hauts' => array_map(fn($dto) => $dto->__normalize(), $this->planchers_hauts),
-            'portes' => array_map(fn($dto) => $dto->__normalize(), $this->portes),
-            'ponts_thermiques' => array_map(fn($dto) => $dto->__normalize(), $this->ponts_thermiques),
+            'niveaux' => array_values(array_map(fn($dto) => $dto->__normalize(), $this->niveaux)),
+            'locaux_non_chauffes' => array_values(array_map(fn($dto) => $dto->__normalize(), $this->locaux_non_chauffes)),
+            'doubles_fenetres' => array_values(array_map(fn($dto) => $dto->__normalize(), $this->doubles_fenetres)),
+            'masques' => array_values(array_map(fn($dto) => $dto->__normalize(), $this->masques)),
+            'baies' => array_values(array_map(fn($dto) => $dto->__normalize(), $this->baies)),
+            'murs' => array_values(array_map(fn($dto) => $dto->__normalize(), $this->murs)),
+            'planchers_bas' => array_values(array_map(fn($dto) => $dto->__normalize(), $this->planchers_bas)),
+            'planchers_hauts' => array_values(array_map(fn($dto) => $dto->__normalize(), $this->planchers_hauts)),
+            'portes' => array_values(array_map(fn($dto) => $dto->__normalize(), $this->portes)),
+            'ponts_thermiques' => array_values(array_map(fn($dto) => $dto->__normalize(), $this->ponts_thermiques)),
         ];
+        if ($this->data) {
+            $data['data'] = [
+                'inertie' => $this->data->inertie?->value,
+                'permeabilite' => [
+                    'hvent' => $this->data->permeabilite?->hvent,
+                    'hperm' => $this->data->permeabilite?->hperm,
+                    'q4pa_conv' => $this->data->permeabilite?->q4pa_conv,
+                    'qvarep_conv' => $this->data->permeabilite?->qvarep_conv,
+                    'qvasouf_conv' => $this->data->permeabilite?->qvasouf_conv,
+                    'smea_conv' => $this->data->permeabilite?->smea_conv,
+                ],
+                'deperditions' => [
+                    'gv' => $this->data->deperditions?->gv,
+                    'dp' => $this->data->deperditions?->dp,
+                    'dp_murs' => $this->data->deperditions?->dp_murs,
+                    'dp_planchers_bas' => $this->data->deperditions?->dp_planchers_bas,
+                    'dp_planchers_hauts' => $this->data->deperditions?->dp_planchers_hauts,
+                    'dp_baies' => $this->data->deperditions?->dp_baies,
+                    'dp_portes' => $this->data->deperditions?->dp_portes,
+                    'pt' => $this->data->deperditions?->pt,
+                    'dr' => $this->data->deperditions?->dr,
+                    'ubat' => $this->data->deperditions?->ubat,
+                    'performance' => $this->data->deperditions?->performance?->value,
+                ],
+                'confort_ete' => [
+                    'performance' => $this->data->confort_ete?->performance?->value,
+                    'inertie_lourde' => $this->data->confort_ete?->inertie_lourde,
+                    'isolation_plancher_haut' => $this->data->confort_ete?->isolation_plancher_haut,
+                    'presence_protection_solaire' => $this->data->confort_ete?->presence_protection_solaire,
+                    'logement_traversant' => $this->data->confort_ete?->logement_traversant,
+                    'presence_brasseur_air' => $this->data->confort_ete?->presence_brasseur_air,
+                ],
+                'apports' => [
+                    'f' => $this->data->apports?->f,
+                    'apport' => $this->data->apports?->apport,
+                    'apport_interne' => $this->data->apports?->apport_interne,
+                    'apport_solaire' => $this->data->apports?->apport_solaire,
+                    'apport_fr' => $this->data->apports?->apport_fr,
+                    'apport_interne_fr' => $this->data->apports?->apport_interne_fr,
+                    'apport_solaire_fr' => $this->data->apports?->apport_solaire_fr,
+                ]
+            ];
+        }
+        return $data;
     }
 }

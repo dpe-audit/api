@@ -16,10 +16,10 @@ final class XMLMurTableValeurRepository extends XMLParoiTableValeurRepository im
         return $this->db->repository('mur.u0')
             ->createQuery()
             ->and('type_structure', $type_structure)
-            ->andCompareTo('annee_construction', $annee_construction)
             ->andCompareTo('epaisseur_structure', $epaisseur_structure)
+            ->andCompareTo('annee_construction', $annee_construction)
             ->getOne()
-            ->floatval('u0');
+            ?->floatval('u0');
     }
 
     public function u(

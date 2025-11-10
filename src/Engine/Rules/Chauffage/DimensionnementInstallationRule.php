@@ -44,11 +44,11 @@ abstract class DimensionnementInstallationRule extends CommonInstallationRule
         $presence_pac = $this->presence_pac($installation_collective);
 
         // Installation de chauffage avec un ou plusieurs systèmes de chauffage divisé
-        if ($systemes_chauffage_central === 0) {
+        if ($systemes_chauffage_central == 0) {
             return Configuration::DIVISE;
         }
         // Installation de chauffage simple avec ou sans appoint
-        if ($systemes_chauffage_central === 1) {
+        if ($systemes_chauffage_central == 1) {
             return Configuration::BASE;
         }
         // Installation de chauffage avec un ou plusieurs systèmes de chauffage central avec ou sans appoint

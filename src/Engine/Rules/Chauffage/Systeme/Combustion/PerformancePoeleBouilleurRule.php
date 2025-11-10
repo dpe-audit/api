@@ -8,9 +8,10 @@ final class PerformancePoeleBouilleurRule extends PerformanceCombustionRule
 {
     public function supports(): bool
     {
-        return $this->type_generateur()->is_poele_bouilleur()
-            && $this->energie_generateur()->is_combustible()
-            && false === $this->generateur_multi_batiment();
+        if (false === parent::supports()) {
+            return false;
+        }
+        return $this->type_generateur()->is_poele_bouilleur();
     }
 
     /**

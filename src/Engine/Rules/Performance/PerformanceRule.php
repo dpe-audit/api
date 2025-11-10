@@ -112,7 +112,7 @@ final class PerformanceRule extends Rule
     {
         parent::__invoke($data, $context);
 
-        if (!$data instanceof Diagnostic || !$data instanceof Etape) {
+        if (!$data instanceof Diagnostic && !$data instanceof Etape) {
             return;
         }
         $data->calcule($data->data()->with(

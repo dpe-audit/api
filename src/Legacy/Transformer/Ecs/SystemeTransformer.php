@@ -22,7 +22,9 @@ final class SystemeTransformer
 
     public function niveaux_desservis(): int
     {
-        return $this->installation_ecs->nombre_niveau_installation_ecs;
+        return $this->installation_ecs->nombre_niveau_installation_ecs > 0
+            ? $this->installation_ecs->nombre_niveau_installation_ecs
+            : 1;
     }
 
     public function isolation_reseau(): ?IsolationReseau
@@ -46,12 +48,20 @@ final class SystemeTransformer
 
     public function volume_stockage(): float
     {
-        return $this->generateur_ecs->enum_type_stockage_ecs_id === 2 ? $this->generateur_ecs->volume_stockage : 0;
+        if (2 !== $this->generateur_ecs->enum_type_stockage_ecs_id) {
+            return 0;
+        }
+        return $this->generateur_ecs->volume_stockage > 0 ? $this->generateur_ecs->volume_stockage : 0;
     }
 
-    public function position_volume_chauffe(): ?bool
+    public function position_volume_chauffe_stockage(): ?bool
     {
-        return $this->generateur_ecs->position_volume_chauffe_stockage;
+        if (0 === $this->volume_stockage()) {
+            return null;
+        }
+        return $this->generateur_ecs->position_volume_chauffe_stockage
+            ?? $this->generateur_ecs->position_volume_chauffe
+            ?? false;
     }
 
     public function __invoke(GenerateurEcs $generateur_ecs, InstallationEcs $installation_ecs, Context $context): SystemeDto
@@ -72,7 +82,7 @@ final class SystemeTransformer
             ),
             stockage: new StockageDto(
                 volume: $this->volume_stockage(),
-                position_volume_chauffe: $this->position_volume_chauffe(),
+                position_volume_chauffe: $this->position_volume_chauffe_stockage(),
             )
         );
     }

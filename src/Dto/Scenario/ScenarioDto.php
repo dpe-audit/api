@@ -41,7 +41,7 @@ final class ScenarioDto
             'type' => $this->type->value,
             'nom' => $this->nom,
             'description' => $this->description,
-            'etapes' => array_map(fn($etape) => $etape->__normalize(), $this->etapes),
+            'etapes' => array_values(array_map(fn($etape) => $etape->__normalize(), $this->etapes)),
         ];
     }
 }

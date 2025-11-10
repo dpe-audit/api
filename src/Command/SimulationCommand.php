@@ -7,10 +7,9 @@ use App\Dto\Diagnostic\DiagnosticDto;
 use App\Handler\Diagnostic\ComputeDiagnosticHandler;
 use App\Legacy\Model\DPE;
 use App\Legacy\Transformer\Diagnostic\DiagnosticTransformer;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Attribute\AsCommand;
-use Symfony\Component\Console\Input\{InputArgument, InputInterface, InputOption};
+use Symfony\Component\Console\Input\{InputInterface, InputOption};
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -19,68 +18,61 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
     description: 'Simule les audits stockés localement au format XML',
     hidden: false,
 )]
-final class SimulationCommand extends Command
+final class SimulationCommand extends LocalCommand
 {
-    public final const INPUT = '/data/diagnostics';
-    public final const OUTPUT = '/data/simulations';
-
     private array $logs = [['id', 'key', 'origin', 'value', 'diff (%)']];
 
     public function __construct(
-        private readonly string $projectDir,
-        private readonly LoggerInterface $logger,
+        string $projectDir,
         private readonly DiagnosticTransformer $transformer,
+        private readonly ValidatorInterface $validator,
         private readonly ComputeDiagnosticHandler $handler,
     ) {
-        parent::__construct();
+        parent::__construct($projectDir);
     }
 
     protected function configure(): void
     {
-        $this->addArgument('numero_dpe', InputArgument::OPTIONAL, 'Numéro de DPE :');
-        $this->addOption('limit', 'l', InputOption::VALUE_REQUIRED, 'Limite');
-        $this->addOption('strict', 's', InputOption::VALUE_NONE, 'Mode strict');
-        $this->addOption('compare', 'c', InputOption::VALUE_NONE, 'Comparaison des résultats');
+        parent::configure();
+        $this->addOption('compare', null, InputOption::VALUE_NONE, 'Comparaison des résultats');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $readdir = $writedir = $this->projectDir;
-        $readdir .= self::INPUT;
-        $writedir .= self::OUTPUT;
-
-        $search = $input->getArgument('numero_dpe') ? $input->getArgument('numero_dpe') . '.xml' : null;
-
-        if (false === $entries = scandir($readdir)) {
-            $output->writeln("Le dossier source n'existe pas");
-            return Command::FAILURE;
-        }
+        $entries = $this->load($input, $output);
         $count = count($entries);
         $counter = 0;
+        $timer = new \DateTime();
 
-        for ($i = 0; $i < $count; $i++) {
-            $filename = $entries[$i];
-            $path = "{$readdir}/{$filename}";
-
-            if (!\is_file($path)) {
-                continue;
-            }
-            if ($search && $filename !== $search) {
-                continue;
-            }
+        foreach ($this->load($input, $output) as $entry) {
             $counter++;
-            $output->writeln("Processing {$counter}/{$count} : {$filename}...");
-            $xml = \simplexml_load_file($path);
+            $id = basename($entry, '.xml');
+
+            $output->writeln("Processing {$counter}/{$count} : {$id}...");
+
+            $xml = simplexml_load_file($entry);
             $data = DPE::from($xml);
             $payload = $this->transformer->__invoke($data);
-            $entity = $this->handler->__invoke($payload);
-            $id = basename($filename, '.xml');
+            //dd(json_encode($payload->__normalize(), JSON_UNESCAPED_UNICODE));
+            $errors = $this->validator->validate($payload);
 
-            $this->save($id, $entity);
-            $this->compare($id, $entity, $data);
+            if (count($errors) > 0) {
+                continue;
+            }
+
+            $entity = $this->handler->__invoke($payload);
+
+            if ($input->getOption('compare')) {
+                $this->save($id, $entity);
+                $this->compare($id, $entity, $data);
+            }
         }
-        $this->savelog();
-        $output->writeln("Done {$counter}/{$count}");
+        $timer = $timer->diff(new \DateTime);
+        $output->writeln("Done {$counter}/{$count} in {$timer->f} microseconds");
+
+        if ($input->getOption('compare')) {
+            $this->savelog();
+        }
         return Command::SUCCESS;
     }
 
@@ -175,16 +167,24 @@ final class SimulationCommand extends Command
         }
 
         // Consommations
+        $this->compareItem($id, 'conso_5_usages_m2', $sortie->ef_conso->conso_5_usages_m2, $entity->data()->bilan->cef);
         $this->compareItem($id, 'cch', $sortie->ef_conso->conso_ch, $entity->chauffage()->data()->cef_ch);
         $this->compareItem($id, 'cecs', $sortie->ef_conso->conso_ecs, $entity->ecs()->data()->cef_ecs);
         $this->compareItem($id, 'cfr', $sortie->ef_conso->conso_fr, $entity->refroidissement()->data()->cef_fr);
         $this->compareItem($id, 'conso_eclairage', $sortie->ef_conso->conso_eclairage, $entity->eclairage()->data()->cef_ecl);
-
+        $this->compareItem($id, 'caux_ch', $sortie->ef_conso->conso_auxiliaire_ch(), $entity->chauffage()->data()->cef_aux);
+        $this->compareItem($id, 'caux_ecs', $sortie->ef_conso->conso_auxiliaire_ecs(), $entity->ecs()->data()->cef_aux);
+        $this->compareItem($id, 'caux_fr', $sortie->ef_conso->conso_auxiliaire_fr(), $entity->refroidissement()->data()->cef_aux);
+        $this->compareItem($id, 'caux_ventilation', $sortie->ef_conso->conso_auxiliaire_ventilation, $entity->ventilation()->data()->cef_aux);
     }
 
     private function compareItem(string $id, string $key, mixed $origin, mixed $value): void
     {
-        $diff = $origin ? round(($value - $origin) / $origin * 100, 2) : "n/a";
+        if ($origin === $value) {
+            $diff = 0;
+        } else {
+            $diff = $origin ? round(($value - $origin) / $origin * 100, 2) : "n/a";
+        }
         $this->logs[] = [$id, $key, $origin, $value, $diff];
     }
 }

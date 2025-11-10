@@ -2,7 +2,7 @@
 
 namespace App\Dto\Enveloppe\DoubleFenetre;
 
-use App\Domain\Enveloppe\DoubleFenetre\{DoubleFenetre, TypeBaie};
+use App\Domain\Enveloppe\DoubleFenetre\{DoubleFenetre, DoubleFenetreData, TypeBaie};
 
 /**
  * @see https://github.com/dpe-audit/schemas/blob/main/schemas/enveloppe/double_fenetre.yaml
@@ -20,27 +20,29 @@ final class DoubleFenetreDto
         public readonly VitrageDto $vitrage,
         public readonly ?SurvitrageDto $survitrage,
         public readonly ?MenuiserieDto $menuiserie,
+        public readonly ?DoubleFenetreData $data = null,
     ) {}
 
-    public static function from(DoubleFenetre $data): self
+    public static function from(DoubleFenetre $entity): self
     {
         return new self(
-            id: (string) $data->id(),
-            description: $data->description(),
-            type: $data->type(),
-            ug: $data->ug(),
-            uw: $data->uw(),
-            sw: $data->sw(),
-            position: PositionDto::from($data->position()),
-            vitrage: VitrageDto::from($data->vitrage()),
-            survitrage: $data->survitrage() ? SurvitrageDto::from($data->survitrage()) : null,
-            menuiserie: $data->menuiserie() ? MenuiserieDto::from($data->menuiserie()) : null,
+            id: (string) $entity->id(),
+            description: $entity->description(),
+            type: $entity->type(),
+            ug: $entity->ug(),
+            uw: $entity->uw(),
+            sw: $entity->sw(),
+            position: PositionDto::from($entity->position()),
+            vitrage: VitrageDto::from($entity->vitrage()),
+            survitrage: $entity->survitrage() ? SurvitrageDto::from($entity->survitrage()) : null,
+            menuiserie: $entity->menuiserie() ? MenuiserieDto::from($entity->menuiserie()) : null,
+            data: $entity->data(),
         );
     }
 
     public function __normalize(): array
     {
-        return [
+        $data = [
             'id' => $this->id,
             'description' => $this->description,
             'type' => $this->type->value,
@@ -52,5 +54,13 @@ final class DoubleFenetreDto
             'survitrage' => $this->survitrage?->__normalize(),
             'menuiserie' => $this->menuiserie?->__normalize(),
         ];
+        if ($this->data) {
+            $data['data'] = [
+                'ug' => $this->data->ug,
+                'uw' => $this->data->uw,
+                'sw' => $this->data->sw,
+            ];
+        }
+        return $data;
     }
 }

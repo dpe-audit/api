@@ -56,6 +56,7 @@ interface EcsTableValeurRepository
         TypeGenerateur $type_generateur,
         EnergieGenerateur $energie_generateur,
         ModeCombustion $mode_combustion,
+        float $volume_stockage,
         int $annee_installation,
         float $pn,
     ): ?float;
@@ -64,6 +65,7 @@ interface EcsTableValeurRepository
         TypeGenerateur $type_generateur,
         EnergieGenerateur $energie_generateur,
         ModeCombustion $mode_combustion,
+        float $volume_stockage,
         int $annee_installation,
         float $pn,
         float $e,
@@ -74,6 +76,7 @@ interface EcsTableValeurRepository
         TypeGenerateur $type_generateur,
         EnergieGenerateur $energie_generateur,
         ModeCombustion $mode_combustion,
+        float $volume_stockage,
         int $annee_installation,
     ): ?float;
 }

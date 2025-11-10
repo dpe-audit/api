@@ -2,7 +2,6 @@
 
 namespace App\Legacy\Transformer\Enveloppe;
 
-use App\Domain\Enveloppe\Paroi\Inertie;
 use App\Domain\Enveloppe\PlancherHaut\{Configuration, TypePlancherHaut};
 use App\Dto\Enveloppe\Paroi\IsolationDto;
 use App\Dto\Enveloppe\PlancherHaut\{PlancherHautDto, PositionDto};
@@ -47,6 +46,16 @@ final class PlancherHautTransformer extends ParoiOpaqueTransformer
         };
     }
 
+    public function u0(): ?float
+    {
+        return $this->paroi->uph0_saisi > 0 ? $this->paroi->uph0_saisi : null;
+    }
+
+    public function u(): ?float
+    {
+        return $this->paroi->uph_saisi > 0 ? $this->paroi->uph_saisi : null;
+    }
+
     public function __invoke(PlancherHaut $plancher_haut, Context $context): PlancherHautDto
     {
         $this->context = $context;
@@ -60,14 +69,14 @@ final class PlancherHautTransformer extends ParoiOpaqueTransformer
             inertie: $this->inertie(),
             annee_construction: null,
             annee_renovation: null,
-            u0: $plancher_haut->uph0_saisi,
-            u: $plancher_haut->uph_saisi,
+            u0: $this->u0(),
+            u: $this->u(),
             isolation: new IsolationDto(
                 etat: $this->etat_isolation(),
                 type: $this->type_isolation(),
                 annee_installation: $this->annee_isolation(),
                 epaisseur: $this->epaisseur_isolation(),
-                resistance_thermique: $plancher_haut->resistance_isolation
+                resistance_thermique: $this->resistance_isolation()
             ),
             position: new PositionDto(
                 surface: $plancher_haut->surface(),

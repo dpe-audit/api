@@ -4,7 +4,7 @@ namespace App\Engine\Rules\Ecs\Systeme;
 
 use App\Engine\Rules\Ecs\{PerformanceGenerateurRule, PerformanceSystemeRule};
 
-final class PerformanceSystemePacRule extends PerformanceSystemeRule
+final class PerformancePacRule extends PerformanceSystemeRule
 {
     public function supports(): bool
     {

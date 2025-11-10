@@ -10,7 +10,7 @@ interface MasqueTableValeurRepository
 {
     public function fe1(
         ConfigurationMasque $configuration_masque,
-        Orientation $orientation_facade,
+        ?Orientation $orientation_facade,
         ?float $avancee_masque,
     ): ?float;
 

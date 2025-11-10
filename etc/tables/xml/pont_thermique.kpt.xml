@@ -63,7 +63,7 @@
     <row>
         <type_liaison>refend_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -75,7 +75,7 @@
     <row>
         <type_liaison>refend_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -87,7 +87,7 @@
     <row>
         <type_liaison>refend_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -159,7 +159,7 @@
     <row>
         <type_liaison>plancher_intermediaire_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -171,7 +171,7 @@
     <row>
         <type_liaison>plancher_intermediaire_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -183,7 +183,7 @@
     <row>
         <type_liaison>plancher_intermediaire_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -245,7 +245,7 @@
         <isolation_mur>0</isolation_mur>
         <type_isolation_mur></type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>ite_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -269,7 +269,7 @@
         <isolation_mur>0</isolation_mur>
         <type_isolation_mur></type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>iti_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -281,7 +281,7 @@
         <isolation_mur>0</isolation_mur>
         <type_isolation_mur></type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>itr_ite_iti</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -341,7 +341,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>iti</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>ite_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -365,7 +365,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>iti</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>iti_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -377,7 +377,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>iti</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>itr_ite_iti</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -437,7 +437,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>ite_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -461,7 +461,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>iti_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -473,7 +473,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>itr_ite_iti</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -533,7 +533,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>itr</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>ite_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -557,7 +557,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>itr</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>iti_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -569,7 +569,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>itr</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>itr_ite_iti</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -629,7 +629,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>iti_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>ite_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -653,7 +653,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>iti_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>iti_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -665,7 +665,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>iti_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>itr_ite_iti</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -675,7 +675,7 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher>0</isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -687,7 +687,7 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher>0</isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -699,7 +699,7 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>iti</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -711,7 +711,7 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>iti</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -723,7 +723,7 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -735,7 +735,7 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>itr</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -747,9 +747,9 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>ite_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -759,7 +759,7 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -771,7 +771,7 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>itr</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -783,9 +783,9 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>ite_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -795,7 +795,7 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>iti_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -807,9 +807,9 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>iti_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -819,9 +819,9 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>itr_ite_iti</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -831,7 +831,7 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>iti_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -843,9 +843,9 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>iti_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -855,9 +855,9 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>itr_ite_iti</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -867,7 +867,7 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher>0</isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -879,7 +879,7 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>iti</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -891,7 +891,7 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -903,7 +903,7 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>itr</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -915,9 +915,9 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>ite_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -927,7 +927,7 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>iti_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -939,9 +939,9 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>iti_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -951,9 +951,9 @@
     <row>
         <type_liaison>plancher_haut_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>itr_ite_iti</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1013,7 +1013,7 @@
         <isolation_mur>0</isolation_mur>
         <type_isolation_mur></type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>ite_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1037,7 +1037,7 @@
         <isolation_mur>0</isolation_mur>
         <type_isolation_mur></type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>iti_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1049,7 +1049,7 @@
         <isolation_mur>0</isolation_mur>
         <type_isolation_mur></type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>itr_ite_iti</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1109,7 +1109,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>iti</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>ite_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1133,7 +1133,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>iti</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>iti_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1145,7 +1145,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>iti</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>itr_ite_iti</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1205,7 +1205,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>ite_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1229,7 +1229,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>iti_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1241,7 +1241,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>itr_ite_iti</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1301,7 +1301,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>itr</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>ite_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1325,7 +1325,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>itr</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>iti_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1337,7 +1337,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>itr</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>itr_ite_iti</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1397,7 +1397,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>iti_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>ite_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1421,7 +1421,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>iti_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>iti_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1433,7 +1433,7 @@
         <isolation_mur>1</isolation_mur>
         <type_isolation_mur>iti_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>itr_ite_iti</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1443,7 +1443,7 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher>0</isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -1455,7 +1455,7 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher>0</isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -1467,7 +1467,7 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>iti</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -1479,7 +1479,7 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>iti</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -1491,7 +1491,7 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -1503,7 +1503,7 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>itr</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -1515,9 +1515,9 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>ite_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1527,7 +1527,7 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -1539,7 +1539,7 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>itr</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -1551,9 +1551,9 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>ite_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1563,7 +1563,7 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>iti_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -1575,9 +1575,9 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>iti_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1587,9 +1587,9 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>itr_ite_iti</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1599,7 +1599,7 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>iti_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -1611,9 +1611,9 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>iti_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1623,9 +1623,9 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>itr_ite_iti</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1635,7 +1635,7 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher>0</isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -1647,7 +1647,7 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>iti</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -1659,7 +1659,7 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -1671,7 +1671,7 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>itr</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -1683,9 +1683,9 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>ite_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1695,7 +1695,7 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
         <type_isolation_plancher>iti_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
@@ -1707,9 +1707,9 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>iti_itr</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1719,9 +1719,9 @@
     <row>
         <type_liaison>plancher_bas_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher>1</isolation_plancher>
-        <type_isolation_plancher>itr_ite_iti</type_isolation_plancher>
+        <type_isolation_plancher>itr_iti_ite</type_isolation_plancher>
         <type_pose_ouverture></type_pose_ouverture>
         <presence_retour_isolation></presence_retour_isolation>
         <largeur_dormant></largeur_dormant>
@@ -1983,7 +1983,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_exterieur</type_pose_ouverture>
@@ -1995,7 +1995,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>tunnel</type_pose_ouverture>
@@ -2007,7 +2007,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_interieur</type_pose_ouverture>
@@ -2019,7 +2019,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_exterieur</type_pose_ouverture>
@@ -2031,7 +2031,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>tunnel</type_pose_ouverture>
@@ -2043,7 +2043,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_interieur</type_pose_ouverture>
@@ -2055,7 +2055,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_exterieur</type_pose_ouverture>
@@ -2067,7 +2067,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_exterieur</type_pose_ouverture>
@@ -2079,7 +2079,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>tunnel</type_pose_ouverture>
@@ -2091,7 +2091,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>tunnel</type_pose_ouverture>
@@ -2103,7 +2103,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_interieur</type_pose_ouverture>
@@ -2115,7 +2115,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_interieur</type_pose_ouverture>
@@ -2127,7 +2127,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_exterieur</type_pose_ouverture>
@@ -2139,7 +2139,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_exterieur</type_pose_ouverture>
@@ -2151,7 +2151,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>tunnel</type_pose_ouverture>
@@ -2163,7 +2163,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>tunnel</type_pose_ouverture>
@@ -2175,7 +2175,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_interieur</type_pose_ouverture>
@@ -2187,7 +2187,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_interieur</type_pose_ouverture>
@@ -2451,7 +2451,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_exterieur</type_pose_ouverture>
@@ -2463,7 +2463,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>tunnel</type_pose_ouverture>
@@ -2475,7 +2475,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_interieur</type_pose_ouverture>
@@ -2487,7 +2487,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_exterieur</type_pose_ouverture>
@@ -2499,7 +2499,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>tunnel</type_pose_ouverture>
@@ -2511,7 +2511,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>iti_itr</type_isolation_mur>
+        <type_isolation_mur>itr_iti</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_interieur</type_pose_ouverture>
@@ -2523,7 +2523,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_exterieur</type_pose_ouverture>
@@ -2535,7 +2535,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_exterieur</type_pose_ouverture>
@@ -2547,7 +2547,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>tunnel</type_pose_ouverture>
@@ -2559,7 +2559,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>tunnel</type_pose_ouverture>
@@ -2571,7 +2571,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_interieur</type_pose_ouverture>
@@ -2583,7 +2583,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_interieur</type_pose_ouverture>
@@ -2595,7 +2595,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_exterieur</type_pose_ouverture>
@@ -2607,7 +2607,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_exterieur</type_pose_ouverture>
@@ -2619,7 +2619,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>tunnel</type_pose_ouverture>
@@ -2631,7 +2631,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>tunnel</type_pose_ouverture>
@@ -2643,7 +2643,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>ite_itr</type_isolation_mur>
+        <type_isolation_mur>itr_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_interieur</type_pose_ouverture>
@@ -2655,7 +2655,7 @@
     <row>
         <type_liaison>menuiserie_mur</type_liaison>
         <isolation_mur>1</isolation_mur>
-        <type_isolation_mur>itr_ite_iti</type_isolation_mur>
+        <type_isolation_mur>itr_iti_ite</type_isolation_mur>
         <isolation_plancher></isolation_plancher>
         <type_isolation_plancher></type_isolation_plancher>
         <type_pose_ouverture>nu_interieur</type_pose_ouverture>

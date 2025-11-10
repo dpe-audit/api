@@ -55,6 +55,11 @@ final class PanneauPhotovoltaiqueTransformer
         return $this->panneau_pv->nombre_module ?? $this->panneau_pv->surface_totale_capteurs > 0 ? 1 : 0;
     }
 
+    public function surface(): ?float
+    {
+        return $this->panneau_pv->surface_totale_capteurs > 0 ? $this->panneau_pv->surface_totale_capteurs : null;
+    }
+
     public function __invoke(PanneauPv $panneau_pv, Context $context): ?PanneauPhotovoltaiqueDto
     {
         $this->panneau_pv = $panneau_pv;
@@ -74,7 +79,7 @@ final class PanneauPhotovoltaiqueTransformer
             orientation: $orientation,
             inclinaison: $inclinaison,
             modules: $modules,
-            surface: $panneau_pv->surface_totale_capteurs,
+            surface: $this->surface(),
             installation_collective: $this->installation_collective(),
         );
     }

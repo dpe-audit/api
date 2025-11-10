@@ -2,7 +2,8 @@
 
 namespace App\Engine\Table;
 
-use App\Domain\Enveloppe\PontThermique\Liaison\{TypeIsolation, TypeLiaison, TypePose};
+use App\Domain\Enveloppe\Paroi\Isolation\TypeIsolation;
+use App\Domain\Enveloppe\PontThermique\Liaison\{TypeLiaison, TypePose};
 
 interface PontThermiqueTableValeurRepository
 {

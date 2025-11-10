@@ -42,7 +42,7 @@ final class InstallationTransformer
     public function fecs_saisi(): ?float
     {
         return match ($this->installation_ecs->enum_methode_saisie_fact_couv_sol_id) {
-            2 => $this->installation_ecs->fecs,
+            2 => $this->installation_ecs->fecs > 0 ? $this->installation_ecs->fecs : null,
             default => null,
         };
     }

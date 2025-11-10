@@ -52,7 +52,7 @@ final class BatimentTransformer
 
     public function logements(): int
     {
-        return $this->context->ressource()->logement()->caracteristique_generale->nombre_appartement ?? 1;
+        return ($value = $this->context->ressource()->logement()->caracteristique_generale->nombre_appartement) ? $value : 1;
     }
 
     public function altitude(): int

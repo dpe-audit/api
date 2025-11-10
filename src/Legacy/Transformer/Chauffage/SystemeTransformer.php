@@ -87,7 +87,9 @@ final class SystemeTransformer
 
     public function niveaux_desservis(): int
     {
-        return $this->installation_chauffage->nombre_niveau_installation_ch;
+        return $this->installation_chauffage->nombre_niveau_installation_ch > 0
+            ? $this->installation_chauffage->nombre_niveau_installation_ch
+            : 1;
     }
 
     /**
@@ -97,7 +99,7 @@ final class SystemeTransformer
     {
         $collection = [];
         foreach ($this->installation_chauffage->emetteur_chauffage_collection as $emetteur) {
-            if (in_array($emetteur->enum_lien_generateur_emetteur_id, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 19, 20, 21, 22, 23, 40, 42, 46, 47, 48, 49, 50])) {
+            if (in_array($emetteur->enum_type_emission_distribution_id, [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 19, 20, 21, 22, 23, 40, 42, 46, 47, 48, 49, 50])) {
                 continue;
             }
             if ($emetteur->enum_lien_generateur_emetteur_id !== $this->generateur_chauffage->enum_lien_generateur_emetteur_id) {

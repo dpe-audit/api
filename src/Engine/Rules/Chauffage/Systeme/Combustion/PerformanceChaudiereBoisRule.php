@@ -6,7 +6,10 @@ final class PerformanceChaudiereBoisRule extends PerformanceChaudiereRule
 {
     public function supports(): bool
     {
-        return parent::supports() && $this->energie_generateur()->is_bois();
+        if (false === parent::supports()) {
+            return false;
+        }
+        return $this->energie_generateur()->is_bois();
     }
 
     /**

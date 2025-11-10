@@ -7,9 +7,18 @@ namespace App\Engine;
  */
 final class Rules implements \IteratorAggregate
 {
-    public function __construct(
-        private iterable $rules,
-    ) {}
+    private iterable $rules;
+
+    /**
+     * @param array<RuleInterface> $rules
+     */
+    public function __construct(iterable $rules)
+    {
+        $this->rules = [];
+        foreach ($rules as $rule) {
+            $this->rules[] = clone $rule;
+        }
+    }
 
     public function find(string $class): ?RuleInterface
     {

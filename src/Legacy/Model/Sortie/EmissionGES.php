@@ -53,4 +53,19 @@ final class EmissionGES
             classe_emission_ges: (string) $xml->classe_emission_ges
         );
     }
+
+    public function emission_ges_auxiliaire_ch(): float
+    {
+        return $this->emission_ges_auxiliaire_generation_ch + $this->emission_ges_auxiliaire_distribution_ch;
+    }
+
+    public function emission_ges_auxiliaire_ecs(): float
+    {
+        return $this->emission_ges_auxiliaire_generation_ecs + $this->emission_ges_auxiliaire_distribution_ecs;
+    }
+
+    public function emission_ges_auxiliaire_fr(): float
+    {
+        return $this->emission_ges_auxiliaire_distribution_fr;
+    }
 }

@@ -2,8 +2,9 @@
 
 namespace App\Database\Local\Table;
 
-use App\Domain\Enveloppe\PontThermique\Liaison\{TypeIsolation, TypeLiaison, TypePose};
+use App\Domain\Enveloppe\PontThermique\Liaison\{TypeLiaison, TypePose};
 use App\Database\Local\XMLTableDatabase;
+use App\Domain\Enveloppe\Paroi\Isolation\TypeIsolation;
 use App\Engine\Table\PontThermiqueTableValeurRepository;
 
 final class XMLPontThermiqueTableValeurRepository implements PontThermiqueTableValeurRepository

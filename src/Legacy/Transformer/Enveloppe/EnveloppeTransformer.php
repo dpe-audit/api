@@ -51,10 +51,9 @@ final class EnveloppeTransformer
     public function q4pa_conv(): ?float
     {
         foreach ($this->context->ressource()->logement()->ventilation_collection as $ventilation) {
-            if (null === $ventilation->q4pa_conv_saisi) {
-                continue;
+            if ($ventilation->q4pa_conv_saisi > 0) {
+                return $ventilation->q4pa_conv_saisi;
             }
-            return $ventilation->q4pa_conv_saisi;
         }
         return null;
     }

@@ -4,10 +4,9 @@ namespace App\Command;
 
 use App\Legacy\Model\DPE;
 use App\Legacy\Transformer\Diagnostic\DiagnosticTransformer;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Attribute\AsCommand;
-use Symfony\Component\Console\Input\{InputArgument, InputInterface, InputOption};
+use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -16,62 +15,44 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
     description: 'Transforme les diagnostics XML vers le nouveau modèle de données',
     hidden: false,
 )]
-final class TransformerCommand extends Command
+final class TransformerCommand extends LocalCommand
 {
-    public final const INPUT = '/data/diagnostics';
-
     public function __construct(
-        private readonly string $projectDir,
-        private readonly LoggerInterface $logger,
-        private readonly ValidatorInterface $validator,
+        string $projectDir,
         private readonly DiagnosticTransformer $transformer,
+        private readonly ValidatorInterface $validator,
     ) {
-        parent::__construct();
-    }
-
-    protected function configure(): void
-    {
-        $this->addArgument('numero_dpe', InputArgument::OPTIONAL, 'Numéro de DPE :');
-        $this->addOption('strict', 's', InputOption::VALUE_NONE, 'Mode strict');
+        parent::__construct($projectDir);
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $readdir = $this->projectDir . self::INPUT;
-
-        $search = $input->getArgument('numero_dpe') ? $input->getArgument('numero_dpe') . '.xml' : null;
-
-        if (false === $entries = scandir($readdir)) {
-            $output->writeln("Le dossier source n'existe pas");
-            return Command::FAILURE;
-        }
+        $entries = $this->load($input, $output);
         $count = count($entries);
-        $counter = 0;
         $success = 0;
+        $counter = 0;
 
-        for ($i = 0; $i < $count; $i++) {
-            $filename = $entries[$i];
-            $path = "{$readdir}/{$filename}";
-
-            if (!\is_file($path)) {
-                continue;
-            }
-            if ($search && $filename !== $search) {
-                continue;
-            }
+        foreach ($this->load($input, $output) as $entry) {
             $counter++;
-            $output->writeln("Processing {$counter}/{$count} : {$filename}...");
-            $xml = \simplexml_load_file($path);
+            $id = basename($entry, '.xml');
+
+            $output->writeln("Processing {$counter}/{$count} : {$id}");
+
+            $xml = simplexml_load_file($entry);
             $data = DPE::from($xml);
             $payload = $this->transformer->__invoke($data);
             $errors = $this->validator->validate($payload);
 
+            $json = json_encode($payload->__normalize(), JSON_UNESCAPED_UNICODE);
+            dd($json);
             if (count($errors) > 0) {
                 $output->writeln("Error");
+
                 if ($input->getOption('strict')) {
-                    var_dump(json_encode($payload->__normalize(), JSON_UNESCAPED_UNICODE));
-                    dd((string) $errors);
-                    return Command::FAILURE;
+                    $json = json_encode($payload->__normalize(), JSON_UNESCAPED_UNICODE);
+                    $output->writeln((string) $errors);
+                    $output->writeln($json);
+                    return false;
                 }
                 continue;
             }

@@ -1,1 +1,291 @@
-<?xml version="1.0" encoding="UTF-8"?><table name="chauffage.tfonc30"><row><type_generateur>chaudiere</type_generateur><mode_combustion>standard</mode_combustion><temperature_distribution>basse</temperature_distribution><annee_installation_emetteur gt="" gte="" lt="" lte="1980" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="1990" eq="" /><tfonc30>53</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>standard</mode_combustion><temperature_distribution>basse</temperature_distribution><annee_installation_emetteur gt="" gte="1981" lt="" lte="2000" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="1990" eq="" /><tfonc30>50</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>standard</mode_combustion><temperature_distribution>basse</temperature_distribution><annee_installation_emetteur gt="" gte="2001" lt="" lte="" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="1990" eq="" /><tfonc30>50</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>standard</mode_combustion><temperature_distribution>moyenne</temperature_distribution><annee_installation_emetteur gt="" gte="" lt="" lte="1980" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="1990" eq="" /><tfonc30>59</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>standard</mode_combustion><temperature_distribution>moyenne</temperature_distribution><annee_installation_emetteur gt="" gte="1981" lt="" lte="2000" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="1990" eq="" /><tfonc30>56</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>standard</mode_combustion><temperature_distribution>moyenne</temperature_distribution><annee_installation_emetteur gt="" gte="2001" lt="" lte="" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="1990" eq="" /><tfonc30>53</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>standard</mode_combustion><temperature_distribution>haute</temperature_distribution><annee_installation_emetteur gt="" gte="" lt="" lte="1980" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="1990" eq="" /><tfonc30>59</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>standard</mode_combustion><temperature_distribution>haute</temperature_distribution><annee_installation_emetteur gt="" gte="1981" lt="" lte="2000" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="1990" eq="" /><tfonc30>56</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>standard</mode_combustion><temperature_distribution>haute</temperature_distribution><annee_installation_emetteur gt="" gte="2001" lt="" lte="" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="1990" eq="" /><tfonc30>56</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>standard</mode_combustion><temperature_distribution>basse</temperature_distribution><annee_installation_emetteur gt="" gte="" lt="" lte="1980" eq="" /><annee_installation_generateur gt="" gte="1991" lt="" lte="" eq="" /><tfonc30>49.5</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>standard</mode_combustion><temperature_distribution>basse</temperature_distribution><annee_installation_emetteur gt="" gte="1981" lt="" lte="2000" eq="" /><annee_installation_generateur gt="" gte="1991" lt="" lte="" eq="" /><tfonc30>45</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>standard</mode_combustion><temperature_distribution>basse</temperature_distribution><annee_installation_emetteur gt="" gte="2001" lt="" lte="" eq="" /><annee_installation_generateur gt="" gte="1991" lt="" lte="" eq="" /><tfonc30>45</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>standard</mode_combustion><temperature_distribution>moyenne</temperature_distribution><annee_installation_emetteur gt="" gte="" lt="" lte="1980" eq="" /><annee_installation_generateur gt="" gte="1991" lt="" lte="" eq="" /><tfonc30>55.5</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>standard</mode_combustion><temperature_distribution>moyenne</temperature_distribution><annee_installation_emetteur gt="" gte="1981" lt="" lte="2000" eq="" /><annee_installation_generateur gt="" gte="1991" lt="" lte="" eq="" /><tfonc30>52.5</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>standard</mode_combustion><temperature_distribution>moyenne</temperature_distribution><annee_installation_emetteur gt="" gte="2001" lt="" lte="" eq="" /><annee_installation_generateur gt="" gte="1991" lt="" lte="" eq="" /><tfonc30>49.5</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>standard</mode_combustion><temperature_distribution>haute</temperature_distribution><annee_installation_emetteur gt="" gte="" lt="" lte="1980" eq="" /><annee_installation_generateur gt="" gte="1991" lt="" lte="" eq="" /><tfonc30>55.5</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>standard</mode_combustion><temperature_distribution>haute</temperature_distribution><annee_installation_emetteur gt="" gte="1981" lt="" lte="2000" eq="" /><annee_installation_generateur gt="" gte="1991" lt="" lte="" eq="" /><tfonc30>52.5</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>standard</mode_combustion><temperature_distribution>haute</temperature_distribution><annee_installation_emetteur gt="" gte="2001" lt="" lte="" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="" eq="" /><tfonc30>52.5</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>basse_temperature</mode_combustion><temperature_distribution>basse</temperature_distribution><annee_installation_emetteur gt="" gte="" lt="" lte="1980" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="" eq="" /><tfonc30>42.5</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>basse_temperature</mode_combustion><temperature_distribution>basse</temperature_distribution><annee_installation_emetteur gt="" gte="1981" lt="" lte="2000" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="" eq="" /><tfonc30>35</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>basse_temperature</mode_combustion><temperature_distribution>basse</temperature_distribution><annee_installation_emetteur gt="" gte="2001" lt="" lte="" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="" eq="" /><tfonc30>35</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>basse_temperature</mode_combustion><temperature_distribution>moyenne</temperature_distribution><annee_installation_emetteur gt="" gte="" lt="" lte="1980" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="" eq="" /><tfonc30>48.5</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>basse_temperature</mode_combustion><temperature_distribution>moyenne</temperature_distribution><annee_installation_emetteur gt="" gte="1981" lt="" lte="2000" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="" eq="" /><tfonc30>45.5</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>basse_temperature</mode_combustion><temperature_distribution>moyenne</temperature_distribution><annee_installation_emetteur gt="" gte="2001" lt="" lte="" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="" eq="" /><tfonc30>42.5</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>basse_temperature</mode_combustion><temperature_distribution>haute</temperature_distribution><annee_installation_emetteur gt="" gte="" lt="" lte="1980" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="" eq="" /><tfonc30>48.5</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>basse_temperature</mode_combustion><temperature_distribution>haute</temperature_distribution><annee_installation_emetteur gt="" gte="1981" lt="" lte="2000" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="" eq="" /><tfonc30>45.5</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>basse_temperature</mode_combustion><temperature_distribution>haute</temperature_distribution><annee_installation_emetteur gt="" gte="2001" lt="" lte="" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="" eq="" /><tfonc30>45.5</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>condensation</mode_combustion><temperature_distribution>basse</temperature_distribution><annee_installation_emetteur gt="" gte="" lt="" lte="1980" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="" eq="" /><tfonc30>32</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>condensation</mode_combustion><temperature_distribution>basse</temperature_distribution><annee_installation_emetteur gt="" gte="1981" lt="" lte="2000" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="" eq="" /><tfonc30>24.5</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>condensation</mode_combustion><temperature_distribution>basse</temperature_distribution><annee_installation_emetteur gt="" gte="2001" lt="" lte="" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="" eq="" /><tfonc30>24.5</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>condensation</mode_combustion><temperature_distribution>moyenne</temperature_distribution><annee_installation_emetteur gt="" gte="" lt="" lte="1980" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="" eq="" /><tfonc30>38</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>condensation</mode_combustion><temperature_distribution>moyenne</temperature_distribution><annee_installation_emetteur gt="" gte="1981" lt="" lte="2000" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="" eq="" /><tfonc30>35</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>condensation</mode_combustion><temperature_distribution>moyenne</temperature_distribution><annee_installation_emetteur gt="" gte="2001" lt="" lte="" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="" eq="" /><tfonc30>32</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>condensation</mode_combustion><temperature_distribution>haute</temperature_distribution><annee_installation_emetteur gt="" gte="" lt="" lte="1980" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="" eq="" /><tfonc30>38</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>condensation</mode_combustion><temperature_distribution>haute</temperature_distribution><annee_installation_emetteur gt="" gte="1981" lt="" lte="2000" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="" eq="" /><tfonc30>35</tfonc30></row><row><type_generateur>chaudiere</type_generateur><mode_combustion>condensation</mode_combustion><temperature_distribution>haute</temperature_distribution><annee_installation_emetteur gt="" gte="2001" lt="" lte="" eq="" /><annee_installation_generateur gt="" gte="" lt="" lte="" eq="" /><tfonc30>35</tfonc30></row></table>
+<?xml version="1.0" encoding="UTF-8"?>
+<table name="chauffage.tfonc30">
+    <row>
+        <mode_combustion>standard</mode_combustion>
+        <temperature_distribution>basse</temperature_distribution>
+        <annee_installation_emetteur lte="1980" gte="" />
+        <annee_installation_generateur lte="1990" gte="" />
+        <tfonc30>53</tfonc30>
+        <tv_temp_fonc_30_id>19</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>standard</mode_combustion>
+        <temperature_distribution>basse</temperature_distribution>
+        <annee_installation_emetteur lte="2000" gte="1981" />
+        <annee_installation_generateur lte="1990" gte="" />
+        <tfonc30>50</tfonc30>
+        <tv_temp_fonc_30_id>22</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>standard</mode_combustion>
+        <temperature_distribution>basse</temperature_distribution>
+        <annee_installation_emetteur lte="" gte="2001" />
+        <annee_installation_generateur lte="1990" gte="" />
+        <tfonc30>50</tfonc30>
+        <tv_temp_fonc_30_id>25</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>standard</mode_combustion>
+        <temperature_distribution>moyenne</temperature_distribution>
+        <annee_installation_emetteur lte="1980" gte="" />
+        <annee_installation_generateur lte="1990" gte="" />
+        <tfonc30>59</tfonc30>
+        <tv_temp_fonc_30_id>20</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>standard</mode_combustion>
+        <temperature_distribution>moyenne</temperature_distribution>
+        <annee_installation_emetteur lte="2000" gte="1981" />
+        <annee_installation_generateur lte="1990" gte="" />
+        <tfonc30>56</tfonc30>
+        <tv_temp_fonc_30_id>23</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>standard</mode_combustion>
+        <temperature_distribution>moyenne</temperature_distribution>
+        <annee_installation_emetteur lte="" gte="2001" />
+        <annee_installation_generateur lte="1990" gte="" />
+        <tfonc30>53</tfonc30>
+        <tv_temp_fonc_30_id>26</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>standard</mode_combustion>
+        <temperature_distribution>haute</temperature_distribution>
+        <annee_installation_emetteur lte="1980" gte="" />
+        <annee_installation_generateur lte="1990" gte="" />
+        <tfonc30>59</tfonc30>
+        <tv_temp_fonc_30_id>21</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>standard</mode_combustion>
+        <temperature_distribution>haute</temperature_distribution>
+        <annee_installation_emetteur lte="2000" gte="1981" />
+        <annee_installation_generateur lte="1990" gte="" />
+        <tfonc30>56</tfonc30>
+        <tv_temp_fonc_30_id>24</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>standard</mode_combustion>
+        <temperature_distribution>haute</temperature_distribution>
+        <annee_installation_emetteur lte="" gte="2001" />
+        <annee_installation_generateur lte="1990" gte="" />
+        <tfonc30>56</tfonc30>
+        <tv_temp_fonc_30_id>27</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>standard</mode_combustion>
+        <temperature_distribution>basse</temperature_distribution>
+        <annee_installation_emetteur lte="1980" gte="" />
+        <annee_installation_generateur lte="" gte="1991" />
+        <tfonc30>49.5</tfonc30>
+        <tv_temp_fonc_30_id>28</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>standard</mode_combustion>
+        <temperature_distribution>basse</temperature_distribution>
+        <annee_installation_emetteur lte="2000" gte="1981" />
+        <annee_installation_generateur lte="" gte="1991" />
+        <tfonc30>45</tfonc30>
+        <tv_temp_fonc_30_id>31</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>standard</mode_combustion>
+        <temperature_distribution>basse</temperature_distribution>
+        <annee_installation_emetteur lte="" gte="2001" />
+        <annee_installation_generateur lte="" gte="1991" />
+        <tfonc30>45</tfonc30>
+        <tv_temp_fonc_30_id>34</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>standard</mode_combustion>
+        <temperature_distribution>moyenne</temperature_distribution>
+        <annee_installation_emetteur lte="1980" gte="" />
+        <annee_installation_generateur lte="" gte="1991" />
+        <tfonc30>55.5</tfonc30>
+        <tv_temp_fonc_30_id>29</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>standard</mode_combustion>
+        <temperature_distribution>moyenne</temperature_distribution>
+        <annee_installation_emetteur lte="2000" gte="1981" />
+        <annee_installation_generateur lte="" gte="1991" />
+        <tfonc30>52.5</tfonc30>
+        <tv_temp_fonc_30_id>32</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>standard</mode_combustion>
+        <temperature_distribution>moyenne</temperature_distribution>
+        <annee_installation_emetteur lte="" gte="2001" />
+        <annee_installation_generateur lte="" gte="1991" />
+        <tfonc30>49.5</tfonc30>
+        <tv_temp_fonc_30_id>35</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>standard</mode_combustion>
+        <temperature_distribution>haute</temperature_distribution>
+        <annee_installation_emetteur lte="1980" gte="" />
+        <annee_installation_generateur lte="" gte="1991" />
+        <tfonc30>55.5</tfonc30>
+        <tv_temp_fonc_30_id>30</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>standard</mode_combustion>
+        <temperature_distribution>haute</temperature_distribution>
+        <annee_installation_emetteur lte="2000" gte="1981" />
+        <annee_installation_generateur lte="" gte="1991" />
+        <tfonc30>52.5</tfonc30>
+        <tv_temp_fonc_30_id>33</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>standard</mode_combustion>
+        <temperature_distribution>haute</temperature_distribution>
+        <annee_installation_emetteur lte="" gte="2001" />
+        <annee_installation_generateur lte="" gte="" />
+        <tfonc30>52.5</tfonc30>
+        <tv_temp_fonc_30_id>36</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>basse_temperature</mode_combustion>
+        <temperature_distribution>basse</temperature_distribution>
+        <annee_installation_emetteur lte="1980" gte="" />
+        <annee_installation_generateur lte="" gte="" />
+        <tfonc30>42.5</tfonc30>
+        <tv_temp_fonc_30_id>10</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>basse_temperature</mode_combustion>
+        <temperature_distribution>basse</temperature_distribution>
+        <annee_installation_emetteur lte="2000" gte="1981" />
+        <annee_installation_generateur lte="" gte="" />
+        <tfonc30>35</tfonc30>
+        <tv_temp_fonc_30_id>13</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>basse_temperature</mode_combustion>
+        <temperature_distribution>basse</temperature_distribution>
+        <annee_installation_emetteur lte="" gte="2001" />
+        <annee_installation_generateur lte="" gte="" />
+        <tfonc30>35</tfonc30>
+        <tv_temp_fonc_30_id>16</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>basse_temperature</mode_combustion>
+        <temperature_distribution>moyenne</temperature_distribution>
+        <annee_installation_emetteur lte="1980" gte="" />
+        <annee_installation_generateur lte="" gte="" />
+        <tfonc30>48.5</tfonc30>
+        <tv_temp_fonc_30_id>11</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>basse_temperature</mode_combustion>
+        <temperature_distribution>moyenne</temperature_distribution>
+        <annee_installation_emetteur lte="2000" gte="1981" />
+        <annee_installation_generateur lte="" gte="" />
+        <tfonc30>45.5</tfonc30>
+        <tv_temp_fonc_30_id>14</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>basse_temperature</mode_combustion>
+        <temperature_distribution>moyenne</temperature_distribution>
+        <annee_installation_emetteur lte="" gte="2001" />
+        <annee_installation_generateur lte="" gte="" />
+        <tfonc30>42.5</tfonc30>
+        <tv_temp_fonc_30_id>17</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>basse_temperature</mode_combustion>
+        <temperature_distribution>haute</temperature_distribution>
+        <annee_installation_emetteur lte="1980" gte="" />
+        <annee_installation_generateur lte="" gte="" />
+        <tfonc30>48.5</tfonc30>
+        <tv_temp_fonc_30_id>12</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>basse_temperature</mode_combustion>
+        <temperature_distribution>haute</temperature_distribution>
+        <annee_installation_emetteur lte="2000" gte="1981" />
+        <annee_installation_generateur lte="" gte="" />
+        <tfonc30>45.5</tfonc30>
+        <tv_temp_fonc_30_id>15</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>basse_temperature</mode_combustion>
+        <temperature_distribution>haute</temperature_distribution>
+        <annee_installation_emetteur lte="" gte="2001" />
+        <annee_installation_generateur lte="" gte="" />
+        <tfonc30>45.5</tfonc30>
+        <tv_temp_fonc_30_id>18</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>condensation</mode_combustion>
+        <temperature_distribution>basse</temperature_distribution>
+        <annee_installation_emetteur lte="1980" gte="" />
+        <annee_installation_generateur lte="" gte="" />
+        <tfonc30>32</tfonc30>
+        <tv_temp_fonc_30_id>1</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>condensation</mode_combustion>
+        <temperature_distribution>basse</temperature_distribution>
+        <annee_installation_emetteur lte="2000" gte="1981" />
+        <annee_installation_generateur lte="" gte="" />
+        <tfonc30>24.5</tfonc30>
+        <tv_temp_fonc_30_id>4</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>condensation</mode_combustion>
+        <temperature_distribution>basse</temperature_distribution>
+        <annee_installation_emetteur lte="" gte="2001" />
+        <annee_installation_generateur lte="" gte="" />
+        <tfonc30>24.5</tfonc30>
+        <tv_temp_fonc_30_id>7</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>condensation</mode_combustion>
+        <temperature_distribution>moyenne</temperature_distribution>
+        <annee_installation_emetteur lte="1980" gte="" />
+        <annee_installation_generateur lte="" gte="" />
+        <tfonc30>38</tfonc30>
+        <tv_temp_fonc_30_id>2</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>condensation</mode_combustion>
+        <temperature_distribution>moyenne</temperature_distribution>
+        <annee_installation_emetteur lte="2000" gte="1981" />
+        <annee_installation_generateur lte="" gte="" />
+        <tfonc30>35</tfonc30>
+        <tv_temp_fonc_30_id>5</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>condensation</mode_combustion>
+        <temperature_distribution>moyenne</temperature_distribution>
+        <annee_installation_emetteur lte="" gte="2001" />
+        <annee_installation_generateur lte="" gte="" />
+        <tfonc30>32</tfonc30>
+        <tv_temp_fonc_30_id>8</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>condensation</mode_combustion>
+        <temperature_distribution>haute</temperature_distribution>
+        <annee_installation_emetteur lte="1980" gte="" />
+        <annee_installation_generateur lte="" gte="" />
+        <tfonc30>38</tfonc30>
+        <tv_temp_fonc_30_id>3</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>condensation</mode_combustion>
+        <temperature_distribution>haute</temperature_distribution>
+        <annee_installation_emetteur lte="2000" gte="1981" />
+        <annee_installation_generateur lte="" gte="" />
+        <tfonc30>35</tfonc30>
+        <tv_temp_fonc_30_id>6</tv_temp_fonc_30_id>
+    </row>
+    <row>
+        <mode_combustion>condensation</mode_combustion>
+        <temperature_distribution>haute</temperature_distribution>
+        <annee_installation_emetteur lte="" gte="2001" />
+        <annee_installation_generateur lte="" gte="" />
+        <tfonc30>35</tfonc30>
+        <tv_temp_fonc_30_id>9</tv_temp_fonc_30_id>
+    </row>
+</table>

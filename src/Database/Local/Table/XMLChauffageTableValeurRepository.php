@@ -168,9 +168,9 @@ final class XMLChauffageTableValeurRepository implements ChauffageTableValeurRep
     ): ?float {
         return $this->db->repository('chauffage.scop')
             ->createQuery()
-            ->and('zone_climatique', $zone_climatique->code())
+            ->and('zone_climatique', $zone_climatique->code(), false)
             ->and('type_generateur', $type_generateur)
-            ->and('type_emission', $type_emission)
+            ->and('type_emission', $type_emission, false)
             ->andCompareTo('annee_installation_generateur', $annee_installation_generateur)
             ->getOne()
             ?->floatval('scop');
@@ -185,8 +185,8 @@ final class XMLChauffageTableValeurRepository implements ChauffageTableValeurRep
     ): ?float {
         return $this->db->repository('chauffage.combustion')
             ->createQuery()
-            ->and('type_generateur', $type_generateur)
-            ->and('energie_generateur', $energie_generateur)
+            ->and('type_generateur', $type_generateur, false)
+            ->and('energie_generateur', $energie_generateur, false)
             ->and('mode_combustion', $mode_combustion)
             ->andCompareTo('annee_installation_generateur', $annee_installation_generateur)
             ->getOne()
@@ -206,8 +206,8 @@ final class XMLChauffageTableValeurRepository implements ChauffageTableValeurRep
     ): ?float {
         return $this->db->repository('chauffage.combustion')
             ->createQuery()
-            ->and('type_generateur', $type_generateur)
-            ->and('energie_generateur', $energie_generateur)
+            ->and('type_generateur', $type_generateur, false)
+            ->and('energie_generateur', $energie_generateur, false)
             ->and('mode_combustion', $mode_combustion)
             ->andCompareTo('annee_installation_generateur', $annee_installation_generateur)
             ->getOne()
@@ -227,10 +227,10 @@ final class XMLChauffageTableValeurRepository implements ChauffageTableValeurRep
         float $e,
         float $f,
     ): ?float {
-        return $this->db->repository('ecs.combustion')
+        return $this->db->repository('chauffage.combustion')
             ->createQuery()
-            ->and('type_generateur', $type_generateur)
-            ->and('energie_generateur', $energie_generateur)
+            ->and('type_generateur', $type_generateur, false)
+            ->and('energie_generateur', $energie_generateur, false)
             ->and('mode_combustion', $mode_combustion)
             ->andCompareTo('annee_installation_generateur', $annee_installation_generateur)
             ->getOne()
@@ -251,16 +251,15 @@ final class XMLChauffageTableValeurRepository implements ChauffageTableValeurRep
     ): ?float {
         return $this->db->repository('chauffage.combustion')
             ->createQuery()
-            ->and('type_generateur', $type_generateur)
+            ->and('type_generateur', $type_generateur, false)
+            ->and('energie_generateur', $energie_generateur, false)
             ->and('mode_combustion', $mode_combustion)
-            ->and('energie_generateur', $energie_generateur)
             ->andCompareTo('annee_installation_generateur', $annee_installation_generateur)
             ->getOne()
             ?->floatval('pveilleuse');
     }
 
     public function tfonc30(
-        TypeGenerateur $type_generateur,
         ModeCombustion $mode_combustion,
         TemperatureDistribution $temperature_distribution,
         int $annee_installation_emetteur,
@@ -268,7 +267,6 @@ final class XMLChauffageTableValeurRepository implements ChauffageTableValeurRep
     ): ?float {
         return $this->db->repository('chauffage.tfonc30')
             ->createQuery()
-            ->and('type_generateur', $type_generateur)
             ->and('mode_combustion', $mode_combustion)
             ->and('temperature_distribution', $temperature_distribution)
             ->andCompareTo('annee_installation_emetteur', $annee_installation_emetteur)

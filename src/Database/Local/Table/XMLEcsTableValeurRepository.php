@@ -115,14 +115,16 @@ final class XMLEcsTableValeurRepository implements EcsTableValeurRepository
         TypeGenerateur $type_generateur,
         EnergieGenerateur $energie_generateur,
         ModeCombustion $mode_combustion,
+        float $volume_stockage,
         int $annee_installation,
         float $pn
     ): ?float {
         return $this->db->repository('ecs.combustion')
             ->createQuery()
             ->and('type_generateur', $type_generateur)
-            ->and('energie_generateur', $energie_generateur)
+            ->and('energie_generateur', $energie_generateur, false)
             ->and('mode_combustion', $mode_combustion)
+            ->andCompareTo('volume_stockage', $volume_stockage)
             ->andCompareTo('annee_installation', $annee_installation)
             ->getOne()
             ?->to(function (XMLTableElement $record) use ($pn) {
@@ -136,6 +138,7 @@ final class XMLEcsTableValeurRepository implements EcsTableValeurRepository
         TypeGenerateur $type_generateur,
         EnergieGenerateur $energie_generateur,
         ModeCombustion $mode_combustion,
+        float $volume_stockage,
         int $annee_installation,
         float $pn,
         float $e,
@@ -144,8 +147,9 @@ final class XMLEcsTableValeurRepository implements EcsTableValeurRepository
         return $this->db->repository('ecs.combustion')
             ->createQuery()
             ->and('type_generateur', $type_generateur)
-            ->and('energie_generateur', $energie_generateur)
+            ->and('energie_generateur', $energie_generateur, false)
             ->and('mode_combustion', $mode_combustion)
+            ->andCompareTo('volume_stockage', $volume_stockage)
             ->andCompareTo('annee_installation', $annee_installation)
             ->getOne()
             ?->to(function (XMLTableElement $record) use ($pn, $e, $f) {
@@ -160,13 +164,15 @@ final class XMLEcsTableValeurRepository implements EcsTableValeurRepository
         TypeGenerateur $type_generateur,
         EnergieGenerateur $energie_generateur,
         ModeCombustion $mode_combustion,
+        float $volume_stockage,
         int $annee_installation
     ): ?float {
         return $this->db->repository('ecs.combustion')
             ->createQuery()
             ->and('type_generateur', $type_generateur)
-            ->and('energie_generateur', $energie_generateur)
+            ->and('energie_generateur', $energie_generateur, false)
             ->and('mode_combustion', $mode_combustion)
+            ->andCompareTo('volume_stockage', $volume_stockage)
             ->andCompareTo('annee_installation_generateur', $annee_installation)
             ->getOne()
             ?->floatval('pveilleuse');

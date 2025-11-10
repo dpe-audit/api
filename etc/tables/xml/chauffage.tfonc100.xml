@@ -1,1 +1,57 @@
-<?xml version="1.0" encoding="UTF-8"?><table name="chauffage.tfonc100"><row><temperature_distribution>basse</temperature_distribution><annee_installation_emetteur gt="" gte="" lt="" lte="1980" eq="" /><tfonc100>60</tfonc100></row><row><temperature_distribution>moyenne</temperature_distribution><annee_installation_emetteur gt="" gte="" lt="" lte="1980" eq="" /><tfonc100>80</tfonc100></row><row><temperature_distribution>haute</temperature_distribution><annee_installation_emetteur gt="" gte="" lt="" lte="1980" eq="" /><tfonc100>80</tfonc100></row><row><temperature_distribution>basse</temperature_distribution><annee_installation_emetteur gt="" gte="1981" lt="" lte="2000" eq="" /><tfonc100>35</tfonc100></row><row><temperature_distribution>moyenne</temperature_distribution><annee_installation_emetteur gt="" gte="1981" lt="" lte="2000" eq="" /><tfonc100>70</tfonc100></row><row><temperature_distribution>haute</temperature_distribution><annee_installation_emetteur gt="" gte="1981" lt="" lte="2000" eq="" /><tfonc100>70</tfonc100></row><row><temperature_distribution>basse</temperature_distribution><annee_installation_emetteur gt="" gte="2001" lt="" lte="" eq="" /><tfonc100>35</tfonc100></row><row><temperature_distribution>moyenne</temperature_distribution><annee_installation_emetteur gt="" gte="2001" lt="" lte="" eq="" /><tfonc100>60</tfonc100></row><row><temperature_distribution>haute</temperature_distribution><annee_installation_emetteur gt="" gte="2001" lt="" lte="" eq="" /><tfonc100>70</tfonc100></row></table>
+<?xml version="1.0" encoding="UTF-8"?>
+<table name="chauffage.tfonc100">
+    <row>
+        <temperature_distribution>basse</temperature_distribution>
+        <annee_installation_emetteur gt="" gte="" lt="" lte="1980" eq="" />
+        <tfonc100>60</tfonc100>
+        <tv_temp_fonc_100_id>1</tv_temp_fonc_100_id>
+    </row>
+    <row>
+        <temperature_distribution>moyenne</temperature_distribution>
+        <annee_installation_emetteur gt="" gte="" lt="" lte="1980" eq="" />
+        <tfonc100>80</tfonc100>
+        <tv_temp_fonc_100_id>2</tv_temp_fonc_100_id>
+    </row>
+    <row>
+        <temperature_distribution>haute</temperature_distribution>
+        <annee_installation_emetteur gt="" gte="" lt="" lte="1980" eq="" />
+        <tfonc100>80</tfonc100>
+        <tv_temp_fonc_100_id>3</tv_temp_fonc_100_id>
+    </row>
+    <row>
+        <temperature_distribution>basse</temperature_distribution>
+        <annee_installation_emetteur gt="" gte="1981" lt="" lte="2000" eq="" />
+        <tfonc100>35</tfonc100>
+        <tv_temp_fonc_100_id>4</tv_temp_fonc_100_id>
+    </row>
+    <row>
+        <temperature_distribution>moyenne</temperature_distribution>
+        <annee_installation_emetteur gt="" gte="1981" lt="" lte="2000" eq="" />
+        <tfonc100>70</tfonc100>
+        <tv_temp_fonc_100_id>5</tv_temp_fonc_100_id>
+    </row>
+    <row>
+        <temperature_distribution>haute</temperature_distribution>
+        <annee_installation_emetteur gt="" gte="1981" lt="" lte="2000" eq="" />
+        <tfonc100>70</tfonc100>
+        <tv_temp_fonc_100_id>6</tv_temp_fonc_100_id>
+    </row>
+    <row>
+        <temperature_distribution>basse</temperature_distribution>
+        <annee_installation_emetteur gt="" gte="2001" lt="" lte="" eq="" />
+        <tfonc100>35</tfonc100>
+        <tv_temp_fonc_100_id>7</tv_temp_fonc_100_id>
+    </row>
+    <row>
+        <temperature_distribution>moyenne</temperature_distribution>
+        <annee_installation_emetteur gt="" gte="2001" lt="" lte="" eq="" />
+        <tfonc100>60</tfonc100>
+        <tv_temp_fonc_100_id>8</tv_temp_fonc_100_id>
+    </row>
+    <row>
+        <temperature_distribution>haute</temperature_distribution>
+        <annee_installation_emetteur gt="" gte="2001" lt="" lte="" eq="" />
+        <tfonc100>70</tfonc100>
+        <tv_temp_fonc_100_id>9</tv_temp_fonc_100_id>
+    </row>
+</table>

@@ -3,7 +3,7 @@
 namespace App\Engine\Rules\Chauffage;
 
 use App\Domain\Chauffage\Generateur\EnergieGenerateur;
-use App\Domain\Chauffage\Systeme\{Systeme, Configuration};
+use App\Domain\Chauffage\Systeme\Configuration;
 use App\Domain\Common\Enum\{Mois, Usage};
 use App\Engine\Context;
 

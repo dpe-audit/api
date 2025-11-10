@@ -40,13 +40,19 @@ final class XMLPlancherBasTableValeurRepository extends XMLParoiTableValeurRepos
         float $surface,
         float $u,
     ): ?float {
-        $points = $this->db->repository('plancher_bas.ue')
+        $records = $this->db->repository('plancher_bas.ue')
             ->createQuery()
-            ->and('mitoyennete', $mitoyennete)
+            ->and('mitoyennete', $mitoyennete, false)
             ->andCompareTo('annee_construction', $annee_construction)
-            ->getMany()
-            ->points('u', '_2s_p', 'ue');
+            ->getMany();
 
+        if (0 === $records->count()) {
+            return null;
+        }
+        if (1 === $records->count()) {
+            return $records->first()->floatval('ue');
+        }
+        $points = $records->points('u', '_2s_p', 'ue');
         $_2s_p = \round(2 * $surface / $perimetre);
         $f = new Interpolation($points, Interpolation::METHOD_BILENAIRE);
         return $f->interpolationBilenaire($u, $_2s_p);

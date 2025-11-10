@@ -42,7 +42,7 @@ final class PerformanceChauffageRule extends Rule
     {
         return $this->get('cef_ch', function (): float {
             return $this->input()->chauffage->systemes()
-                ->map(fn($entity) => $this->requireIterator(PerformanceSystemeRule::class, $entity)->cef_aux())
+                ->map(fn($entity) => $this->requireIterator(PerformanceSystemeRule::class, $entity)->cef_ch())
                 ->reduce(fn($carry, $item) => $carry + $item);
         });
     }

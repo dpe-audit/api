@@ -888,6 +888,7 @@ $defs:
           - ossature_bois_sans_remplissage
           - ossature_bois_avec_remplissage_tout_venant
           - ossature_bois_avec_remplissage_isolant
+          - beton_cellulaire
           - null
         default: null
       epaisseur_structure:
@@ -1573,12 +1574,26 @@ $defs:
         default: null
       position:
         $ref: '#/$defs/position'
-      menuiserie:
-        $ref: '#/$defs/menuiserie'
       vitrage:
         $ref: '#/$defs/vitrage'
+      menuiserie:
+        title: Menuiserie
+        type:
+          - object
+          - 'null'
+        default: null
+        oneOf:
+          - $ref: '#/$defs/menuiserie'
+          - const: null
       survitrage:
-        $ref: '#/$defs/survitrage'
+        title: Survitrage
+        type:
+          - object
+          - 'null'
+        default: null
+        oneOf:
+          - $ref: '#/$defs/survitrage'
+          - const: null
       masques:
         title: Liste des masques
         type: array
@@ -1605,16 +1620,26 @@ $defs:
             enum:
               - brique_verre_pleine
               - brique_verre_creuse
-              - polycarbonate
           vitrage:
             type: object
             properties:
               type:
-                enum:
-                  - brique_verre
-                  - polycarbonate
+                const: brique_verre
           menuiserie:
             const: null
+        required:
+          - type
+          - vitrage
+      - title: Paroi en polycarbonate
+        type: object
+        properties:
+          type:
+            const: polycarbonate
+          vitrage:
+            type: object
+            properties:
+              type:
+                const: polycarbonate
         required:
           - type
           - vitrage
@@ -1647,13 +1672,11 @@ $defs:
           - position
           - vitrage
           - menuiserie
-      - title: Porte fenêtre
+      - title: Porte fenêtre battante
         type: object
         properties:
           type:
-            enum:
-              - porte_fenetre_coulissante
-              - porte_fenetre_battante
+            const: porte_fenetre_battante
           position:
             type: object
             properties:
@@ -1664,6 +1687,33 @@ $defs:
             required:
               - type_pose
               - presence_soubassement
+          vitrage:
+            type: object
+            properties:
+              type:
+                not:
+                  enum:
+                    - brique_verre
+                    - polycarbonate
+          menuiserie:
+            type: object
+        required:
+          - type
+          - position
+          - vitrage
+          - menuiserie
+      - title: Porte fenêtre coulissante
+        type: object
+        properties:
+          type:
+            const: porte_fenetre_coulissante
+          position:
+            type: object
+            properties:
+              type_pose:
+                type: string
+            required:
+              - type_pose
           vitrage:
             type: object
             properties:
@@ -2390,16 +2440,26 @@ $defs:
             enum:
               - brique_verre_pleine
               - brique_verre_creuse
-              - polycarbonate
           vitrage:
             type: object
             properties:
               type:
-                enum:
-                  - brique_verre
-                  - polycarbonate
+                const: brique_verre
           menuiserie:
             const: null
+        required:
+          - type
+          - vitrage
+      - title: Paroi en polycarbonate
+        type: object
+        properties:
+          type:
+            const: polycarbonate
+          vitrage:
+            type: object
+            properties:
+              type:
+                const: polycarbonate
         required:
           - type
           - vitrage
@@ -3068,31 +3128,29 @@ $defs:
           - generateur_collectif
           - generateur_multi_batiment
           - position_volume_chauffe
-        allOf:
-          - oneOf:
-              - title: Générateur individuel
-                type: object
-                properties:
-                  generateur_collectif:
-                    const: false
-                  generateur_multi_batiment:
-                    const: false
-                  generateur_mixte_id:
-                    const: null
-                  reseau_chaleur_id:
-                    const: null
-                required:
-                  - generateur_collectif
-              - title: Générateur collectif
-                type: object
-                properties:
-                  generateur_collectif:
-                    const: true
-                  position_volume_chauffe:
-                    const: false
-                required:
-                  - generateur_collectif
-                  - position_volume_chauffe
+        oneOf:
+          - title: Générateur individuel
+            type: object
+            properties:
+              generateur_collectif:
+                const: false
+              generateur_multi_batiment:
+                const: false
+              reseau_chaleur_id:
+                const: null
+            required:
+              - generateur_collectif
+              - generateur_multi_batiment
+          - title: Générateur collectif
+            type: object
+            properties:
+              generateur_collectif:
+                const: true
+              position_volume_chauffe:
+                const: false
+            required:
+              - generateur_collectif
+              - position_volume_chauffe
       signaletique:
         title: Fiche signalétique
         type: object
@@ -3816,7 +3874,9 @@ $defs:
             default: null
           fch:
             title: Facteur de couverture solaire connu et justifié en %
-            type: number
+            type:
+              - number
+              - 'null'
             minimum: 0
             maximum: 100
         required:
@@ -3864,9 +3924,13 @@ $defs:
               presence_regulation:
                 const: false
               minimum_temperature:
-                const: null
+                enum:
+                  - false
+                  - null
               detection_presence:
-                const: null
+                enum:
+                  - false
+                  - null
             required:
               - presence_regulation
       data:
@@ -3956,16 +4020,41 @@ $defs:
       - generateur_id
       - type
     oneOf:
-      - title: Chauffage central
+      - title: Chauffage central avec distribution hydraulique
         type: object
         properties:
           type:
             const: chauffage_central
           reseau:
             type: object
+            properties:
+              type_distribution:
+                const: hydraulique
+            required:
+              - type_distribution
           emetteurs:
             type: array
             minContains: 1
+        required:
+          - type
+          - reseau
+          - emetteurs
+      - title: Chauffage central avec distribution aéraulique
+        type: object
+        properties:
+          type:
+            const: chauffage_central
+          reseau:
+            type: object
+            properties:
+              type_distribution:
+                const: aeraulique
+            required:
+              - type_distribution
+          emetteurs:
+            type: array
+            minContains: 0
+            maxContains: 0
         required:
           - type
           - reseau
@@ -3997,7 +4086,10 @@ $defs:
             enum:
               - hydraulique
               - aeraulique
-              - fluide_frigorigene
+          presence_fluide_frigorigene:
+            title: Distribution avec fluide frigorigène
+            type: boolean
+            default: false
           presence_circulateur_externe:
             title: Présence d'un circulateur externe
             type: boolean
@@ -4018,6 +4110,7 @@ $defs:
             default: null
         required:
           - type_distribution
+          - presence_fluide_frigorigene
           - presence_circulateur_externe
           - niveaux_desservis
           - isolation
@@ -4543,6 +4636,29 @@ $defs:
           - generateur_collectif
           - generateur_multi_batiment
           - position_volume_chauffe
+        oneOf:
+          - title: Générateur individuel
+            type: object
+            properties:
+              generateur_collectif:
+                const: false
+              generateur_multi_batiment:
+                const: false
+              reseau_chaleur_id:
+                const: null
+            required:
+              - generateur_collectif
+              - generateur_multi_batiment
+          - title: Générateur collectif
+            type: object
+            properties:
+              generateur_collectif:
+                const: true
+              position_volume_chauffe:
+                const: false
+            required:
+              - generateur_collectif
+              - position_volume_chauffe
       signaletique:
         title: Fiche signalétique
         type: object
@@ -4845,7 +4961,7 @@ $defs:
               - 'null'
             default: null
         oneOf:
-          - title: Absance de stockage
+          - title: Avec stockage
             properties:
               volume:
                 minimumExclusive: 0

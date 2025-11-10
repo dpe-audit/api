@@ -41,15 +41,21 @@ final class XMLDoubleFenetreTableValeurRepository implements DoubleFenetreTableV
         ?Materiau $materiau,
         ?bool $presence_rupteur_pont_thermique
     ): ?float {
-        $points = $this->db->repository('baie.uw')
+        $records = $this->db->repository('baie.uw')
             ->createQuery()
             ->and('type_baie', $type_baie)
             ->and('presence_soubassement', $presence_soubassement)
-            ->and('materiau', $materiau)
+            ->and('materiau', $materiau, false)
             ->and('presence_rupteur_pont_thermique', $presence_rupteur_pont_thermique)
-            ->getMany()
-            ->points('ug', 'uw');
+            ->getMany();
 
+        if (0 === $records->count()) {
+            return null;
+        }
+        if (1 === $records->count()) {
+            return $records->first()->floatval('uw');
+        }
+        $points = $records->points('ug', 'uw');
         $f = new Interpolation($points, Interpolation::METHOD_LINEAIRE);
         return $f->interpolationLineaire($ug);
     }

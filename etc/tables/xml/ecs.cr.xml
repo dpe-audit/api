@@ -1,1 +1,143 @@
-<?xml version="1.0" encoding="UTF-8"?><table name="ecs.cr"><row><position_chauffe_eau>chauffe_eau_horizontal</position_chauffe_eau><label_generateur></label_generateur><volume_stockage lte="100" lt="" gte="" gt="0" eq="" /><cr>0.39</cr></row><row><position_chauffe_eau>chauffe_eau_horizontal</position_chauffe_eau><label_generateur></label_generateur><volume_stockage lte="200" lt="" gte="" gt="100" eq="" /><cr>0.33</cr></row><row><position_chauffe_eau>chauffe_eau_horizontal</position_chauffe_eau><label_generateur></label_generateur><volume_stockage lte="300" lt="" gte="" gt="200" eq="" /><cr>0.3</cr></row><row><position_chauffe_eau>chauffe_eau_horizontal</position_chauffe_eau><label_generateur></label_generateur><volume_stockage lte="" lt="" gte="" gt="300" eq="" /><cr>0.3</cr></row><row><position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau><label_generateur>ne_performance_a</label_generateur><volume_stockage lte="100" lt="" gte="" gt="0" eq="" /><cr>0.32</cr></row><row><position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau><label_generateur>ne_performance_a</label_generateur><volume_stockage lte="200" lt="" gte="" gt="100" eq="" /><cr>0.23</cr></row><row><position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau><label_generateur>ne_performance_a</label_generateur><volume_stockage lte="300" lt="" gte="" gt="200" eq="" /><cr>0.22</cr></row><row><position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau><label_generateur>ne_performance_a</label_generateur><volume_stockage lte="" lt="" gte="" gt="300" eq="" /><cr>0.22</cr></row><row><position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau><label_generateur>ne_performance_b</label_generateur><volume_stockage lte="100" lt="" gte="" gt="0" eq="" /><cr>0.27</cr></row><row><position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau><label_generateur>ne_performance_b</label_generateur><volume_stockage lte="200" lt="" gte="" gt="100" eq="" /><cr>0.22</cr></row><row><position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau><label_generateur>ne_performance_b</label_generateur><volume_stockage lte="300" lt="" gte="" gt="200" eq="" /><cr>0.2</cr></row><row><position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau><label_generateur>ne_performance_b</label_generateur><volume_stockage lte="" lt="" gte="" gt="300" eq="" /><cr>0.18</cr></row><row><position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau><label_generateur>ne_performance_c</label_generateur><volume_stockage lte="100" lt="" gte="" gt="0" eq="" /><cr>0.25</cr></row><row><position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau><label_generateur>ne_performance_c</label_generateur><volume_stockage lte="200" lt="" gte="" gt="100" eq="" /><cr>0.2</cr></row><row><position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau><label_generateur>ne_performance_c</label_generateur><volume_stockage lte="300" lt="" gte="" gt="200" eq="" /><cr>0.18</cr></row><row><position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau><label_generateur>ne_performance_c</label_generateur><volume_stockage lte="" lt="" gte="" gt="300" eq="" /><cr>0.16</cr></row><row><position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau><label_generateur></label_generateur><volume_stockage lte="100" lt="" gte="" gt="0" eq="" /><cr>0.32</cr></row><row><position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau><label_generateur></label_generateur><volume_stockage lte="200" lt="" gte="" gt="100" eq="" /><cr>0.23</cr></row><row><position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau><label_generateur></label_generateur><volume_stockage lte="300" lt="" gte="" gt="200" eq="" /><cr>0.22</cr></row><row><position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau><label_generateur></label_generateur><volume_stockage lte="" lt="" gte="" gt="300" eq="" /><cr>0.22</cr></row></table>
+<?xml version="1.0" encoding="UTF-8"?>
+<table name="ecs.cr">
+    <row>
+        <position_chauffe_eau>chauffe_eau_horizontal</position_chauffe_eau>
+        <label_generateur></label_generateur>
+        <volume_stockage lte="100" gt="" />
+        <cr>0.39</cr>
+        <tv_pertes_stockage_id>1</tv_pertes_stockage_id>
+    </row>
+    <row>
+        <position_chauffe_eau>chauffe_eau_horizontal</position_chauffe_eau>
+        <label_generateur></label_generateur>
+        <volume_stockage lte="200" gt="100" />
+        <cr>0.33</cr>
+        <tv_pertes_stockage_id>5</tv_pertes_stockage_id>
+    </row>
+    <row>
+        <position_chauffe_eau>chauffe_eau_horizontal</position_chauffe_eau>
+        <label_generateur></label_generateur>
+        <volume_stockage lte="300" gt="200" />
+        <cr>0.3</cr>
+        <tv_pertes_stockage_id>9</tv_pertes_stockage_id>
+    </row>
+    <row>
+        <position_chauffe_eau>chauffe_eau_horizontal</position_chauffe_eau>
+        <label_generateur></label_generateur>
+        <volume_stockage lte="" gt="300" />
+        <cr>0.3</cr>
+        <tv_pertes_stockage_id>13</tv_pertes_stockage_id>
+    </row>
+    <row>
+        <position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau>
+        <label_generateur>ne_performance_a</label_generateur>
+        <volume_stockage lte="100" gt="" />
+        <cr>0.32</cr>
+        <tv_pertes_stockage_id>2</tv_pertes_stockage_id>
+    </row>
+    <row>
+        <position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau>
+        <label_generateur>ne_performance_a</label_generateur>
+        <volume_stockage lte="200" gt="100" />
+        <cr>0.23</cr>
+        <tv_pertes_stockage_id>3</tv_pertes_stockage_id>
+    </row>
+    <row>
+        <position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau>
+        <label_generateur>ne_performance_a</label_generateur>
+        <volume_stockage lte="300" gt="200" />
+        <cr>0.22</cr>
+        <tv_pertes_stockage_id>10</tv_pertes_stockage_id>
+    </row>
+    <row>
+        <position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau>
+        <label_generateur>ne_performance_a</label_generateur>
+        <volume_stockage lte="" gt="300" />
+        <cr>0.22</cr>
+        <tv_pertes_stockage_id>14</tv_pertes_stockage_id>
+    </row>
+    <row>
+        <position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau>
+        <label_generateur>ne_performance_b</label_generateur>
+        <volume_stockage lte="100" gt="" />
+        <cr>0.27</cr>
+        <tv_pertes_stockage_id>3</tv_pertes_stockage_id>
+    </row>
+    <row>
+        <position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau>
+        <label_generateur>ne_performance_b</label_generateur>
+        <volume_stockage lte="200" gt="100" />
+        <cr>0.22</cr>
+        <tv_pertes_stockage_id>7</tv_pertes_stockage_id>
+    </row>
+    <row>
+        <position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau>
+        <label_generateur>ne_performance_b</label_generateur>
+        <volume_stockage lte="300" gt="200" />
+        <cr>0.2</cr>
+        <tv_pertes_stockage_id>11</tv_pertes_stockage_id>
+    </row>
+    <row>
+        <position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau>
+        <label_generateur>ne_performance_b</label_generateur>
+        <volume_stockage lte="" gt="300" />
+        <cr>0.18</cr>
+        <tv_pertes_stockage_id>15</tv_pertes_stockage_id>
+    </row>
+    <row>
+        <position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau>
+        <label_generateur>ne_performance_c</label_generateur>
+        <volume_stockage lte="100" gt="" />
+        <cr>0.25</cr>
+        <tv_pertes_stockage_id>4</tv_pertes_stockage_id>
+    </row>
+    <row>
+        <position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau>
+        <label_generateur>ne_performance_c</label_generateur>
+        <volume_stockage lte="200" gt="100" />
+        <cr>0.2</cr>
+        <tv_pertes_stockage_id>8</tv_pertes_stockage_id>
+    </row>
+    <row>
+        <position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau>
+        <label_generateur>ne_performance_c</label_generateur>
+        <volume_stockage lte="300" gt="200" />
+        <cr>0.18</cr>
+        <tv_pertes_stockage_id>12</tv_pertes_stockage_id>
+    </row>
+    <row>
+        <position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau>
+        <label_generateur>ne_performance_c</label_generateur>
+        <volume_stockage lte="" gt="300" />
+        <cr>0.16</cr>
+        <tv_pertes_stockage_id>16</tv_pertes_stockage_id>
+    </row>
+    <row>
+        <position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau>
+        <label_generateur></label_generateur>
+        <volume_stockage lte="100" gt="" />
+        <cr>0.32</cr>
+        <tv_pertes_stockage_id>2</tv_pertes_stockage_id>
+    </row>
+    <row>
+        <position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau>
+        <label_generateur></label_generateur>
+        <volume_stockage lte="200" gt="100" />
+        <cr>0.23</cr>
+        <tv_pertes_stockage_id>3</tv_pertes_stockage_id>
+    </row>
+    <row>
+        <position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau>
+        <label_generateur></label_generateur>
+        <volume_stockage lte="300" gt="200" />
+        <cr>0.22</cr>
+        <tv_pertes_stockage_id>10</tv_pertes_stockage_id>
+    </row>
+    <row>
+        <position_chauffe_eau>chauffe_eau_vertical</position_chauffe_eau>
+        <label_generateur></label_generateur>
+        <volume_stockage lte="" gt="300" />
+        <cr>0.22</cr>
+        <tv_pertes_stockage_id>14</tv_pertes_stockage_id>
+    </row>
+</table>

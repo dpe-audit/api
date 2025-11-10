@@ -14,12 +14,12 @@ final class XMLMasqueTableValeurRepository implements MasqueTableValeurRepositor
 
     public function fe1(
         ConfigurationMasque $configuration_masque,
-        Orientation $orientation_facade,
+        ?Orientation $orientation_facade,
         ?float $avancee_masque,
     ): ?float {
         return $this->db->repository('masque.fe1')
             ->createQuery()
-            ->and('configuration_masque', $configuration_masque)
+            ->and('configuration_masque', $configuration_masque, false)
             ->and('orientation_facade', $orientation_facade)
             ->andCompareTo('avancee_masque', $avancee_masque)
             ->getOne()

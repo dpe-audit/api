@@ -51,4 +51,19 @@ final class EFConso
             conso_5_usages_m2: (float) $xml->conso_5_usages_m2
         );
     }
+
+    public function conso_auxiliaire_ch(): float
+    {
+        return $this->conso_auxiliaire_generation_ch + $this->conso_auxiliaire_distribution_ch;
+    }
+
+    public function conso_auxiliaire_ecs(): float
+    {
+        return $this->conso_auxiliaire_generation_ecs + $this->conso_auxiliaire_distribution_ecs;
+    }
+
+    public function conso_auxiliaire_fr(): float
+    {
+        return $this->conso_auxiliaire_distribution_fr;
+    }
 }

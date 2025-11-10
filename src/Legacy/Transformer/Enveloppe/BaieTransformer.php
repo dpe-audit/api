@@ -123,6 +123,12 @@ final class BaieTransformer extends ParoiTransformer
 
     public function type_vitrage(): TypeVitrage
     {
+        if ($this->type_baie()->is_paroi_brique_verre()) {
+            return TypeVitrage::BRIQUE_VERRE;
+        }
+        if ($this->type_baie()->is_paroi_polycarbonate()) {
+            return TypeVitrage::POLYCARBONATE;
+        }
         return match ($this->paroi->enum_type_vitrage_id) {
             1, 4 => TypeVitrage::SIMPLE_VITRAGE,
             2 => $this->paroi->vitrage_vir ? TypeVitrage::DOUBLE_VITRAGE_FE : TypeVitrage::DOUBLE_VITRAGE,
@@ -168,12 +174,32 @@ final class BaieTransformer extends ParoiTransformer
         if (false === $this->type_vitrage()->vitrage_complexe()) {
             return null;
         }
-        return $this->paroi->epaisseur_lame;
+        return $this->paroi->epaisseur_lame > 0 ? $this->paroi->epaisseur_lame : null;
     }
 
     public function presence_rupteur_pont_thermique(): bool
     {
         return $this->paroi->enum_type_materiaux_menuiserie_id === 6 ? true : false;
+    }
+
+    public function ug(): ?float
+    {
+        return $this->paroi->ug_saisi > 0 ? $this->paroi->ug_saisi : null;
+    }
+
+    public function uw(): ?float
+    {
+        return $this->paroi->uw_saisi > 0 ? $this->paroi->uw_saisi : null;
+    }
+
+    public function ujn(): ?float
+    {
+        return $this->paroi->ujn_saisi > 0 ? $this->paroi->ujn_saisi : null;
+    }
+
+    public function sw(): ?float
+    {
+        return $this->paroi->sw_saisi > 0 ? $this->paroi->sw_saisi : null;
     }
 
     /**
@@ -191,7 +217,6 @@ final class BaieTransformer extends ParoiTransformer
         return array_filter($collection);
     }
 
-
     public function __invoke(BaieVitree $paroi, Context $context): ?BaieDto
     {
         $this->context = $context;
@@ -208,10 +233,10 @@ final class BaieTransformer extends ParoiTransformer
             presence_protection_solaire: $this->presence_protection_solaire(),
             type_fermeture: $this->type_fermeture(),
             annee_installation: null,
-            ug: $paroi->ug_saisi,
-            uw: $paroi->uw_saisi,
-            ujn: $paroi->ujn_saisi,
-            sw: $paroi->sw_saisi,
+            ug: $this->ug(),
+            uw: $this->uw(),
+            ujn: $this->ujn(),
+            sw: $this->sw(),
             position: new PositionDto(
                 surface: $paroi->surface(),
                 mitoyennete: $this->mitoyennete(),
@@ -234,9 +259,9 @@ final class BaieTransformer extends ParoiTransformer
             ) : null,
             menuiserie: $this->type_baie()->is_paroi_vitree() ? null : new MenuiserieDto(
                 materiau: $this->materiau(),
-                largeur_dormant: null,
-                presence_joint: null,
-                presence_retour_isolation: null,
+                largeur_dormant: $this->largeur_dormant(),
+                presence_joint: $this->paroi->presence_joint,
+                presence_retour_isolation: $this->paroi->presence_retour_isolation,
                 presence_rupteur_pont_thermique: $this->presence_rupteur_pont_thermique(),
             ),
             masques: $this->masques(),

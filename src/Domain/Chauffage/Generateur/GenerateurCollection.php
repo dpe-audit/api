@@ -43,6 +43,6 @@ final class GenerateurCollection extends ArrayCollection
 
     public function with_type(TypeGenerateur $type): self
     {
-        return $this->filter(fn(Generateur $generateur) => $generateur->type() === $type);
+        return $this->filter(fn(Generateur $item) => $item->type() === $type);
     }
 }

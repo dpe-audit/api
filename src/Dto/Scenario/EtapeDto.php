@@ -2,7 +2,7 @@
 
 namespace App\Dto\Scenario;
 
-use App\Domain\Scenario\Etape\Etape;
+use App\Domain\Scenario\Etape\{Etape, EtapeData};
 use App\Dto\Chauffage\ChauffageDto;
 use App\Dto\Ecs\EcsDto;
 use App\Dto\Enveloppe\EnveloppeDto;
@@ -34,6 +34,8 @@ final class EtapeDto
         public readonly RefroidissementDto $refroidissement,
         #[Constraints\Valid]
         public readonly ProductionDto $production,
+
+        public readonly ?EtapeData $data = null,
     ) {}
 
     public static function from(Etape $entity): self
@@ -48,12 +50,13 @@ final class EtapeDto
             ventilation: VentilationDto::from($entity->ventilation()),
             refroidissement: RefroidissementDto::from($entity->refroidissement()),
             production: ProductionDto::from($entity->production()),
+            data: $entity->data(),
         );
     }
 
     public function __normalize(): array
     {
-        return [
+        $data = [
             'id' => $this->id,
             'nom' => $this->nom,
             'description' => $this->description,
@@ -64,5 +67,22 @@ final class EtapeDto
             'refroidissement' => $this->refroidissement->__normalize(),
             'production' => $this->production->__normalize(),
         ];
+        if ($this->data) {
+            $data['data'] = [
+                'zone_climatique' => $this->data->zone_climatique?->value,
+                'effet_joule' => $this->data->effet_joule,
+                'parois_anciennes_lourdes' => $this->data->parois_anciennes_lourdes,
+                'surface_reference' => $this->data->surface_reference,
+                'volume_reference' => $this->data->volume_reference,
+                'bilan' => [
+                    'cef' => $this->data->bilan?->cef,
+                    'cep' => $this->data->bilan?->cep,
+                    'eges' => $this->data->bilan?->eges,
+                    'etiquette_energie' => $this->data->bilan?->etiquette_energie?->value,
+                    'etiquette_climat' => $this->data->bilan?->etiquette_climat?->value,
+                ],
+            ];
+        }
+        return $data;
     }
 }

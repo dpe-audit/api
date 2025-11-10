@@ -3,8 +3,9 @@
 namespace App\Engine\Rules\Enveloppe\Deperdition;
 
 use App\Domain\Enveloppe\Paroi\Mitoyennete;
+use App\Domain\Enveloppe\Paroi\Isolation\TypeIsolation;
 use App\Domain\Enveloppe\PlancherBas\TypePlancherBas;
-use App\Domain\Enveloppe\PontThermique\Liaison\{TypeIsolation, TypeLiaison, TypePose};
+use App\Domain\Enveloppe\PontThermique\Liaison\{TypeLiaison, TypePose};
 use App\Domain\Enveloppe\PontThermique\PontThermique;
 use App\Engine\Context;
 use App\Engine\RuleIterator;
@@ -98,10 +99,10 @@ final class DeperditionPontThermiqueRule extends RuleIterator
     public function annee_construction_plancher(): int
     {
         return current(array_filter([
-            $this->item()->liaison()->plancher_bas()->annee_renovation(),
-            $this->item()->liaison()->plancher_bas()->annee_construction(),
-            $this->item()->liaison()->plancher_haut()->annee_renovation(),
-            $this->item()->liaison()->plancher_haut()->annee_construction(),
+            $this->item()->liaison()->plancher_bas()?->annee_renovation(),
+            $this->item()->liaison()->plancher_bas()?->annee_construction(),
+            $this->item()->liaison()->plancher_haut()?->annee_renovation(),
+            $this->item()->liaison()->plancher_haut()?->annee_construction(),
             $this->input()->batiment->annee_construction,
         ]));
     }
@@ -129,7 +130,7 @@ final class DeperditionPontThermiqueRule extends RuleIterator
     public function type_isolation_mur(): ?TypeIsolation
     {
         if ($value = $this->item()->liaison()->mur->isolation()->type) {
-            return TypeIsolation::from($value->value);
+            return $value;
         }
         return $this->isolation_mur() ? TypeIsolation::ITI : null;
     }
@@ -138,13 +139,13 @@ final class DeperditionPontThermiqueRule extends RuleIterator
     {
         if ($plancher = $this->item()->liaison()->plancher_bas()) {
             if ($value = $plancher->isolation()->type) {
-                return TypeIsolation::from($value->value);
+                return $value;
             }
             return $this->isolation_plancher() ? TypeIsolation::ITE : null;
         }
         if ($plancher = $this->item()->liaison()->plancher_haut()) {
             if ($value = $plancher->isolation()->type) {
-                return TypeIsolation::from($value->value);
+                return $value;
             }
             return $this->isolation_plancher() ? TypeIsolation::ITE : null;
         }

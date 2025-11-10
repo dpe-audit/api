@@ -46,6 +46,16 @@ abstract class CommonSystemeRule extends RuleIterator
         return $this->item()->installation()->systemes()->has_generateur_collectif();
     }
 
+    public function presence_circulateur_externe(): bool
+    {
+        return $this->item()->reseau()?->presence_circulateur_externe ?? false;
+    }
+
+    public function reseau_distribution(): bool
+    {
+        return null !== $this->item()->reseau();
+    }
+
     public function niveaux_desservis(): ?int
     {
         return $this->item()->reseau()?->niveaux_desservis;
@@ -102,8 +112,10 @@ abstract class CommonSystemeRule extends RuleIterator
      */
     public function temperatures_distribution(): array
     {
-        $values = $this->item()->emetteurs()->map(fn(Emetteur $entity) => $entity->temperature_distribution())->values();
-        return array_unique($values);
+        return $this->item()->emetteurs()
+            ->map(fn(Emetteur $entity) => $entity->temperature_distribution())
+            ->unique()
+            ->values();
     }
 
     public function type_systeme(): TypeChauffage
@@ -173,7 +185,7 @@ abstract class CommonSystemeRule extends RuleIterator
 
     public function cascade(): ?int
     {
-        return null !== $this->item()->cascade() ? min($this->item()->cascade(), 2) : null;
+        return null !== $this->item()->cascade() ? $this->item()->cascade() : null;
     }
 
     /**
@@ -238,12 +250,12 @@ abstract class CommonSystemeRule extends RuleIterator
 
     public function qp0(): float
     {
-        return $this->requireIterator(PerformanceGenerateurRule::class, $this->item()->generateur())->qp0() / 1000;
+        return $this->requireIterator(PerformanceGenerateurRule::class, $this->item()->generateur())->qp0();
     }
 
     public function pveilleuse(): float
     {
-        return $this->requireIterator(PerformanceGenerateurRule::class, $this->item()->generateur())->pveilleuse() / 1000;
+        return $this->requireIterator(PerformanceGenerateurRule::class, $this->item()->generateur())->pveilleuse();
     }
 
     public function tfonc30(): ?float

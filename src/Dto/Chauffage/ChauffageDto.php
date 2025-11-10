@@ -2,7 +2,7 @@
 
 namespace App\Dto\Chauffage;
 
-use App\Domain\Chauffage\Chauffage;
+use App\Domain\Chauffage\{Chauffage, ChauffageData};
 use App\Dto\Chauffage\Emetteur\EmetteurDto;
 use App\Dto\Chauffage\Generateur\GenerateurDto;
 use App\Dto\Chauffage\Installation\InstallationDto;
@@ -34,15 +34,18 @@ final class ChauffageDto
         #[Constraints\All([new Constraints\Type(SystemeDto::class)])]
         #[Constraints\Valid]
         public readonly array $systemes,
+
+        public readonly ?ChauffageData $data = null,
     ) {}
 
-    public static function from(Chauffage $data): self
+    public static function from(Chauffage $entity): self
     {
         return new self(
-            emetteurs: $data->emetteurs()->map(fn($item) => EmetteurDto::from($item))->values(),
-            generateurs: $data->generateurs()->map(fn($item) => GenerateurDto::from($item))->values(),
-            installations: $data->installations()->map(fn($item) => InstallationDto::from($item))->values(),
-            systemes: $data->systemes()->map(fn($item) => SystemeDto::from($item))->values(),
+            emetteurs: $entity->emetteurs()->map(fn($item) => EmetteurDto::from($item))->values(),
+            generateurs: $entity->generateurs()->map(fn($item) => GenerateurDto::from($item))->values(),
+            installations: $entity->installations()->map(fn($item) => InstallationDto::from($item))->values(),
+            systemes: $entity->systemes()->map(fn($item) => SystemeDto::from($item))->values(),
+            data: $entity->data(),
         );
     }
 
@@ -63,11 +66,25 @@ final class ChauffageDto
 
     public function __normalize(): array
     {
-        return [
-            'emetteurs' => array_map(fn($dto) => $dto->__normalize(), $this->emetteurs),
-            'generateurs' => array_map(fn($dto) => $dto->__normalize(), $this->generateurs),
-            'installations' => array_map(fn($dto) => $dto->__normalize(), $this->installations),
-            'systemes' => array_map(fn($dto) => $dto->__normalize(), $this->systemes),
+        $data = [
+            'emetteurs' => array_values(array_map(fn($dto) => $dto->__normalize(), $this->emetteurs)),
+            'generateurs' => array_values(array_map(fn($dto) => $dto->__normalize(), $this->generateurs)),
+            'installations' => array_values(array_map(fn($dto) => $dto->__normalize(), $this->installations)),
+            'systemes' => array_values(array_map(fn($dto) => $dto->__normalize(), $this->systemes)),
         ];
+        if ($this->data) {
+            $data['data'] = [
+                'bch' => $this->data->bch,
+                'cef_ch' => $this->data->cef_ch,
+                'cep_ch' => $this->data->cep_ch,
+                'eges_ch' => $this->data->eges_ch,
+                'cef_aux' => $this->data->cef_aux,
+                'cep_aux' => $this->data->cep_aux,
+                'eges_aux' => $this->data->eges_aux,
+                'pertes_generation' => $this->data->pertes_generation,
+                'pertes_generation_recuperables' => $this->data->pertes_generation_recuperables,
+            ];
+        }
+        return $data;
     }
 }

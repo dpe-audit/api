@@ -10,6 +10,7 @@ final class PerformanceGenerateurCombustionRule extends PerformanceGenerateurRul
     public function supports(): bool
     {
         return $this->type()->is_chaudiere()
+            || $this->type()->is_chauffe_eau()
             && $this->energie()->is_combustible()
             && false === $this->generateur_multi_batiment();
     }
@@ -25,6 +26,7 @@ final class PerformanceGenerateurCombustionRule extends PerformanceGenerateurRul
                 energie_generateur: $this->energie(),
                 mode_combustion: $this->mode_combustion(),
                 annee_installation: $this->annee_installation(),
+                volume_stockage: $this->volume_stockage_integre(),
                 pn: $this->pn(),
             ) ?? throw new \DomainException("Valeurs forfaitaires Rpn non trouvées");
         });
@@ -47,6 +49,7 @@ final class PerformanceGenerateurCombustionRule extends PerformanceGenerateurRul
                 energie_generateur: $this->energie(),
                 mode_combustion: $this->mode_combustion(),
                 annee_installation: $this->annee_installation(),
+                volume_stockage: $this->volume_stockage_integre(),
                 pn: $this->pn(),
                 e: $e,
                 f: $f,
@@ -65,6 +68,7 @@ final class PerformanceGenerateurCombustionRule extends PerformanceGenerateurRul
                 energie_generateur: $this->energie(),
                 mode_combustion: $this->mode_combustion(),
                 annee_installation: $this->annee_installation(),
+                volume_stockage: $this->volume_stockage_integre(),
             ) ?? throw new \DomainException("Valeurs forfaitaires Pveil non trouvées");
         });
     }

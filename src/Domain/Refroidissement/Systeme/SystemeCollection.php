@@ -17,7 +17,7 @@ final class SystemeCollection extends ArrayCollection
 
     public function find(Id $id): ?Systeme
     {
-        return $this->first(fn(Systeme $item) => $item->id()->equals($id));
+        return array_find($this->elements, fn(Systeme $item): bool => $item->id()->equals($id));
     }
 
     public function with_installation(Id $id): self

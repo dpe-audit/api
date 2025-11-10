@@ -14,6 +14,13 @@ composer install
 symfony server:start
 ```
 
+## Commandes
+
+```
+php bin/console app:diagnostic:transformer --start=50 --end=100 --strict
+php bin/console app:diagnostic:simulation --start=50 --end=100 --strict
+```
+
 ## Usage
 
 ### GET /ressources

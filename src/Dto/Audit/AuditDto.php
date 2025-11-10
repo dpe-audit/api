@@ -6,6 +6,7 @@ use App\Domain\Audit\Audit;
 use App\Dto\Batiment\BatimentDto;
 use App\Dto\Logement\LogementDto;
 use App\Dto\Scenario\ScenarioDto;
+use App\Validation;
 use Symfony\Component\Validator\Constraints;
 
 /**
@@ -14,6 +15,7 @@ use Symfony\Component\Validator\Constraints;
  * @property ?array<LogementDto> $logements
  * @property array<ScenarioDto> $scenarios
  */
+#[Validation\Audit\AuditValid]
 final class AuditDto
 {
     public function __construct(
@@ -49,8 +51,8 @@ final class AuditDto
             'date_visite' => $this->date_visite->format('Y-m-d'),
             'date_etablissement' => $this->date_etablissement->format('Y-m-d'),
             'batiment' => $this->batiment?->__normalize(),
-            'logements' => $this->logements ? array_map(fn($item) => $item->__normalize(), $this->logements) : null,
-            'scenarios' => array_map(fn($item) => $item->__normalize(), $this->scenarios ?? []),
+            'logements' => $this->logements ? array_values(array_map(fn($item) => $item->__normalize(), $this->logements)) : null,
+            'scenarios' => array_values(array_map(fn($item) => $item->__normalize(), $this->scenarios ?? [])),
         ];
     }
 }
