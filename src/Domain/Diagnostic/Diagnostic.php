@@ -2,11 +2,9 @@
 
 namespace App\Domain\Diagnostic;
 
-use App\Domain\Adresse\Adresse;
 use App\Domain\Batiment\Batiment;
 use App\Domain\Chauffage\Chauffage;
 use App\Domain\Common\ValueObject\Id;
-use App\Domain\Eclairage\Eclairage;
 use App\Domain\Ecs\Ecs;
 use App\Domain\Enveloppe\Enveloppe;
 use App\Domain\Logement\{Logement, LogementCollection};
@@ -32,7 +30,6 @@ final class Diagnostic
         private Refroidissement $refroidissement,
         private Ventilation $ventilation,
         private Production $production,
-        private Eclairage $eclairage,
     ) {
         $this->logements = new LogementCollection();
         $this->data = DiagnosticData::create();
@@ -61,7 +58,6 @@ final class Diagnostic
             refroidissement: $refroidissement,
             ventilation: $ventilation,
             production: $production,
-            eclairage: Eclairage::create(),
         );
     }
 
@@ -79,7 +75,6 @@ final class Diagnostic
         $this->refroidissement->reinitialise();
         $this->ventilation->reinitialise();
         $this->production->reinitialise();
-        $this->eclairage->reinitialise();
         return $this;
     }
 
@@ -141,11 +136,6 @@ final class Diagnostic
     public function production(): Production
     {
         return $this->production;
-    }
-
-    public function eclairage(): Eclairage
-    {
-        return $this->eclairage;
     }
 
     public function logements(): LogementCollection

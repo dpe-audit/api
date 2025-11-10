@@ -62,12 +62,7 @@ final class RefroidissementDto
         if ($this->data) {
             $data['data'] = [
                 'bfr' => $this->data->bfr,
-                'cef_fr' => $this->data->cef_fr,
-                'cep_fr' => $this->data->cep_fr,
-                'eges_fr' => $this->data->eges_fr,
-                'cef_aux' => $this->data->cef_aux,
-                'cep_aux' => $this->data->cep_aux,
-                'eges_aux' => $this->data->eges_aux,
+                'consommations' => $this->data->consommations?->__normalize(),
             ];
         }
         return $data;

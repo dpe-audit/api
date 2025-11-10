@@ -2,6 +2,7 @@
 
 namespace App\Command;
 
+use App\Domain\Common\Enum\{Scenario, Usage};
 use App\Domain\Diagnostic\Diagnostic;
 use App\Dto\Diagnostic\DiagnosticDto;
 use App\Handler\Diagnostic\ComputeDiagnosticHandler;
@@ -168,14 +169,15 @@ final class SimulationCommand extends LocalCommand
 
         // Consommations
         $this->compareItem($id, 'conso_5_usages_m2', $sortie->ef_conso->conso_5_usages_m2, $entity->data()->bilan->cef);
-        $this->compareItem($id, 'cch', $sortie->ef_conso->conso_ch, $entity->chauffage()->data()->cef_ch);
-        $this->compareItem($id, 'cecs', $sortie->ef_conso->conso_ecs, $entity->ecs()->data()->cef_ecs);
-        $this->compareItem($id, 'cfr', $sortie->ef_conso->conso_fr, $entity->refroidissement()->data()->cef_fr);
-        $this->compareItem($id, 'conso_eclairage', $sortie->ef_conso->conso_eclairage, $entity->eclairage()->data()->cef_ecl);
-        $this->compareItem($id, 'caux_ch', $sortie->ef_conso->conso_auxiliaire_ch(), $entity->chauffage()->data()->cef_aux);
-        $this->compareItem($id, 'caux_ecs', $sortie->ef_conso->conso_auxiliaire_ecs(), $entity->ecs()->data()->cef_aux);
-        $this->compareItem($id, 'caux_fr', $sortie->ef_conso->conso_auxiliaire_fr(), $entity->refroidissement()->data()->cef_aux);
-        $this->compareItem($id, 'caux_ventilation', $sortie->ef_conso->conso_auxiliaire_ventilation, $entity->ventilation()->data()->cef_aux);
+        $this->compareItem($id, 'cch', $sortie->ef_conso->conso_ch, $entity->data()->consommations->cef(scenario: Scenario::CONVENTIONNEL, usage: Usage::CHAUFFAGE));
+        $this->compareItem($id, 'cecs', $sortie->ef_conso->conso_ecs, $entity->data()->consommations->cef(scenario: Scenario::CONVENTIONNEL, usage: Usage::ECS));
+        $this->compareItem($id, 'cfr', $sortie->ef_conso->conso_fr, $entity->data()->consommations->cef(scenario: Scenario::CONVENTIONNEL, usage: Usage::REFROIDISSEMENT));
+        $this->compareItem($id, 'cecl', $sortie->ef_conso->conso_eclairage, $entity->data()->consommations->cef(scenario: Scenario::CONVENTIONNEL, usage: Usage::ECLAIRAGE));
+        $this->compareItem($id, 'caux', $sortie->ef_conso->conso_totale_auxiliaire, $entity->data()->consommations->cef(scenario: Scenario::CONVENTIONNEL, usage: Usage::AUXILIAIRE));
+        $this->compareItem($id, 'caux_ch', $sortie->ef_conso->conso_auxiliaire_ch(), $entity->chauffage()->data()->consommations->cef(scenario: Scenario::CONVENTIONNEL, usage: Usage::AUXILIAIRE));
+        $this->compareItem($id, 'caux_ecs', $sortie->ef_conso->conso_auxiliaire_ecs(), $entity->ecs()->data()->consommations->cef(scenario: Scenario::CONVENTIONNEL, usage: Usage::AUXILIAIRE));
+        $this->compareItem($id, 'caux_fr', $sortie->ef_conso->conso_auxiliaire_fr(), $entity->refroidissement()->data()->consommations->cef(scenario: Scenario::CONVENTIONNEL, usage: Usage::REFROIDISSEMENT));
+        $this->compareItem($id, 'caux_ventilation', $sortie->ef_conso->conso_auxiliaire_ventilation, $entity->ventilation()->data()->consommations->cef(scenario: Scenario::CONVENTIONNEL, usage: Usage::AUXILIAIRE));
     }
 
     private function compareItem(string $id, string $key, mixed $origin, mixed $value): void

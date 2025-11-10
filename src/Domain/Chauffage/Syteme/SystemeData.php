@@ -2,6 +2,7 @@
 
 namespace App\Domain\Chauffage\Systeme;
 
+use App\Domain\Common\Consommation\ConsommationCollection;
 use Webmozart\Assert\Assert;
 
 final class SystemeData
@@ -16,12 +17,7 @@ final class SystemeData
         public readonly ?float $rd,
         public readonly ?float $rg,
         public readonly ?float $rr,
-        public readonly ?float $cef_ch,
-        public readonly ?float $cep_ch,
-        public readonly ?float $eges_ch,
-        public readonly ?float $cef_aux,
-        public readonly ?float $cep_aux,
-        public readonly ?float $eges_aux,
+        public readonly ?ConsommationCollection $consommations,
     ) {}
 
     public static function create(
@@ -34,12 +30,7 @@ final class SystemeData
         ?float $rd = null,
         ?float $rg = null,
         ?float $rr = null,
-        ?float $cef_ch = null,
-        ?float $cep_ch = null,
-        ?float $eges_ch = null,
-        ?float $cef_aux = null,
-        ?float $cep_aux = null,
-        ?float $eges_aux = null,
+        ?ConsommationCollection $consommations = null,
     ): self {
         Assert::nullOrGreaterThanEq($rdim, 0);
         Assert::nullOrLessThanEq($rdim, 1);
@@ -50,12 +41,6 @@ final class SystemeData
         Assert::nullOrGreaterThanEq($rd, 0);
         Assert::nullOrGreaterThanEq($rg, 0);
         Assert::nullOrGreaterThanEq($rr, 0);
-        Assert::nullOrGreaterThanEq($cef_ch, 0);
-        Assert::nullOrGreaterThanEq($cep_ch, 0);
-        Assert::nullOrGreaterThanEq($eges_ch, 0);
-        Assert::nullOrGreaterThanEq($cef_aux, 0);
-        Assert::nullOrGreaterThanEq($cep_aux, 0);
-        Assert::nullOrGreaterThanEq($eges_aux, 0);
 
         return new self(
             configuration: $configuration,
@@ -67,12 +52,7 @@ final class SystemeData
             rd: $rd,
             rg: $rg,
             rr: $rr,
-            cef_ch: $cef_ch,
-            cep_ch: $cep_ch,
-            eges_ch: $eges_ch,
-            cef_aux: $cef_aux,
-            cep_aux: $cep_aux,
-            eges_aux: $eges_aux,
+            consommations: $consommations,
         );
     }
 
@@ -86,12 +66,7 @@ final class SystemeData
         ?float $rd = null,
         ?float $rg = null,
         ?float $rr = null,
-        ?float $cef_ch = null,
-        ?float $cep_ch = null,
-        ?float $eges_ch = null,
-        ?float $cef_aux = null,
-        ?float $cep_aux = null,
-        ?float $eges_aux = null,
+        ?ConsommationCollection $consommations = null,
     ): self {
         return self::create(
             configuration: $configuration ?? $this->configuration,
@@ -103,12 +78,7 @@ final class SystemeData
             rd: $rd ?? $this->rd,
             rg: $rg ?? $this->rg,
             rr: $rr ?? $this->rr,
-            cef_ch: $cef_ch ?? $this->cef_ch,
-            cep_ch: $cep_ch ?? $this->cep_ch,
-            eges_ch: $eges_ch ?? $this->eges_ch,
-            cef_aux: $cef_aux ?? $this->cef_aux,
-            cep_aux: $cep_aux ?? $this->cep_aux,
-            eges_aux: $eges_aux ?? $this->eges_aux,
+            consommations: $consommations ?? $this->consommations
         );
     }
 }

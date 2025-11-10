@@ -41,8 +41,7 @@ final class SurfaceSudEquivalenteEtsRule extends RuleIterator
 
     public function sst(?Mois $mois = null): float
     {
-        $key = $mois ? "sst::{$mois->value}" : 'sst';
-        return $this->get($key, function () use ($mois): float {
+        return $this->get(self::implode(['sst', $mois]), function () use ($mois): float {
             return $this->item()->baies()
                 ->map(fn($item) => $this->requireIterator(SurfaceSudEquivalenteEtsBaieRule::class, $item)->sst($mois))
                 ->reduce(fn($carry, $item) => $carry + $item);
@@ -51,7 +50,7 @@ final class SurfaceSudEquivalenteEtsRule extends RuleIterator
 
     public function sse_baies(Mois $mois): float
     {
-        return $this->get("sse_baies::{$mois->value}", function () use ($mois): float {
+        return $this->get(self::implode(['sse_baies', $mois]), function () use ($mois): float {
             return $this->input()->enveloppe->baies()
                 ->filter(fn(Baie $item) => $item->local_non_chauffe()?->id()->equals($this->item()->id()))
                 ->map(fn(Baie $item) => $this->requireIterator(SurfaceSudEquivalenteBaieRule::class, $item)->sse($mois))
@@ -99,7 +98,7 @@ final class SurfaceSudEquivalenteEtsRule extends RuleIterator
      */
     public function ssind(Mois $mois): float
     {
-        return $this->get("ssind::{$mois->value}", function () use ($mois): float {
+        return $this->get(self::implode(['ssind', $mois]), function () use ($mois): float {
             if ($this->type_lnc() !== TypeLnc::ESPACE_TAMPON_SOLARISE) {
                 return 0;
             }
@@ -114,7 +113,7 @@ final class SurfaceSudEquivalenteEtsRule extends RuleIterator
      */
     public function ssd(Mois $mois): float
     {
-        return $this->get("ssd::{$mois->value}", function () use ($mois): float {
+        return $this->get(self::implode(['ssd', $mois]), function () use ($mois): float {
             if ($this->type_lnc() !== TypeLnc::ESPACE_TAMPON_SOLARISE) {
                 return 0;
             }

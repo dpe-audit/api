@@ -2,6 +2,7 @@
 
 namespace App\Engine\Rules\Chauffage\Systeme;
 
+use App\Domain\Common\Enum\Scenario;
 use App\Engine\Rules\Chauffage\PerformanceSystemeRule;
 
 final class PerformanceGenerateurEffetJouleRule extends PerformanceSystemeRule
@@ -16,7 +17,7 @@ final class PerformanceGenerateurEffetJouleRule extends PerformanceSystemeRule
     /**
      * @inheritDoc
      */
-    public function rg(): float
+    public function rg(Scenario $scenario): float
     {
         return $this->get('rg', function (): float {
             return $this->type_generateur()->is_chaudiere() ? 0.97 : 1;

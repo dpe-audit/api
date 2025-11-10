@@ -65,6 +65,7 @@ final class GenerateurDto
                 'tfonc100' => $this->data->tfonc100,
                 'pertes_generation' => $this->data->pertes_generation,
                 'pertes_generation_recuperables' => $this->data->pertes_generation_recuperables,
+                'consommations' => $this->data->consommations?->__normalize(),
             ];
         }
         return $data;

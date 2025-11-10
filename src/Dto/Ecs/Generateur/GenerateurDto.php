@@ -61,6 +61,7 @@ final class GenerateurDto
                 'pertes_generation_recuperables' => $this->data->pertes_generation_recuperables,
                 'pertes_stockage' => $this->data->pertes_stockage,
                 'pertes_stockage_recuperables' => $this->data->pertes_stockage_recuperables,
+                'consommations' => $this->data->consommations?->__normalize(),
             ];
         }
         return $data;

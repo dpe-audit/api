@@ -2,12 +2,27 @@
 
 namespace App\Engine\Rules\Chauffage;
 
+use App\Domain\Common\Consommation\ConsommationCollection;
+use App\Domain\Common\Enum\Scenario;
 use App\Engine\Context;
 use App\Engine\Table\ChauffageTableValeurRepository;
 
 final class PerformanceInstallationRule extends DimensionnementInstallationRule
 {
     public function __construct(private ChauffageTableValeurRepository $repository) {}
+
+    /**
+     * Liste des consommations de l'installation de chauffage
+     */
+    public function consommations(): ConsommationCollection
+    {
+        return $this->get(
+            'consommations',
+            fn(): ConsommationCollection => $this->item()->systemes()
+                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->consommations())
+                ->reduce(fn(ConsommationCollection $carry, ConsommationCollection $item) => $carry->merge($item), new ConsommationCollection)
+        );
+    }
 
     /**
      * Facteur de couverture solaire
@@ -28,14 +43,15 @@ final class PerformanceInstallationRule extends DimensionnementInstallationRule
     /**
      * Inverse du rendement de l'installation
      */
-    public function ich(): float
+    public function ich(Scenario $scenario): float
     {
-        return $this->get('ich', function (): float {
-            return $this->item()->systemes()
+        return $this->get(
+            self::implode(['ich', $scenario]),
+            fn(): float => $this->item()->systemes()
                 ->map(fn($entity) => $this->requireIterator(PerformanceSystemeRule::class, $entity))
-                ->map(fn(PerformanceSystemeRule $rule) => $rule->ich() * $rule->rdim())
-                ->reduce(fn($carry, $item) => $carry + $item);
-        });
+                ->map(fn(PerformanceSystemeRule $rule) => $rule->ich($scenario) * ($rule->rdim() / $this->rdim()))
+                ->reduce(fn($carry, $item) => $carry + $item)
+        );
     }
 
     /**
@@ -43,12 +59,10 @@ final class PerformanceInstallationRule extends DimensionnementInstallationRule
      */
     public function re(): float
     {
-        return $this->get('re', function (): float {
-            return $this->item()->systemes()
-                ->map(fn($entity) => $this->requireIterator(PerformanceSystemeRule::class, $entity))
-                ->map(fn(PerformanceSystemeRule $rule) => $rule->re() * $rule->rdim())
-                ->reduce(fn($carry, $item) => $carry + $item);
-        });
+        return $this->get('re', fn(): float => $this->item()->systemes()
+            ->map(fn($entity) => $this->requireIterator(PerformanceSystemeRule::class, $entity))
+            ->map(fn(PerformanceSystemeRule $rule) => $rule->re() * ($rule->rdim() / $this->rdim()))
+            ->reduce(fn($carry, $item) => $carry + $item));
     }
 
     /**
@@ -56,25 +70,24 @@ final class PerformanceInstallationRule extends DimensionnementInstallationRule
      */
     public function rd(): float
     {
-        return $this->get('rd', function (): float {
-            return $this->item()->systemes()
-                ->map(fn($entity) => $this->requireIterator(PerformanceSystemeRule::class, $entity))
-                ->map(fn(PerformanceSystemeRule $rule) => $rule->rd() * $rule->rdim())
-                ->reduce(fn($carry, $item) => $carry + $item);
-        });
+        return $this->get('rd', fn(): float => $this->item()->systemes()
+            ->map(fn($entity) => $this->requireIterator(PerformanceSystemeRule::class, $entity))
+            ->map(fn(PerformanceSystemeRule $rule) => $rule->rd() * ($rule->rdim() / $this->rdim()))
+            ->reduce(fn($carry, $item) => $carry + $item));
     }
 
     /**
      * Rendement de génération de l'installation
      */
-    public function rg(): float
+    public function rg(Scenario $scenario): float
     {
-        return $this->get('rg', function (): float {
-            return $this->item()->systemes()
+        return $this->get(
+            self::implode(['rg', $scenario]),
+            fn(): float => $this->item()->systemes()
                 ->map(fn($entity) => $this->requireIterator(PerformanceSystemeRule::class, $entity))
-                ->map(fn(PerformanceSystemeRule $rule) => $rule->rg() * $rule->rdim())
-                ->reduce(fn($carry, $item) => $carry + $item);
-        });
+                ->map(fn(PerformanceSystemeRule $rule) => $rule->rg($scenario) * ($rule->rdim() / $this->rdim()))
+                ->reduce(fn($carry, $item) => $carry + $item)
+        );
     }
 
     /**
@@ -82,12 +95,10 @@ final class PerformanceInstallationRule extends DimensionnementInstallationRule
      */
     public function rr(): float
     {
-        return $this->get('rr', function (): float {
-            return $this->item()->systemes()
-                ->map(fn($entity) => $this->requireIterator(PerformanceSystemeRule::class, $entity))
-                ->map(fn(PerformanceSystemeRule $rule) => $rule->rr() * $rule->rdim())
-                ->reduce(fn($carry, $item) => $carry + $item);
-        });
+        return $this->get('rr', fn(): float => $this->item()->systemes()
+            ->map(fn($entity) => $this->requireIterator(PerformanceSystemeRule::class, $entity))
+            ->map(fn(PerformanceSystemeRule $rule) => $rule->rr() * ($rule->rdim() / $this->rdim()))
+            ->reduce(fn($carry, $item) => $carry + $item));
     }
 
     /**
@@ -101,7 +112,7 @@ final class PerformanceInstallationRule extends DimensionnementInstallationRule
             $rule->item()->calcule($rule->item()->data()->with(
                 fch: $rule->fch(),
                 rdim: $rule->rdim(),
-
+                consommations: $rule->consommations(),
             ));
         }
     }

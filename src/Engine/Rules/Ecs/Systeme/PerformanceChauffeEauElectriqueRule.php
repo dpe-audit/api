@@ -2,6 +2,7 @@
 
 namespace App\Engine\Rules\Ecs\Systeme;
 
+use App\Domain\Common\Enum\Scenario;
 use App\Domain\Ecs\Generateur\EnergieGenerateur;
 use App\Domain\Ecs\Generateur\Position\PositionChauffeEau;
 use App\Domain\Ecs\Generateur\Signaletique\LabelGenerateur;
@@ -38,13 +39,13 @@ final class PerformanceChauffeEauElectriqueRule extends PerformanceSystemeRule
     /**
      * @inheritDoc
      */
-    public function rs(): float
+    public function rs(Scenario $scenario): float
     {
-        return $this->get("rs", function (): float {
+        return $this->get(self::implode(['rs', $scenario]), function () use ($scenario): float {
             if (0 == $this->volume_stockage()) {
                 return 1;
             }
-            $becs = $this->becs();
+            $becs = $this->becs($scenario);
             $pertes = $this->pertes_stockage();
             $rd = $this->rd();
 
@@ -60,7 +61,7 @@ final class PerformanceChauffeEauElectriqueRule extends PerformanceSystemeRule
     /**
      * @inheritDoc
      */
-    public function rg(): float
+    public function rg(Scenario $scenario): float
     {
         return $this->get("rg", function (): float {
             return $this->type_generateur()->is_chaudiere() ? 0.97 : 1;

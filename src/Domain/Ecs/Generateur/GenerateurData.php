@@ -2,6 +2,7 @@
 
 namespace App\Domain\Ecs\Generateur;
 
+use App\Domain\Common\Consommation\ConsommationCollection;
 use Webmozart\Assert\Assert;
 
 final class GenerateurData
@@ -19,6 +20,7 @@ final class GenerateurData
         public readonly ?float $pertes_generation_recuperables,
         public readonly ?float $pertes_stockage,
         public readonly ?float $pertes_stockage_recuperables,
+        public readonly ?ConsommationCollection $consommations,
     ) {}
 
     public static function create(
@@ -34,6 +36,7 @@ final class GenerateurData
         ?float $pertes_generation_recuperables = null,
         ?float $pertes_stockage = null,
         ?float $pertes_stockage_recuperables = null,
+        ?ConsommationCollection $consommations = null
     ): self {
         Assert::nullOrGreaterThanEq($rdim, 0);
         Assert::nullOrLessThanEq($rdim, 1);
@@ -61,6 +64,7 @@ final class GenerateurData
             pertes_generation_recuperables: $pertes_generation_recuperables,
             pertes_stockage: $pertes_stockage,
             pertes_stockage_recuperables: $pertes_stockage_recuperables,
+            consommations: $consommations,
         );
     }
 
@@ -77,6 +81,7 @@ final class GenerateurData
         ?float $pertes_generation_recuperables = null,
         ?float $pertes_stockage = null,
         ?float $pertes_stockage_recuperables = null,
+        ?ConsommationCollection $consommations = null
     ): self {
         return self::create(
             rdim: $rdim ?? $this->rdim,
@@ -91,6 +96,7 @@ final class GenerateurData
             pertes_generation_recuperables: $pertes_generation_recuperables ?? $this->pertes_generation_recuperables,
             pertes_stockage: $pertes_stockage ?? $this->pertes_stockage,
             pertes_stockage_recuperables: $pertes_stockage_recuperables ?? $this->pertes_stockage_recuperables,
+            consommations: $consommations ?? $this->consommations
         );
     }
 }

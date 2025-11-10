@@ -56,6 +56,7 @@ final class InstallationDto
                 'rd' => $this->data->rd,
                 'rg' => $this->data->rg,
                 'rr' => $this->data->rr,
+                'consommations' => $this->data->consommations?->__normalize(),
             ];
         }
         return $data;

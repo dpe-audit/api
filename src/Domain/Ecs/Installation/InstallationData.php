@@ -2,6 +2,7 @@
 
 namespace App\Domain\Ecs\Installation;
 
+use App\Domain\Common\Consommation\ConsommationCollection;
 use Webmozart\Assert\Assert;
 
 final class InstallationData
@@ -14,6 +15,7 @@ final class InstallationData
         public readonly ?float $rs,
         public readonly ?float $rg,
         public readonly ?float $rgs,
+        public readonly ?ConsommationCollection $consommations,
     ) {}
 
     public static function create(
@@ -24,6 +26,7 @@ final class InstallationData
         ?float $rs = null,
         ?float $rg = null,
         ?float $rgs = null,
+        ?ConsommationCollection $consommations = null
     ): self {
         Assert::nullOrGreaterThanEq($rdim, 0);
         Assert::nullOrLessThanEq($rdim, 1);
@@ -43,6 +46,7 @@ final class InstallationData
             rs: $rs,
             rg: $rg,
             rgs: $rgs,
+            consommations: $consommations,
         );
     }
 
@@ -54,6 +58,7 @@ final class InstallationData
         ?float $rs = null,
         ?float $rg = null,
         ?float $rgs = null,
+        ?ConsommationCollection $consommations = null
     ): self {
         return self::create(
             rdim: $rdim ?? $this->rdim,
@@ -63,6 +68,7 @@ final class InstallationData
             rs: $rs ?? $this->rs,
             rg: $rg ?? $this->rg,
             rgs: $rgs ?? $this->rgs,
+            consommations: $consommations ?? $this->consommations
         );
     }
 }

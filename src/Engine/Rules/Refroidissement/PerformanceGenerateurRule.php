@@ -2,6 +2,8 @@
 
 namespace App\Engine\Rules\Refroidissement;
 
+use App\Domain\Common\Consommation\ConsommationCollection;
+use App\Domain\Common\Enum\Scenario;
 use App\Domain\Refroidissement\Generateur\Generateur;
 use App\Engine\{Context, RuleIterator};
 use App\Engine\Rules\Batiment\WithBatimentRule;
@@ -58,9 +60,25 @@ final class PerformanceGenerateurRule extends RuleIterator
             ->values();
     }
 
-    public function bfr(): float
+    public function bfr(Scenario $scenario): float
     {
-        return $this->require(PerformanceRefroidissementRule::class)->bfr();
+        return $this->require(PerformanceRefroidissementRule::class)->bfr($scenario);
+    }
+
+    // * Données de sortie
+
+    /**
+     * Liste des consommations de refroidissement
+     */
+    public function consommations(): ConsommationCollection
+    {
+        return $this->get(
+            'consommations',
+            fn(): ConsommationCollection => $this->input()->refroidissement->systemes()
+                ->with_generateur($this->item()->id())
+                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->consommations())
+                ->reduce(fn(ConsommationCollection $carry, ConsommationCollection $item) => $carry->merge($item), new ConsommationCollection)
+        );
     }
 
     /**
@@ -100,6 +118,7 @@ final class PerformanceGenerateurRule extends RuleIterator
             $rule->item()->calcule($rule->item()->data()->with(
                 rdim: $this->rdim(),
                 eer: $this->eer(),
+                consommations: $this->consommations(),
             ));
         }
     }

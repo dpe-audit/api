@@ -6,7 +6,7 @@ use App\Domain\Chauffage\Emetteur\{Emetteur, TemperatureDistribution, TypeEmissi
 use App\Domain\Chauffage\Generateur\{Generateur, EnergieGenerateur, TypeGenerateur};
 use App\Domain\Chauffage\Generateur\Position\PositionChaudiere;
 use App\Domain\Chauffage\Generateur\Signaletique\ModeCombustion;
-use App\Domain\Common\Enum\Mois;
+use App\Domain\Common\Enum\{Mois, Scenario};
 use App\Engine\Rules\Batiment\WithBatimentRule;
 use App\Engine\Rules\Enveloppe\WithDeperditionRule;
 use App\Engine\RuleIterator;
@@ -147,9 +147,9 @@ abstract class CommonGenerateurRule extends RuleIterator
             ])->values();
     }
 
-    public function bch_hp(?Mois $mois): float
+    public function bch_hp(Scenario $scenario, ?Mois $mois): float
     {
-        return $this->require(PerformanceChauffageRule::class)->bch_hp($mois);
+        return $this->require(PerformanceChauffageRule::class)->bch_hp($scenario, $mois);
     }
 
     /**

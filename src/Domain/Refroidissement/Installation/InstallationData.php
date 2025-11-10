@@ -2,30 +2,36 @@
 
 namespace App\Domain\Refroidissement\Installation;
 
+use App\Domain\Common\Consommation\ConsommationCollection;
 use Webmozart\Assert\Assert;
 
 final class InstallationData
 {
     public function __construct(
         public readonly ?float $rdim,
+        public readonly ?ConsommationCollection $consommations,
     ) {}
 
     public static function create(
         ?float $rdim = null,
+        ?ConsommationCollection $consommations = null,
     ): self {
         Assert::nullOrGreaterThan($rdim, 0);
         Assert::nullOrLessThanEq($rdim, 1);
 
         return new self(
             rdim: $rdim,
+            consommations: $consommations,
         );
     }
 
     public function with(
         ?float $rdim = null,
+        ?ConsommationCollection $consommations = null,
     ): self {
         return self::create(
             rdim: $rdim ?? $this->rdim,
+            consommations: $consommations ?? $this->consommations
         );
     }
 }

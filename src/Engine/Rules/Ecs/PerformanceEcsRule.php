@@ -3,7 +3,8 @@
 namespace App\Engine\Rules\Ecs;
 
 use App\Domain\Batiment\TypeBatiment;
-use App\Domain\Common\Enum\{Mois, ScenarioUsage};
+use App\Domain\Common\Consommation\ConsommationCollection;
+use App\Domain\Common\Enum\{Mois, Scenario};
 use App\Engine\{Context, Rule};
 use App\Engine\Rules\Batiment\{WithBatiment, WithBatimentRule};
 
@@ -14,97 +15,38 @@ final class PerformanceEcsRule extends Rule
     // * Données de sortie
 
     /**
-     * Consommation finale d'eau chaude sanitaire en kWh
+     * Liste des consommations d'eau chaude sanitaire
      */
-    public function cef_ecs(): float
+    public function consommations(): ConsommationCollection
     {
-        return $this->get('cef_ecs', function (): float {
+        return $this->get('consommations', function (): ConsommationCollection {
             return $this->input()->ecs->systemes()
-                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->cef_ecs())
-                ->reduce(fn(float $carry, float $item): float => $carry + $item);
+                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->consommations())
+                ->reduce(fn(ConsommationCollection $carry, ConsommationCollection $item) => $carry->merge($item), new ConsommationCollection);
         });
     }
 
     /**
-     * Consommation primaire  d'eau chaude sanitaire en kWh
+     * Besoin d'eau chaude sanitaire en kWh
      */
-    public function cep_ecs(): float
+    public function becs(Scenario $scenario, ?Mois $mois = null): float
     {
-        return $this->get('cep_ecs', function (): float {
-            return $this->input()->ecs->systemes()
-                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->cep_ecs())
-                ->reduce(fn(float $carry, float $item): float => $carry + $item);
-        });
-    }
+        return $this->get(
+            self::implode(['becs', $scenario, $mois]),
+            function () use ($scenario, $mois): float {
+                if (null === $mois) {
+                    return Mois::reduce(fn(Mois $mois): float => $this->becs($scenario, $mois));
+                }
+                $nj = $mois->nj();
+                $nadeq = $this->nadeq();
+                $tefs = $this->tefs($mois);
 
-    /**
-     * Emissions de CO2 d'eau chaude sanitaire en kg
-     */
-    public function eges_ecs(): float
-    {
-        return $this->get('eges_ecs', function (): float {
-            return $this->input()->ecs->systemes()
-                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->eges_ecs())
-                ->reduce(fn(float $carry, float $item): float => $carry + $item);
-        });
-    }
-
-    /**
-     * Consommation finale des auxiliaires d'eau chaude sanitaire en kWh
-     */
-    public function cef_aux(): float
-    {
-        return $this->get('cef_aux', function (): float {
-            return $this->input()->ecs->systemes()
-                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->cef_aux())
-                ->reduce(fn(float $carry, float $item): float => $carry + $item);
-        });
-    }
-
-    /**
-     * Consommation primaire des auxiliaires d'eau chaude sanitaire en kWh
-     */
-    public function cep_aux(): float
-    {
-        return $this->get('cep_aux', function (): float {
-            return $this->input()->ecs->systemes()
-                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->cep_aux())
-                ->reduce(fn(float $carry, float $item): float => $carry + $item);
-        });
-    }
-
-    /**
-     * Emissions de CO2 des auxiliaires d'eau chaude sanitaire en kg
-     */
-    public function eges_aux(): float
-    {
-        return $this->get('eges_aux', function (): float {
-            return $this->input()->ecs->systemes()
-                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->eges_aux())
-                ->reduce(fn(float $carry, float $item): float => $carry + $item);
-        });
-    }
-
-    /**
-     * Besoin annuel d'eau chaude sanitaire en kWh
-     */
-    public function becs(?Mois $mois = null): float
-    {
-        $key = $mois ? "becs::{$mois->value}" : 'becs';
-
-        return $this->get($key, function () use ($mois): float {
-            if (null === $mois) {
-                return Mois::reduce(fn(Mois $item): float => $this->becs($item));
+                return match ($scenario) {
+                    Scenario::CONVENTIONNEL => 1.163 * $nadeq * 56 * (40 - $tefs) * $nj / 1000,
+                    Scenario::DEPENSIER => 1.163 * $nadeq * 79 * (40 - $tefs) * $nj / 1000,
+                };
             }
-            $nj = $mois->nj();
-            $nadeq = $this->nadeq();
-            $tefs = $this->tefs($mois);
-
-            return match ($this->scenario()) {
-                ScenarioUsage::CONVENTIONNEL => 1.163 * $nadeq * 56 * (40 - $tefs) * $nj / 1000,
-                ScenarioUsage::DEPENSIER => 1.163 * $nadeq * 79 * (40 - $tefs) * $nj / 1000,
-            };
-        });
+        );
     }
 
     /**
@@ -145,53 +87,57 @@ final class PerformanceEcsRule extends Rule
     /**
      * Pertes en Wh
      */
-    public function pertes(?Mois $mois = null): float
+    public function pertes(Scenario $scenario, ?Mois $mois = null): float
     {
-        $key = $mois ? "pertes::{$mois->value}" : 'pertes';
-        return $this->get($key, function () use ($mois): float {
-            return $this->pertes_generation($mois)
-                + $this->pertes_stockage($mois)
-                + $this->pertes_distribution($mois);
-        });
+        return $this->get(
+            self::implode(['pertes', $scenario, $mois]),
+            fn(): float => array_sum([
+                $this->pertes_generation($scenario, $mois),
+                $this->pertes_stockage($mois),
+                $this->pertes_distribution($scenario, $mois),
+            ])
+        );
     }
 
     /**
      * Pertes récupérables en Wh
      */
-    public function pertes_recuperables(?Mois $mois = null): float
+    public function pertes_recuperables(Scenario $scenario, ?Mois $mois = null): float
     {
-        $key = $mois ? "pertes_recuperables::{$mois->value}" : 'pertes_recuperables';
-        return $this->get($key, function () use ($mois): float {
-            return $this->pertes_generation_recuperables($mois)
-                + $this->pertes_stockage_recuperables($mois)
-                + $this->pertes_distribution_recuperables($mois);
-        });
+        return $this->get(
+            self::implode(['pertes_recuperables', $scenario, $mois]),
+            fn(): float => array_sum([
+                $this->pertes_generation_recuperables($scenario, $mois),
+                $this->pertes_stockage_recuperables($scenario, $mois),
+                $this->pertes_distribution_recuperables($scenario, $mois),
+            ])
+        );
     }
 
     /**
      * Pertes de génération en Wh
      */
-    public function pertes_generation(?Mois $mois = null): float
+    public function pertes_generation(Scenario $scenario, ?Mois $mois = null): float
     {
-        $key = $mois ? "pertes_generation::{$mois->value}" : 'pertes_generation';
-        return $this->get($key, function () use ($mois): float {
-            return $this->input()->ecs->generateurs()
-                ->map(fn($item) => $this->requireIterator(PerformanceGenerateurRule::class, $item)->pertes_generation($mois))
-                ->reduce(fn(float $carry, float $item): float => $carry + $item);
-        });
+        return $this->get(
+            self::implode(['pertes_generation', $scenario, $mois]),
+            fn(): float => $this->input()->ecs->generateurs()
+                ->map(fn($item) => $this->requireIterator(PerformanceGenerateurRule::class, $item)->pertes_generation($scenario, $mois))
+                ->reduce(fn(float $carry, float $item): float => $carry + $item)
+        );
     }
 
     /**
      * Pertes de génération récupérables en Wh
      */
-    public function pertes_generation_recuperables(?Mois $mois = null): float
+    public function pertes_generation_recuperables(Scenario $scenario, ?Mois $mois = null): float
     {
-        $key = $mois ? "pertes_generation_recuperables::{$mois->value}" : 'pertes_generation_recuperables';
-        return $this->get($key, function () use ($mois): float {
-            return $this->input()->ecs->generateurs()
-                ->map(fn($item) => $this->requireIterator(PerformanceGenerateurRule::class, $item)->pertes_generation_recuperables($mois))
-                ->reduce(fn(float $carry, float $item): float => $carry + $item);
-        });
+        return $this->get(
+            self::implode(['pertes_generation_recuperables', $scenario, $mois]),
+            fn(): float => $this->input()->ecs->generateurs()
+                ->map(fn($item) => $this->requireIterator(PerformanceGenerateurRule::class, $item)->pertes_generation_recuperables($scenario, $mois))
+                ->reduce(fn(float $carry, float $item): float => $carry + $item)
+        );
     }
 
     /**
@@ -199,51 +145,52 @@ final class PerformanceEcsRule extends Rule
      */
     public function pertes_stockage(?Mois $mois = null): float
     {
-        $key = $mois ? "pertes_stockage::{$mois->value}" : "pertes_stockage";
-        return $this->get($key, function () use ($mois): float {
-            return $this->input()->ecs->systemes()
+        return $this->get(
+            self::implode(['pertes_stockage', $mois]),
+            fn(): float => $this->input()->ecs->systemes()
                 ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->pertes_stockage($mois))
-                ->reduce(fn(float $carry, float $item): float => $carry + $item);
-        });
+                ->reduce(fn(float $carry, float $item): float => $carry + $item)
+        );
     }
 
     /**
      * Pertes de stockage récupérables en Wh
      */
-    public function pertes_stockage_recuperables(?Mois $mois = null): float
+    public function pertes_stockage_recuperables(Scenario $scenario, ?Mois $mois = null): float
     {
-        $key = $mois ? "pertes_stockage_recuperables::{$mois->value}" : "pertes_stockage_recuperables";
-        return $this->get($key, function () use ($mois): float {
-            return $this->input()->ecs->systemes()
-                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->pertes_stockage_recuperables($mois))
-                ->reduce(fn(float $carry, float $item): float => $carry + $item);
-        });
+        return $this->get(
+            self::implode(['pertes_stockage_recuperables', $scenario, $mois]),
+            fn(): float => $this->input()->ecs->systemes()
+                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->pertes_stockage_recuperables($scenario, $mois))
+                ->reduce(fn(float $carry, float $item): float => $carry + $item)
+        );
     }
 
     /**
      * Pertes de distribution en Wh
      */
-    public function pertes_distribution(?Mois $mois = null): float
+    public function pertes_distribution(Scenario $scenario, ?Mois $mois = null): float
     {
-        $key = $mois ? "pertes_distribution::{$mois->value}" : "pertes_distribution";
-        return $this->get($key, function () use ($mois): float {
-            return $this->input()->ecs->systemes()
-                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->pertes_distribution($mois))
-                ->reduce(fn(float $carry, float $item): float => $carry + $item);
-        });
+        return $this->get(
+            self::implode(['pertes_distribution', $scenario, $mois]),
+            fn(): float => $this->input()->ecs->systemes()
+                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->pertes_distribution($scenario, $mois))
+                ->reduce(fn(float $carry, float $item): float => $carry + $item)
+        );
     }
 
     /**
      * Pertes mensuelles de distribution récupérables en Wh
      */
-    public function pertes_distribution_recuperables(?Mois $mois = null): float
+    public function pertes_distribution_recuperables(Scenario $scenario, ?Mois $mois = null): float
     {
-        $key = $mois ? "pertes_distribution_recuperables::{$mois->value}" : "pertes_distribution_recuperables";
-        return $this->get($key, function () use ($mois): float {
-            return $this->input()->ecs->systemes()
-                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->pertes_distribution_recuperables($mois))
-                ->reduce(fn(float $carry, float $item): float => $carry + $item);
-        });
+        return $this->get(
+            self::implode(['pertes_distribution_recuperables', $scenario, $mois]),
+            fn(): float => $this->input()->ecs->systemes()
+                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->pertes_distribution_recuperables($scenario, $mois))
+                ->reduce(fn(float $carry, float $item): float => $carry + $item)
+
+        );
     }
 
     /**
@@ -256,19 +203,14 @@ final class PerformanceEcsRule extends Rule
         $context->input()->ecs->calcule($context->input()->ecs->data()->with(
             nmax: $this->nmax(),
             nadeq: $this->nadeq(),
-            becs: $this->becs(),
-            cef_ecs: $this->cef_ecs(),
-            cep_ecs: $this->cep_ecs(),
-            eges_ecs: $this->eges_ecs(),
-            cef_aux: $this->cef_aux(),
-            cep_aux: $this->cep_aux(),
-            eges_aux: $this->eges_aux(),
+            becs: $this->becs(Scenario::CONVENTIONNEL),
             pertes_stockage: $this->pertes_stockage(),
-            pertes_stockage_recuperables: $this->pertes_stockage_recuperables(),
-            pertes_generation: $this->pertes_generation(),
-            pertes_generation_recuperables: $this->pertes_generation_recuperables(),
-            pertes_distribution: $this->pertes_distribution(),
-            pertes_distribution_recuperables: $this->pertes_distribution_recuperables(),
+            pertes_stockage_recuperables: $this->pertes_stockage_recuperables(Scenario::CONVENTIONNEL),
+            pertes_generation: $this->pertes_generation(Scenario::CONVENTIONNEL),
+            pertes_generation_recuperables: $this->pertes_generation_recuperables(Scenario::CONVENTIONNEL),
+            pertes_distribution: $this->pertes_distribution(Scenario::CONVENTIONNEL),
+            pertes_distribution_recuperables: $this->pertes_distribution_recuperables(Scenario::CONVENTIONNEL),
+            consommations: $this->consommations(),
         ));
     }
 }

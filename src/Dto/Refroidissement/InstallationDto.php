@@ -36,6 +36,7 @@ final class InstallationDto
         if ($this->data) {
             $data['data'] = [
                 'rdim' => $this->data->rdim,
+                'consommations' => $this->data->consommations?->__normalize(),
             ];
         }
         return $data;

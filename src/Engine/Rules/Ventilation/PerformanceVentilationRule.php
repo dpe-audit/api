@@ -2,44 +2,22 @@
 
 namespace App\Engine\Rules\Ventilation;
 
+use App\Domain\Common\Consommation\ConsommationCollection;
 use App\Engine\{Context, Rule};
 
 final class PerformanceVentilationRule extends Rule
 {
     /**
-     * Consommation d'énergie final des auxiliaires de ventilation en kWh/an
+     * Liste des consommations de ventilation
      */
-    public function cef_aux(): float
+    public function consommations(): ConsommationCollection
     {
-        return $this->get('cef_aux', function (): float {
-            return $this->input()->ventilation->generateurs()
-                ->map(fn($item) => $this->requireIterator(PerformanceGenerateurRule::class, $item)->cef_aux())
-                ->reduce(fn($carry, $item) => $carry + $item);
-        });
-    }
-
-    /**
-     * Consommation d'énergie primaire des auxiliaires de ventilation en kWh/an
-     */
-    public function cep_aux(): float
-    {
-        return $this->get('cep_aux', function (): float {
-            return $this->input()->ventilation->generateurs()
-                ->map(fn($item) => $this->requireIterator(PerformanceGenerateurRule::class, $item)->cep_aux())
-                ->reduce(fn($carry, $item) => $carry + $item);
-        });
-    }
-
-    /**
-     * Consommation d'énergie primaire des auxiliaires de ventilation en kWh/an
-     */
-    public function eges_aux(): float
-    {
-        return $this->get('eges_aux', function (): float {
-            return $this->input()->ventilation->generateurs()
-                ->map(fn($item) => $this->requireIterator(PerformanceGenerateurRule::class, $item)->eges_aux())
-                ->reduce(fn($carry, $item) => $carry + $item);
-        });
+        return $this->get(
+            'consommations',
+            fn(): ConsommationCollection => $this->input()->ventilation->generateurs()
+                ->map(fn($item) => $this->requireIterator(PerformanceGenerateurRule::class, $item)->consommations())
+                ->reduce(fn(ConsommationCollection $carry, ConsommationCollection $item) => $carry->merge($item), new ConsommationCollection)
+        );
     }
 
     /**
@@ -108,9 +86,7 @@ final class PerformanceVentilationRule extends Rule
         parent::__invoke($data, $context);
 
         $context->input()->ventilation->calcule($context->input()->ventilation->data()->with(
-            cef_aux: $this->cef_aux(),
-            cep_aux: $this->cep_aux(),
-            eges_aux: $this->eges_aux(),
+            consommations: $this->consommations(),
         ));
     }
 }

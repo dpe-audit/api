@@ -84,8 +84,7 @@ final class SurfaceSudEquivalenteEtsBaieRule extends RuleIterator
      */
     public function sst(?Mois $mois = null): float
     {
-        $key = $mois ? "sst::{$mois->value}" : 'sst';
-        return $this->get($key, function () use ($mois): float {
+        return $this->get(self::implode(['sst', $mois]), function () use ($mois): float {
             return $mois
                 ? $this->surface() * (0.8 * $this->t() + 0.024) * $this->fe() * $this->c1($mois)
                 : Mois::reduce(fn(Mois $item) => $this->sst($item));
@@ -119,7 +118,7 @@ final class SurfaceSudEquivalenteEtsBaieRule extends RuleIterator
      */
     public function c1(Mois $mois): float
     {
-        return $this->get("c1::{$mois->value}", function () use ($mois): float {
+        return $this->get(self::implode(['c1', $mois]), function () use ($mois): float {
             return array_find($this->c1_collection(), fn(array $item) => $item['mois'] === $mois)['c1']
                 ?? throw new \DomainException("Valeur forfaitaire C1 non trouvée pour le mois {$mois->value}");
         });

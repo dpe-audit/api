@@ -3,7 +3,8 @@
 namespace App\Engine\Rules\Ventilation;
 
 use App\Domain\Batiment\TypeBatiment;
-use App\Domain\Common\Enum\{Energie, Usage};
+use App\Domain\Common\Consommation\{Consommation, ConsommationCollection};
+use App\Domain\Common\Enum\{Energie, Scenario, Usage};
 use App\Engine\Context;
 use App\Engine\Table\VentilationTableValeurRepository;
 
@@ -12,6 +13,25 @@ final class PerformanceGenerateurRule extends CommonGenerateurRule
     public function __construct(
         private VentilationTableValeurRepository $repository,
     ) {}
+
+    /**
+     * Liste des consommations du générateur de ventilation
+     */
+    public function consommations(): ConsommationCollection
+    {
+        return $this->get('consommations', function (): ConsommationCollection {
+            $collection = new ConsommationCollection();
+
+            return $collection->with(...Scenario::each(fn(Scenario $scenario) => Consommation::create(
+                scenario: $scenario,
+                usage: Usage::AUXILIAIRE,
+                energie: Energie::ELECTRICITE,
+                cef: $this->cef_aux(),
+                cep: $this->cep_aux(),
+                eges: $this->eges_aux(),
+            )));
+        });
+    }
 
     /**
      * Consommation finale de l'auxiliaire de ventilation en kWh/an
@@ -132,9 +152,7 @@ final class PerformanceGenerateurRule extends CommonGenerateurRule
                 rdim: $this->rdim(),
                 ratio_utilisation: $this->ratio_utilisation(),
                 pvent_moy: $this->pvent_moy(),
-                cef_aux: $this->cef_aux(),
-                cep_aux: $this->cep_aux(),
-                eges_aux: $this->eges_aux(),
+                consommations: $this->consommations(),
             ));
         }
     }

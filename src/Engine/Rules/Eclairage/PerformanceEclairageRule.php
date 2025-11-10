@@ -2,8 +2,9 @@
 
 namespace App\Engine\Rules\Eclairage;
 
-use App\Domain\Common\Enum\Energie;
-use App\Engine\{Context, Rule};
+use App\Domain\Common\Consommation\{Consommation, ConsommationCollection};
+use App\Domain\Common\Enum\{Energie, Scenario, Usage};
+use App\Engine\Rule;
 use App\Engine\Rules\Batiment\WithBatimentRule;
 use App\Engine\Table\EclairageTableValeurRepository;
 
@@ -19,6 +20,24 @@ final class PerformanceEclairageRule extends Rule
     public function __construct(
         private EclairageTableValeurRepository $repository,
     ) {}
+
+    /**
+     * Liste des consommations d'éclairage
+     */
+    public function consommations(): ConsommationCollection
+    {
+        return $this->get('consommations', function (): ConsommationCollection {
+            $collection = Scenario::each(fn(Scenario $scenario) => Consommation::create(
+                scenario: $scenario,
+                usage: Usage::ECLAIRAGE,
+                energie: Energie::ELECTRICITE,
+                cef: $this->cef_ecl(),
+                cep: $this->cep_ecl(),
+                eges: $this->eges_ecl(),
+            ));
+            return ConsommationCollection::create(...$collection);
+        });
+    }
 
     /**
      * Consommation finale d'éclairage en kWh/an
@@ -63,19 +82,5 @@ final class PerformanceEclairageRule extends Rule
             return $this->repository->nhecl($this->zone_climatique())
                 ?? throw new \DomainException('Valeur forfaitaires "nhecl" non trouvée');
         });
-    }
-
-    /**
-     * @inheritDoc
-     */
-    public function __invoke(mixed $data, Context $context): void
-    {
-        parent::__invoke($data, $context);
-
-        $context->input()->eclairage->calcule($context->input()->eclairage->data()->with(
-            cef_ecl: $this->cef_ecl(),
-            cep_ecl: $this->cep_ecl(),
-            eges_ecl: $this->eges_ecl(),
-        ));
     }
 }

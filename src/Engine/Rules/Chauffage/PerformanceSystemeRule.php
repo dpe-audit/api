@@ -4,84 +4,110 @@ namespace App\Engine\Rules\Chauffage;
 
 use App\Domain\Chauffage\Generateur\EnergieGenerateur;
 use App\Domain\Chauffage\Systeme\Configuration;
-use App\Domain\Common\Enum\{Mois, Usage};
+use App\Domain\Common\Consommation\{Consommation, ConsommationCollection};
+use App\Domain\Common\Enum\{Mois, Scenario, Usage};
 use App\Engine\Context;
 
 abstract class PerformanceSystemeRule extends PerformanceAuxiliaireRule
 {
     // * Données intermédiaires
 
-    public function bch(): float
+    public function bch(Scenario $scenario): float
     {
-        $bch = $this->require(PerformanceChauffageRule::class)->bch();
+        return $this->get(self::implode(['bch', $scenario]), function () use ($scenario): float {
+            $bch = $this->require(PerformanceChauffageRule::class)->bch($scenario);
 
-        if ($this->installation_collective()) {
-            if (in_array($this->configuration(), [Configuration::BASE, Configuration::RELEVE])) {
-                return Mois::reduce(function (Mois $mois) use ($bch) {
-                    $dht = $this->dht($mois);
+            if ($this->installation_collective()) {
+                if (in_array($this->configuration(), [Configuration::BASE, Configuration::RELEVE])) {
+                    return Mois::reduce(function (Mois $mois) use ($scenario, $bch) {
+                        $dht = $this->dht($scenario, $mois);
+                        $dh14 = $this->dh14($mois);
+                        return $bch * (1 / ($dht / $dh14));
+                    });
+                }
+                return Mois::reduce(function (Mois $mois) use ($scenario, $bch) {
+                    $dht = $this->dht($scenario, $mois);
                     $dh14 = $this->dh14($mois);
-                    return $bch * (1 / ($dht / $dh14));
+                    return $bch * ($dht / $dh14);
                 });
             }
-            return Mois::reduce(function (Mois $mois) use ($bch) {
-                $dht = $this->dht($mois);
-                $dh14 = $this->dh14($mois);
-                return $bch * ($dht / $dh14);
-            });
-        }
-        return $bch;
-    }
-
-    public function pertes_generation(?Mois $mois = null): float
-    {
-        $key = $mois ? "pertes_generation::{$mois->value}" : 'pertes_generation';
-        return $this->get($key, function () use ($mois): float {
-            $rule = $this->requireIterator(PerformanceGenerateurRule::class, $this->item()->generateur());
-            return $rule->pertes_generation($mois) * ($this->rdim() / $rule->rdim());
+            return $bch;
         });
     }
 
-    public function pertes_generation_recuperables(?Mois $mois = null): float
+    public function pertes_generation(Scenario $scenario, ?Mois $mois = null): float
     {
-        $key = $mois ? "pertes_generation_recuperables::{$mois->value}" : 'pertes_generation_recuperables';
-        return $this->get($key, function () use ($mois): float {
-            $rule = $this->requireIterator(PerformanceGenerateurRule::class, $this->item()->generateur());
-            return $rule->pertes_generation_recuperables($mois) * ($this->rdim() / $rule->rdim());
-        });
+        return $this->get(
+            self::implode(['pertes_generation', $scenario, $mois]),
+            function () use ($scenario, $mois): float {
+                $rule = $this->requireIterator(PerformanceGenerateurRule::class, $this->item()->generateur());
+                return $rule->pertes_generation($scenario, $mois) * ($this->rdim() / $rule->rdim());
+            }
+        );
+    }
+
+    public function pertes_generation_recuperables(Scenario $scenario, ?Mois $mois = null): float
+    {
+        return $this->get(
+            self::implode(['pertes_generation_recuperables', $scenario, $mois]),
+            function () use ($scenario, $mois): float {
+                $rule = $this->requireIterator(PerformanceGenerateurRule::class, $this->item()->generateur());
+                return $rule->pertes_generation_recuperables($scenario, $mois) * ($this->rdim() / $rule->rdim());
+            }
+        );
     }
 
     // * Données de sortie
 
     /**
+     * Liste des consommations du système de chauffage
+     */
+    public function consommations(): ConsommationCollection
+    {
+        return $this->get('consommations', function (): ConsommationCollection {
+            $collection = parent::consommations();
+
+            return $collection->with(...Scenario::each(fn(Scenario $scenario) => Consommation::create(
+                scenario: $scenario,
+                usage: Usage::CHAUFFAGE,
+                energie: $this->energie_generateur()->to(),
+                cef: $this->cef_ch($scenario),
+                cep: $this->cep_ch($scenario),
+                eges: $this->eges_ch($scenario),
+            )));
+        });
+    }
+
+    /**
      * Consommation finale du système de chauffage en kWh/an
      */
-    public function cef_ch(): float
+    public function cef_ch(Scenario $scenario): float
     {
-        return $this->get('cef_ch', function (): float {
-            return $this->bch() * (1 - $this->fch()) * $this->ich() * $this->rdim();
+        return $this->get(self::implode(['cef_ch', $scenario]), function () use ($scenario): float {
+            return $this->bch($scenario) * (1 - $this->fch()) * $this->ich($scenario) * $this->rdim();
         });
     }
 
     /**
      * Consommation primaire du système de chauffage en kWh/an
      */
-    public function cep_ch(): float
+    public function cep_ch(Scenario $scenario): float
     {
-        return $this->get('cep_ch', function (): float {
-            return $this->cef_ch() * $this->energie_generateur()->to()->facteur_energie_primaire();
+        return $this->get(self::implode(['cep_ch', $scenario]), function () use ($scenario): float {
+            return $this->cef_ch($scenario) * $this->energie_generateur()->to()->facteur_energie_primaire();
         });
     }
 
     /**
      * Emissions de CO2 du système de chauffage en kg/an
      */
-    public function eges_ch(): float
+    public function eges_ch(Scenario $scenario): float
     {
-        return $this->get('eges_ch', function (): float {
+        return $this->get(self::implode(['eges_ch', $scenario]), function () use ($scenario): float {
             if ($contenu_co2_reseau_chaleur = $this->contenu_co2_reseau_chaleur()) {
-                return $this->cef_ch() * $contenu_co2_reseau_chaleur;
+                return $this->cef_ch($scenario) * $contenu_co2_reseau_chaleur;
             }
-            return $this->cef_ch() * match ($this->energie_generateur()) {
+            return $this->cef_ch($scenario) * match ($this->energie_generateur()) {
                 EnergieGenerateur::BOIS_BUCHE => 0.03,
                 EnergieGenerateur::BOIS_PLAQUETTE => 0.024,
                 EnergieGenerateur::BOIS_GRANULE => 0.03,
@@ -103,27 +129,30 @@ abstract class PerformanceSystemeRule extends PerformanceAuxiliaireRule
     /**
      * Température de dimensionnement
      */
-    public function t(): float
+    public function t(Scenario $scenario): float
     {
-        return $this->get('t', function (): float {
+        return $this->get(self::implode(['t', $scenario]), function () use ($scenario): float {
             $dh14 = Mois::reduce(fn(Mois $mois) => $this->dh14($mois));
-            return 14 - ($this->pe() * $dh14 / $this->bch());
+            return 14 - ($this->pe() * $dh14 / $this->bch($scenario));
         });
     }
 
     /**
      * Degré heure base T
      */
-    public function dht(Mois $mois): float
+    public function dht(Scenario $scenario, Mois $mois): float
     {
-        return $this->get("dht::{$mois->value}", function () use ($mois): float {
-            $nref = $this->nref($mois);
-            $text = $this->text($mois);
-            $tbase = $this->tbase();
-            $t = $this->t();
-            $x = 0.5 * (($t - $tbase) / ($text - $tbase));
-            return $nref * ($text - $tbase) * pow($x, 5) * (14 - 25 * $x + 20 * pow($x, 2) - 5 * pow($x, 3));
-        });
+        return $this->get(
+            self::implode(['dht', $scenario, $mois]),
+            function () use ($scenario, $mois): float {
+                $nref = $this->nref($scenario, $mois);
+                $text = $this->text($mois);
+                $tbase = $this->tbase();
+                $t = $this->t($scenario);
+                $x = 0.5 * (($t - $tbase) / ($text - $tbase));
+                return $nref * ($text - $tbase) * pow($x, 5) * (14 - 25 * $x + 20 * pow($x, 2) - 5 * pow($x, 3));
+            }
+        );
     }
 
     /**
@@ -163,21 +192,20 @@ abstract class PerformanceSystemeRule extends PerformanceAuxiliaireRule
     /**
      * Inverse du rendement du système
      */
-    public function ich(): float
+    public function ich(Scenario $scenario = Scenario::CONVENTIONNEL): float
     {
-        return $this->get('ich', function (): float {
-            $rd = $this->rd();
-            $re = $this->re();
-            $rg = $this->rg();
-            $rr = $this->rr();
-            return 1 / ($rd * $re * $rg * $rr);
-        });
+        return $this->get(self::implode(['ich', $scenario]), fn(): float => 1 / array_product([
+            $this->rd(),
+            $this->re(),
+            $this->rg($scenario),
+            $this->rr(),
+        ]));
     }
 
     /**
      * Rendement de génération
      */
-    abstract public function rg(): float;
+    abstract public function rg(Scenario $scenario): float;
 
     /**
      * Rendement de distribution
@@ -251,19 +279,14 @@ abstract class PerformanceSystemeRule extends PerformanceAuxiliaireRule
 
         foreach ($this as $rule) {
             $rule->item()->calcule($rule->item()->data()->with(
-                cef_ch: $rule->cef_ch(),
-                cep_ch: $rule->cep_ch(),
-                eges_ch: $rule->eges_ch(),
-                cef_aux: $rule->cef_aux(),
-                cep_aux: $rule->cep_aux(),
-                eges_aux: $rule->eges_aux(),
                 i0: $rule->i0(),
                 int: $rule->int(),
                 ich: $rule->ich(),
                 rd: $rule->rd(),
                 re: $rule->re(),
-                rg: $rule->rg(),
+                rg: $rule->rg(Scenario::CONVENTIONNEL),
                 rr: $rule->rr(),
+                consommations: $rule->consommations(),
             ));
         }
     }

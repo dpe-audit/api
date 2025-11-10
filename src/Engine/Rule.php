@@ -2,8 +2,6 @@
 
 namespace App\Engine;
 
-use App\Domain\Common\Enum\ScenarioUsage;
-
 abstract class Rule implements RuleInterface
 {
     private Context $context;
@@ -16,14 +14,6 @@ abstract class Rule implements RuleInterface
     public function context(): Context
     {
         return $this->context;
-    }
-
-    /**
-     * Scénario applicable
-     */
-    public function scenario(): ScenarioUsage
-    {
-        return $this->context->scenario();
     }
 
     /**
@@ -40,6 +30,13 @@ abstract class Rule implements RuleInterface
     public function get(string $key, callable $cb): mixed
     {
         return $this->context->store()->get($this->namespace(), $key, $cb);
+    }
+
+    public static function implode(array $keys): string
+    {
+        $keys = array_map(fn($key) => $key instanceof \BackedEnum ? $key->value : $key, $keys);
+        $keys = array_filter($keys);
+        return implode('::', $keys);
     }
 
     /**

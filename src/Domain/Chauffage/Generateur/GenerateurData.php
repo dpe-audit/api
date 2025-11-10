@@ -2,6 +2,7 @@
 
 namespace App\Domain\Chauffage\Generateur;
 
+use App\Domain\Common\Consommation\ConsommationCollection;
 use Webmozart\Assert\Assert;
 
 final class GenerateurData
@@ -20,6 +21,7 @@ final class GenerateurData
         public readonly ?float $tfonc100,
         public readonly ?float $pertes_generation,
         public readonly ?float $pertes_generation_recuperables,
+        public readonly ?ConsommationCollection $consommations,
     ) {}
 
     public static function create(
@@ -36,6 +38,7 @@ final class GenerateurData
         ?float $tfonc100 = null,
         ?float $pertes_generation = null,
         ?float $pertes_generation_recuperables = null,
+        ?ConsommationCollection $consommations = null
     ): self {
         Assert::nullOrGreaterThanEq($rdim, 0);
         Assert::nullOrLessThanEq($rdim, 1);
@@ -66,6 +69,7 @@ final class GenerateurData
             tfonc100: $tfonc100,
             pertes_generation: $pertes_generation,
             pertes_generation_recuperables: $pertes_generation_recuperables,
+            consommations: $consommations,
         );
     }
 
@@ -83,6 +87,7 @@ final class GenerateurData
         ?float $tfonc100 = null,
         ?float $pertes_generation = null,
         ?float $pertes_generation_recuperables = null,
+        ?ConsommationCollection $consommations = null
     ): self {
         return self::create(
             rdim: $rdim ?? $this->rdim,
@@ -97,7 +102,8 @@ final class GenerateurData
             tfonc30: $tfonc30 ?? $this->tfonc30,
             tfonc100: $tfonc100 ?? $this->tfonc100,
             pertes_generation: $pertes_generation ?? $this->pertes_generation,
-            pertes_generation_recuperables: $pertes_generation_recuperables ?? $this->pertes_generation_recuperables
+            pertes_generation_recuperables: $pertes_generation_recuperables ?? $this->pertes_generation_recuperables,
+            consommations: $consommations ?? $this->consommations,
         );
     }
 }

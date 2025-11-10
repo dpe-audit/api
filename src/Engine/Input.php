@@ -5,7 +5,6 @@ namespace App\Engine;
 use App\Domain\Batiment\Batiment;
 use App\Domain\Chauffage\Chauffage;
 use App\Domain\Diagnostic\Diagnostic;
-use App\Domain\Eclairage\Eclairage;
 use App\Domain\Ecs\Ecs;
 use App\Domain\Enveloppe\Enveloppe;
 use App\Domain\Logement\Logement;
@@ -25,7 +24,6 @@ final class Input
         public readonly Refroidissement $refroidissement,
         public readonly Ventilation $ventilation,
         public readonly Production $production,
-        public readonly Eclairage $eclairage,
     ) {}
 
     public static function from_diagnostic(Diagnostic $entity, ?Logement $logement = null): self
@@ -39,7 +37,6 @@ final class Input
             refroidissement: $entity->refroidissement(),
             ventilation: $entity->ventilation(),
             production: $entity->production(),
-            eclairage: $entity->eclairage(),
         );
     }
 
@@ -54,7 +51,6 @@ final class Input
             refroidissement: $entity->refroidissement(),
             ventilation: $entity->ventilation(),
             production: $entity->production(),
-            eclairage: $entity->eclairage(),
         );
     }
 }

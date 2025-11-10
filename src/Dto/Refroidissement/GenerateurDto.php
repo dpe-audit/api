@@ -51,6 +51,7 @@ final class GenerateurDto
             $data['data'] = [
                 'rdim' => $this->data->rdim,
                 'eer' => $this->data->eer,
+                'consommations' => $this->data->consommations?->__normalize(),
             ];
         }
         return $data;

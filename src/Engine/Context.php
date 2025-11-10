@@ -2,40 +2,13 @@
 
 namespace App\Engine;
 
-use App\Domain\Common\Enum\ScenarioUsage;
-
-/**
- * @property array<string, Store> $stores
- */
 final class Context
 {
-    /** @var Store[] */
-    private array $stores = [];
+    public function __construct(private Rules $rules, private Input $input, private Store $store,) {}
 
-    public function __construct(
-        private Rules $rules,
-        private Input $input,
-        private ScenarioUsage $scenario,
-    ) {}
-
-    public static function create(Rules $rules, Input $input, ?ScenarioUsage $scenario = null): self
+    public static function create(Rules $rules, Input $input): self
     {
-        return new self(
-            rules: $rules,
-            input: $input,
-            scenario: $scenario ?? ScenarioUsage::CONVENTIONNEL,
-        );
-    }
-
-    public function restore(): void
-    {
-        $this->scenario = ScenarioUsage::CONVENTIONNEL;
-        $this->stores = [];
-    }
-
-    public function switch(ScenarioUsage $scenario): void
-    {
-        $this->scenario = $scenario;
+        return new self(rules: $rules, input: $input, store: new Store());
     }
 
     public function rules(): Rules
@@ -48,17 +21,8 @@ final class Context
         return $this->input;
     }
 
-    public function scenario(): ScenarioUsage
-    {
-        return $this->scenario;
-    }
-
     public function store(): Store
     {
-        $key = $this->scenario->value;
-        if (false === array_key_exists($key, $this->stores)) {
-            $this->stores[$key] = new Store();
-        }
-        return $this->stores[$key];
+        return $this->store;
     }
 }

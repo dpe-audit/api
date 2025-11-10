@@ -3,6 +3,8 @@
 namespace App\Engine\Rules\Performance;
 
 use App\Domain\Common\Bilan\{Bilan, EtiquetteClimat, EtiquetteEnergie};
+use App\Domain\Common\Consommation\{ConsommationCollection};
+use App\Domain\Common\Enum\Scenario;
 use App\Domain\Diagnostic\Diagnostic;
 use App\Domain\Scenario\Etape\Etape;
 use App\Engine\{Context, Rule};
@@ -23,20 +25,28 @@ final class PerformanceRule extends Rule
     ) {}
 
     /**
+     * Liste des consommations d'énergie
+     */
+    public function consommations(): ConsommationCollection
+    {
+        return $this->get('consommations', function (): ConsommationCollection {
+            $collection = new ConsommationCollection();
+            $collection = $collection->merge($this->require(PerformanceChauffageRule::class)->consommations());
+            $collection = $collection->merge($this->require(PerformanceEcsRule::class)->consommations());
+            $collection = $collection->merge($this->require(PerformanceRefroidissementRule::class)->consommations());
+            $collection = $collection->merge($this->require(PerformanceVentilationRule::class)->consommations());
+            $collection = $collection->merge($this->require(PerformanceEclairageRule::class)->consommations());
+            return $collection;
+        });
+    }
+
+    /**
      * Consommation finale d'énergie en kWh/m²/an
      */
     public function cef(): float
     {
         return $this->get('cef', function (): float {
-            $value = $this->require(PerformanceChauffageRule::class)->cef_ch()
-                + $this->require(PerformanceChauffageRule::class)->cef_aux()
-                + $this->require(PerformanceEcsRule::class)->cef_ecs()
-                + $this->require(PerformanceEcsRule::class)->cef_aux()
-                + $this->require(PerformanceRefroidissementRule::class)->cef_fr()
-                + $this->require(PerformanceRefroidissementRule::class)->cef_aux()
-                + $this->require(PerformanceVentilationRule::class)->cef_aux()
-                + $this->require(PerformanceEclairageRule::class)->cef_ecl();
-            return $value / $this->surface_reference();
+            return $this->consommations()->cef(Scenario::CONVENTIONNEL) / $this->surface_reference();
         });
     }
 
@@ -46,15 +56,7 @@ final class PerformanceRule extends Rule
     public function cep(): float
     {
         return $this->get('cep', function (): float {
-            $value = $this->require(PerformanceChauffageRule::class)->cep_ch()
-                + $this->require(PerformanceChauffageRule::class)->cep_aux()
-                + $this->require(PerformanceEcsRule::class)->cep_ecs()
-                + $this->require(PerformanceEcsRule::class)->cep_aux()
-                + $this->require(PerformanceRefroidissementRule::class)->cep_fr()
-                + $this->require(PerformanceRefroidissementRule::class)->cep_aux()
-                + $this->require(PerformanceVentilationRule::class)->cep_aux()
-                + $this->require(PerformanceEclairageRule::class)->cep_ecl();
-            return $value / $this->surface_reference();
+            return $this->consommations()->cep(Scenario::CONVENTIONNEL) / $this->surface_reference();
         });
     }
 
@@ -64,15 +66,7 @@ final class PerformanceRule extends Rule
     public function eges(): float
     {
         return $this->get('eges', function (): float {
-            $value = $this->require(PerformanceChauffageRule::class)->eges_ch()
-                + $this->require(PerformanceChauffageRule::class)->eges_aux()
-                + $this->require(PerformanceEcsRule::class)->eges_ecs()
-                + $this->require(PerformanceEcsRule::class)->eges_aux()
-                + $this->require(PerformanceRefroidissementRule::class)->eges_fr()
-                + $this->require(PerformanceRefroidissementRule::class)->eges_aux()
-                + $this->require(PerformanceVentilationRule::class)->eges_aux()
-                + $this->require(PerformanceEclairageRule::class)->eges_ecl();
-            return $value / $this->surface_reference();
+            return $this->consommations()->eges(Scenario::CONVENTIONNEL) / $this->surface_reference();
         });
     }
 
@@ -122,7 +116,8 @@ final class PerformanceRule extends Rule
                 eges: $this->eges(),
                 etiquette_energie: $this->etiquette_energie(),
                 etiquette_climat: $this->etiquette_climat(),
-            )
+            ),
+            consommations: $this->consommations(),
         ));
     }
 }

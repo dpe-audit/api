@@ -5,7 +5,6 @@ namespace App\Domain\Scenario\Etape;
 use App\Domain\Chauffage\Chauffage;
 use App\Domain\Common\ValueObject\Id;
 use App\Domain\Scenario\Scenario;
-use App\Domain\Eclairage\Eclairage;
 use App\Domain\Ecs\Ecs;
 use App\Domain\Enveloppe\Enveloppe;
 use App\Domain\Production\Production;
@@ -27,7 +26,6 @@ final class Etape
         private Refroidissement $refroidissement,
         private Ventilation $ventilation,
         private Production $production,
-        private Eclairage $eclairage,
     ) {
         $this->data = EtapeData::create();
     }
@@ -54,7 +52,6 @@ final class Etape
             refroidissement: $refroidissement,
             ventilation: $ventilation,
             production: $production,
-            eclairage: Eclairage::create(),
         );
     }
 
@@ -72,7 +69,6 @@ final class Etape
         $this->refroidissement->reinitialise();
         $this->ventilation->reinitialise();
         $this->production->reinitialise();
-        $this->eclairage->reinitialise();
         return $this;
     }
 
@@ -124,11 +120,6 @@ final class Etape
     public function production(): Production
     {
         return $this->production;
-    }
-
-    public function eclairage(): Eclairage
-    {
-        return $this->eclairage;
     }
 
     public function data(): EtapeData

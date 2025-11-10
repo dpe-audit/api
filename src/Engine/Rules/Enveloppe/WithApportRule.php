@@ -2,7 +2,7 @@
 
 namespace App\Engine\Rules\Enveloppe;
 
-use App\Domain\Common\Enum\Mois;
+use App\Domain\Common\Enum\{Mois, Scenario};
 use App\Engine\Rules\Enveloppe\Apport\ApportEnveloppeRule;
 use App\Engine\Rules\WithRule;
 
@@ -15,18 +15,18 @@ trait WithApportRule
         return $this->require(ApportEnveloppeRule::class);
     }
 
-    public function f(?Mois $mois = null): float
+    public function f(Scenario $scenario, ?Mois $mois = null): float
     {
-        return $this->apport_rule()->f($mois);
+        return $this->apport_rule()->f($scenario, $mois);
     }
 
-    public function apport(?Mois $mois = null): float
+    public function apport(Scenario $scenario, ?Mois $mois = null): float
     {
-        return $this->apport_rule()->apport($mois);
+        return $this->apport_rule()->apport($scenario, $mois);
     }
 
-    public function apport_fr(?Mois $mois = null): float
+    public function apport_fr(Scenario $scenario, ?Mois $mois = null): float
     {
-        return $this->apport_rule()->apport_fr($mois);
+        return $this->apport_rule()->apport_fr($scenario, $mois);
     }
 }

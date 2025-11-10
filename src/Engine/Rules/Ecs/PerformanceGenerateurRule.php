@@ -2,7 +2,8 @@
 
 namespace App\Engine\Rules\Ecs;
 
-use App\Domain\Common\Enum\Mois;
+use App\Domain\Common\Consommation\ConsommationCollection;
+use App\Domain\Common\Enum\{Mois, Scenario};
 use App\Engine\Context;
 use App\Engine\Rules\Batiment\WithBatimentRule;
 use App\Engine\Table\EcsTableValeurRepository;
@@ -14,6 +15,19 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
     public function __construct(
         protected EcsTableValeurRepository $repository,
     ) {}
+
+    /**
+     * Liste des consommations du générateur d'eau chaude sanitaire
+     */
+    public function consommations(): ConsommationCollection
+    {
+        return $this->get(
+            'consommations',
+            fn(): ConsommationCollection => $this->item()->systemes()
+                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->consommations())
+                ->reduce(fn(ConsommationCollection $carry, ConsommationCollection $item) => $carry->merge($item), new ConsommationCollection)
+        );
+    }
 
     /**
      * Coefficient de performance énergétique
@@ -50,7 +64,7 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
     /**
      * Pertes de génération  en Wh
      */
-    public function pertes_generation(?Mois $mois = null): float
+    public function pertes_generation(Scenario $scenario, ?Mois $mois = null): float
     {
         return 0;
     }
@@ -58,7 +72,7 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
     /**
      * Pertes de génération récupérables exprimées en Wh
      */
-    public function pertes_generation_recuperables(?Mois $mois = null): float
+    public function pertes_generation_recuperables(Scenario $scenario, ?Mois $mois = null): float
     {
         return 0;
     }
@@ -68,8 +82,7 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
      */
     public function pertes_stockage(?Mois $mois = null): float
     {
-        $key = $mois ? "pertes_stockage::{$mois->value}" : "pertes_stockage";
-        return $this->get($key, function () use ($mois): float {
+        return $this->get(self::implode(['pertes_stockage', $mois]), function () use ($mois): float {
             if (0 == $vs = $this->volume_stockage()) {
                 return 0;
             }
@@ -90,15 +103,14 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
     /**
      * Pertes de stockage intégré récupérables en Wh
      */
-    public function pertes_stockage_recuperables(?Mois $mois = null): float
+    public function pertes_stockage_recuperables(Scenario $scenario, ?Mois $mois = null): float
     {
-        $key = $mois ? "pertes_stockage_recuperables::{$mois->value}" : "pertes_stockage_recuperables";
-        return $this->get($key, function () use ($mois): float {
+        return $this->get(self::implode(['pertes_stockage_recuperables', $scenario, $mois]), function () use ($scenario, $mois): float {
             if (null === $mois) {
-                return Mois::reduce(fn(Mois $item): float => $this->pertes_stockage_recuperables($item));
+                return Mois::reduce(fn(Mois $imois): float => $this->pertes_stockage_recuperables($scenario, $imois));
             }
             return $this->position_volume_chauffe()
-                ? 0.48 * $this->nref($mois) * ($this->pertes_stockage() / 8760)
+                ? 0.48 * $this->nref($scenario, $mois) * ($this->pertes_stockage() / 8760)
                 : 0;
         });
     }
@@ -120,10 +132,11 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
                 rpn: $rule->rpn(),
                 qp0: $rule->qp0(),
                 pveilleuse: $rule->pveilleuse(),
-                pertes_generation: $rule->pertes_generation(),
-                pertes_generation_recuperables: $rule->pertes_generation_recuperables(),
+                pertes_generation: $rule->pertes_generation(Scenario::CONVENTIONNEL),
+                pertes_generation_recuperables: $rule->pertes_generation_recuperables(Scenario::CONVENTIONNEL),
                 pertes_stockage: $rule->pertes_stockage(),
-                pertes_stockage_recuperables: $rule->pertes_stockage_recuperables(),
+                pertes_stockage_recuperables: $rule->pertes_stockage_recuperables(Scenario::CONVENTIONNEL),
+                consommations: $rule->consommations(),
             ));
         }
     }

@@ -2,9 +2,11 @@
 
 namespace App\Engine\Rules\Ecs;
 
-use App\Domain\Common\Enum\Mois;
+use App\Domain\Common\Enum\{Mois, Scenario};
 use App\Domain\Ecs\Generateur\{EnergieGenerateur, TypeGenerateur};
-use App\Domain\Ecs\Systeme\Reseau\BouclageReseau;
+use App\Domain\Ecs\Generateur\Position\PositionChauffeEau;
+use App\Domain\Ecs\Generateur\Signaletique\LabelGenerateur;
+use App\Domain\Ecs\Systeme\Reseau\{BouclageReseau, IsolationReseau};
 use App\Domain\Ecs\Systeme\Systeme;
 use App\Engine\RuleIterator;
 
@@ -69,6 +71,11 @@ abstract class CommonSystemeRule extends RuleIterator
         return $this->item()->reseau()->bouclage ?? BouclageReseau::RESEAU_BOUCLE;
     }
 
+    public function isolation_reseau(): IsolationReseau
+    {
+        return $this->item()->reseau()->isolation ?? IsolationReseau::NON_ISOLE;
+    }
+
     public function niveaux_desservis(): int
     {
         return $this->item()->reseau()->niveaux_desservis;
@@ -79,9 +86,24 @@ abstract class CommonSystemeRule extends RuleIterator
         return $this->item()->stockage()->volume ?? 0;
     }
 
+    public function volume_stockage_integre(): float
+    {
+        return $this->item()->generateur()->signaletique()->volume_stockage ?? 0;
+    }
+
     public function position_volume_chauffe(): bool
     {
         return $this->item()->generateur()->position()->position_volume_chauffe ?? false;
+    }
+
+    public function position_chauffe_eau(): ?PositionChauffeEau
+    {
+        return $this->item()->generateur()->position()->position_chauffe_eau;
+    }
+
+    public function label_generateur(): ?LabelGenerateur
+    {
+        return $this->item()->generateur()->signaletique()->label;
     }
 
     public function position_volume_chauffe_stockage(): bool
@@ -109,14 +131,33 @@ abstract class CommonSystemeRule extends RuleIterator
         return $this->requireIterator(PerformanceInstallationRule::class, $this->item()->installation())->fecs();
     }
 
-    public function becs(?Mois $mois = null): float
+    public function becs(Scenario $scenario, ?Mois $mois = null): float
     {
-        return $this->require(PerformanceEcsRule::class)->becs($mois);
+        return $this->require(PerformanceEcsRule::class)->becs($scenario, $mois);
+    }
+
+    public function cop(): float
+    {
+        return $this->requireIterator(PerformanceGenerateurRule::class, $this->item()->generateur())->cop();
     }
 
     public function pn(): float
     {
-        $entity = $this->item()->generateur();
-        return $this->requireIterator(PerformanceGenerateurRule::class, $entity)->pn();
+        return $this->requireIterator(PerformanceGenerateurRule::class, $this->item()->generateur())->pn();
+    }
+
+    public function qp0(): ?float
+    {
+        return $this->requireIterator(PerformanceGenerateurRule::class, $this->item()->generateur())->qp0();
+    }
+
+    public function rpn(): ?float
+    {
+        return $this->requireIterator(PerformanceGenerateurRule::class, $this->item()->generateur())->rpn();
+    }
+
+    public function pveilleuse(): ?float
+    {
+        return $this->requireIterator(PerformanceGenerateurRule::class, $this->item()->generateur())->pveilleuse();
     }
 }

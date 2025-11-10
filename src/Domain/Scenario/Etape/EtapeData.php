@@ -4,6 +4,7 @@ namespace App\Domain\Scenario\Etape;
 
 use App\Domain\Batiment\ZoneClimatique;
 use App\Domain\Common\Bilan\Bilan;
+use App\Domain\Common\Consommation\ConsommationCollection;
 use Webmozart\Assert\Assert;
 
 final class EtapeData
@@ -15,6 +16,7 @@ final class EtapeData
         public readonly ?float $surface_reference,
         public readonly ?float $volume_reference,
         public readonly ?Bilan $bilan,
+        public readonly ?ConsommationCollection $consommations,
     ) {}
 
     public static function create(
@@ -24,6 +26,7 @@ final class EtapeData
         ?float $surface_reference = null,
         ?float $volume_reference = null,
         ?Bilan $bilan = null,
+        ?ConsommationCollection $consommations = null,
     ): self {
         Assert::nullOrGreaterThan($surface_reference, 0);
         Assert::nullOrGreaterThan($volume_reference, 0);
@@ -35,6 +38,7 @@ final class EtapeData
             surface_reference: $surface_reference,
             volume_reference: $volume_reference,
             bilan: $bilan,
+            consommations: $consommations,
         );
     }
 
@@ -45,6 +49,7 @@ final class EtapeData
         ?float $surface_reference = null,
         ?float $volume_reference = null,
         ?Bilan $bilan = null,
+        ?ConsommationCollection $consommations = null,
     ): self {
         return self::create(
             zone_climatique: $zone_climatique ?? $this->zone_climatique,
@@ -53,6 +58,7 @@ final class EtapeData
             surface_reference: $surface_reference ?? $this->surface_reference,
             volume_reference: $volume_reference ?? $this->volume_reference,
             bilan: $bilan ?? $this->bilan,
+            consommations: $consommations ?? $this->consommations,
         );
     }
 }

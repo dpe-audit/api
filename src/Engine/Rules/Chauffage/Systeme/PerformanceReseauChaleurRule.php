@@ -2,6 +2,7 @@
 
 namespace App\Engine\Rules\Chauffage\Systeme;
 
+use App\Domain\Common\Enum\Scenario;
 use App\Engine\Rules\Chauffage\PerformanceSystemeRule;
 
 final class PerformanceReseauChaleurRule extends PerformanceSystemeRule
@@ -14,7 +15,7 @@ final class PerformanceReseauChaleurRule extends PerformanceSystemeRule
     /**
      * @inheritDoc
      */
-    public function rg(): float
+    public function rg(Scenario $scenario): float
     {
         return $this->get('rg', fn(): float => 0.97);
     }

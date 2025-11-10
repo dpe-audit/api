@@ -3,7 +3,7 @@
 namespace App\Engine\Rules\Batiment;
 
 use App\Domain\Batiment\ZoneClimatique;
-use App\Domain\Common\Enum\{Mois, ScenarioUsage};
+use App\Domain\Common\Enum\{Mois, Scenario};
 use App\Domain\Diagnostic\Diagnostic;
 use App\Domain\Enveloppe\Inertie;
 use App\Domain\Scenario\Etape\Etape;
@@ -122,11 +122,11 @@ final class BatimentRule extends Rule
      * 
      * TODO: Vérifier la méthode (coquille ?)
      */
-    public function e_fr(Mois $mois): ?float
+    public function e_fr(Scenario $scenario, Mois $mois): ?float
     {
-        return match ($this->scenario()) {
-            ScenarioUsage::CONVENTIONNEL => $this->e_fr_28($mois),
-            ScenarioUsage::DEPENSIER => $this->e_fr_26($mois),
+        return match ($scenario) {
+            Scenario::CONVENTIONNEL => $this->e_fr_28($mois),
+            Scenario::DEPENSIER => $this->e_fr_26($mois),
         };
     }
 
@@ -140,33 +140,33 @@ final class BatimentRule extends Rule
         return $this->sollicitations_exterieures($mois)->nref21;
     }
 
-    public function nref(Mois $mois): ?float
+    public function nref(Scenario $scenario, Mois $mois): ?float
     {
-        return match ($this->scenario()) {
-            ScenarioUsage::CONVENTIONNEL => $this->sollicitations_exterieures($mois)->nref19,
-            ScenarioUsage::DEPENSIER => $this->sollicitations_exterieures($mois)->nref21,
+        return match ($scenario) {
+            Scenario::CONVENTIONNEL => $this->sollicitations_exterieures($mois)->nref19,
+            Scenario::DEPENSIER => $this->sollicitations_exterieures($mois)->nref21,
         };
     }
 
     /**
      * Nref_fr - Nombre d'heures de refroidissement sur le mois en h
      */
-    public function nref_fr(Mois $mois): ?float
+    public function nref_fr(Scenario $scenario, Mois $mois): ?float
     {
-        return match ($this->scenario()) {
-            ScenarioUsage::CONVENTIONNEL => $this->sollicitations_exterieures($mois)->nref28,
-            ScenarioUsage::DEPENSIER => $this->sollicitations_exterieures($mois)->nref26,
+        return match ($scenario) {
+            Scenario::CONVENTIONNEL => $this->sollicitations_exterieures($mois)->nref28,
+            Scenario::DEPENSIER => $this->sollicitations_exterieures($mois)->nref26,
         };
     }
 
     /**
      * DH - Degrés-heures de chauffage sur le mois en °C.h
      */
-    public function dh(Mois $mois): ?float
+    public function dh(Scenario $scenario, Mois $mois): ?float
     {
-        return match ($this->scenario()) {
-            ScenarioUsage::CONVENTIONNEL => $this->sollicitations_exterieures($mois)->dh19,
-            ScenarioUsage::DEPENSIER => $this->sollicitations_exterieures($mois)->dh21,
+        return match ($scenario) {
+            Scenario::CONVENTIONNEL => $this->sollicitations_exterieures($mois)->dh19,
+            Scenario::DEPENSIER => $this->sollicitations_exterieures($mois)->dh21,
         };
     }
 
@@ -189,11 +189,11 @@ final class BatimentRule extends Rule
     /**
      * Text_fr - Température extérieure moyenne en période de refroidissement sur le mois en C°
      */
-    public function text_fr(Mois $mois): ?float
+    public function text_fr(Scenario $scenario, Mois $mois): ?float
     {
-        return match ($this->scenario()) {
-            ScenarioUsage::CONVENTIONNEL => $this->sollicitations_exterieures($mois)->textmoy_clim28,
-            ScenarioUsage::DEPENSIER => $this->sollicitations_exterieures($mois)->textmoy_clim26,
+        return match ($scenario) {
+            Scenario::CONVENTIONNEL => $this->sollicitations_exterieures($mois)->textmoy_clim28,
+            Scenario::DEPENSIER => $this->sollicitations_exterieures($mois)->textmoy_clim26,
         };
     }
 

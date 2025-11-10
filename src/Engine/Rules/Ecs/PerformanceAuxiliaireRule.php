@@ -2,7 +2,8 @@
 
 namespace App\Engine\Rules\Ecs;
 
-use App\Domain\Common\Enum\{Energie, Mois, Usage};
+use App\Domain\Common\Consommation\{Consommation, ConsommationCollection};
+use App\Domain\Common\Enum\{Energie, Mois, Scenario, Usage};
 use App\Domain\Ecs\Systeme\Reseau\BouclageReseau;
 use App\Engine\Table\EcsTableValeurRepository;
 
@@ -10,73 +11,89 @@ abstract class PerformanceAuxiliaireRule extends DimensionnementSystemeRule
 {
     public function __construct(protected EcsTableValeurRepository $repository) {}
 
-    abstract public function pertes_distribution(): float;
+    abstract public function pertes_distribution(Scenario $scenario, ?Mois $mois = null): float;
+
+    /**
+     * Liste des consommations des auxiliaires de refroidissement
+     */
+    public function consommations(): ConsommationCollection
+    {
+        $collection = new ConsommationCollection();
+        return $collection->with(...Scenario::each(fn(Scenario $scenario) => Consommation::create(
+            scenario: $scenario,
+            usage: Usage::AUXILIAIRE,
+            energie: Energie::ELECTRICITE,
+            cef: $this->cef_aux($scenario),
+            cep: $this->cep_aux($scenario),
+            eges: $this->eges_aux($scenario),
+        )));
+    }
 
     /**
      * Consommation finale des auxiliaires d'eau chaude sanitaire en kWh
      */
-    public function cef_aux(): float
+    public function cef_aux(Scenario $scenario): float
     {
-        return $this->get('cef_aux', function (): float {
-            return $this->caux_generation() + $this->caux_circulateur() + $this->caux_traceur();
+        return $this->get(self::implode(['cef_aux', $scenario]), function () use ($scenario): float {
+            return $this->caux_generation($scenario) + $this->caux_circulateur($scenario) + $this->caux_traceur($scenario);
         });
     }
 
     /**
      * Consommation primaire des auxiliaires d'eau chaude sanitaire en kWh
      */
-    public function cep_aux(): float
+    public function cep_aux(Scenario $scenario): float
     {
-        return $this->get('cep_aux', function (): float {
-            return $this->cef_aux() * Energie::ELECTRICITE->facteur_energie_primaire();
+        return $this->get(self::implode(['cep_aux', $scenario]), function () use ($scenario): float {
+            return $this->cef_aux($scenario) * Energie::ELECTRICITE->facteur_energie_primaire();
         });
     }
 
     /**
      * Emissions de CO2 des auxiliaires d'eau chaude sanitaire en kg
      */
-    public function eges_aux(): float
+    public function eges_aux(Scenario $scenario): float
     {
-        return $this->get('eges_aux', function (): float {
-            return $this->cef_aux() * Energie::ELECTRICITE->facteur_eges(Usage::AUXILIAIRE);
+        return $this->get(self::implode(['eges_aux', $scenario]), function () use ($scenario): float {
+            return $this->cef_aux($scenario) * Energie::ELECTRICITE->facteur_eges(Usage::AUXILIAIRE);
         });
     }
 
     /**
      * Consommation de l'auxiliaire de génération en kWh/an
      */
-    public function caux_generation(): float
+    public function caux_generation(Scenario $scenario): float
     {
-        return $this->get('caux_generation', function (): float {
-            return ($this->paux() * $this->becs() * $this->rdim()) / $this->pn() / 1000;
+        return $this->get(self::implode(['caux_generation', $scenario]), function () use ($scenario): float {
+            return ($this->paux() / 1000 * $this->becs($scenario) * $this->rdim()) / $this->pn() / 1000;
         });
     }
 
     /**
      * Consommation du circulateur en kWh/an
      */
-    public function caux_circulateur(): float
+    public function caux_circulateur(Scenario $scenario): float
     {
-        return $this->get('caux_circulateur', function (): float {
+        return $this->get(self::implode(['caux_circulateur', $scenario]), function () use ($scenario): float {
             if ($this->bouclage_reseau() === BouclageReseau::RESEAU_NON_BOUCLE) {
                 return 0;
             }
             $nh = Mois::reduce(fn(Mois $mois): float => $mois->nh());
             $nh_puisage = $this->nh_puisage();
-            $puissance_circulateur = $this->puissance_circulateur();
+            $puissance_circulateur = $this->puissance_circulateur($scenario) / 1000;
             $rdim = $this->rdim();
-            return $nh_puisage * $puissance_circulateur + ($nh - $nh_puisage) * 20 * $rdim / 1000;
+            return $nh_puisage * $puissance_circulateur + ($nh - $nh_puisage) * 20 * $rdim;
         });
     }
 
     /**
      * Consommation du traceur en kWh/an
      */
-    public function caux_traceur(): float
+    public function caux_traceur(Scenario $scenario): float
     {
-        return $this->get('caux_traceur', function (): float {
+        return $this->get(self::implode(['caux_traceur', $scenario]), function () use ($scenario): float {
             return $this->bouclage_reseau() === BouclageReseau::RESEAU_TRACE
-                ? 0.14 * $this->becs() * $this->rdim()
+                ? 0.14 * $this->becs($scenario) * $this->rdim()
                 : 0;
         });
     }
@@ -105,10 +122,10 @@ abstract class PerformanceAuxiliaireRule extends DimensionnementSystemeRule
     /**
      * Puissance hydraulique de bouclage en W
      */
-    public function puissance_hydraulique(): float
+    public function puissance_hydraulique(Scenario $scenario): float
     {
-        return $this->get('puissance_hydraulique', function (): float {
-            $pertes_distribution = $this->pertes_distribution();
+        return $this->get(self::implode(['puissance_hydraulique', $scenario]), function () use ($scenario): float {
+            $pertes_distribution = $this->pertes_distribution($scenario);
             $nh_puisage = $this->nh_puisage();
             $pertes_charge_bouclage = $this->pertes_charge_bouclage();
             return $pertes_distribution / (5.815 * $nh_puisage) * $pertes_charge_bouclage / 3.6;
@@ -118,11 +135,11 @@ abstract class PerformanceAuxiliaireRule extends DimensionnementSystemeRule
     /**
      * Puissance électrique du circulateur en W
      */
-    public function puissance_circulateur(): float
+    public function puissance_circulateur(Scenario $scenario): float
     {
-        return $this->get('puissance_circulateur', function (): float {
-            $puissance_hydraulique = $this->puissance_hydraulique();
-            $efficacite_circulateur = $this->efficacite_circulateur();
+        return $this->get(self::implode(['puissance_circulateur', $scenario]), function () use ($scenario): float {
+            $puissance_hydraulique = $this->puissance_hydraulique($scenario);
+            $efficacite_circulateur = $this->efficacite_circulateur($scenario);
             return \max(20, $puissance_hydraulique / $efficacite_circulateur);
         });
     }
@@ -130,11 +147,12 @@ abstract class PerformanceAuxiliaireRule extends DimensionnementSystemeRule
     /**
      * Efficacité du circulateur
      */
-    public function efficacite_circulateur(): float
+    public function efficacite_circulateur(Scenario $scenario): float
     {
-        return $this->get('efficacite_circulateur', function (): float {
-            return \pow($this->puissance_hydraulique(), 0.324) / 15.3;
-        });
+        return $this->get(
+            self::implode(['efficacite_circulateur', $scenario]),
+            fn(): float => \pow($this->puissance_hydraulique($scenario), 0.324) / 15.3
+        );
     }
 
     /**

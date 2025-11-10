@@ -81,6 +81,7 @@ final class EtapeDto
                     'etiquette_energie' => $this->data->bilan?->etiquette_energie?->value,
                     'etiquette_climat' => $this->data->bilan?->etiquette_climat?->value,
                 ],
+                'consommations' => $this->data->consommations?->__normalize(),
             ];
         }
         return $data;

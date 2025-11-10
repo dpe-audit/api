@@ -55,9 +55,7 @@ final class VentilationDto
 
         if ($this->data) {
             $data['data'] = [
-                'cef_aux' => $this->data->cef_aux,
-                'cep_aux' => $this->data->cep_aux,
-                'eges_aux' => $this->data->eges_aux,
+                'consommations' => $this->data->consommations?->__normalize(),
             ];
         }
         return $data;

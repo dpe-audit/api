@@ -69,7 +69,7 @@ final class XMLChauffageTableValeurRepository implements ChauffageTableValeurRep
             ->and('presence_ventouse', $presence_ventouse)
             ->getOne()
             ?->to(function (XMLTableElement $record) use ($pn) {
-                $pn = $record->floatval('pn_max') ?? $pn;
+                $pn = $record->floatval('pn_max') ? min($record->floatval('pn_max'), $pn) : $pn;
                 $expression = $record->strval('paux');
                 return $this->expression_resolver->evalue($expression, ['Pn' => $pn]);
             });
@@ -191,9 +191,9 @@ final class XMLChauffageTableValeurRepository implements ChauffageTableValeurRep
             ->andCompareTo('annee_installation_generateur', $annee_installation_generateur)
             ->getOne()
             ?->to(function (XMLTableElement $record) use ($pn) {
-                $pn = $record->floatval('pn_max') ? max($record->floatval('pn_max'), $pn) : $pn;
+                $pn = $record->floatval('pn_max') ? min($record->floatval('pn_max'), $pn) : $pn;
                 $expression = $record->strval('rpn');
-                return $this->expression_resolver->evalue($expression, ['Pn' => $pn]);
+                return $this->expression_resolver->evalue($expression, ['Pn' => $pn]) / 100;
             });
     }
 
@@ -212,9 +212,9 @@ final class XMLChauffageTableValeurRepository implements ChauffageTableValeurRep
             ->andCompareTo('annee_installation_generateur', $annee_installation_generateur)
             ->getOne()
             ?->to(function (XMLTableElement $record) use ($pn) {
-                $pn = $record->floatval('pn_max') ? max($record->floatval('pn_max'), $pn) : $pn;
+                $pn = $record->floatval('pn_max') ? min($record->floatval('pn_max'), $pn) : $pn;
                 $expression = $record->strval('rpint');
-                return $this->expression_resolver->evalue($expression, ['Pn' => $pn]);
+                return $this->expression_resolver->evalue($expression, ['Pn' => $pn]) / 100;
             });
     }
 
@@ -235,7 +235,7 @@ final class XMLChauffageTableValeurRepository implements ChauffageTableValeurRep
             ->andCompareTo('annee_installation_generateur', $annee_installation_generateur)
             ->getOne()
             ?->to(function (XMLTableElement $record) use ($pn, $e, $f) {
-                $pn = $record->floatval('pn_max') ? max($record->floatval('pn_max'), $pn) : $pn;
+                $pn = $record->floatval('pn_max') ? min($record->floatval('pn_max'), $pn) : $pn;
                 $expression = $record->strval('qp0');
                 $value =  $this->expression_resolver->evalue($expression, ['Pn' => $pn, 'E' => $e, 'F' => $f]);
                 return $value;

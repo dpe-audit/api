@@ -2,6 +2,7 @@
 
 namespace App\Engine\Rules\Chauffage\Systeme\Combustion;
 
+use App\Domain\Common\Enum\Scenario;
 use App\Engine\Rules\Chauffage\Systeme\PerformanceCombustionRule;
 
 final class PerformancePoeleBouilleurRule extends PerformanceCombustionRule
@@ -17,12 +18,12 @@ final class PerformancePoeleBouilleurRule extends PerformanceCombustionRule
     /**
      * @inheritDoc
      */
-    public function qp(TauxCharge $x): float
+    public function qp(Scenario $scenario, TauxCharge $x): float
     {
-        $QP0 = $this->qp0();
+        $QP0 = $this->qp0() / 1000;
         $QP50 = $this->qp50();
         $QP100 = $this->qp100();
-        $tch = $this->tch_final($x);
+        $tch = $this->tch_final($scenario, $x);
 
         return $x->value < 50
             ? ((($QP50 - 0.15 * $QP0) * $tch) / 0.5) + 0.15 * $QP0
@@ -35,7 +36,7 @@ final class PerformancePoeleBouilleurRule extends PerformanceCombustionRule
     public function qp50(): float
     {
         $pn = $this->pn();
-        $rpint = $this->rpint();
+        $rpint = $this->rpint() * 100;
         return 0.5 * $pn * ((100 - $rpint) / $rpint);
     }
 
@@ -45,7 +46,7 @@ final class PerformancePoeleBouilleurRule extends PerformanceCombustionRule
     public function qp100(): float
     {
         $pn = $this->pn();
-        $rpn = $this->rpn();
+        $rpn = $this->rpn() * 100;
         return $pn * ((100 - $rpn) / $rpn);
     }
 }

@@ -3,7 +3,8 @@
 namespace App\Engine\Rules\Chauffage;
 
 use App\Domain\Chauffage\Emetteur\TypeEmission;
-use App\Domain\Common\Enum\Mois;
+use App\Domain\Common\Consommation\ConsommationCollection;
+use App\Domain\Common\Enum\{Mois, Scenario};
 use App\Engine\Context;
 
 abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
@@ -15,6 +16,21 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
             $emissions[] = TypeEmission::from_type_generateur($this->type_generateur());
         }
         return array_unique($emissions, SORT_REGULAR);
+    }
+
+    // * Données de sortie
+
+    /**
+     * Liste des consommations du générateur d'eau chaude sanitaire
+     */
+    public function consommations(): ConsommationCollection
+    {
+        return $this->get(
+            'consommations',
+            fn(): ConsommationCollection => $this->item()->systemes()
+                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->consommations())
+                ->reduce(fn(ConsommationCollection $carry, ConsommationCollection $item) => $carry->merge($item), new ConsommationCollection)
+        );
     }
 
     /**
@@ -165,36 +181,38 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
     /**
      * Pertes de génération en Wh
      */
-    public function pertes_generation(?Mois $mois = null): float
+    public function pertes_generation(Scenario $scenario, ?Mois $mois = null): float
     {
-        $key = $mois ? "pertes_generation::{$mois->value}" : 'pertes_generation';
-        return $this->get($key, function () use ($mois): float {
-            if (null === $mois) {
-                return Mois::reduce(fn(Mois $item): float => $this->pertes_generation($item));
-            }
-            $nref = $this->nref($mois);
-            $cper = $this->presence_ventouse() ? 0.75 : 0.5;
-            $qp0 = $this->qp0();
-            $bch_hp = $this->bch_hp($mois);
-            $pn = $this->pn();
-            $dper = min($nref, (1.3 * $bch_hp) / (0.3 / $pn));
+        return $this->get(
+            self::implode(['pertes_generation', $scenario, $mois]),
+            function () use ($scenario, $mois): float {
+                if (null === $mois) {
+                    return Mois::reduce(fn(Mois $mois): float => $this->pertes_generation($scenario, $mois));
+                }
+                $nref = $this->nref($scenario, $mois);
+                $cper = $this->presence_ventouse() ? 0.75 : 0.5;
+                $qp0 = $this->qp0();
+                $bch_hp = $this->bch_hp($scenario, $mois);
+                $pn = $this->pn();
+                $dper = min($nref, (1.3 * $bch_hp) / (0.3 / $pn));
 
-            if ($this->generateur_mixte()) {
-                $dper = min($nref, (1.3 * $bch_hp) / (0.3 / $pn) + $nref * (1790 / 8760));
+                if ($this->generateur_mixte()) {
+                    $dper = min($nref, (1.3 * $bch_hp) / (0.3 / $pn) + $nref * (1790 / 8760));
+                }
+                return $cper * $qp0 * $dper * $this->rdim();
             }
-            return $cper * $qp0 * $dper * $this->rdim();
-        });
+        );
     }
 
     /**
      * Pertes de génération de chauffage récupérables en Wh
      */
-    public function pertes_generation_recuperables(?Mois $mois = null): float
+    public function pertes_generation_recuperables(Scenario $scenario, ?Mois $mois = null): float
     {
-        $key = $mois ? "pertes_generation_recuperables::{$mois->value}" : 'pertes_generation_recuperables';
-        return $this->get($key, function () use ($mois): float {
-            return 0.48 * $this->pertes_generation($mois);
-        });
+        return $this->get(
+            self::implode(['pertes_generation_recuperables', $scenario, $mois]),
+            fn(): float => 0.48 * $this->pertes_generation($scenario, $mois)
+        );
     }
 
     public function __invoke(mixed $data, Context $context): void
@@ -213,6 +231,7 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
                 pveilleuse: $rule->pveilleuse(),
                 tfonc30: $rule->tfonc30(),
                 tfonc100: $rule->tfonc100(),
+                consommations: $rule->consommations(),
             ));
         }
     }

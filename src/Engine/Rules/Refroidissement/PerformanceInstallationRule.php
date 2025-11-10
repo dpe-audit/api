@@ -2,6 +2,7 @@
 
 namespace App\Engine\Rules\Refroidissement;
 
+use App\Domain\Common\Consommation\ConsommationCollection;
 use App\Domain\Refroidissement\Installation\Installation;
 use App\Engine\{Context, RuleIterator};
 use App\Engine\Rules\Batiment\WithBatimentRule;
@@ -34,6 +35,21 @@ final class PerformanceInstallationRule extends RuleIterator
         return $this->item()->surface();
     }
 
+    // * Données de sortie
+
+    /**
+     * Liste des consommations de l'installation refroidissement
+     */
+    public function consommations(): ConsommationCollection
+    {
+        return $this->get(
+            'consommations',
+            fn(): ConsommationCollection => $this->item()->systemes()
+                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->consommations())
+                ->reduce(fn(ConsommationCollection $carry, ConsommationCollection $item) => $carry->merge($item), new ConsommationCollection)
+        );
+    }
+
     /**
      * Ratio de dimensionnement de l'installation de refroidissement
      */
@@ -54,6 +70,7 @@ final class PerformanceInstallationRule extends RuleIterator
         foreach ($this as $rule) {
             $rule->item()->calcule($rule->item()->data()->with(
                 rdim: $rule->rdim(),
+                consommations: $rule->consommations(),
             ));
         }
     }

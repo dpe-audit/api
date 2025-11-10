@@ -2,7 +2,8 @@
 
 namespace App\Engine\Rules\Refroidissement;
 
-use App\Domain\Common\Enum\{Mois, ScenarioUsage};
+use App\Domain\Common\Consommation\ConsommationCollection;
+use App\Domain\Common\Enum\{Mois, Scenario};
 use App\Engine\{Context, Rule};
 use App\Engine\Rules\Batiment\WithBatimentRule;
 use App\Engine\Rules\Enveloppe\{WithApportRule, WithDeperditionRule, WithInertieRule};
@@ -12,101 +13,41 @@ final class PerformanceRefroidissementRule extends Rule
     use WithApportRule, WithDeperditionRule, WithInertieRule, WithBatimentRule;
 
     /**
-     * Consommation d'énergie final de refroidissement en kWh/an
+     * Liste des consommations de refroidissement
      */
-    public function cef_fr(): float
+    public function consommations(): ConsommationCollection
     {
-        return $this->get('cef_fr', function (): float {
-            return $this->input()->refroidissement->systemes()
-                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->cef_fr())
-                ->reduce(fn(float $carry, float $item) => $carry + $item);
-        });
-    }
-
-    /**
-     * Consommation d'énergie primaire de refroidissement en kWh/an
-     */
-    public function cep_fr(): float
-    {
-        return $this->get('cep_fr', function (): float {
-            return $this->input()->refroidissement->systemes()
-                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->cep_fr())
-                ->reduce(fn(float $carry, float $item) => $carry + $item);
-        });
-    }
-
-    /**
-     * Consommation d'énergie primaire de refroidissement en kWh/an
-     */
-    public function eges_fr(): float
-    {
-        return $this->get('eges_fr', function (): float {
-            return $this->input()->refroidissement->systemes()
-                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->eges_fr())
-                ->reduce(fn(float $carry, float $item) => $carry + $item);
-        });
-    }
-
-    /**
-     * Consommation d'énergie final des auxiliaires de refroidissement en kWh/an
-     */
-    public function cef_aux(): float
-    {
-        return $this->get('cef_aux', function (): float {
-            return $this->input()->refroidissement->systemes()
-                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->cef_aux())
-                ->reduce(fn(float $carry, float $item) => $carry + $item);
-        });
-    }
-
-    /**
-     * Consommation d'énergie primaire des auxiliaires de refroidissement en kWh/an
-     */
-    public function cep_aux(): float
-    {
-        return $this->get('cep_aux', function (): float {
-            return $this->input()->refroidissement->systemes()
-                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->cep_aux())
-                ->reduce(fn(float $carry, float $item) => $carry + $item);
-        });
-    }
-
-    /**
-     * Consommation d'énergie primaire des auxiliaires de refroidissement en kWh/an
-     */
-    public function eges_aux(): float
-    {
-        return $this->get('eges_aux', function (): float {
-            return $this->input()->refroidissement->systemes()
-                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->eges_aux())
-                ->reduce(fn(float $carry, float $item) => $carry + $item);
-        });
+        return $this->get(
+            'consommations',
+            fn(): ConsommationCollection => $this->input()->refroidissement->systemes()
+                ->map(fn($item) => $this->requireIterator(PerformanceSystemeRule::class, $item)->consommations())
+                ->reduce(fn(ConsommationCollection $carry, ConsommationCollection $item) => $carry->merge($item), new ConsommationCollection)
+        );
     }
 
     /**
      * Besoin de refroidissement en kWh
      */
-    public function bfr(?Mois $mois = null): float
+    public function bfr(Scenario $scenario, ?Mois $mois = null): float
     {
-        $key = $mois ? "bfr::{$mois->value}" : 'bfr';
-        return $this->get($key, function () use ($mois): float {
+        return $this->get(self::implode(['bfr', $scenario, $mois]), function () use ($scenario, $mois): float {
             if (null === $mois) {
-                return Mois::reduce(fn(Mois $item) => $this->bfr($item));
+                return Mois::reduce(fn(Mois $mois) => $this->bfr($scenario, $mois));
             }
-            $text_fr = $this->text_fr($mois);
-            $nref_fr = $this->nref_fr($mois);
+            $text_fr = $this->text_fr($scenario, $mois);
+            $nref_fr = $this->nref_fr($scenario, $mois);
 
             if (!$text_fr || !$nref_fr) {
                 return 0;
             }
-            if (0.5 > $this->rbth($mois)) {
+            if (0.5 > $this->rbth($scenario, $mois)) {
                 return 0;
             }
             $fut = $this->fut($mois);
-            $tint = $this->tint();
+            $tint = $this->tint($scenario);
 
             $gv = $this->gv() / 1000;
-            $bfr = $this->apport_fr($mois) / 1000;
+            $bfr = $this->apport_fr($scenario, $mois) / 1000;
             $bfr -= $fut * $gv * ($tint - $text_fr) * $nref_fr;
             return max($bfr, 0);
         });
@@ -115,14 +56,14 @@ final class PerformanceRefroidissementRule extends Rule
     /**
      * Ratio mensuel de bilan thermique
      */
-    public function rbth(Mois $mois): float
+    public function rbth(Scenario $scenario, Mois $mois): float
     {
-        return $this->get("rbth::{$mois->value}", function () use ($mois) {
+        return $this->get(self::implode(['rbth', $scenario, $mois]), function () use ($scenario, $mois): float {
             $gv = $this->gv();
-            $apports = $this->apport_fr($mois);
-            $text_fr = $this->text_fr($mois);
-            $nref_fr = $this->nref_fr($mois);
-            $rbth = $gv * ($text_fr - $this->tint()) * $nref_fr;
+            $apports = $this->apport_fr($scenario, $mois);
+            $text_fr = $this->text_fr($scenario, $mois);
+            $nref_fr = $this->nref_fr($scenario, $mois);
+            $rbth = $gv * ($text_fr - $this->tint($scenario)) * $nref_fr;
             return $rbth ? $apports / $rbth : 0;
         });
     }
@@ -130,11 +71,11 @@ final class PerformanceRefroidissementRule extends Rule
     /**
      * Facteur mensuel d'utilisation des apports
      */
-    public function fut(Mois $mois): float
+    public function fut(Mois $mois, Scenario $scenario = Scenario::CONVENTIONNEL): float
     {
-        return $this->get("fut::{$mois->value}", function () use ($mois) {
+        return $this->get(self::implode(['fut', $scenario, $mois]), function () use ($scenario, $mois): float {
             $t = $this->t();
-            $rbth = $this->rbth($mois);
+            $rbth = $this->rbth($scenario, $mois);
             $a = 1 + ($t / 15);
 
             if ($rbth == 1) {
@@ -150,11 +91,11 @@ final class PerformanceRefroidissementRule extends Rule
     /**
      * Température de consigne en froid exprimée en °C
      */
-    public function tint(): float
+    public function tint(Scenario $scenario = Scenario::CONVENTIONNEL): float
     {
-        return $this->get('tint', fn() => match ($this->scenario()) {
-            ScenarioUsage::CONVENTIONNEL => 26,
-            ScenarioUsage::DEPENSIER => 28,
+        return $this->get(self::implode(['tint', $scenario]), fn() => match ($scenario) {
+            Scenario::CONVENTIONNEL => 26,
+            Scenario::DEPENSIER => 28,
         });
     }
 
@@ -186,13 +127,8 @@ final class PerformanceRefroidissementRule extends Rule
         parent::__invoke($data, $context);
 
         $context->input()->refroidissement->calcule($context->input()->refroidissement->data()->with(
-            bfr: $this->bfr(),
-            cef_fr: $this->cef_fr(),
-            cep_fr: $this->cep_fr(),
-            eges_fr: $this->eges_fr(),
-            cef_aux: $this->cef_aux(),
-            cep_aux: $this->cep_aux(),
-            eges_aux: $this->eges_aux(),
+            bfr: $this->bfr(Scenario::CONVENTIONNEL),
+            consommations: $this->consommations(),
         ));
     }
 }

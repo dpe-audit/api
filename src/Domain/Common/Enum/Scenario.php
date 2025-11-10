@@ -2,7 +2,7 @@
 
 namespace App\Domain\Common\Enum;
 
-enum ScenarioUsage: string
+enum Scenario: string
 {
     case CONVENTIONNEL = 'conventionnel';
     case DEPENSIER = 'depensier';

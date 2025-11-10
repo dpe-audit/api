@@ -3,7 +3,7 @@
 namespace App\Engine\Rules\Batiment;
 
 use App\Domain\Batiment\ZoneClimatique;
-use App\Domain\Common\Enum\Mois;
+use App\Domain\Common\Enum\{Mois, Scenario};
 use App\Engine\Rules\WithRule;
 
 trait WithBatimentRule
@@ -55,24 +55,24 @@ trait WithBatimentRule
         return $this->batiment_rule()->e($mois);
     }
 
-    public function e_fr(Mois $mois): ?float
+    public function e_fr(Scenario $scenario, Mois $mois): ?float
     {
-        return $this->batiment_rule()->e_fr($mois);
+        return $this->batiment_rule()->e_fr($scenario, $mois);
     }
 
-    public function nref(Mois $mois): ?float
+    public function nref(Scenario $scenario, Mois $mois): ?float
     {
-        return $this->batiment_rule()->nref($mois);
+        return $this->batiment_rule()->nref($scenario, $mois);
     }
 
-    public function nref_fr(Mois $mois): ?float
+    public function nref_fr(Scenario $scenario, Mois $mois): ?float
     {
-        return $this->batiment_rule()->nref_fr($mois);
+        return $this->batiment_rule()->nref_fr($scenario, $mois);
     }
 
-    public function dh(Mois $mois): ?float
+    public function dh(Scenario $scenario, Mois $mois): ?float
     {
-        return $this->batiment_rule()->dh($mois);
+        return $this->batiment_rule()->dh($scenario, $mois);
     }
 
     public function dh14(Mois $mois): ?float
@@ -85,9 +85,9 @@ trait WithBatimentRule
         return $this->batiment_rule()->text($mois);
     }
 
-    public function text_fr(Mois $mois): ?float
+    public function text_fr(Scenario $scenario, Mois $mois): ?float
     {
-        return $this->batiment_rule()->text_fr($mois);
+        return $this->batiment_rule()->text_fr($scenario, $mois);
     }
 
     public function tefs(Mois $mois): ?float

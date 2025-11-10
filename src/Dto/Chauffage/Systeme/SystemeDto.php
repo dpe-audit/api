@@ -62,12 +62,7 @@ final class SystemeDto
                 'rd' => $this->data->rd,
                 'rg' => $this->data->rg,
                 'rr' => $this->data->rr,
-                'cef_ch' => $this->data->cef_ch,
-                'cep_ch' => $this->data->cep_ch,
-                'eges_ch' => $this->data->eges_ch,
-                'cef_aux' => $this->data->cef_aux,
-                'cep_aux' => $this->data->cep_aux,
-                'eges_aux' => $this->data->eges_aux,
+                'consommations' => $this->data->consommations?->__normalize(),
             ];
         }
         return $data;

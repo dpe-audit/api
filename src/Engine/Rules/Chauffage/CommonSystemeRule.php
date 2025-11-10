@@ -9,6 +9,7 @@ use App\Domain\Chauffage\Installation\Regulation\TypeIntermittence;
 use App\Domain\Chauffage\Systeme\{Systeme, Configuration};
 use App\Domain\Chauffage\Systeme\Reseau\{IsolationReseau, TypeDistribution};
 use App\Domain\Chauffage\TypeChauffage;
+use App\Domain\Common\Enum\Scenario;
 use App\Engine\RuleIterator;
 use App\Engine\Rules\Batiment\{WithBatiment, WithBatimentRule};
 use App\Engine\Rules\Enveloppe\{WithDeperditionRule, WithInertieRule};
@@ -218,9 +219,9 @@ abstract class CommonSystemeRule extends RuleIterator
         return $values;
     }
 
-    public function bch(): float
+    public function bch(Scenario $scenario): float
     {
-        return $this->require(PerformanceChauffageRule::class)->bch();
+        return $this->require(PerformanceChauffageRule::class)->bch($scenario);
     }
 
     public function fch(): float

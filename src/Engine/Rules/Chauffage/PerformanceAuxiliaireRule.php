@@ -2,7 +2,8 @@
 
 namespace App\Engine\Rules\Chauffage;
 
-use App\Domain\Common\Enum\{Energie, Mois, Usage};
+use App\Domain\Common\Consommation\{Consommation, ConsommationCollection};
+use App\Domain\Common\Enum\{Energie, Mois, Scenario, Usage};
 use App\Engine\Table\ChauffageTableValeurRepository;
 
 abstract class PerformanceAuxiliaireRule extends CommonSystemeRule
@@ -10,62 +11,83 @@ abstract class PerformanceAuxiliaireRule extends CommonSystemeRule
     public function __construct(protected ChauffageTableValeurRepository $repository) {}
 
     /**
+     * Liste des consommations des auxiliaires de chauffage
+     */
+    public function consommations(): ConsommationCollection
+    {
+        $collection = new ConsommationCollection();
+        return $collection->with(...Scenario::each(fn(Scenario $scenario) => Consommation::create(
+            scenario: $scenario,
+            usage: Usage::AUXILIAIRE,
+            energie: Energie::ELECTRICITE,
+            cef: $this->cef_aux($scenario),
+            cep: $this->cep_aux($scenario),
+            eges: $this->eges_aux($scenario),
+        )));
+    }
+
+    /**
      * Consommation finale de l'auxiliaire de chauffage en kWh/an
      */
-    public function cef_aux(): float
+    public function cef_aux(Scenario $scenario): float
     {
-        return $this->get('cef_aux', function (): float {
-            return $this->caux_generation() + $this->caux_distribution();
+        return $this->get(self::implode(['cef_aux', $scenario]), function () use ($scenario): float {
+            return $this->caux_generation($scenario) + $this->caux_distribution($scenario);
         });
     }
 
     /**
      * Consommation primaire de l'auxiliaire de chauffage en kWh/an
      */
-    public function cep_aux(): float
+    public function cep_aux(Scenario $scenario): float
     {
-        return $this->get('cep_aux', function (): float {
-            return $this->cef_aux() * Energie::ELECTRICITE->facteur_energie_primaire();
+        return $this->get(self::implode(['cep_aux', $scenario]), function () use ($scenario): float {
+            return $this->cef_aux($scenario) * Energie::ELECTRICITE->facteur_energie_primaire();
         });
     }
 
     /**
      * Emission de CO2 de l'auxiliaire de chauffage en kg/an
      */
-    public function eges_aux(): float
+    public function eges_aux(Scenario $scenario): float
     {
-        return $this->get('eges_aux', function (): float {
-            return $this->cef_aux() * Energie::ELECTRICITE->facteur_eges(Usage::AUXILIAIRE);
+        return $this->get(self::implode(['eges_aux', $scenario]), function () use ($scenario): float {
+            return $this->cef_aux($scenario) * Energie::ELECTRICITE->facteur_eges(Usage::AUXILIAIRE);
         });
     }
 
     /**
      * Consommation de l'auxiliaire de génération en kWh/an
      */
-    public function caux_generation(): float
+    public function caux_generation(Scenario $scenario): float
     {
-        return $this->get('caux_generation', function (): float {
-            $bch = $this->bch();
-            $rdim = $this->rdim();
-            $paux = $this->paux();
-            $pn = $this->pn();
-            return ($paux / 1000 * $bch * $rdim) / $pn;
-        });
+        return $this->get(
+            self::implode(['caux_generation', $scenario]),
+            function () use ($scenario): float {
+                $bch = $this->bch($scenario);
+                $rdim = $this->rdim();
+                $paux = $this->paux();
+                $pn = $this->pn();
+                return ($paux / 1000 * $bch * $rdim) / $pn;
+            }
+        );
     }
 
     /**
      * Consommation de l'auxiliaire de distribution en kWh
      */
-    public function caux_distribution(?Mois $mois = null): float
+    public function caux_distribution(Scenario $scenario, ?Mois $mois = null): float
     {
-        $key = $mois ? "caux_distribution::{$mois->value}" : 'caux_distribution';
-        return $this->get($key, function () use ($mois): float {
-            if (null === $mois) {
-                return Mois::reduce(fn(Mois $mois): float => $this->caux_distribution($mois));
+        return $this->get(
+            self::implode(['caux_distribution', $scenario, $mois]),
+            function () use ($scenario, $mois): float {
+                if (null === $mois) {
+                    return Mois::reduce(fn(Mois $mois): float => $this->caux_distribution($scenario, $mois));
+                }
+                $nref = $this->nref($scenario, $mois);
+                return $this->puissance_circulateur() * $nref / 1000;
             }
-            $nref = $this->nref($mois);
-            return $this->puissance_circulateur() * $nref / 1000;
-        });
+        );
     }
 
     /**

@@ -52,9 +52,7 @@ final class GenerateurDto
                 'rdim' => $this->data->rdim,
                 'ratio_utilisation' => $this->data->ratio_utilisation,
                 'pvent_moy' => $this->data->pvent_moy,
-                'cef_aux' => $this->data->cef_aux,
-                'cep_aux' => $this->data->cep_aux,
-                'eges_aux' => $this->data->eges_aux,
+                'consommations' => $this->data->consommations?->__normalize(),
             ];
         }
         return $data;

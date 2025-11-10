@@ -35,7 +35,7 @@ final class XMLEcsTableValeurRepository implements EcsTableValeurRepository
             ->and('presence_ventouse', $presence_ventouse)
             ->getOne()
             ?->to(function (XMLTableElement $record) use ($pn) {
-                $pn = $record->floatval('pn_max') ?? $pn;
+                $pn = $record->floatval('pn_max') ? min($record->floatval('pn_max'), $pn) : $pn;
                 $expression = $record->strval('paux');
                 return $this->expression_resolver->evalue($expression, ['Pn' => $pn]);
             });
@@ -125,12 +125,12 @@ final class XMLEcsTableValeurRepository implements EcsTableValeurRepository
             ->and('energie_generateur', $energie_generateur, false)
             ->and('mode_combustion', $mode_combustion)
             ->andCompareTo('volume_stockage', $volume_stockage)
-            ->andCompareTo('annee_installation', $annee_installation)
+            ->andCompareTo('annee_installation_generateur', $annee_installation)
             ->getOne()
             ?->to(function (XMLTableElement $record) use ($pn) {
-                $pn = $record->floatval('pn_max') ? max($record->floatval('pn_max'), $pn) : $pn;
+                $pn = $record->floatval('pn_max') ? min($record->floatval('pn_max'), $pn) : $pn;
                 $expression = $record->strval('rpn');
-                return $this->expression_resolver->evalue($expression, ['Pn' => $pn]);
+                return $this->expression_resolver->evalue($expression, ['Pn' => $pn]) / 100;
             });
     }
 
@@ -150,10 +150,10 @@ final class XMLEcsTableValeurRepository implements EcsTableValeurRepository
             ->and('energie_generateur', $energie_generateur, false)
             ->and('mode_combustion', $mode_combustion)
             ->andCompareTo('volume_stockage', $volume_stockage)
-            ->andCompareTo('annee_installation', $annee_installation)
+            ->andCompareTo('annee_installation_generateur', $annee_installation)
             ->getOne()
             ?->to(function (XMLTableElement $record) use ($pn, $e, $f) {
-                $pn = $record->floatval('pn_max') ? max($record->floatval('pn_max'), $pn) : $pn;
+                $pn = $record->floatval('pn_max') ? min($record->floatval('pn_max'), $pn) : $pn;
                 $expression = $record->strval('qp0');
                 $variables = ['Pn' => $pn, 'E' => $e, 'F' => $f];
                 return $this->expression_resolver->evalue($expression, $variables);

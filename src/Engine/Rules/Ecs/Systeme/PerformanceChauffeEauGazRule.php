@@ -2,6 +2,8 @@
 
 namespace App\Engine\Rules\Ecs\Systeme;
 
+use App\Domain\Common\Enum\Scenario;
+
 final class PerformanceChauffeEauGazRule extends PerformanceSystemeCombustionRule
 {
     public function supports(): bool
@@ -17,10 +19,10 @@ final class PerformanceChauffeEauGazRule extends PerformanceSystemeCombustionRul
     /**
      * @inheritDoc
      */
-    public function rg(): float
+    public function rg(Scenario $scenario): float
     {
-        return $this->get('rg', function (): float {
-            $becs = $this->becs();
+        return $this->get(self::implode(['rg', $scenario]), function () use ($scenario): float {
+            $becs = $this->becs($scenario) / 1000;
             $rpn = $this->rpn();
             $qp0 = $this->qp0();
             $pveilleuse = $this->pveilleuse();

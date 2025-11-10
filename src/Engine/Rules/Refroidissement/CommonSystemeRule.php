@@ -2,6 +2,7 @@
 
 namespace App\Engine\Rules\Refroidissement;
 
+use App\Domain\Common\Enum\{Mois, Scenario};
 use App\Domain\Refroidissement\Generateur\EnergieGenerateur;
 use App\Domain\Refroidissement\Systeme\Systeme;
 use App\Engine\RuleIterator;
@@ -42,9 +43,9 @@ abstract class CommonSystemeRule extends RuleIterator
         return $this->item()->generateur()->reseau_froid()?->contenu_co2();
     }
 
-    public function bfr(): float
+    public function bfr(Scenario $scenario, ?Mois $mois = null): float
     {
-        return $this->require(PerformanceRefroidissementRule::class)->bfr();
+        return $this->require(PerformanceRefroidissementRule::class)->bfr($scenario, $mois);
     }
 
     public function rdim_installation(): float

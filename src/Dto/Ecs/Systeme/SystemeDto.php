@@ -50,16 +50,11 @@ final class SystemeDto
                 'rs' => $this->data->rs,
                 'rg' => $this->data->rg,
                 'rgs' => $this->data->rgs,
-                'cef_ecs' => $this->data->cef_ecs,
-                'cep_ecs' => $this->data->cep_ecs,
-                'eges_ecs' => $this->data->eges_ecs,
-                'cef_aux' => $this->data->cef_aux,
-                'cep_aux' => $this->data->cep_aux,
-                'eges_aux' => $this->data->eges_aux,
                 'pertes_stockage' => $this->data->pertes_stockage,
                 'pertes_stockage_recuperables' => $this->data->pertes_stockage_recuperables,
                 'pertes_distribution' => $this->data->pertes_distribution,
                 'pertes_distribution_recuperables' => $this->data->pertes_distribution_recuperables,
+                'consommations' => $this->data->consommations?->__normalize(),
             ];
         }
         return $data;
