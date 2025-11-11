@@ -117,7 +117,7 @@ abstract class PerformanceSystemeRule extends PerformanceAuxiliaireRule
     }
 
     /**
-     * Puissance émise utile par le générateur en base exprimée en kW
+     * Puissance émise utile par le générateur en base en kW
      */
     public function pe(): float
     {

@@ -89,7 +89,7 @@ final class PerformanceRefroidissementRule extends Rule
     }
 
     /**
-     * Température de consigne en froid exprimée en °C
+     * Température de consigne en froid en °C
      */
     public function tint(Scenario $scenario = Scenario::CONVENTIONNEL): float
     {
@@ -100,7 +100,7 @@ final class PerformanceRefroidissementRule extends Rule
     }
 
     /**
-     * Constante de temps de la zone pour le refroidissement exprimée en J/K
+     * Constante de temps de la zone pour le refroidissement en J/K
      */
     public function t(): float
     {
@@ -110,7 +110,7 @@ final class PerformanceRefroidissementRule extends Rule
     }
 
     /**
-     * Capacité thermique intérieure efficace de la zone exprimée en J/K
+     * Capacité thermique intérieure efficace de la zone en J/K
      */
     public function cin(): float
     {

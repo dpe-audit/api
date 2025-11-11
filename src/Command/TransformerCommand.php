@@ -43,8 +43,6 @@ final class TransformerCommand extends LocalCommand
             $payload = $this->transformer->__invoke($data);
             $errors = $this->validator->validate($payload);
 
-            $json = json_encode($payload->__normalize(), JSON_UNESCAPED_UNICODE);
-            dd($json);
             if (count($errors) > 0) {
                 $output->writeln("Error");
 

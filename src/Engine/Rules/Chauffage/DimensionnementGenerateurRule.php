@@ -19,7 +19,7 @@ abstract class DimensionnementGenerateurRule extends CommonGenerateurRule
     }
 
     /**
-     * Puissance conventionnelle de chauffage exprimée en W
+     * Puissance conventionnelle de chauffage en kW
      */
     public function pch(): float
     {
@@ -38,7 +38,7 @@ abstract class DimensionnementGenerateurRule extends CommonGenerateurRule
     }
 
     /**
-     * Puissance nominale conventionnelle exprimée en kW
+     * Puissance nominale conventionnelle en kW
      */
     public function pn(): float
     {
@@ -61,7 +61,7 @@ abstract class DimensionnementGenerateurRule extends CommonGenerateurRule
     }
 
     /**
-     * Puissance de dimensionnement du générateur exprimée en kW
+     * Puissance de dimensionnement du générateur en kW
      */
     public function pdim(): float
     {

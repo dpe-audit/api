@@ -2,1394 +2,1172 @@
 <table name="chauffage.combustion">
     <row>
         <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
-        <annee_installation_generateur lte="1977" gte="" />
-        <pn lte="70" gt="" />
-        <pn_max></pn_max>
-        <rpn>47 + 6 * logPn</rpn>
-        <rpint>48 + 6 * logPn</rpint>
-        <qp0>0.08 * Pn * (Pn ^ -0.27)</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
-        <annee_installation_generateur lte="1977" gte="" />
-        <pn lte="400" gt="70" />
-        <pn_max>70</pn_max>
-        <rpn>58</rpn>
-        <rpint>59</rpint>
-        <qp0>1.8</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
-        <annee_installation_generateur lte="1977" gte="" />
-        <pn lte="" gt="400" />
-        <pn_max>70</pn_max>
-        <rpn>58</rpn>
-        <rpint>59</rpint>
-        <qp0>1.1</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
-        <annee_installation_generateur lte="1994" gte="1978" />
-        <pn lte="70" gt="" />
-        <pn_max></pn_max>
-        <rpn>47 + 6 * logPn</rpn>
-        <rpint>48 + 6 * logPn</rpint>
-        <qp0>0.07 * Pn * (Pn ^ -0.3)</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
-        <annee_installation_generateur lte="1994" gte="1978" />
-        <pn lte="400" gt="70" />
-        <pn_max>70</pn_max>
-        <rpn>58</rpn>
-        <rpint>59</rpint>
-        <qp0>1.4</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
-        <annee_installation_generateur lte="1994" gte="1978" />
-        <pn lte="" gt="400" />
-        <pn_max>70</pn_max>
-        <rpn>58</rpn>
-        <rpint>59</rpint>
-        <qp0>0.8</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
-        <annee_installation_generateur lte="2003" gte="1995" />
-        <pn lte="70" gt="" />
-        <pn_max></pn_max>
-        <rpn>47 + 6 * logPn</rpn>
-        <rpint>48 + 6 * logPn</rpint>
-        <qp0>0.085 * Pn * (Pn ^ -0.4)</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
-        <annee_installation_generateur lte="2003" gte="1995" />
-        <pn lte="400" gt="70" />
-        <pn_max>70</pn_max>
-        <rpn>58</rpn>
-        <rpint>59</rpint>
-        <qp0>1.1</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
-        <annee_installation_generateur lte="2003" gte="1995" />
-        <pn lte="" gt="400" />
-        <pn_max>70</pn_max>
-        <rpn>58</rpn>
-        <rpint>59</rpint>
-        <qp0>0.5</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
-        <annee_installation_generateur lte="2012" gte="2004" />
-        <pn lte="70" gt="" />
-        <pn_max></pn_max>
-        <rpn>57 + 6 * logPn</rpn>
-        <rpint>58 + 6 * logPn</rpint>
-        <qp0>0.085 * Pn * (Pn ^ -0.4)</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
-        <annee_installation_generateur lte="2012" gte="2004" />
-        <pn lte="400" gt="70" />
-        <pn_max>70</pn_max>
-        <rpn>68</rpn>
-        <rpint>69</rpint>
-        <qp0>1.1</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
-        <annee_installation_generateur lte="2012" gte="2004" />
-        <pn lte="" gt="400" />
-        <pn_max>70</pn_max>
-        <rpn>68</rpn>
-        <rpint>69</rpint>
-        <qp0>0.5</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
-        <annee_installation_generateur lte="2017" gte="2013" />
-        <pn lte="70" gt="" />
-        <pn_max></pn_max>
-        <rpn>67 + 6 * logPn</rpn>
-        <rpint>68 + 6 * logPn</rpint>
-        <qp0>0.085 * Pn * (Pn ^ -0.4)</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
-        <annee_installation_generateur lte="2017" gte="2013" />
-        <pn lte="400" gt="70" />
-        <pn_max>70</pn_max>
-        <rpn>78</rpn>
-        <rpint>79</rpint>
-        <qp0>1.1</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
-        <annee_installation_generateur lte="2017" gte="2013" />
-        <pn lte="" gt="400" />
-        <pn_max>70</pn_max>
-        <rpn>78</rpn>
-        <rpint>79</rpint>
-        <qp0>0.5</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
-        <annee_installation_generateur lte="2019" gte="2018" />
-        <pn lte="70" gt="" />
-        <pn_max></pn_max>
-        <rpn>80 + 2 * logPn</rpn>
-        <rpint>77 + 3 * logPn</rpint>
-        <qp0>0.085 * Pn * (Pn ^ -0.4)</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
-        <annee_installation_generateur lte="2019" gte="2018" />
-        <pn lte="400" gt="70" />
-        <pn_max>70</pn_max>
-        <rpn>84</rpn>
-        <rpint>83</rpint>
-        <qp0>1.1</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
-        <annee_installation_generateur lte="2019" gte="2018" />
-        <pn lte="" gt="400" />
-        <pn_max>70</pn_max>
-        <rpn>84</rpn>
-        <rpint>83</rpint>
-        <qp0>0.5</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
-        <annee_installation_generateur lte="" gte="2020" />
-        <pn lte="20" gt="" />
-        <pn_max></pn_max>
-        <rpn>89 + 2 * logPn</rpn>
-        <rpint>84 + 2 * logPn</rpint>
-        <qp0>0.085 * Pn * (Pn ^ -0.4)</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
-        <annee_installation_generateur lte="" gte="2020" />
-        <pn lte="70" gt="20" />
-        <pn_max></pn_max>
-        <rpn>90 + 2 * logPn</rpn>
-        <rpint>85 + 2 * logPn</rpint>
-        <qp0>0.085 * Pn * (Pn ^ -0.4)</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
-        <annee_installation_generateur lte="" gte="2020" />
-        <pn lte="400" gt="70" />
-        <pn_max>70</pn_max>
-        <rpn>94</rpn>
-        <rpint>89</rpint>
-        <qp0>1.1</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
-        <annee_installation_generateur lte="" gte="2020" />
-        <pn lte="" gt="400" />
-        <pn_max>70</pn_max>
-        <rpn>94</rpn>
-        <rpint>89</rpint>
-        <qp0>0.5</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_granule</energie_generateur>
-        <annee_installation_generateur lte="1977" gte="" />
-        <pn lte="70" gt="" />
-        <pn_max></pn_max>
-        <rpn>47 + 6 * logPn</rpn>
-        <rpint>48 + 6 * logPn</rpint>
-        <qp0>0.08 * Pn * (Pn ^ -0.27)</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_granule</energie_generateur>
-        <annee_installation_generateur lte="1977" gte="" />
-        <pn lte="400" gt="70" />
-        <pn_max>70</pn_max>
-        <rpn>58</rpn>
-        <rpint>59</rpint>
-        <qp0>1.8</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_granule</energie_generateur>
-        <annee_installation_generateur lte="1977" gte="" />
-        <pn lte="" gt="400" />
-        <pn_max>70</pn_max>
-        <rpn>58</rpn>
-        <rpint>59</rpint>
-        <qp0>1.1</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_granule</energie_generateur>
-        <annee_installation_generateur lte="1994" gte="1978" />
-        <pn lte="70" gt="" />
-        <pn_max></pn_max>
-        <rpn>47 + 6 * logPn</rpn>
-        <rpint>48 + 6 * logPn</rpint>
-        <qp0>0.08 * Pn * (Pn ^ -0.3)</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_granule</energie_generateur>
-        <annee_installation_generateur lte="1994" gte="1978" />
-        <pn lte="400" gt="70" />
-        <pn_max>70</pn_max>
-        <rpn>58</rpn>
-        <rpint>59</rpint>
-        <qp0>1.4</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_granule</energie_generateur>
-        <annee_installation_generateur lte="1994" gte="1978" />
-        <pn lte="" gt="400" />
-        <pn_max>70</pn_max>
-        <rpn>58</rpn>
-        <rpint>59</rpint>
-        <qp0>0.8</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_granule</energie_generateur>
-        <annee_installation_generateur lte="2003" gte="1995" />
-        <pn lte="70" gt="" />
-        <pn_max></pn_max>
-        <rpn>57 + 6 * logPn</rpn>
-        <rpint>58 + 6 * logPn</rpint>
-        <qp0>0.085 * Pn * (Pn ^ -0.4)</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_granule</energie_generateur>
-        <annee_installation_generateur lte="2003" gte="1995" />
-        <pn lte="400" gt="70" />
-        <pn_max>70</pn_max>
-        <rpn>68</rpn>
-        <rpint>69</rpint>
-        <qp0>1.1</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_granule</energie_generateur>
-        <annee_installation_generateur lte="2003" gte="1995" />
-        <pn lte="" gt="400" />
-        <pn_max>70</pn_max>
-        <rpn>68</rpn>
-        <rpint>69</rpint>
-        <qp0>0.5</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_granule</energie_generateur>
-        <annee_installation_generateur lte="2012" gte="2004" />
-        <pn lte="70" gt="" />
-        <pn_max></pn_max>
-        <rpn>67 + 6 * logPn</rpn>
-        <rpint>68 + 6 * logPn</rpint>
-        <qp0>0.085 * Pn * (Pn ^ -0.4)</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_granule</energie_generateur>
-        <annee_installation_generateur lte="2012" gte="2004" />
-        <pn lte="400" gt="70" />
-        <pn_max>70</pn_max>
-        <rpn>78</rpn>
-        <rpint>79</rpint>
-        <qp0>1.1</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_granule</energie_generateur>
-        <annee_installation_generateur lte="2012" gte="2004" />
-        <pn lte="" gt="400" />
-        <pn_max>70</pn_max>
-        <rpn>78</rpn>
-        <rpint>79</rpint>
-        <qp0>0.5</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_granule</energie_generateur>
-        <annee_installation_generateur lte="2019" gte="2013" />
-        <pn lte="70" gt="" />
-        <pn_max></pn_max>
-        <rpn>80 + 2 * logPn</rpn>
-        <rpint>77 + 3 * logPn</rpint>
-        <qp0>0.085 * Pn * (Pn ^ -0.4)</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_granule</energie_generateur>
-        <annee_installation_generateur lte="2019" gte="2013" />
-        <pn lte="400" gt="70" />
-        <pn_max>70</pn_max>
-        <rpn>84</rpn>
-        <rpint>83</rpint>
-        <qp0>1.1</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_granule</energie_generateur>
-        <annee_installation_generateur lte="2019" gte="2013" />
-        <pn lte="" gt="400" />
-        <pn_max>70</pn_max>
-        <rpn>84</rpn>
-        <rpint>83</rpint>
-        <qp0>0.5</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_granule</energie_generateur>
-        <annee_installation_generateur lte="" gte="2020" />
-        <pn lte="20" gt="" />
-        <pn_max></pn_max>
-        <rpn>91 + 2 * logPn</rpn>
-        <rpint>88 + 2 * logPn</rpint>
-        <qp0>0.085 * Pn * (Pn ^ -0.4)</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_granule</energie_generateur>
-        <annee_installation_generateur lte="" gte="2020" />
-        <pn lte="70" gt="20" />
-        <pn_max></pn_max>
-        <rpn>92 + 2 * logPn</rpn>
-        <rpint>89 + 2 * logPn</rpint>
-        <qp0>0.085 * Pn * (Pn ^ -0.4)</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_granule</energie_generateur>
-        <annee_installation_generateur lte="" gte="2020" />
-        <pn lte="400" gt="70" />
-        <pn_max>70</pn_max>
-        <rpn>96</rpn>
-        <rpint>93</rpint>
-        <qp0>1.1</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>bois_granule</energie_generateur>
-        <annee_installation_generateur lte="" gte="2020" />
-        <pn lte="" gt="400" />
-        <pn_max>70</pn_max>
-        <rpn>96</rpn>
-        <rpint>93</rpint>
-        <qp0>0.5</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>basse_temperature</mode_combustion>
-        <energie_generateur>fioul</energie_generateur>
-        <annee_installation_generateur lte="2015" gte="" />
-        <pn lte="" gt="" />
-        <pn_max></pn_max>
-        <rpn>87.5 + 1.5 * logPn</rpn>
-        <rpint>87.5 + 1.5 * logPn</rpint>
-        <qp0>0.01 * Pn</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>basse_temperature</mode_combustion>
-        <energie_generateur>fioul</energie_generateur>
-        <annee_installation_generateur lte="" gte="2016" />
-        <pn lte="" gt="" />
-        <pn_max></pn_max>
-        <rpn>87.5 + 1.5 * logPn</rpn>
-        <rpint>87.5 + 1.5 * logPn</rpint>
-        <qp0>Pn * (E + F * logPn) / 100 * Pn</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>basse_temperature</mode_combustion>
         <energie_generateur>gaz_naturel|gpl</energie_generateur>
-        <annee_installation_generateur lte="2000" gte="" />
-        <pn lte="" gt="" />
-        <pn_max></pn_max>
-        <rpn>87.5 + 1.5 * logPn</rpn>
-        <rpint>87.5 + 1.5 * logPn</rpint>
-        <qp0>0.012 * Pn</qp0>
-        <pveilleuse>120</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>basse_temperature</mode_combustion>
-        <energie_generateur>gaz_naturel|gpl</energie_generateur>
-        <annee_installation_generateur lte="2015" gte="2001" />
-        <pn lte="" gt="" />
-        <pn_max></pn_max>
-        <rpn>87.5 + 1.5 * logPn</rpn>
-        <rpint>87.5 + 1.5 * logPn</rpint>
-        <qp0>0.01 * Pn</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>basse_temperature</mode_combustion>
-        <energie_generateur>gaz_naturel|gpl</energie_generateur>
-        <annee_installation_generateur lte="" gte="2016" />
-        <pn lte="" gt="" />
-        <pn_max></pn_max>
-        <rpn>87.5 + 1.5 * logPn</rpn>
-        <rpint>87.5 + 1.5 * logPn</rpint>
-        <qp0>Pn * (E + F * logPn) / 100 * Pn</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>condensation</mode_combustion>
-        <energie_generateur>fioul</energie_generateur>
-        <annee_installation_generateur lte="2015" gte="" />
-        <pn lte="" gt="" />
-        <pn_max></pn_max>
-        <rpn>91 + logPn</rpn>
-        <rpint>97 + logPn</rpint>
-        <qp0>0.01 * Pn</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>condensation</mode_combustion>
-        <energie_generateur>fioul</energie_generateur>
-        <annee_installation_generateur lte="" gte="2016" />
-        <pn lte="70" gt="" />
-        <pn_max></pn_max>
-        <rpn>91 + 3 * logPn</rpn>
-        <rpint>103 + 2.5 * logPn</rpint>
-        <qp0>0.005 * Pn</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>condensation</mode_combustion>
-        <energie_generateur>fioul</energie_generateur>
-        <annee_installation_generateur lte="" gte="2016" />
-        <pn lte="400" gt="70" />
-        <pn_max></pn_max>
-        <rpn>94 + logPn</rpn>
-        <rpint>105 + 0.5 * logPn</rpint>
-        <qp0>0.003 * Pn</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>condensation</mode_combustion>
-        <energie_generateur>fioul</energie_generateur>
-        <annee_installation_generateur lte="" gte="2016" />
-        <pn lte="" gt="400" />
-        <pn_max>400</pn_max>
-        <rpn>96.6</rpn>
-        <rpint>106.3</rpint>
-        <qp0>0.003 * Pn</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>condensation</mode_combustion>
-        <energie_generateur>gaz_naturel|gpl</energie_generateur>
-        <annee_installation_generateur lte="1985" gte="" />
-        <pn lte="" gt="" />
-        <pn_max></pn_max>
-        <rpn>91 + logPn</rpn>
-        <rpint>97 + logPn</rpint>
-        <qp0>0.01 * Pn</qp0>
-        <pveilleuse>150</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>condensation</mode_combustion>
-        <energie_generateur>gaz_naturel|gpl</energie_generateur>
-        <annee_installation_generateur lte="2000" gte="1986" />
-        <pn lte="" gt="" />
-        <pn_max></pn_max>
-        <rpn>91 + logPn</rpn>
-        <rpint>97 + logPn</rpint>
-        <qp0>0.01 * Pn</qp0>
-        <pveilleuse>120</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>condensation</mode_combustion>
-        <energie_generateur>gaz_naturel|gpl</energie_generateur>
-        <annee_installation_generateur lte="2015" gte="2001" />
-        <pn lte="" gt="" />
-        <pn_max></pn_max>
-        <rpn>91 + logPn</rpn>
-        <rpint>97 + logPn</rpint>
-        <qp0>0.01 * Pn</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>condensation</mode_combustion>
-        <energie_generateur>gaz_naturel|gpl</energie_generateur>
-        <annee_installation_generateur lte="" gte="2016" />
-        <pn lte="70" gt="" />
-        <pn_max></pn_max>
-        <rpn>91 + 3 * logPn</rpn>
-        <rpint>103 + 2.5 * logPn</rpint>
-        <qp0>0.005 * Pn</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>condensation</mode_combustion>
-        <energie_generateur>gaz_naturel|gpl</energie_generateur>
-        <annee_installation_generateur lte="" gte="2016" />
-        <pn lte="400" gt="70" />
-        <pn_max></pn_max>
-        <rpn>94 + logPn</rpn>
-        <rpint>105 + 0.5 * logPn</rpint>
-        <qp0>0.003 * Pn</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>condensation</mode_combustion>
-        <energie_generateur>gaz_naturel|gpl</energie_generateur>
-        <annee_installation_generateur lte="" gte="2016" />
-        <pn lte="" gt="400" />
-        <pn_max>400</pn_max>
-        <rpn>96.6</rpn>
-        <rpint>106.3</rpint>
-        <qp0>0.003 * Pn</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>charbon</energie_generateur>
-        <annee_installation_generateur lte="1977" gte="" />
-        <pn lte="70" gt="" />
-        <pn_max></pn_max>
-        <rpn>47 + 6 * logPn</rpn>
-        <rpint>48 + 6 * logPn</rpint>
-        <qp0>0.08 * Pn * (Pn ^ -0.27)</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>charbon</energie_generateur>
-        <annee_installation_generateur lte="1977" gte="" />
-        <pn lte="400" gt="70" />
-        <pn_max>70</pn_max>
-        <rpn>58</rpn>
-        <rpint>59</rpint>
-        <qp0>1.8</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>charbon</energie_generateur>
-        <annee_installation_generateur lte="1977" gte="" />
-        <pn lte="" gt="400" />
-        <pn_max>70</pn_max>
-        <rpn>58</rpn>
-        <rpint>59</rpint>
-        <qp0>1.1</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>charbon</energie_generateur>
-        <annee_installation_generateur lte="1994" gte="1978" />
-        <pn lte="70" gt="" />
-        <pn_max></pn_max>
-        <rpn>47 + 6 * logPn</rpn>
-        <rpint>48 + 6 * logPn</rpint>
-        <qp0>0.07 * Pn * (Pn ^ -0.3)</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>charbon</energie_generateur>
-        <annee_installation_generateur lte="1994" gte="1978" />
-        <pn lte="400" gt="70" />
-        <pn_max>70</pn_max>
-        <rpn>58</rpn>
-        <rpint>59</rpint>
-        <qp0>1.4</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>charbon</energie_generateur>
-        <annee_installation_generateur lte="1994" gte="1978" />
-        <pn lte="" gt="400" />
-        <pn_max>70</pn_max>
-        <rpn>58</rpn>
-        <rpint>59</rpint>
-        <qp0>0.8</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>charbon</energie_generateur>
-        <annee_installation_generateur lte="2003" gte="1995" />
-        <pn lte="70" gt="" />
-        <pn_max></pn_max>
-        <rpn>47 + 6 * logPn</rpn>
-        <rpint>48 + 6 * logPn</rpint>
-        <qp0>0.085 * Pn * (Pn ^ -0.4)</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>charbon</energie_generateur>
-        <annee_installation_generateur lte="2003" gte="1995" />
-        <pn lte="400" gt="70" />
-        <pn_max>70</pn_max>
-        <rpn>58</rpn>
-        <rpint>59</rpint>
-        <qp0>1.1</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>charbon</energie_generateur>
-        <annee_installation_generateur lte="2003" gte="1995" />
-        <pn lte="" gt="400" />
-        <pn_max>70</pn_max>
-        <rpn>58</rpn>
-        <rpint>59</rpint>
-        <qp0>0.5</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>charbon</energie_generateur>
-        <annee_installation_generateur lte="2012" gte="2004" />
-        <pn lte="70" gt="" />
-        <pn_max></pn_max>
-        <rpn>57 + 6 * logPn</rpn>
-        <rpint>58 + 6 * logPn</rpint>
-        <qp0>0.085 * Pn * (Pn ^ -0.4)</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>charbon</energie_generateur>
-        <annee_installation_generateur lte="2012" gte="2004" />
-        <pn lte="400" gt="70" />
-        <pn_max>70</pn_max>
-        <rpn>68</rpn>
-        <rpint>69</rpint>
-        <qp0>1.1</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>charbon</energie_generateur>
-        <annee_installation_generateur lte="2012" gte="2004" />
-        <pn lte="" gt="400" />
-        <pn_max>70</pn_max>
-        <rpn>68</rpn>
-        <rpint>69</rpint>
-        <qp0>0.5</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>charbon</energie_generateur>
-        <annee_installation_generateur lte="2017" gte="2013" />
-        <pn lte="70" gt="" />
-        <pn_max></pn_max>
-        <rpn>67 + 6 * logPn</rpn>
-        <rpint>68 + 6 * logPn</rpint>
-        <qp0>0.085 * Pn * (Pn ^ -0.4)</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>charbon</energie_generateur>
-        <annee_installation_generateur lte="2017" gte="2013" />
-        <pn lte="400" gt="70" />
-        <pn_max>70</pn_max>
-        <rpn>78</rpn>
-        <rpint>79</rpint>
-        <qp0>1.1</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>charbon</energie_generateur>
-        <annee_installation_generateur lte="2017" gte="2013" />
-        <pn lte="" gt="400" />
-        <pn_max>70</pn_max>
-        <rpn>78</rpn>
-        <rpint>79</rpint>
-        <qp0>0.5</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>charbon</energie_generateur>
-        <annee_installation_generateur lte="2019" gte="2018" />
-        <pn lte="70" gt="" />
-        <pn_max></pn_max>
-        <rpn>80 + 2 * logPn</rpn>
-        <rpint>77 + 3 * logPn</rpint>
-        <qp0>0.085 * Pn * (Pn ^ -0.4)</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>charbon</energie_generateur>
-        <annee_installation_generateur lte="2019" gte="2018" />
-        <pn lte="400" gt="70" />
-        <pn_max>70</pn_max>
-        <rpn>84</rpn>
-        <rpint>83</rpint>
-        <qp0>1.1</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>charbon</energie_generateur>
-        <annee_installation_generateur lte="2019" gte="2018" />
-        <pn lte="" gt="400" />
-        <pn_max>70</pn_max>
-        <rpn>84</rpn>
-        <rpint>83</rpint>
-        <qp0>0.5</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>charbon</energie_generateur>
-        <annee_installation_generateur lte="" gte="2020" />
-        <pn lte="20" gt="" />
-        <pn_max></pn_max>
-        <rpn>89 + 2 * logPn</rpn>
-        <rpint>84 + 2 * logPn</rpint>
-        <qp0>0.085 * Pn * (Pn ^ -0.4)</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>charbon</energie_generateur>
-        <annee_installation_generateur lte="" gte="2020" />
-        <pn lte="70" gt="20" />
-        <pn_max></pn_max>
-        <rpn>90 + 2 * logPn</rpn>
-        <rpint>85 + 2 * logPn</rpint>
-        <qp0>0.085 * Pn * (Pn ^ -0.4)</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>charbon</energie_generateur>
-        <annee_installation_generateur lte="" gte="2020" />
-        <pn lte="400" gt="70" />
-        <pn_max>70</pn_max>
-        <rpn>94</rpn>
-        <rpint>89</rpint>
-        <qp0>1.1</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion></mode_combustion>
-        <energie_generateur>charbon</energie_generateur>
-        <annee_installation_generateur lte="" gte="2020" />
-        <pn lte="" gt="400" />
-        <pn_max>70</pn_max>
-        <rpn>94</rpn>
-        <rpint>89</rpint>
-        <qp0>0.5</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
         <mode_combustion>standard</mode_combustion>
-        <energie_generateur>fioul</energie_generateur>
-        <annee_installation_generateur lte="1969" gte="" />
-        <pn lte="" gt="" />
-        <pn_max></pn_max>
-        <rpn>84 + 2 * logPn</rpn>
-        <rpint>80 + 3 * logPn</rpint>
-        <qp0>0.04 * Pn</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>standard</mode_combustion>
-        <energie_generateur>fioul</energie_generateur>
-        <annee_installation_generateur lte="1975" gte="1970" />
-        <pn lte="" gt="" />
-        <pn_max></pn_max>
-        <rpn>84 + 2 * logPn</rpn>
-        <rpint>80 + 3 * logPn</rpint>
-        <qp0>0.03 * Pn</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>standard</mode_combustion>
-        <energie_generateur>fioul</energie_generateur>
-        <annee_installation_generateur lte="1980" gte="1976" />
-        <pn lte="" gt="" />
-        <pn_max></pn_max>
-        <rpn>84 + 2 * logPn</rpn>
-        <rpint>80 + 3 * logPn</rpint>
-        <qp0>0.02 * Pn</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>standard</mode_combustion>
-        <energie_generateur>fioul</energie_generateur>
-        <annee_installation_generateur lte="1990" gte="1981" />
-        <pn lte="" gt="" />
-        <pn_max></pn_max>
-        <rpn>84 + 2 * logPn</rpn>
-        <rpint>80 + 3 * logPn</rpint>
-        <qp0>0.01 * Pn</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>standard</mode_combustion>
-        <energie_generateur>fioul</energie_generateur>
-        <annee_installation_generateur lte="2015" gte="1991" />
-        <pn lte="" gt="" />
-        <pn_max></pn_max>
-        <rpn>84 + 2 * logPn</rpn>
-        <rpint>80 + 3 * logPn</rpint>
-        <qp0>0.01 * Pn</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>standard</mode_combustion>
-        <energie_generateur>fioul</energie_generateur>
-        <annee_installation_generateur lte="" gte="2016" />
-        <pn lte="" gt="" />
-        <pn_max></pn_max>
-        <rpn>84 + 2 * logPn</rpn>
-        <rpint>80 + 3 * logPn</rpint>
-        <qp0>Pn * (E + F * logPn) / 100 * Pn</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>standard</mode_combustion>
-        <energie_generateur>gaz_naturel|gpl</energie_generateur>
         <annee_installation_generateur lte="1980" gte="" />
         <pn lte="" gt="" />
         <pn_max></pn_max>
-        <rpn>84 + 2 * logPn</rpn>
-        <rpint>80 + 3 * logPn</rpint>
-        <qp0>0.04 * Pn</qp0>
+        <rpn>(84 + 2 * logPn) / 100</rpn>
+        <rpint>(80 + 3 * logPn) / 100</rpint>
+        <qp0>0.04 * Pn * 1000</qp0>
         <pveilleuse>240</pveilleuse>
+        <tv_generateur_combustion_id>1</tv_generateur_combustion_id>
     </row>
     <row>
         <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>standard</mode_combustion>
         <energie_generateur>gaz_naturel|gpl</energie_generateur>
+        <mode_combustion>standard</mode_combustion>
         <annee_installation_generateur lte="1985" gte="1981" />
         <pn lte="" gt="" />
         <pn_max></pn_max>
-        <rpn>84 + 2 * logPn</rpn>
-        <rpint>80 + 3 * logPn</rpint>
-        <qp0>0.02 * Pn</qp0>
+        <rpn>(84 + 2 * logPn) / 100</rpn>
+        <rpint>(80 + 3 * logPn) / 100</rpint>
+        <qp0>0.02 * Pn * 1000</qp0>
         <pveilleuse>150</pveilleuse>
+        <tv_generateur_combustion_id>2</tv_generateur_combustion_id>
     </row>
     <row>
         <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>standard</mode_combustion>
         <energie_generateur>gaz_naturel|gpl</energie_generateur>
+        <mode_combustion>standard</mode_combustion>
         <annee_installation_generateur lte="1990" gte="1986" />
         <pn lte="" gt="" />
         <pn_max></pn_max>
-        <rpn>84 + 2 * logPn</rpn>
-        <rpint>80 + 3 * logPn</rpint>
-        <qp0>0.015 * Pn</qp0>
+        <rpn>(84 + 2 * logPn) / 100</rpn>
+        <rpint>(80 + 3 * logPn) / 100</rpint>
+        <qp0>0.015 * Pn * 1000</qp0>
         <pveilleuse>150</pveilleuse>
+        <tv_generateur_combustion_id>3</tv_generateur_combustion_id>
     </row>
     <row>
         <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>standard</mode_combustion>
         <energie_generateur>gaz_naturel|gpl</energie_generateur>
+        <mode_combustion>standard</mode_combustion>
         <annee_installation_generateur lte="2000" gte="1991" />
         <pn lte="" gt="" />
         <pn_max></pn_max>
-        <rpn>84 + 2 * logPn</rpn>
-        <rpint>80 + 3 * logPn</rpint>
-        <qp0>0.012 * Pn</qp0>
+        <rpn>(84 + 2 * logPn) / 100</rpn>
+        <rpint>(80 + 3 * logPn) / 100</rpint>
+        <qp0>0.012 * Pn * 1000</qp0>
         <pveilleuse>120</pveilleuse>
+        <tv_generateur_combustion_id>4</tv_generateur_combustion_id>
     </row>
     <row>
         <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>standard</mode_combustion>
         <energie_generateur>gaz_naturel|gpl</energie_generateur>
+        <mode_combustion>standard</mode_combustion>
         <annee_installation_generateur lte="2015" gte="2001" />
         <pn lte="" gt="" />
         <pn_max></pn_max>
-        <rpn>84 + 2 * logPn</rpn>
-        <rpint>80 + 3 * logPn</rpint>
-        <qp0>0.01 * Pn</qp0>
+        <rpn>(84 + 2 * logPn) / 100</rpn>
+        <rpint>(80 + 3 * logPn) / 100</rpint>
+        <qp0>0.01 * Pn * 1000</qp0>
         <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>5</tv_generateur_combustion_id>
     </row>
     <row>
         <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
-        <mode_combustion>standard</mode_combustion>
         <energie_generateur>gaz_naturel|gpl</energie_generateur>
+        <mode_combustion>standard</mode_combustion>
         <annee_installation_generateur lte="" gte="2016" />
         <pn lte="" gt="" />
         <pn_max></pn_max>
-        <rpn>84 + 2 * logPn</rpn>
-        <rpint>80 + 3 * logPn</rpint>
-        <qp0>Pn * (E + F * logPn) / 100 * Pn</qp0>
+        <rpn>(84 + 2 * logPn) / 100</rpn>
+        <rpint>(80 + 3 * logPn) / 100</rpint>
+        <qp0>(E + F * logPn) / 100 * Pn * 1000</qp0>
         <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>6</tv_generateur_combustion_id>
     </row>
     <row>
-        <type_generateur>generateur_air_chaud</type_generateur>
-        <mode_combustion>standard</mode_combustion>
-        <energie_generateur></energie_generateur>
-        <annee_installation_generateur lte="2005" gte="" />
-        <pn lte="300" gt="" />
-        <pn_max></pn_max>
-        <rpn>77</rpn>
-        <rpint>74</rpint>
-        <qp0>Pn * (1.75 -0.55 * logPn) / 100</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>generateur_air_chaud</type_generateur>
-        <mode_combustion>standard</mode_combustion>
-        <energie_generateur></energie_generateur>
-        <annee_installation_generateur lte="2005" gte="" />
-        <pn lte="" gt="300" />
-        <pn_max>300</pn_max>
-        <rpn>77</rpn>
-        <rpint>74</rpint>
-        <qp0>Pn * (1.75 -0.55 * logPn) / 100</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>generateur_air_chaud</type_generateur>
-        <mode_combustion>standard</mode_combustion>
-        <energie_generateur></energie_generateur>
-        <annee_installation_generateur lte="" gte="2006" />
-        <pn lte="300" gt="" />
-        <pn_max></pn_max>
-        <rpn>84</rpn>
-        <rpint>77</rpint>
-        <qp0>Pn * (1.75 -0.55 * logPn) / 100</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>generateur_air_chaud</type_generateur>
-        <mode_combustion>standard</mode_combustion>
-        <energie_generateur></energie_generateur>
-        <annee_installation_generateur lte="" gte="2006" />
-        <pn lte="" gt="300" />
-        <pn_max>300</pn_max>
-        <rpn>84</rpn>
-        <rpint>77</rpint>
-        <qp0>Pn * (1.75 -0.55 * logPn) / 100</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>generateur_air_chaud</type_generateur>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>gaz_naturel|gpl</energie_generateur>
         <mode_combustion>basse_temperature</mode_combustion>
-        <energie_generateur></energie_generateur>
-        <annee_installation_generateur lte="2005" gte="" />
-        <pn lte="300" gt="" />
+        <annee_installation_generateur lte="2000" gte="" />
+        <pn lte="" gt="" />
         <pn_max></pn_max>
-        <rpn>77</rpn>
-        <rpint>74</rpint>
-        <qp0>Pn * (1.75 -0.55 * logPn) / 100</qp0>
-        <pveilleuse>0</pveilleuse>
+        <rpn>(87.5 + 1.5 * logPn) / 100</rpn>
+        <rpint>(87.5 + 1.5 * logPn) / 100</rpint>
+        <qp0>0.012 * Pn * 1000</qp0>
+        <pveilleuse>120</pveilleuse>
+        <tv_generateur_combustion_id>7</tv_generateur_combustion_id>
     </row>
     <row>
-        <type_generateur>generateur_air_chaud</type_generateur>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>gaz_naturel|gpl</energie_generateur>
         <mode_combustion>basse_temperature</mode_combustion>
-        <energie_generateur></energie_generateur>
-        <annee_installation_generateur lte="2005" gte="" />
-        <pn lte="" gt="300" />
-        <pn_max>300</pn_max>
-        <rpn>77</rpn>
-        <rpint>74</rpint>
-        <qp0>Pn * (1.75 -0.55 * logPn) / 100</qp0>
-        <pveilleuse>0</pveilleuse>
-    </row>
-    <row>
-        <type_generateur>generateur_air_chaud</type_generateur>
-        <mode_combustion>basse_temperature</mode_combustion>
-        <energie_generateur></energie_generateur>
-        <annee_installation_generateur lte="" gte="2006" />
-        <pn lte="300" gt="" />
+        <annee_installation_generateur lte="2015" gte="2001" />
+        <pn lte="" gt="" />
         <pn_max></pn_max>
-        <rpn>84</rpn>
-        <rpint>77</rpint>
-        <qp0>Pn * (1.75 -0.55 * logPn) / 100</qp0>
+        <rpn>(87.5 + 1.5 * logPn) / 100</rpn>
+        <rpint>(87.5 + 1.5 * logPn) / 100</rpint>
+        <qp0>0.01 * Pn * 1000</qp0>
         <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>8</tv_generateur_combustion_id>
     </row>
     <row>
-        <type_generateur>generateur_air_chaud</type_generateur>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>gaz_naturel|gpl</energie_generateur>
         <mode_combustion>basse_temperature</mode_combustion>
-        <energie_generateur></energie_generateur>
-        <annee_installation_generateur lte="" gte="2006" />
-        <pn lte="" gt="300" />
-        <pn_max>300</pn_max>
-        <rpn>84</rpn>
-        <rpint>77</rpint>
-        <qp0>Pn * (1.75 -0.55 * logPn) / 100</qp0>
+        <annee_installation_generateur lte="" gte="2016" />
+        <pn lte="" gt="" />
+        <pn_max></pn_max>
+        <rpn>(87.5 + 1.5 * logPn) / 100</rpn>
+        <rpint>(87.5 + 1.5 * logPn) / 100</rpint>
+        <qp0>(E + F * logPn) / 100 * Pn * 1000</qp0>
         <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>9</tv_generateur_combustion_id>
     </row>
     <row>
-        <type_generateur>generateur_air_chaud</type_generateur>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>gaz_naturel|gpl</energie_generateur>
         <mode_combustion>condensation</mode_combustion>
-        <energie_generateur></energie_generateur>
-        <annee_installation_generateur lte="" gte="2006" />
-        <pn lte="300" gt="" />
+        <annee_installation_generateur lte="1985" gte="" />
+        <pn lte="" gt="" />
         <pn_max></pn_max>
-        <rpn>90</rpn>
-        <rpint>83</rpint>
-        <qp0>Pn * (1.75 -0.55 * logPn) / 100</qp0>
+        <rpn>(91 + logPn) / 100</rpn>
+        <rpint>(97 + logPn) / 100</rpint>
+        <qp0>0.01 * Pn * 1000</qp0>
+        <pveilleuse>150</pveilleuse>
+        <tv_generateur_combustion_id>10</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>gaz_naturel|gpl</energie_generateur>
+        <mode_combustion>condensation</mode_combustion>
+        <annee_installation_generateur lte="2000" gte="1986" />
+        <pn lte="" gt="" />
+        <pn_max></pn_max>
+        <rpn>(91 + logPn) / 100</rpn>
+        <rpint>(97 + logPn) / 100</rpint>
+        <qp0>0</qp0>
+        <pveilleuse>120</pveilleuse>
+        <tv_generateur_combustion_id>11</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>gaz_naturel|gpl</energie_generateur>
+        <mode_combustion>condensation</mode_combustion>
+        <annee_installation_generateur lte="2015" gte="2001" />
+        <pn lte="" gt="" />
+        <pn_max></pn_max>
+        <rpn>(91 + logPn) / 100</rpn>
+        <rpint>(97 + logPn) / 100</rpint>
+        <qp0>0</qp0>
         <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>12</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>gaz_naturel|gpl</energie_generateur>
+        <mode_combustion>condensation</mode_combustion>
+        <annee_installation_generateur lte="" gte="2016" />
+        <pn lte="70" gt="" />
+        <pn_max></pn_max>
+        <rpn>(91 + 3 * logPn) / 100</rpn>
+        <rpint>(103 + 2.5 * logPn) / 100</rpint>
+        <qp0>0.005 * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>13</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>gaz_naturel|gpl</energie_generateur>
+        <mode_combustion>condensation</mode_combustion>
+        <annee_installation_generateur lte="" gte="2016" />
+        <pn lte="400" gt="70" />
+        <pn_max></pn_max>
+        <rpn>(94 + logPn) / 100</rpn>
+        <rpint>(105 + 0.5 * logPn) / 100</rpint>
+        <qp0>0.003 * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>14</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>gaz_naturel|gpl</energie_generateur>
+        <mode_combustion>condensation</mode_combustion>
+        <annee_installation_generateur lte="" gte="2016" />
+        <pn lte="" gt="400" />
+        <pn_max>400</pn_max>
+        <rpn>96.6 / 100</rpn>
+        <rpint>106.3 / 100</rpint>
+        <qp0>0</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>15</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>fioul</energie_generateur>
+        <mode_combustion>standard</mode_combustion>
+        <annee_installation_generateur lte="1969" gte="" />
+        <pn lte="" gt="" />
+        <pn_max></pn_max>
+        <rpn>(84 + 2 * logPn) / 100</rpn>
+        <rpint>(80 + 3 * logPn) / 100</rpint>
+        <qp0>0.04 * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>16</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>fioul</energie_generateur>
+        <mode_combustion>standard</mode_combustion>
+        <annee_installation_generateur lte="1975" gte="1970" />
+        <pn lte="" gt="" />
+        <pn_max></pn_max>
+        <rpn>(84 + 2 * logPn) / 100</rpn>
+        <rpint>(80 + 3 * logPn) / 100</rpint>
+        <qp0>0.03 * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>17</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>fioul</energie_generateur>
+        <mode_combustion>standard</mode_combustion>
+        <annee_installation_generateur lte="1980" gte="1976" />
+        <pn lte="" gt="" />
+        <pn_max></pn_max>
+        <rpn>(84 + 2 * logPn) / 100</rpn>
+        <rpint>(80 + 3 * logPn) / 100</rpint>
+        <qp0>0.02 * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>18</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>fioul</energie_generateur>
+        <mode_combustion>standard</mode_combustion>
+        <annee_installation_generateur lte="1990" gte="1981" />
+        <pn lte="" gt="" />
+        <pn_max></pn_max>
+        <rpn>(84 + 2 * logPn) / 100</rpn>
+        <rpint>(80 + 3 * logPn) / 100</rpint>
+        <qp0>0.01 * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>19</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>fioul</energie_generateur>
+        <mode_combustion>standard</mode_combustion>
+        <annee_installation_generateur lte="2015" gte="1991" />
+        <pn lte="" gt="" />
+        <pn_max></pn_max>
+        <rpn>(84 + 2 * logPn) / 100</rpn>
+        <rpint>(80 + 3 * logPn) / 100</rpint>
+        <qp0>0.01 * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>20</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>fioul</energie_generateur>
+        <mode_combustion>standard</mode_combustion>
+        <annee_installation_generateur lte="" gte="2016" />
+        <pn lte="" gt="" />
+        <pn_max></pn_max>
+        <rpn>(84 + 2 * logPn) / 100</rpn>
+        <rpint>(80 + 3 * logPn) / 100</rpint>
+        <qp0>(E + F * logPn) / 100 * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>21</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>fioul</energie_generateur>
+        <mode_combustion>basse_temperature</mode_combustion>
+        <annee_installation_generateur lte="2015" gte="" />
+        <pn lte="" gt="" />
+        <pn_max></pn_max>
+        <rpn>(87.5 + 1.5 * logPn) / 100</rpn>
+        <rpint>(87.5 + 1.5 * logPn) / 100</rpint>
+        <qp0>0.01 * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>22</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>fioul</energie_generateur>
+        <mode_combustion>basse_temperature</mode_combustion>
+        <annee_installation_generateur lte="" gte="2016" />
+        <pn lte="" gt="" />
+        <pn_max></pn_max>
+        <rpn>(87.5 + 1.5 * logPn) / 100</rpn>
+        <rpint>(87.5 + 1.5 * logPn) / 100</rpint>
+        <qp0>(E + F * logPn) / 100 * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>23</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>fioul</energie_generateur>
+        <mode_combustion>condensation</mode_combustion>
+        <annee_installation_generateur lte="2015" gte="" />
+        <pn lte="" gt="" />
+        <pn_max></pn_max>
+        <rpn>(91 + logPn) / 100</rpn>
+        <rpint>(97 + logPn) / 100</rpint>
+        <qp0>0.01 * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>24</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>fioul</energie_generateur>
+        <mode_combustion>condensation</mode_combustion>
+        <annee_installation_generateur lte="" gte="2016" />
+        <pn lte="70" gt="" />
+        <pn_max></pn_max>
+        <rpn>(91 + 3 * logPn) / 100</rpn>
+        <rpint>(98 + 3 * logPn) / 100</rpint>
+        <qp0>0.005 * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>25</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>fioul</energie_generateur>
+        <mode_combustion>condensation</mode_combustion>
+        <annee_installation_generateur lte="" gte="2016" />
+        <pn lte="400" gt="70" />
+        <pn_max></pn_max>
+        <rpn>(94 + logPn) / 100</rpn>
+        <rpint>(100 + logPn) / 100</rpint>
+        <qp0>0.006 * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>26</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>fioul</energie_generateur>
+        <mode_combustion>condensation</mode_combustion>
+        <annee_installation_generateur lte="" gte="2016" />
+        <pn lte="" gt="400" />
+        <pn_max>400</pn_max>
+        <rpn>96.6 / 100</rpn>
+        <rpint>102.6 / 100</rpint>
+        <qp0>0.003 * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>27</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_buche|bois_plaquette|charbon</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="1977" gte="" />
+        <pn lte="70" gt="" />
+        <pn_max></pn_max>
+        <rpn>(47 + 6 * logPn) / 100</rpn>
+        <rpint>(48 + 6 * logPn) / 100</rpint>
+        <qp0>0.08 * (Pn ^ -0.27) * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>28</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_buche|bois_plaquette|charbon</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="1977" gte="" />
+        <pn lte="400" gt="70" />
+        <pn_max>70</pn_max>
+        <rpn>58 / 100</rpn>
+        <rpint>59 / 100</rpint>
+        <qp0>1.8 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>29</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_buche|bois_plaquette|charbon</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="1977" gte="" />
+        <pn lte="" gt="400" />
+        <pn_max>70</pn_max>
+        <rpn>58 / 100</rpn>
+        <rpint>59 / 100</rpint>
+        <qp0>1.1 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>30</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_buche|bois_plaquette|charbon</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="1994" gte="1978" />
+        <pn lte="70" gt="" />
+        <pn_max></pn_max>
+        <rpn>(47 + 6 * logPn) / 100</rpn>
+        <rpint>(48 + 6 * logPn) / 100</rpint>
+        <qp0>0.07 * (Pn ^ -0.3) * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>31</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_buche|bois_plaquette|charbon</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="1994" gte="1978" />
+        <pn lte="400" gt="70" />
+        <pn_max>70</pn_max>
+        <rpn>58 / 100</rpn>
+        <rpint>59 / 100</rpint>
+        <qp0>1.4 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>32</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_buche|bois_plaquette|charbon</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="1994" gte="1978" />
+        <pn lte="" gt="400" />
+        <pn_max>70</pn_max>
+        <rpn>58 / 100</rpn>
+        <rpint>59 / 100</rpint>
+        <qp0>0.8 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>33</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_buche|bois_plaquette|charbon</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="2003" gte="1995" />
+        <pn lte="70" gt="" />
+        <pn_max></pn_max>
+        <rpn>(47 + 6 * logPn) / 100</rpn>
+        <rpint>(48 + 6 * logPn) / 100</rpint>
+        <qp0>0.085 * (Pn ^ -0.4) * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>34</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_buche|bois_plaquette|charbon</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="2003" gte="1995" />
+        <pn lte="400" gt="70" />
+        <pn_max>70</pn_max>
+        <rpn>58 / 100</rpn>
+        <rpint>59 / 100</rpint>
+        <qp0>1.1 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>35</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_buche|bois_plaquette|charbon</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="2003" gte="1995" />
+        <pn lte="" gt="400" />
+        <pn_max>70</pn_max>
+        <rpn>58 / 100</rpn>
+        <rpint>59 / 100</rpint>
+        <qp0>0.5 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>36</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_buche|bois_plaquette|charbon</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="2012" gte="2004" />
+        <pn lte="70" gt="" />
+        <pn_max></pn_max>
+        <rpn>(57 + 6 * logPn) / 100</rpn>
+        <rpint>(58 + 6 * logPn) / 100</rpint>
+        <qp0>0.085 * (Pn ^ -0.4) * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>37</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_buche|bois_plaquette|charbon</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="2012" gte="2004" />
+        <pn lte="400" gt="70" />
+        <pn_max>70</pn_max>
+        <rpn>68 / 100</rpn>
+        <rpint>69 / 100</rpint>
+        <qp0>1.1 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>38</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_buche|bois_plaquette|charbon</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="2012" gte="2004" />
+        <pn lte="" gt="400" />
+        <pn_max>70</pn_max>
+        <rpn>68 / 100</rpn>
+        <rpint>69 / 100</rpint>
+        <qp0>0.5 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>39</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_buche|bois_plaquette|charbon</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="2017" gte="2013" />
+        <pn lte="70" gt="" />
+        <pn_max></pn_max>
+        <rpn>(67 + 6 * logPn) / 100</rpn>
+        <rpint>(68 + 6 * logPn) / 100</rpint>
+        <qp0>0.085 * (Pn ^ -0.4) * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>40</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_buche|bois_plaquette|charbon</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="2017" gte="2013" />
+        <pn lte="400" gt="70" />
+        <pn_max>70</pn_max>
+        <rpn>78 / 100</rpn>
+        <rpint>79 / 100</rpint>
+        <qp0>1.1 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>41</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_buche|bois_plaquette|charbon</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="2017" gte="2013" />
+        <pn lte="" gt="400" />
+        <pn_max>70</pn_max>
+        <rpn>78 / 100</rpn>
+        <rpint>79 / 100</rpint>
+        <qp0>0.5 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>42</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_buche|bois_plaquette|charbon</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="2019" gte="2018" />
+        <pn lte="70" gt="" />
+        <pn_max></pn_max>
+        <rpn>(80 + 2 * logPn) / 100</rpn>
+        <rpint>(77 + 3 * logPn) / 100</rpint>
+        <qp0>0.085 * (Pn ^ -0.4) * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>43</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_buche|bois_plaquette|charbon</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="2019" gte="2018" />
+        <pn lte="400" gt="70" />
+        <pn_max>70</pn_max>
+        <rpn>84 / 100</rpn>
+        <rpint>83 / 100</rpint>
+        <qp0>1.1 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>44</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_buche|bois_plaquette|charbon</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="2019" gte="2018" />
+        <pn lte="" gt="400" />
+        <pn_max>70</pn_max>
+        <rpn>84 / 100</rpn>
+        <rpint>83 / 100</rpint>
+        <qp0>0.5 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>45</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_buche|bois_plaquette|charbon</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="" gte="2020" />
+        <pn lte="20" gt="" />
+        <pn_max></pn_max>
+        <rpn>(89 + 2 * logPn) / 100</rpn>
+        <rpint>(84 + 2 * logPn) / 100</rpint>
+        <qp0>0.085 * (Pn ^ -0.4) * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>46</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_buche|bois_plaquette|charbon</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="" gte="2020" />
+        <pn lte="70" gt="20" />
+        <pn_max></pn_max>
+        <rpn>(90 + 2 * logPn) / 100</rpn>
+        <rpint>(85 + 2 * logPn) / 100</rpint>
+        <qp0>0.085 * (Pn ^ -0.4) * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>47</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_buche|bois_plaquette|charbon</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="" gte="2020" />
+        <pn lte="400" gt="70" />
+        <pn_max>70</pn_max>
+        <rpn>94 / 100</rpn>
+        <rpint>89 / 100</rpint>
+        <qp0>1.1 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>48</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_buche|bois_plaquette|charbon</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="" gte="2020" />
+        <pn lte="" gt="400" />
+        <pn_max>70</pn_max>
+        <rpn>94 / 100</rpn>
+        <rpint>89 / 100</rpint>
+        <qp0>0.5 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>49</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="1977" gte="" />
+        <pn lte="70" gt="" />
+        <pn_max></pn_max>
+        <rpn>(47 + 6 * logPn) / 100</rpn>
+        <rpint>(48 + 6 * logPn) / 100</rpint>
+        <qp0>0.08 * (Pn ^ -0.27) * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>50</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="1977" gte="" />
+        <pn lte="400" gt="70" />
+        <pn_max>70</pn_max>
+        <rpn>58 / 100</rpn>
+        <rpint>59 / 100</rpint>
+        <qp0>1.8 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>51</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="1977" gte="" />
+        <pn lte="" gt="400" />
+        <pn_max>70</pn_max>
+        <rpn>58 / 100</rpn>
+        <rpint>59 / 100</rpint>
+        <qp0>1.1 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>52</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="1994" gte="1978" />
+        <pn lte="70" gt="" />
+        <pn_max></pn_max>
+        <rpn>(47 + 6 * logPn) / 100</rpn>
+        <rpint>(48 + 6 * logPn) / 100</rpint>
+        <qp0>0.08 * (Pn ^ -0.3) * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>53</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="1994" gte="1978" />
+        <pn lte="400" gt="70" />
+        <pn_max>70</pn_max>
+        <rpn>58 / 100</rpn>
+        <rpint>59 / 100</rpint>
+        <qp0>1.4 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>54</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="1994" gte="1978" />
+        <pn lte="" gt="400" />
+        <pn_max>70</pn_max>
+        <rpn>58 / 100</rpn>
+        <rpint>59 / 100</rpint>
+        <qp0>0.8 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>55</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="2003" gte="1995" />
+        <pn lte="70" gt="" />
+        <pn_max></pn_max>
+        <rpn>(57 + 6 * logPn) / 100</rpn>
+        <rpint>(58 + 6 * logPn) / 100</rpint>
+        <qp0>0.085 * (Pn ^ -0.4) * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>56</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="2003" gte="1995" />
+        <pn lte="400" gt="70" />
+        <pn_max>70</pn_max>
+        <rpn>68 / 100</rpn>
+        <rpint>69 / 100</rpint>
+        <qp0>1.1 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>57</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="2003" gte="1995" />
+        <pn lte="" gt="400" />
+        <pn_max>70</pn_max>
+        <rpn>68 / 100</rpn>
+        <rpint>69 / 100</rpint>
+        <qp0>0.5 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>58</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="2012" gte="2004" />
+        <pn lte="70" gt="" />
+        <pn_max></pn_max>
+        <rpn>(67 + 6 * logPn) / 100</rpn>
+        <rpint>(68 + 6 * logPn) / 100</rpint>
+        <qp0>0.085 * (Pn ^ -0.4) * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>59</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="2012" gte="2004" />
+        <pn lte="400" gt="70" />
+        <pn_max>70</pn_max>
+        <rpn>78 / 100</rpn>
+        <rpint>79 / 100</rpint>
+        <qp0>1.1 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>60</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="2012" gte="2004" />
+        <pn lte="" gt="400" />
+        <pn_max>70</pn_max>
+        <rpn>78 / 100</rpn>
+        <rpint>79 / 100</rpint>
+        <qp0>0.5 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>61</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="2019" gte="2013" />
+        <pn lte="70" gt="" />
+        <pn_max></pn_max>
+        <rpn>(80 + 2 * logPn) / 100</rpn>
+        <rpint>(77 + 3 * logPn) / 100</rpint>
+        <qp0>0.085 * (Pn ^ -0.4) * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>62</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="2019" gte="2013" />
+        <pn lte="400" gt="70" />
+        <pn_max>70</pn_max>
+        <rpn>84 / 100</rpn>
+        <rpint>83 / 100</rpint>
+        <qp0>1.1 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>63</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="2019" gte="2013" />
+        <pn lte="" gt="400" />
+        <pn_max>70</pn_max>
+        <rpn>84 / 100</rpn>
+        <rpint>83 / 100</rpint>
+        <qp0>0.5 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>64</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="" gte="2020" />
+        <pn lte="20" gt="" />
+        <pn_max></pn_max>
+        <rpn>(91 + 2 * logPn) / 100</rpn>
+        <rpint>(88 + 2 * logPn) / 100</rpint>
+        <qp0>0.085 * (Pn ^ -0.4) * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>65</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="" gte="2020" />
+        <pn lte="70" gt="20" />
+        <pn_max></pn_max>
+        <rpn>(92 + 2 * logPn) / 100</rpn>
+        <rpint>(89 + 2 * logPn) / 100</rpint>
+        <qp0>0.085 * (Pn ^ -0.4) * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>66</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="" gte="2020" />
+        <pn lte="400" gt="70" />
+        <pn_max>70</pn_max>
+        <rpn>96 / 100</rpn>
+        <rpint>93 / 100</rpint>
+        <qp0>1.1 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>67</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>chaudiere|pac_air_eau|pac_eau_eau|pac_eau_glycolee_eau|pac_geothermique</type_generateur>
+        <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="" gte="2020" />
+        <pn lte="" gt="400" />
+        <pn_max>70</pn_max>
+        <rpn>96 / 100</rpn>
+        <rpint>93 / 100</rpint>
+        <qp0>0.5 * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>68</tv_generateur_combustion_id>
     </row>
     <row>
         <type_generateur>generateur_air_chaud</type_generateur>
-        <mode_combustion>condensation</mode_combustion>
         <energie_generateur></energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="2005" gte="" />
+        <pn lte="300" gt="" />
+        <pn_max></pn_max>
+        <rpn>77 / 100</rpn>
+        <rpint>74 / 100</rpint>
+        <qp0>(1.75 - 0.55 * logPn) * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>69</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>generateur_air_chaud</type_generateur>
+        <energie_generateur></energie_generateur>
+        <mode_combustion></mode_combustion>
+        <annee_installation_generateur lte="2005" gte="" />
+        <pn lte="" gt="300" />
+        <pn_max>300</pn_max>
+        <rpn>77 / 100</rpn>
+        <rpint>74 / 100</rpint>
+        <qp0>(1.75 - 0.55 * logPn) * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>70</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>generateur_air_chaud</type_generateur>
+        <energie_generateur></energie_generateur>
+        <mode_combustion>standard</mode_combustion>
+        <annee_installation_generateur lte="" gte="2006" />
+        <pn lte="300" gt="" />
+        <pn_max></pn_max>
+        <rpn>84 / 100</rpn>
+        <rpint>77 / 100</rpint>
+        <qp0>(1.75 - 0.55 * logPn) * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>71</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>generateur_air_chaud</type_generateur>
+        <energie_generateur></energie_generateur>
+        <mode_combustion>standard</mode_combustion>
         <annee_installation_generateur lte="" gte="2006" />
         <pn lte="" gt="300" />
         <pn_max>300</pn_max>
-        <rpn>90</rpn>
-        <rpint>83</rpint>
-        <qp0>Pn * (1.75 -0.55 * logPn) / 100</qp0>
+        <rpn>84 / 100</rpn>
+        <rpint>77 / 100</rpint>
+        <qp0>(1.75 - 0.55 * logPn) * Pn * 1000</qp0>
         <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>72</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>generateur_air_chaud</type_generateur>
+        <energie_generateur></energie_generateur>
+        <mode_combustion>condensation</mode_combustion>
+        <annee_installation_generateur lte="" gte="2006" />
+        <pn lte="300" gt="" />
+        <pn_max></pn_max>
+        <rpn>90 / 100</rpn>
+        <rpint>83 / 100</rpint>
+        <qp0>(1.75 - 0.55 * logPn) * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>73</tv_generateur_combustion_id>
+    </row>
+    <row>
+        <type_generateur>generateur_air_chaud</type_generateur>
+        <energie_generateur></energie_generateur>
+        <mode_combustion>condensation</mode_combustion>
+        <annee_installation_generateur lte="" gte="2006" />
+        <pn lte="" gt="300" />
+        <pn_max>300</pn_max>
+        <rpn>90 / 100</rpn>
+        <rpint>83 / 100</rpint>
+        <qp0>(1.75 - 0.55 * logPn) * Pn * 1000</qp0>
+        <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>74</tv_generateur_combustion_id>
     </row>
     <row>
         <type_generateur>radiateur_gaz</type_generateur>
-        <mode_combustion></mode_combustion>
         <energie_generateur></energie_generateur>
+        <mode_combustion></mode_combustion>
         <annee_installation_generateur lte="2005" gte="" />
         <pn lte="5" gt="" />
         <pn_max></pn_max>
-        <rpn>70</rpn>
+        <rpn>70 / 100</rpn>
         <rpint>0</rpint>
         <qp0>0</qp0>
         <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>75</tv_generateur_combustion_id>
     </row>
     <row>
         <type_generateur>radiateur_gaz</type_generateur>
-        <mode_combustion></mode_combustion>
         <energie_generateur></energie_generateur>
+        <mode_combustion></mode_combustion>
         <annee_installation_generateur lte="2005" gte="" />
         <pn lte="" gt="5" />
         <pn_max></pn_max>
-        <rpn>73</rpn>
+        <rpn>73 / 100</rpn>
         <rpint>0</rpint>
         <qp0>0</qp0>
         <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>76</tv_generateur_combustion_id>
     </row>
     <row>
         <type_generateur>radiateur_gaz</type_generateur>
-        <mode_combustion></mode_combustion>
         <energie_generateur></energie_generateur>
+        <mode_combustion></mode_combustion>
         <annee_installation_generateur lte="" gte="2006" />
         <pn lte="5" gt="" />
         <pn_max></pn_max>
-        <rpn>80</rpn>
+        <rpn>80 / 100</rpn>
         <rpint>0</rpint>
         <qp0>0</qp0>
         <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>77</tv_generateur_combustion_id>
     </row>
     <row>
         <type_generateur>radiateur_gaz</type_generateur>
-        <mode_combustion></mode_combustion>
         <energie_generateur></energie_generateur>
+        <mode_combustion></mode_combustion>
         <annee_installation_generateur lte="" gte="2006" />
         <pn lte="" gt="5" />
         <pn_max></pn_max>
-        <rpn>82</rpn>
+        <rpn>82 / 100</rpn>
         <rpint>0</rpint>
         <qp0>0</qp0>
         <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>78</tv_generateur_combustion_id>
     </row>
     <row>
         <type_generateur>poele_bouilleur</type_generateur>
-        <mode_combustion></mode_combustion>
         <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
+        <mode_combustion></mode_combustion>
         <annee_installation_generateur lte="2011" gte="" />
         <pn lte="70" gt="" />
         <pn_max></pn_max>
-        <rpn>47 + 6 * logPn</rpn>
-        <rpint>48 + 6 * logPn</rpint>
-        <qp0>0.07 * Pn * (Pn ^ -0.3)</qp0>
+        <rpn>(47 + 6 * logPn) / 100</rpn>
+        <rpint>(48 + 6 * logPn) / 100</rpint>
+        <qp0>0.07 * (Pn ^ -0.3) * Pn * 1000</qp0>
         <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>31</tv_generateur_combustion_id>
     </row>
     <row>
         <type_generateur>poele_bouilleur</type_generateur>
-        <mode_combustion></mode_combustion>
         <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
+        <mode_combustion></mode_combustion>
         <annee_installation_generateur lte="2011" gte="" />
         <pn lte="400" gt="70" />
         <pn_max>70</pn_max>
-        <rpn>58</rpn>
-        <rpint>59</rpint>
-        <qp0>1.4</qp0>
+        <rpn>58 / 100</rpn>
+        <rpint>59 / 100</rpint>
+        <qp0>1.4 * 1000</qp0>
         <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>32</tv_generateur_combustion_id>
     </row>
     <row>
         <type_generateur>poele_bouilleur</type_generateur>
-        <mode_combustion></mode_combustion>
         <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
+        <mode_combustion></mode_combustion>
         <annee_installation_generateur lte="2011" gte="" />
         <pn lte="" gt="400" />
         <pn_max>70</pn_max>
-        <rpn>58</rpn>
-        <rpint>59</rpint>
-        <qp0>0.8</qp0>
+        <rpn>58 / 100</rpn>
+        <rpint>59 / 100</rpint>
+        <qp0>0.8 * 1000</qp0>
         <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>33</tv_generateur_combustion_id>
     </row>
     <row>
         <type_generateur>poele_bouilleur</type_generateur>
-        <mode_combustion></mode_combustion>
         <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
+        <mode_combustion></mode_combustion>
         <annee_installation_generateur lte="" gte="2012" />
         <pn lte="70" gt="" />
         <pn_max></pn_max>
-        <rpn>57 + 6 * logPn</rpn>
-        <rpint>58 + 6 * logPn</rpint>
-        <qp0>0.085 * Pn * (Pn ^ -0.4)</qp0>
+        <rpn>(57 + 6 * logPn) / 100</rpn>
+        <rpint>(58 + 6 * logPn) / 100</rpint>
+        <qp0>0.085 * (Pn ^ -0.4) * Pn * 1000</qp0>
         <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>37</tv_generateur_combustion_id>
     </row>
     <row>
         <type_generateur>poele_bouilleur</type_generateur>
-        <mode_combustion></mode_combustion>
         <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
+        <mode_combustion></mode_combustion>
         <annee_installation_generateur lte="" gte="2012" />
         <pn lte="400" gt="70" />
         <pn_max>70</pn_max>
-        <rpn>68</rpn>
-        <rpint>69</rpint>
-        <qp0>1.1</qp0>
+        <rpn>68 / 100</rpn>
+        <rpint>69 / 100</rpint>
+        <qp0>1.1 * 1000</qp0>
         <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>38</tv_generateur_combustion_id>
     </row>
     <row>
         <type_generateur>poele_bouilleur</type_generateur>
-        <mode_combustion></mode_combustion>
         <energie_generateur>bois_buche|bois_plaquette</energie_generateur>
+        <mode_combustion></mode_combustion>
         <annee_installation_generateur lte="" gte="2012" />
         <pn lte="" gt="400" />
         <pn_max>70</pn_max>
-        <rpn>68</rpn>
-        <rpint>69</rpint>
-        <qp0>0.5</qp0>
+        <rpn>68 / 100</rpn>
+        <rpint>69 / 100</rpint>
+        <qp0>0.5 * 1000</qp0>
         <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>39</tv_generateur_combustion_id>
     </row>
     <row>
         <type_generateur>poele_bouilleur</type_generateur>
-        <mode_combustion></mode_combustion>
         <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
         <annee_installation_generateur lte="2011" gte="" />
         <pn lte="70" gt="" />
         <pn_max></pn_max>
-        <rpn>47 + 6 * logPn</rpn>
-        <rpint>48 + 6 * logPn</rpint>
-        <qp0>0.08 * Pn * (Pn ^ -0.3)</qp0>
+        <rpn>(47 + 6 * logPn) / 100</rpn>
+        <rpint>(48 + 6 * logPn) / 100</rpint>
+        <qp0>0.08 * (Pn ^ -0.3) * Pn * 1000</qp0>
         <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>53</tv_generateur_combustion_id>
     </row>
     <row>
         <type_generateur>poele_bouilleur</type_generateur>
-        <mode_combustion></mode_combustion>
         <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
         <annee_installation_generateur lte="2011" gte="" />
         <pn lte="400" gt="70" />
         <pn_max>70</pn_max>
-        <rpn>58</rpn>
-        <rpint>59</rpint>
-        <qp0>1.4</qp0>
+        <rpn>58 / 100</rpn>
+        <rpint>59 / 100</rpint>
+        <qp0>1.4 * 1000</qp0>
         <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>54</tv_generateur_combustion_id>
     </row>
     <row>
         <type_generateur>poele_bouilleur</type_generateur>
-        <mode_combustion></mode_combustion>
         <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
         <annee_installation_generateur lte="2011" gte="" />
         <pn lte="" gt="400" />
         <pn_max>70</pn_max>
-        <rpn>58</rpn>
-        <rpint>59</rpint>
-        <qp0>0.8</qp0>
+        <rpn>58 / 100</rpn>
+        <rpint>59 / 100</rpint>
+        <qp0>0.8 * 1000</qp0>
         <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>55</tv_generateur_combustion_id>
     </row>
     <row>
         <type_generateur>poele_bouilleur</type_generateur>
-        <mode_combustion></mode_combustion>
         <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
         <annee_installation_generateur lte="" gte="2012" />
         <pn lte="70" gt="" />
         <pn_max></pn_max>
-        <rpn>67 + 6 * logPn</rpn>
-        <rpint>68 + 6 * logPn</rpint>
-        <qp0>0.085 * Pn * (Pn ^ -0.4)</qp0>
+        <rpn>(67 + 6 * logPn) / 100</rpn>
+        <rpint>(68 + 6 * logPn) / 100</rpint>
+        <qp0>0.085 * (Pn ^ -0.4) * Pn * 1000</qp0>
         <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>59</tv_generateur_combustion_id>
     </row>
     <row>
         <type_generateur>poele_bouilleur</type_generateur>
-        <mode_combustion></mode_combustion>
         <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
         <annee_installation_generateur lte="" gte="2012" />
         <pn lte="400" gt="70" />
         <pn_max>70</pn_max>
-        <rpn>78</rpn>
-        <rpint>79</rpint>
-        <qp0>1.1</qp0>
+        <rpn>78 / 100</rpn>
+        <rpint>79 / 100</rpint>
+        <qp0>1.1 * 1000</qp0>
         <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>60</tv_generateur_combustion_id>
     </row>
     <row>
         <type_generateur>poele_bouilleur</type_generateur>
-        <mode_combustion></mode_combustion>
         <energie_generateur>bois_granule</energie_generateur>
+        <mode_combustion></mode_combustion>
         <annee_installation_generateur lte="" gte="2012" />
         <pn lte="" gt="400" />
         <pn_max>70</pn_max>
-        <rpn>78</rpn>
-        <rpint>79</rpint>
-        <qp0>0.5</qp0>
+        <rpn>78 / 100</rpn>
+        <rpint>79 / 100</rpint>
+        <qp0>0.5 * 1000</qp0>
         <pveilleuse>0</pveilleuse>
+        <tv_generateur_combustion_id>61</tv_generateur_combustion_id>
     </row>
 </table>

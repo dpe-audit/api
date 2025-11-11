@@ -65,7 +65,8 @@ abstract class PerformanceAuxiliaireRule extends DimensionnementSystemeRule
     public function caux_generation(Scenario $scenario): float
     {
         return $this->get(self::implode(['caux_generation', $scenario]), function () use ($scenario): float {
-            return ($this->paux() / 1000 * $this->becs($scenario) * $this->rdim()) / $this->pn() / 1000;
+            $paux = $this->paux() / 1000;
+            return ($paux * $this->becs($scenario) * $this->rdim()) / $this->pn();
         });
     }
 
@@ -80,9 +81,10 @@ abstract class PerformanceAuxiliaireRule extends DimensionnementSystemeRule
             }
             $nh = Mois::reduce(fn(Mois $mois): float => $mois->nh());
             $nh_puisage = $this->nh_puisage();
-            $puissance_circulateur = $this->puissance_circulateur($scenario) / 1000;
+            $puissance_circulateur = $this->puissance_circulateur($scenario);
             $rdim = $this->rdim();
-            return $nh_puisage * $puissance_circulateur + ($nh - $nh_puisage) * 20 * $rdim;
+            $caux = $nh_puisage * $puissance_circulateur + ($nh - $nh_puisage) * 20 * $rdim;
+            return $caux / 1000;
         });
     }
 
@@ -156,7 +158,7 @@ abstract class PerformanceAuxiliaireRule extends DimensionnementSystemeRule
     }
 
     /**
-     * Nombre d'heures de puisage annuel
+     * Nombre d'heures de puisage annuel en h
      */
     public function nh_puisage(): float
     {
@@ -166,7 +168,7 @@ abstract class PerformanceAuxiliaireRule extends DimensionnementSystemeRule
     }
 
     /**
-     * Longueur du bouclage exprimée en m
+     * Longueur du bouclage en m
      */
     public function longueur_bouclage(): float
     {
@@ -178,7 +180,7 @@ abstract class PerformanceAuxiliaireRule extends DimensionnementSystemeRule
     }
 
     /**
-     * Pertes de charge du bouclage de l'installation exprimées en kPa
+     * Pertes de charge du bouclage de l'installation en kPa
      */
     public function pertes_charge_bouclage(): float
     {

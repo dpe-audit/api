@@ -129,7 +129,7 @@ final class DeperditionBaieRule extends DeperditionParoiRule
     // * Données intermédiaires
 
     /**
-     * Coefficient de transmission thermique de la double fenêtre exprimé en W/m².K
+     * Coefficient de transmission thermique de la double fenêtre en W/m².K
      */
     public function ug2(): ?float
     {
@@ -141,7 +141,7 @@ final class DeperditionBaieRule extends DeperditionParoiRule
     }
 
     /**
-     * Coefficient de transmission thermique de la double fenêtre exprimé en W/m².K
+     * Coefficient de transmission thermique de la double fenêtre en W/m².K
      */
     public function uw2(): ?float
     {
@@ -163,7 +163,7 @@ final class DeperditionBaieRule extends DeperditionParoiRule
     }
 
     /**
-     * Coefficient de transmission thermique du vitrage exprimé en W/m².K
+     * Coefficient de transmission thermique du vitrage en W/m².K
      */
     public function ug(): float
     {
@@ -173,7 +173,7 @@ final class DeperditionBaieRule extends DeperditionParoiRule
     }
 
     /**
-     * Coefficient de transmission thermique du vitrage exprimé en W/m².K
+     * Coefficient de transmission thermique du vitrage en W/m².K
      */
     public function ug1(): float
     {
@@ -191,7 +191,7 @@ final class DeperditionBaieRule extends DeperditionParoiRule
     }
 
     /**
-     * Coefficient de transmission thermique de la menuiserie exprimé en W/m².K
+     * Coefficient de transmission thermique de la menuiserie en W/m².K
      */
     public function uw(): float
     {
@@ -203,7 +203,7 @@ final class DeperditionBaieRule extends DeperditionParoiRule
     }
 
     /**
-     * Coefficient de transmission thermique de la menuiserie exprimé en W/m².K
+     * Coefficient de transmission thermique de la menuiserie en W/m².K
      */
     public function uw1(): float
     {
@@ -219,7 +219,7 @@ final class DeperditionBaieRule extends DeperditionParoiRule
     }
 
     /**
-     * Résistance thermique additionnelle due aux fermetures exprimée en m².K/W
+     * Résistance thermique additionnelle due aux fermetures en m².K/W
      */
     public function deltar(): float
     {
@@ -233,7 +233,7 @@ final class DeperditionBaieRule extends DeperditionParoiRule
     }
 
     /**
-     * Coefficient de transmission thermique de la menuiserie avec fermetures exprimé en W/m².K
+     * Coefficient de transmission thermique de la menuiserie avec fermetures en W/m².K
      */
     public function ujn(): float
     {

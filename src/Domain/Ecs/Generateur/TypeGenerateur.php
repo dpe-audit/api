@@ -23,6 +23,11 @@ enum TypeGenerateur: string
         return \in_array($this, [self::CHAUDIERE, self::POELE_BOUILLEUR]);
     }
 
+    public function is_poele_bouilleur(): bool
+    {
+        return $this === self::POELE_BOUILLEUR;
+    }
+
     public function is_pac(): bool
     {
         return \in_array($this, [

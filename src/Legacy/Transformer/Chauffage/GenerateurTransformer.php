@@ -94,7 +94,7 @@ final class GenerateurTransformer
                 default => EnergieGenerateur::GAZ_NATUREL,
             };
         }
-        return match ($this->generateur_chauffage->enum_type_energie_id) {
+        $value = match ($this->generateur_chauffage->enum_type_energie_id) {
             1, 12 => EnergieGenerateur::ELECTRICITE,
             2 => EnergieGenerateur::GAZ_NATUREL,
             3 => EnergieGenerateur::FIOUL,
@@ -105,6 +105,11 @@ final class GenerateurTransformer
             9, 10, 13 => EnergieGenerateur::GPL,
             11 => EnergieGenerateur::CHARBON,
         };
+
+        if ($this->type()?->is_poele_bouilleur()) {
+            return $value->is_bois() ? $value : EnergieGenerateur::BOIS_BUCHE;
+        }
+        return $value;
     }
 
     /**
@@ -198,7 +203,7 @@ final class GenerateurTransformer
         $enum_type_generateur_ch_id = $this->generateur_hybride?->enum_type_generateur_ch_id
             ?? $this->generateur_chauffage->enum_type_generateur_ch_id;
 
-        return match ($enum_type_generateur_ch_id) {
+        $value = match ($enum_type_generateur_ch_id) {
             50, 51, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80,
             85, 86, 87, 88, 89, 90, 109, 110, 111, 112, 113, 114, 115, 116, 119, 120, 121, 122, 123, 124, 125, 126, 127, 128,
             129, 130, 131, 132, 140, 141, 152, 153, 154, 155, 156, 157, 158, 159, 171 => ModeCombustion::STANDARD,
@@ -206,6 +211,11 @@ final class GenerateurTransformer
             52, 83, 84, 94, 95, 96, 97, 136, 137, 138, 139, 148, 149, 150, 151, 160, 161 => ModeCombustion::CONDENSATION,
             default => null,
         };
+
+        if ($value ?? $this->type()?->is_generateur_air_chaud()) {
+            return $value === ModeCombustion::BASSE_TEMPERATURE ? ModeCombustion::STANDARD : $value;
+        }
+        return $value;
     }
 
     public function label(): ?LabelGenerateur

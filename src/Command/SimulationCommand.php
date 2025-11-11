@@ -43,33 +43,40 @@ final class SimulationCommand extends LocalCommand
         $entries = $this->load($input, $output);
         $count = count($entries);
         $counter = 0;
-        $timer = new \DateTime();
+        $timer = microtime(true);
 
+        $output->writeln("Processing {$counter}/{$count}...");
         foreach ($this->load($input, $output) as $entry) {
             $counter++;
             $id = basename($entry, '.xml');
 
-            $output->writeln("Processing {$counter}/{$count} : {$id}...");
-
             $xml = simplexml_load_file($entry);
             $data = DPE::from($xml);
             $payload = $this->transformer->__invoke($data);
-            //dd(json_encode($payload->__normalize(), JSON_UNESCAPED_UNICODE));
             $errors = $this->validator->validate($payload);
 
             if (count($errors) > 0) {
+                $output->writeln("Transformation error : {$id}");
                 continue;
             }
 
-            $entity = $this->handler->__invoke($payload);
+            try {
+                $entity = $this->handler->__invoke($payload);
+            } catch (\Throwable $th) {
+                if ($input->getOption('strict')) {
+                    throw $th;
+                }
+                $output->writeln("Simulation error : {$id}");
+                continue;
+            }
 
             if ($input->getOption('compare')) {
                 $this->save($id, $entity);
                 $this->compare($id, $entity, $data);
             }
         }
-        $timer = $timer->diff(new \DateTime);
-        $output->writeln("Done {$counter}/{$count} in {$timer->f} microseconds");
+        $diff = microtime(true) - $timer;
+        $output->writeln("Done {$counter}/{$count} in {$diff} seconds.");
 
         if ($input->getOption('compare')) {
             $this->savelog();

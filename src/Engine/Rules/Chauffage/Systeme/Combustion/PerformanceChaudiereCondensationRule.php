@@ -41,7 +41,7 @@ final class PerformanceChaudiereCondensationRule extends PerformanceChaudiereRul
     }
 
     /**
-     * Pertes de charge à 30% de puissance exprimées en kW
+     * Pertes de charge à 30% de puissance en kW
      */
     public function qp30(): float
     {

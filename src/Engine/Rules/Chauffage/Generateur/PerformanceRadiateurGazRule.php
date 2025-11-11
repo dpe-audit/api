@@ -12,26 +12,6 @@ final class PerformanceRadiateurGazRule extends PerformanceGenerateurRule
     }
 
     /** @inheritDoc */
-    public function rpn(): float
-    {
-        return $this->get("rpn", function (): float {
-            $annee_installation = $this->annee_installation();
-            $pn = $this->pn();
-
-            return $this->rpn_saisi() ?? match (true) {
-                $annee_installation < 2006 => match (true) {
-                    $pn < 5 => 0.7,
-                    $pn >= 5 => 0.73,
-                },
-                $annee_installation >= 2006 => match (true) {
-                    $pn < 5 => 0.8,
-                    $pn >= 5 => 0.82,
-                },
-            };
-        });
-    }
-
-    /** @inheritDoc */
     public function scop(): ?float
     {
         return null;

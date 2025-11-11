@@ -3,6 +3,7 @@
 namespace App\Engine\Rules\Chauffage;
 
 use App\Domain\Chauffage\Emetteur\TypeEmission;
+use App\Domain\Chauffage\Generateur\TypeGenerateur;
 use App\Domain\Common\Consommation\ConsommationCollection;
 use App\Domain\Common\Enum\{Mois, Scenario};
 use App\Engine\Context;
@@ -88,7 +89,7 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
     }
 
     /**
-     * Pertes à l'arrêt exprimées en W
+     * Pertes à l'arrêt en W
      */
     public function qp0(): ?float
     {
@@ -109,12 +110,12 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
                 f: $f,
             )) throw new \DomainException('Valeur forfaitaire QP0 non trouvée');
 
-            return $qp0 * 1000;
+            return $qp0;
         });
     }
 
     /**
-     * Puissance de la veilleuse exprimée en W
+     * Puissance de la veilleuse en W
      */
     public function pveilleuse(): ?float
     {
@@ -189,15 +190,18 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
                 if (null === $mois) {
                     return Mois::reduce(fn(Mois $mois): float => $this->pertes_generation($scenario, $mois));
                 }
+                if ($this->type_generateur() === TypeGenerateur::GENERATEUR_AIR_CHAUD) {
+                    return 0;
+                }
                 $nref = $this->nref($scenario, $mois);
                 $cper = $this->presence_ventouse() ? 0.75 : 0.5;
                 $qp0 = $this->qp0();
-                $bch_hp = $this->bch_hp($scenario, $mois);
-                $pn = $this->pn();
-                $dper = min($nref, (1.3 * $bch_hp) / (0.3 / $pn));
+                $bch = $this->bch_hp($scenario, $mois);
+                $pn = $this->pn() * 1000;
+                $dper = min($nref, (1.3 * $bch) / (0.3 / $pn));
 
                 if ($this->generateur_mixte()) {
-                    $dper = min($nref, (1.3 * $bch_hp) / (0.3 / $pn) + $nref * (1790 / 8760));
+                    $dper = min($nref, (1.3 * $bch) / (0.3 / $pn) + $nref * (1790 / 8760));
                 }
                 return $cper * $qp0 * $dper * $this->rdim();
             }

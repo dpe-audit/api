@@ -113,7 +113,7 @@ final class DeperditionLncRule extends RuleIterator
     }
 
     /**
-     * Coefficient surfacique équivalent exprimé en W/(m2.K)
+     * Coefficient surfacique équivalent en W/(m2.K)
      */
     public function uvue(): ?float
     {

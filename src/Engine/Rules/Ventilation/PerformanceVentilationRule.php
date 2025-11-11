@@ -22,7 +22,7 @@ final class PerformanceVentilationRule extends Rule
 
     /**
      * Déperdition thermique par renouvellement d'air due au système de ventilation par degré
-     * d'écart entre l'intérieur et l'extérieur exprimées en W/K
+     * d'écart entre l'intérieur et l'extérieur en W/K
      */
     public function hvent(): float
     {

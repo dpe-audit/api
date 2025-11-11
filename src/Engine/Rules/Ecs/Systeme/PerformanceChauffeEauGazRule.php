@@ -22,7 +22,7 @@ final class PerformanceChauffeEauGazRule extends PerformanceSystemeCombustionRul
     public function rg(Scenario $scenario): float
     {
         return $this->get(self::implode(['rg', $scenario]), function () use ($scenario): float {
-            $becs = $this->becs($scenario) / 1000;
+            $becs = $this->becs($scenario) * 1000;
             $rpn = $this->rpn();
             $qp0 = $this->qp0();
             $pveilleuse = $this->pveilleuse();

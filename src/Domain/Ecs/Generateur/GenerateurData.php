@@ -44,7 +44,8 @@ final class GenerateurData
         Assert::nullOrGreaterThan($pdim, 0);
         Assert::nullOrGreaterThanEq($pecs, 0);
         Assert::nullOrGreaterThan($cop, 0);
-        Assert::nullOrGreaterThan($qp0, 0);
+        Assert::nullOrGreaterThan($rpn, 0);
+        Assert::nullOrGreaterThanEq($qp0, 0);
         Assert::nullOrGreaterThanEq($pveilleuse, 0);
         Assert::nullOrGreaterThanEq($pertes_generation, 0);
         Assert::nullOrGreaterThanEq($pertes_generation_recuperables, 0);

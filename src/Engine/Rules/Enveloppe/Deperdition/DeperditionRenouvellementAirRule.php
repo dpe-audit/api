@@ -120,7 +120,7 @@ final class DeperditionRenouvellementAirRule extends Rule
     // * Données calculées
 
     /**
-     * Déperditions thermiques de l'enveloppe par renouvellement d'air exprimées en W/K
+     * Déperditions thermiques de l'enveloppe par renouvellement d'air en W/K
      */
     public function dr(): float
     {
@@ -131,7 +131,7 @@ final class DeperditionRenouvellementAirRule extends Rule
 
     /**
      * Déperdition thermique par renouvellement d’air due au vent par degré d’écart entre
-     * l’intérieur et l’extérieur exprimé en W/K
+     * l’intérieur et l’extérieur en W/K
      */
     public function hperm(): float
     {
@@ -141,7 +141,7 @@ final class DeperditionRenouvellementAirRule extends Rule
     }
 
     /**
-     * Débit d’air dû aux infiltrations liées au vent exprimé en m3/h
+     * Débit d’air dû aux infiltrations liées au vent en m3/h
      */
     public function qvinf(): float
     {
@@ -176,7 +176,7 @@ final class DeperditionRenouvellementAirRule extends Rule
     }
 
     /**
-     * Renouvellement d'air sous 50 Pascals exprimé en h-1
+     * Renouvellement d'air sous 50 Pascals en h-1
      */
     public function n50(): float
     {
@@ -184,7 +184,7 @@ final class DeperditionRenouvellementAirRule extends Rule
     }
 
     /**
-     * Perméabilité sous 4 Pa de la zone exprimée en m3/h
+     * Perméabilité sous 4 Pa de la zone en m3/h
      */
     public function q4pa(): float
     {
@@ -192,7 +192,7 @@ final class DeperditionRenouvellementAirRule extends Rule
     }
 
     /**
-     * Perméabilité de l'enveloppe exprimée en m3/h
+     * Perméabilité de l'enveloppe en m3/h
      */
     public function q4pa_env(): float
     {

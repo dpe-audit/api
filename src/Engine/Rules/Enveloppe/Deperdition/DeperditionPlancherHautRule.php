@@ -122,7 +122,7 @@ final class DeperditionPlancherHautRule extends DeperditionParoiRule
     // * Données calculées
 
     /**
-     * Coefficient de transmission thermique du plancher haut non isolé exprimé en W/m².K
+     * Coefficient de transmission thermique du plancher haut non isolé en W/m².K
      */
     public function u0(): float
     {
@@ -136,7 +136,7 @@ final class DeperditionPlancherHautRule extends DeperditionParoiRule
     }
 
     /**
-     * Coefficient de transmission thermique du plancher haut exprimé en W/m².K
+     * Coefficient de transmission thermique du plancher haut en W/m².K
      */
     public function u(): float
     {

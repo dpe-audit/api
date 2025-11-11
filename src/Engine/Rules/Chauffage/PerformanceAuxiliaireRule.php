@@ -66,9 +66,9 @@ abstract class PerformanceAuxiliaireRule extends CommonSystemeRule
             function () use ($scenario): float {
                 $bch = $this->bch($scenario);
                 $rdim = $this->rdim();
-                $paux = $this->paux();
+                $paux = $this->paux() / 1000;
                 $pn = $this->pn();
-                return ($paux / 1000 * $bch * $rdim) / $pn;
+                return ($paux * $bch * $rdim) / $pn;
             }
         );
     }
@@ -85,13 +85,14 @@ abstract class PerformanceAuxiliaireRule extends CommonSystemeRule
                     return Mois::reduce(fn(Mois $mois): float => $this->caux_distribution($scenario, $mois));
                 }
                 $nref = $this->nref($scenario, $mois);
-                return $this->puissance_circulateur() * $nref / 1000;
+                $caux = $this->puissance_circulateur() * $nref;
+                return $caux / 1000;
             }
         );
     }
 
     /**
-     * Puissance des auxiliaires de génération exprimée en W
+     * Puissance des auxiliaires de génération en W
      */
     public function paux(): float
     {
@@ -107,7 +108,7 @@ abstract class PerformanceAuxiliaireRule extends CommonSystemeRule
     }
 
     /**
-     * Puissance du circulateur exprimée en W
+     * Puissance du circulateur en W
      */
     public function puissance_circulateur(): float
     {
@@ -126,7 +127,7 @@ abstract class PerformanceAuxiliaireRule extends CommonSystemeRule
     }
 
     /**
-     * Puissance nominale en chaud expriomée en kW
+     * Puissance nominale en chaud en kW
      */
     public function pnc(): float
     {
@@ -138,7 +139,7 @@ abstract class PerformanceAuxiliaireRule extends CommonSystemeRule
     }
 
     /**
-     * Débit nominal du circulateur exprimé en m³/h
+     * Débit nominal du circulateur en m³/h
      */
     public function debit_circultateur(): float
     {
@@ -150,7 +151,7 @@ abstract class PerformanceAuxiliaireRule extends CommonSystemeRule
     }
 
     /**
-     * Longueur du réseau de distribution exprimées en m
+     * Longueur du réseau de distribution en m
      */
     public function lem(): float
     {
@@ -165,7 +166,7 @@ abstract class PerformanceAuxiliaireRule extends CommonSystemeRule
     }
 
     /**
-     * Chute de température du réseau de distribution exprimée en °C
+     * Chute de température du réseau de distribution en °C
      */
     public function chute_nominale_temperature(): float
     {
@@ -177,7 +178,7 @@ abstract class PerformanceAuxiliaireRule extends CommonSystemeRule
     }
 
     /**
-     * Pertes de charge de l'émetteur exprimées en kPa
+     * Pertes de charge de l'émetteur en kPa
      */
     public function pertes_charge(): float
     {

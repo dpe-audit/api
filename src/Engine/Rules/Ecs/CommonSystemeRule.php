@@ -96,9 +96,9 @@ abstract class CommonSystemeRule extends RuleIterator
         return $this->item()->generateur()->position()->position_volume_chauffe ?? false;
     }
 
-    public function position_chauffe_eau(): ?PositionChauffeEau
+    public function position_chauffe_eau(): PositionChauffeEau
     {
-        return $this->item()->generateur()->position()->position_chauffe_eau;
+        return $this->item()->generateur()->position()->position_chauffe_eau ?? PositionChauffeEau::CHAUFFE_EAU_VERTICAL;
     }
 
     public function label_generateur(): ?LabelGenerateur

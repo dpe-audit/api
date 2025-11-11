@@ -61,7 +61,7 @@ final class PerformanceRule extends Rule
     }
 
     /**
-     * Emisssions de CO2 exprimées en kg/m²/an
+     * Emisssions de CO2 en kg/m²/an
      */
     public function eges(): float
     {

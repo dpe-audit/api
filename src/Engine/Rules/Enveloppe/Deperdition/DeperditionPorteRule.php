@@ -83,7 +83,7 @@ final class DeperditionPorteRule extends DeperditionParoiRule
     // * Données calculées
 
     /**
-     * Coefficient de transmission thermique exprimé en W/m².K
+     * Coefficient de transmission thermique en W/m².K
      */
     public function u(): float
     {

@@ -193,7 +193,7 @@ final class XMLChauffageTableValeurRepository implements ChauffageTableValeurRep
             ?->to(function (XMLTableElement $record) use ($pn) {
                 $pn = $record->floatval('pn_max') ? min($record->floatval('pn_max'), $pn) : $pn;
                 $expression = $record->strval('rpn');
-                return $this->expression_resolver->evalue($expression, ['Pn' => $pn]) / 100;
+                return $this->expression_resolver->evalue($expression, ['Pn' => $pn]);
             });
     }
 
@@ -214,7 +214,7 @@ final class XMLChauffageTableValeurRepository implements ChauffageTableValeurRep
             ?->to(function (XMLTableElement $record) use ($pn) {
                 $pn = $record->floatval('pn_max') ? min($record->floatval('pn_max'), $pn) : $pn;
                 $expression = $record->strval('rpint');
-                return $this->expression_resolver->evalue($expression, ['Pn' => $pn]) / 100;
+                return $this->expression_resolver->evalue($expression, ['Pn' => $pn]);
             });
     }
 

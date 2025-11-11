@@ -72,15 +72,7 @@ final class PerformanceChauffageRule extends Rule
     {
         return $this->get(
             self::implode(['bch', $scenario, $mois]),
-            function () use ($scenario, $mois): float {
-                if (null === $mois) {
-                    return Mois::reduce(fn(Mois $mois): float => $this->bch($scenario, $mois));
-                }
-                $bv = $this->gv() * (1 - $this->f($scenario, $mois));
-                $bch = $bv * $this->dh($scenario, $mois) / 1000;
-                $pertes_recuperables = min($bch, $this->pertes_recuperables($scenario, $mois) / 1000);
-                return $bch - $pertes_recuperables;
-            }
+            fn(): float => max($this->bch_hp($scenario, $mois) - $this->pertes_recuperables($scenario, $mois) / 1000, 0)
         );
     }
 
@@ -91,7 +83,7 @@ final class PerformanceChauffageRule extends Rule
     {
         return $this->get('pch', function (): float {
             $value = 1.2 * $this->gv() * (19 - $this->tbase());
-            $value /= 1000 * \pow(0.95, 3);
+            $value /= (1000 * \pow(0.95, 3));
             return $value;
         });
     }

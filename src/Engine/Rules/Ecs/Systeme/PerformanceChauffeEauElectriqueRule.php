@@ -17,25 +17,6 @@ final class PerformanceChauffeEauElectriqueRule extends PerformanceSystemeRule
             && false === $this->generateur_multi_batiment();
     }
 
-    // * Données d'entrée
-
-    public function position_chauffe_eau(): PositionChauffeEau
-    {
-        return $this->item()->generateur()->position()->position_chauffe_eau ?? PositionChauffeEau::CHAUFFE_EAU_VERTICAL;
-    }
-
-    public function label_generateur(): ?LabelGenerateur
-    {
-        return $this->item()->generateur()->signaletique()->label;
-    }
-
-    public function volume_stockage_integre(): float
-    {
-        return $this->item()->generateur()->signaletique()->volume_stockage ?? 0;
-    }
-
-    // * Données de sortie
-
     /**
      * @inheritDoc
      */
@@ -45,16 +26,16 @@ final class PerformanceChauffeEauElectriqueRule extends PerformanceSystemeRule
             if (0 == $this->volume_stockage()) {
                 return 1;
             }
-            $becs = $this->becs($scenario);
+            $becs = $this->becs($scenario) * 1000;
             $pertes = $this->pertes_stockage();
             $rd = $this->rd();
 
             if ($this->position_chauffe_eau() === PositionChauffeEau::CHAUFFE_EAU_VERTICAL) {
                 if ($this->label_generateur() === LabelGenerateur::NE_PERFORMANCE_C) {
-                    return 1.08 / (1 + ($pertes * $rd) / ($becs * 1000));
+                    return 1.08 / (1 + ($pertes * $rd) / $becs);
                 }
             }
-            return 1 / (1 + ($pertes * $rd) / ($becs * 1000));
+            return 1 / (1 + ($pertes * $rd) / $becs);
         });
     }
 

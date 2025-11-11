@@ -42,16 +42,16 @@ final class GenerateurData
     ): self {
         Assert::nullOrGreaterThanEq($rdim, 0);
         Assert::nullOrLessThanEq($rdim, 1);
-        Assert::greaterThanEq($pn, 0);
-        Assert::greaterThanEq($pdim, 0);
-        Assert::greaterThanEq($pch, 0);
-        Assert::greaterThanEq($scop, 0);
-        Assert::greaterThanEq($rpn, 0);
-        Assert::greaterThanEq($rpint, 0);
-        Assert::greaterThanEq($qp0, 0);
-        Assert::greaterThanEq($pveilleuse, 0);
-        Assert::greaterThanEq($tfonc30, 0);
-        Assert::greaterThanEq($tfonc100, 0);
+        Assert::nullOrGreaterThanEq($pn, 0);
+        Assert::nullOrGreaterThanEq($pdim, 0);
+        Assert::nullOrGreaterThanEq($pch, 0);
+        Assert::nullOrGreaterThanEq($scop, 0);
+        Assert::nullOrGreaterThan($rpint, 0);
+        Assert::nullOrGreaterThan($rpn, 0);
+        Assert::nullOrGreaterThanEq($qp0, 0);
+        Assert::nullOrGreaterThanEq($pveilleuse, 0);
+        Assert::nullOrGreaterThan($tfonc30, 0);
+        Assert::nullOrGreaterThan($tfonc100, 0);
         Assert::nullOrGreaterThanEq($pertes_generation, 0);
         Assert::nullOrGreaterThanEq($pertes_generation_recuperables, 0);
 

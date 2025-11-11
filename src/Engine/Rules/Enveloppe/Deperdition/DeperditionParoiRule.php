@@ -40,12 +40,12 @@ abstract class DeperditionParoiRule extends RuleIterator
     // * Données calculées
 
     /**
-     * Coefficient de transmission thermique exprimé en W/m².K
+     * Coefficient de transmission thermique en W/m².K
      */
     abstract public function u(): float;
 
     /**
-     * Déperditions thermiques exprimées en W/K
+     * Déperditions thermiques en W/K
      */
     public function dp(): float
     {

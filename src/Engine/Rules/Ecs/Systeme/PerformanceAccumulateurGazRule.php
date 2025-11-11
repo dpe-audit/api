@@ -22,7 +22,7 @@ final class PerformanceAccumulateurGazRule extends PerformanceSystemeCombustionR
     public function rgs(Scenario $scenario): float
     {
         return $this->get(self::implode(['rgs', $scenario]), function () use ($scenario): float {
-            $becs = $this->becs($scenario) / 1000;
+            $becs = $this->becs($scenario) * 1000;
             $pertes = $this->pertes_stockage();
             $rpn = $this->rpn();
             $qp0 = $this->qp0();

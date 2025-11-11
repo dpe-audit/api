@@ -121,7 +121,7 @@ final class XMLEcsTableValeurRepository implements EcsTableValeurRepository
     ): ?float {
         return $this->db->repository('ecs.combustion')
             ->createQuery()
-            ->and('type_generateur', $type_generateur)
+            ->and('type_generateur', $type_generateur, false)
             ->and('energie_generateur', $energie_generateur, false)
             ->and('mode_combustion', $mode_combustion)
             ->andCompareTo('volume_stockage', $volume_stockage)
@@ -130,7 +130,7 @@ final class XMLEcsTableValeurRepository implements EcsTableValeurRepository
             ?->to(function (XMLTableElement $record) use ($pn) {
                 $pn = $record->floatval('pn_max') ? min($record->floatval('pn_max'), $pn) : $pn;
                 $expression = $record->strval('rpn');
-                return $this->expression_resolver->evalue($expression, ['Pn' => $pn]) / 100;
+                return $this->expression_resolver->evalue($expression, ['Pn' => $pn]);
             });
     }
 
@@ -146,7 +146,7 @@ final class XMLEcsTableValeurRepository implements EcsTableValeurRepository
     ): ?float {
         return $this->db->repository('ecs.combustion')
             ->createQuery()
-            ->and('type_generateur', $type_generateur)
+            ->and('type_generateur', $type_generateur, false)
             ->and('energie_generateur', $energie_generateur, false)
             ->and('mode_combustion', $mode_combustion)
             ->andCompareTo('volume_stockage', $volume_stockage)
@@ -169,7 +169,7 @@ final class XMLEcsTableValeurRepository implements EcsTableValeurRepository
     ): ?float {
         return $this->db->repository('ecs.combustion')
             ->createQuery()
-            ->and('type_generateur', $type_generateur)
+            ->and('type_generateur', $type_generateur, false)
             ->and('energie_generateur', $energie_generateur, false)
             ->and('mode_combustion', $mode_combustion)
             ->andCompareTo('volume_stockage', $volume_stockage)

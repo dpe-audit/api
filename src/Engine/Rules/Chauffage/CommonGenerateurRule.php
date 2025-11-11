@@ -147,7 +147,7 @@ abstract class CommonGenerateurRule extends RuleIterator
             ])->values();
     }
 
-    public function bch_hp(Scenario $scenario, ?Mois $mois): float
+    public function bch_hp(Scenario $scenario, ?Mois $mois = null): float
     {
         return $this->require(PerformanceChauffageRule::class)->bch_hp($scenario, $mois);
     }

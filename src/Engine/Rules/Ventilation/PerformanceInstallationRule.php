@@ -26,7 +26,7 @@ final class PerformanceInstallationRule extends CommonInstallationRule
 
     /**
      * Déperdition thermique par renouvellement d'air due au système de ventilation par degré
-     * d'écart entre l'intérieur et l'extérieur exprimées en W/K
+     * d'écart entre l'intérieur et l'extérieur en W/K
      */
     public function hvent(): float
     {
@@ -37,7 +37,7 @@ final class PerformanceInstallationRule extends CommonInstallationRule
     }
 
     /**
-     * Débit volumique conventionnel à reprendre exprimé en m3/(h.m²)
+     * Débit volumique conventionnel à reprendre en m3/(h.m²)
      */
     public function qvarep_conv(): float
     {
@@ -54,7 +54,7 @@ final class PerformanceInstallationRule extends CommonInstallationRule
     }
 
     /**
-     * Débit volumique conventionnel à souffler exprimé en m3/(h.m²)
+     * Débit volumique conventionnel à souffler en m3/(h.m²)
      */
     public function qvasouf_conv(): float
     {
@@ -71,7 +71,7 @@ final class PerformanceInstallationRule extends CommonInstallationRule
     }
 
     /**
-     * Somme des modules d'entrée d'air exprimée en m3/(h.m²)
+     * Somme des modules d'entrée d'air en m3/(h.m²)
      */
     public function smea_conv(): float
     {

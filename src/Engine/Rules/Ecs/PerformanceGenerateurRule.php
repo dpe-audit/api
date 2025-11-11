@@ -38,7 +38,7 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
     }
 
     /**
-     * Rendement à pleine charge exprimée en %
+     * Rendement à pleine charge
      */
     public function rpn(): ?float
     {
@@ -46,7 +46,7 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
     }
 
     /**
-     * Pertes à l'arrêt du générateur exprimée en W
+     * Pertes à l'arrêt du générateur en W
      */
     public function qp0(): ?float
     {
@@ -54,7 +54,7 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
     }
 
     /**
-     * Puissance de la veilleuse exprimée en W
+     * Puissance de la veilleuse en W
      */
     public function pveilleuse(): ?float
     {
@@ -62,7 +62,7 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
     }
 
     /**
-     * Pertes de génération  en Wh
+     * Pertes de génération en Wh
      */
     public function pertes_generation(Scenario $scenario, ?Mois $mois = null): float
     {
@@ -70,7 +70,7 @@ abstract class PerformanceGenerateurRule extends DimensionnementGenerateurRule
     }
 
     /**
-     * Pertes de génération récupérables exprimées en Wh
+     * Pertes de génération récupérables en Wh
      */
     public function pertes_generation_recuperables(Scenario $scenario, ?Mois $mois = null): float
     {

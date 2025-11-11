@@ -2943,10 +2943,10 @@ $defs:
             title: Besoin de chauffage en kWh/an
             type: number
           pertes_generation:
-            title: Pertes de génération en kWh/an
+            title: Pertes de génération en Wh/an
             type: number
           pertes_generation_recuperables:
-            title: Pertes de génération récupérables en kWh/an
+            title: Pertes de génération récupérables en Wh/an
             type: number
           consommations:
             $ref: /common/consommations
@@ -3262,10 +3262,10 @@ $defs:
               - number
               - 'null'
           pertes_generation:
-            title: Pertes de génération en kWh/an
+            title: Pertes de génération en Wh/an
             type: number
           pertes_generation_recuperables:
-            title: Pertes de génération récupérables en kWh/an
+            title: Pertes de génération récupérables en Wh/an
             type: number
           consommations:
             $ref: /common/consommations
@@ -3273,10 +3273,7 @@ $defs:
       - title: Chaudière à combustion
         properties:
           type:
-            enum:
-              - chaudiere
-              - poele_bouilleur
-              - generateur_air_chaud
+            const: chaudiere
           energie:
             not:
               enum:
@@ -3285,6 +3282,34 @@ $defs:
           bienergie:
             not:
               const: reseau_chaleur
+          position:
+            type: object
+            properties:
+              reseau_chaleur_id:
+                const: null
+          signaletique:
+            type: object
+            properties:
+              label:
+                const: null
+              scop:
+                const: null
+        required:
+          - type
+          - energie
+          - position
+          - signaletique
+      - title: Poêle bouilleur
+        properties:
+          type:
+            const: poele_bouilleur
+          energie:
+            enum:
+              - bois_buche
+              - bois_plaquette
+              - bois_granule
+          bienergie:
+            const: null
           position:
             type: object
             properties:
@@ -3558,6 +3583,40 @@ $defs:
               tfonc30:
                 const: null
               tfonc100:
+                const: null
+        required:
+          - type
+          - energie
+          - position
+          - signaletique
+      - title: Générateur air chaud à combustion
+        type: object
+        properties:
+          type:
+            const: generateur_air_chaud
+          energie:
+            not:
+              enum:
+                - electricite
+                - reseau_chaleur
+          bienergie:
+            const: null
+          position:
+            type: object
+            properties:
+              reseau_chaleur_id:
+                const: null
+          signaletique:
+            type: object
+            properties:
+              mode_combustion:
+                enum:
+                  - standard
+                  - condensation
+                  - null
+              label:
+                const: null
+              scop:
                 const: null
         required:
           - type
@@ -4141,6 +4200,9 @@ $defs:
           rdim:
             title: Ratio de dimensionnement
             type: number
+          paux:
+            title: Puissance des auxiliaires en W
+            type: number
           int:
             title: Facteur d'intermittence
             type: number
@@ -4209,22 +4271,22 @@ $defs:
             title: Besoin d'eau chaude sanitaire en kWh/an
             type: number
           pertes_generation:
-            title: Pertes de génération en kWh/an
+            title: Pertes de génération en Wh/an
             type: number
           pertes_generation_recuperables:
-            title: Pertes de génération récupérables en kWh/an
+            title: Pertes de génération récupérables en Wh/an
             type: number
           pertes_stockage:
-            title: Pertes de stockage en kWh/an
+            title: Pertes de stockage en Wh/an
             type: number
           pertes_stockage_recuperables:
-            title: Pertes de stockage récupérables en kWh/an
+            title: Pertes de stockage récupérables en Wh/an
             type: number
           pertes_distribution:
-            title: Pertes de distribution en kWh/an
+            title: Pertes de distribution en Wh/an
             type: number
           pertes_distribution_recuperables:
-            title: Pertes de distribution récupérables en kWh/an
+            title: Pertes de distribution récupérables en Wh/an
             type: number
           consommations:
             $ref: /common/consommations
@@ -4297,14 +4359,41 @@ $defs:
         type: object
         properties:
           type:
-            enum:
-              - chaudiere
-              - poele_bouilleur
+            const: chaudiere
           energie:
             not:
               enum:
                 - electricite
                 - reseau_chaleur
+          position:
+            type: object
+            properties:
+              position_chauffe_eau:
+                const: null
+              reseau_chaleur_id:
+                const: null
+          signaletique:
+            type: object
+            properties:
+              cop:
+                const: null
+              label:
+                const: null
+        required:
+          - type
+          - energie
+          - position
+          - signaletique
+      - title: Poêle à bois bouilleur
+        type: object
+        properties:
+          type:
+            const: poele_bouilleur
+          energie:
+            enum:
+              - bois_buche
+              - bois_plaquette
+              - bois_granule
           position:
             type: object
             properties:
@@ -4382,6 +4471,10 @@ $defs:
           signaletique:
             type: object
             properties:
+              mode_combustion:
+                enum:
+                  - standard
+                  - condensation
               cop:
                 const: null
               label:
@@ -4760,16 +4853,16 @@ $defs:
               - number
               - 'null'
           pertes_generation:
-            title: Pertes de génération en kWh/an
+            title: Pertes de génération en Wh/an
             type: number
           pertes_generation_recuperables:
-            title: Pertes de génération récupérables en kWh/an
+            title: Pertes de génération récupérables en Wh/an
             type: number
           pertes_stockage:
-            title: Pertes de stockage intégré en kWh/an
+            title: Pertes de stockage intégré en Wh/an
             type: number
           pertes_stockage_recuperables:
-            title: Pertes de stockage intégré récupérables en kWh/an
+            title: Pertes de stockage intégré récupérables en Wh/an
             type: number
           consommations:
             $ref: /common/consommations
@@ -4982,7 +5075,7 @@ $defs:
             title: Ratio de dimensionnement
             type: number
           paux:
-            title: Puissance des auxiliaires en kW
+            title: Puissance des auxiliaires en W
             type: number
           iecs:
             title: Inverse du rendement du système
@@ -5000,16 +5093,16 @@ $defs:
             title: Rendement de génération et de stockage
             type: number
           pertes_stockage:
-            title: Pertes de stockage indépendant en kWh/an
+            title: Pertes de stockage indépendant en Wh/an
             type: number
           pertes_stockage_recuperables:
-            title: Pertes de stockage indépendant récupérables en kWh/an
+            title: Pertes de stockage indépendant récupérables en Wh/an
             type: number
           pertes_distribution:
-            title: Pertes de distribution en kWh/an
+            title: Pertes de distribution en Wh/an
             type: number
           pertes_distribution_recuperables:
-            title: Pertes de distribution récupérables en kWh/an
+            title: Pertes de distribution récupérables en Wh/an
             type: number
           consommations:
             $ref: /common/consommations

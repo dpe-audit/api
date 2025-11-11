@@ -30,7 +30,6 @@ final class PerformanceChaudiereMixteRule extends PerformanceSystemeCombustionRu
             $rgs += (1790 * $qp0 + $pertes) / $becs;
             $rgs += 6970 * (0.5 * $pveilleuse / $becs);
             $rgs = 1 / $rgs;
-
             return $rgs;
         });
     }

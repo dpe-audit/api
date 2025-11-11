@@ -107,7 +107,7 @@ final class DeperditionDoubleFenetreRule extends RuleIterator
     // * Valeurs calculées
 
     /**
-     * Coefficient de transmission thermique du vitrage exprimé en W/m².K
+     * Coefficient de transmission thermique du vitrage en W/m².K
      */
     public function ug(): float
     {
@@ -123,7 +123,7 @@ final class DeperditionDoubleFenetreRule extends RuleIterator
     }
 
     /**
-     * Coefficient de transmission thermique de la menuiserie exprimé en W/m².K
+     * Coefficient de transmission thermique de la menuiserie en W/m².K
      */
     public function uw(): float
     {

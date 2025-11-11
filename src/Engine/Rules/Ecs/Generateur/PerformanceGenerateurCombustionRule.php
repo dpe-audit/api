@@ -44,7 +44,7 @@ final class PerformanceGenerateurCombustionRule extends PerformanceGenerateurRul
             $e = $this->presence_ventouse() ? 1.75 : 2.5;
             $f = $this->presence_ventouse() ? -0.55 : -0.8;
 
-            $value = $this->repository->qp0(
+            return $this->repository->qp0(
                 type_generateur: $this->type(),
                 energie_generateur: $this->energie(),
                 mode_combustion: $this->mode_combustion(),
@@ -54,8 +54,6 @@ final class PerformanceGenerateurCombustionRule extends PerformanceGenerateurRul
                 e: $e,
                 f: $f,
             ) ?? throw new \DomainException("Valeurs forfaitaires QP0 non trouvées");
-
-            return $value * 1000;
         });
     }
 

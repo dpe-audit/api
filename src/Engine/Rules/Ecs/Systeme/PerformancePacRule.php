@@ -3,7 +3,7 @@
 namespace App\Engine\Rules\Ecs\Systeme;
 
 use App\Domain\Common\Enum\Scenario;
-use App\Engine\Rules\Ecs\{PerformanceGenerateurRule, PerformanceSystemeRule};
+use App\Engine\Rules\Ecs\PerformanceSystemeRule;
 
 final class PerformancePacRule extends PerformanceSystemeRule
 {

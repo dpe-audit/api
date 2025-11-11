@@ -132,7 +132,7 @@ final class DeperditionMurRule extends DeperditionParoiRule
     // * Données calculées
 
     /**
-     * Coefficient de transmission thermique du mur non isolé exprimé en W/m².K
+     * Coefficient de transmission thermique du mur non isolé en W/m².K
      */
     public function u0(): float
     {
@@ -152,7 +152,7 @@ final class DeperditionMurRule extends DeperditionParoiRule
     }
 
     /**
-     * Coefficient de transmission thermique du mur exprimé en W/m².K
+     * Coefficient de transmission thermique du mur en W/m².K
      */
     public function u(): float
     {
@@ -194,7 +194,7 @@ final class DeperditionMurRule extends DeperditionParoiRule
 
     /**
      * Coefficient de transmission thermique additionnel dû à la présence d'un enduit isolant
-     * sur une paroi ancienne exprimé en W/m².K
+     * sur une paroi ancienne en W/m².K
      */
     public function u0_enduit_isolant(): float
     {
@@ -211,7 +211,7 @@ final class DeperditionMurRule extends DeperditionParoiRule
         });
     }
     /**
-     * Coefficient de transmission thermique additionnel dû au doublage exprimé en W/m².K
+     * Coefficient de transmission thermique additionnel dû au doublage en W/m².K
      */
     public function u0_doublage(): float
     {

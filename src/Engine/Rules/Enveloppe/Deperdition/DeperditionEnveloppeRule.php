@@ -101,7 +101,7 @@ final class DeperditionEnveloppeRule extends Rule
     }
 
     /**
-     * Coefficient de transmission thermique de l'enveloppe exprimé en W/K.m²
+     * Coefficient de transmission thermique de l'enveloppe en W/K.m²
      */
     public function ubat(): float
     {

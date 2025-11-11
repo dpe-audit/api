@@ -30,7 +30,7 @@ final class BatimentRule extends Rule
     }
 
     /**
-     * Surface habitable de référence exprimée en m²
+     * Surface habitable de référence en m²
      */
     public function surface_reference(): float
     {
@@ -40,7 +40,7 @@ final class BatimentRule extends Rule
     }
 
     /**
-     * Volume habitable de référence exprimé en m³
+     * Volume habitable de référence en m³
      */
     public function volume_reference(): float
     {
@@ -60,7 +60,7 @@ final class BatimentRule extends Rule
     }
 
     /**
-     * Température extérieure de base exprimée en °C
+     * Température extérieure de base en °C
      */
     public function tbase(): float
     {
